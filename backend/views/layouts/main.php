@@ -71,7 +71,7 @@ AppAsset::register($this);
                                                 <div class="media-body">
                                                     <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
                                                     <p class="m-0">
-                                                        <small>There are new settings available.</small>
+                                                        <small>There are new settings available</small>
                                                     </p>
                                                 </div>
                                             </div>
@@ -248,28 +248,18 @@ AppAsset::register($this);
                             </ul>
                         </li>
 
-                        <li class="text-muted menu-title">More</li>
+                        <li class="text-muted menu-title">Access</li>
 
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Pages </span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Access Control </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="page-starter.html">Starter Page</a></li>
-                                <li><a href="page-login.html">Login</a></li>
-                                <li><a href="page-login-v2.html">Login v2</a></li>
-                                <li><a href="page-register.html">Register</a></li>
-                                <li><a href="page-register-v2.html">Register v2</a></li>
-                                <li><a href="page-signup-signin.html">Signin - Signup</a></li>
-                                <li><a href="page-recoverpw.html">Recover Password</a></li>
-                                <li><a href="page-lock-screen.html">Lock Screen</a></li>
-                                <li><a href="page-400.html">Error 400</a></li>
-                                <li><a href="page-403.html">Error 403</a></li>
-                                <li><a href="page-404.html">Error 404</a></li>
-                                <li><a href="page-404_alt.html">Error 404-alt</a></li>
-                                <li><a href="page-500.html">Error 500</a></li>
-                                <li><a href="page-503.html">Error 503</a></li>
+                                <li><a href="<?= Url::to(['auth-item/index']) ?>">AuthItem</a></li>
+                                <li><a href="<?= Url::to(['auth-assignment/index']) ?>">AuthAssignment</a></li>
+                                <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li>
+                                <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li>
                             </ul>
                         </li>
-
+                        <li class="text-muted menu-title">Other</li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-gift"></i><span> Extras </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
@@ -292,7 +282,6 @@ AppAsset::register($this);
                             <ul class="list-unstyled">
                                 <li><a href="apps-calendar.html"> Calendar</a></li>
                                 <li><a href="apps-contact.html"> Contact</a></li>
-                                <li><a href="apps-taskboard.html"> Taskboard</a></li>
                             </ul>
                         </li>
 

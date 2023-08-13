@@ -2,16 +2,16 @@
 
 namespace backend\controllers;
 
-use common\models\Pengguna;
-use backend\models\PenggunaSearch;
+use common\models\AuthItemChild;
+use backend\models\AuthItemChildSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * PenggunaController implements the CRUD actions for Pengguna model.
+ * AuthItemChildController implements the CRUD actions for AuthItemChild model.
  */
-class PenggunaController extends Controller
+class AuthItemChildController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,13 +32,13 @@ class PenggunaController extends Controller
     }
 
     /**
-     * Lists all Pengguna models.
+     * Lists all AuthItemChild models.
      *
      * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new PenggunaSearch();
+        $searchModel = new AuthItemChildSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
@@ -48,58 +48,55 @@ class PenggunaController extends Controller
     }
 
     /**
-     * Displays a single Pengguna model.
-     * @param int $id ID
+     * Displays a single AuthItemChild model.
+     * @param string $parent Parent
+     * @param string $child Child
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView($parent, $child)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $this->findModel($parent, $child),
         ]);
     }
 
     /**
-     * Creates a new Pengguna model.
+     * Creates a new AuthItemChild model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('createPostUser')) {
-            $model = new Pengguna();
+        $model = new AuthItemChild();
 
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
-                }
-            } else {
-                $model->loadDefaultValues();
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
             }
-
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
-            return $this->redirect(['pengguna/index']);
+            $model->loadDefaultValues();
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
-     * Updates an existing Pengguna model.
+     * Updates an existing AuthItemChild model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id ID
+     * @param string $parent Parent
+     * @param string $child Child
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id)
+    public function actionUpdate($parent, $child)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($parent, $child);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view', 'parent' => $model->parent, 'child' => $model->child]);
         }
 
         return $this->render('update', [
@@ -108,29 +105,31 @@ class PenggunaController extends Controller
     }
 
     /**
-     * Deletes an existing Pengguna model.
+     * Deletes an existing AuthItemChild model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id ID
+     * @param string $parent Parent
+     * @param string $child Child
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($parent, $child)
     {
-        $this->findModel($id)->delete();
+        $this->findModel($parent, $child)->delete();
 
         return $this->redirect(['index']);
     }
 
     /**
-     * Finds the Pengguna model based on its primary key value.
+     * Finds the AuthItemChild model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id ID
-     * @return Pengguna the loaded model
+     * @param string $parent Parent
+     * @param string $child Child
+     * @return AuthItemChild the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
+    protected function findModel($parent, $child)
     {
-        if (($model = Pengguna::findOne(['id' => $id])) !== null) {
+        if (($model = AuthItemChild::findOne(['parent' => $parent, 'child' => $child])) !== null) {
             return $model;
         }
 

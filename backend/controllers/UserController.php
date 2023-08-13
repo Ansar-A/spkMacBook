@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\User;
 use backend\models\UserSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -67,19 +68,26 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        $model = new User();
+        if (\Yii::$app->user->can('createPostUser')) {
+            // create post
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            $model = new User();
+
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            return $this->redirect(['user/index']);
+        }
     }
 
     /**

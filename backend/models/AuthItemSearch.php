@@ -4,13 +4,12 @@ namespace backend\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\User;
-use Yii;
+use common\models\AuthItem;
 
 /**
- * UserSearch represents the model behind the search form of `common\models\User`.
+ * AuthItemSearch represents the model behind the search form of `common\models\AuthItem`.
  */
-class UserSearch extends User
+class AuthItemSearch extends AuthItem
 {
     /**
      * {@inheritdoc}
@@ -18,7 +17,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'description', 'rule_name', 'data'], 'safe'],
+            [['type', 'created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -40,12 +40,12 @@ class UserSearch extends User
      */
     public function search($params)
     {
+        $query = AuthItem::find();
 
-        $query = User::find();
         // add conditions that should always apply here
+
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 5),
         ]);
 
         $this->load($params);
@@ -58,19 +58,15 @@ class UserSearch extends User
 
         // grid filtering conditions
         $query->andFilterWhere([
-            'id' => $this->id,
-            'status' => $this->status,
+            'type' => $this->type,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'rule_name', $this->rule_name])
+            ->andFilterWhere(['like', 'data', $this->data]);
 
         return $dataProvider;
     }

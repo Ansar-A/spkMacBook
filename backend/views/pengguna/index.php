@@ -13,6 +13,14 @@ use yii\grid\GridView;
 $this->title = 'Penggunas';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<!-- display error message -->
+<?php if (Yii::$app->session->hasFlash('error')) : ?>
+    <div class="alert alert-danger alert-dismissable">
+        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+        <h4><i class="icon fa fa-check"></i>Saved!</h4>
+        <?= Yii::$app->session->getFlash('error') ?>
+    </div>
+<?php endif; ?>
 <div class="pengguna-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -21,7 +29,8 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Pengguna', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+    ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -48,7 +57,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'class' => ActionColumn::className(),
                 'urlCreator' => function ($action, Pengguna $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
-                 }
+                }
             ],
         ],
     ]); ?>

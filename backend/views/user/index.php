@@ -17,6 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
+            <!-- display error message -->
+            <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                <div class="alert alert-danger alert-dismissable">
+                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
+                    <?= Yii::$app->session->getFlash('error') ?>
+                </div>
+            <?php endif; ?>
+
             <div class="col-sm-12">
                 <div class="btn-group pull-right m-t-15">
                     <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
