@@ -71,7 +71,7 @@ AppAsset::register($this);
                                                 <div class="media-body">
                                                     <h5 class="media-heading">A new order has been placed A new order has been placed</h5>
                                                     <p class="m-0">
-                                                        <small>There are new settings available</small>
+                                                        <small>There are new settings available.</small>
                                                     </p>
                                                 </div>
                                             </div>
