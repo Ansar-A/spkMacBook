@@ -4,11 +4,13 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
+use common\models\SosialMedia;
 use yii\helpers\Url;
 use kartik\form\ActiveForm;
 use yii\helpers\Html;
 use kartik\password\PasswordInput;
 use kartik\file\FileInput;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'Signup';
 ?>
@@ -61,8 +63,10 @@ $this->title = 'Signup';
                                         ]
                                     ])->passwordInput(['placeholder' => 'Enter password...']); ?>
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
+                                    <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About...']); ?>
                                 </div>
                                 <div class="col-md-6">
+
                                     <?= $form->field($model, 'hp', [
                                         'feedbackIcon' => [
                                             'prefix' => 'fa fa-phone',
@@ -74,13 +78,12 @@ $this->title = 'Signup';
                                     ])->widget('yii\widgets\MaskedInput', [
                                         'mask' => '999-999-999-999'
                                     ]);
-                                    ?>
-                                    <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
-                                        'options' => ['accept' => 'photos/*'],
-                                        'pluginOptions' => [
-                                            'showUpload' => false
-                                        ],
-                                    ]); ?>
+                                    ?> <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
+                                            'options' => ['accept' => 'photos/*'],
+                                            'pluginOptions' => [
+                                                'showUpload' => false
+                                            ],
+                                        ]); ?>
                                 </div>
                             </div>
                             <div class="row">

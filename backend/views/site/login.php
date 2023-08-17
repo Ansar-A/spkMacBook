@@ -128,14 +128,19 @@ $this->title = 'Login';
                 </div>
             </div>
             <?php ActiveForm::end(); ?>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <p>
-                        <font>Tidak punya akun?</font> <a href="<?= Url::to(['site/signup']) ?>" class="text-primary m-l-5"><b>
-                                <font>Sign Up</font>
-                            </b></a>
-                    </p>
-                </div>
+            <div class="container">
+                <p>
+                    &nbsp;
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 text-center">
+                <p>
+                    <font>Tidak punya akun?</font> <a href="<?= Url::to(['site/signup']) ?>" class="text-primary m-l-5"><b>
+                            <font>Sign Up</font>
+                        </b></a>
+                </p>
             </div>
         </div>
     </div>

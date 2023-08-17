@@ -66,7 +66,7 @@ class DetailProduk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetSpk()
+    public function getSpk()
     {
         return $this->hasOne(DataSpk::class, ['id_spk' => 'get_spk']);
     }

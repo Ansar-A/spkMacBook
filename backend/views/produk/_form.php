@@ -2,6 +2,7 @@
 
 use common\models\Audio;
 use common\models\BuiltinApps;
+use common\models\DataSpk;
 use common\models\Daya;
 use common\models\DetailProduk;
 use common\models\JenisLayar;
@@ -150,6 +151,7 @@ use kartik\file\FileInput;
             );
             ?>
         </div>
+        <!-- ketahanan -->
         <div class="col-sm-6">
             <?php
             $list = DetailProduk::find()->all();
@@ -165,7 +167,240 @@ use kartik\file\FileInput;
             )->label('Detail Ketahanan');
             ?>
         </div>
+        <!-- performa -->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->performa0->ram;
+                                    },
+                                ),
+                                ['prompt' => 'ram...']
+                            )->label('Detail Performa');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->performa0->vga;
+                                    },
+                                ),
+                                ['prompt' => 'vga...']
+                            )->label('Detail Performa');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->performa0->prosesor;
+                                    },
+                                ),
+                                ['prompt' => 'prosesor...']
+                            )->label('Detail Performa');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->performa0->storage;
+                                    },
+                                ),
+                                ['prompt' => 'storage...']
+                            )->label('Detail Performa');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- kondisi -->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->kondisi0->kondisi_layar;
+                                    },
+                                ),
+                                ['prompt' => 'kondisi layar...']
+                            )->label('Detail kondisi');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->kondisi0->keyboard;
+                                    },
+                                ),
+                                ['prompt' => 'keyboard...']
+                            )->label('Detail kondisi');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->kondisi0->tracpad;
+                                    },
+                                ),
+                                ['prompt' => 'tracpad...']
+                            )->label('Detail kondisi');
+                            ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->kondisi0->audio;
+                                    },
+                                ),
+                                ['prompt' => 'audio...']
+                            )->label('Detail kondisi');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- keamanan -->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <!-- keamanan -->
+                        <div class="col-sm-6">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->keamanan0->no_seri;
+                                    },
+                                ),
+                                ['prompt' => 'No Seri...']
+                            )->label('Detail keamanan');
+                            ?>
+                        </div>
+                        <div class="col-sm-6">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->keamanan0->garansi;
+                                    },
+                                ),
+                                ['prompt' => 'garansi...']
+                            )->label('Detail keamanan');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- spk -->
+        <div class="col">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->spk->rSquare;
+                                    },
+                                ),
+                                ['prompt' => 'R Square...']
+                            )->label('Detail SPK');
+                            ?>
+                        </div>
+                        <div class="col-sm-4">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->spk->dataF;
+                                    },
+                                ),
+                                ['prompt' => 'data F...']
+                            )->label('Detail SPK');
+                            ?>
+                        </div>
+                        <div class="col-sm-4">
+                            <?php
+                            $list = DetailProduk::find()->all();
+                            echo $form->field($model, 'get_detaill')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id_detail',
+                                    function ($list) {
+                                        return $list->spk->dataT;
+                                    },
+                                ),
+                                ['prompt' => 'data T...']
+                            )->label('Detail SPK');
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="col">
@@ -202,7 +437,7 @@ use kartik\file\FileInput;
     </div>
 
     <div class="col">
-        <div class="col-sm-6"> <?= $form->field($model, 'harga')->textInput() ?></div>
+        <div class="col-sm-6"> <?= $form->field($model, 'harga')->textInput(['type' => 'number']) ?></div>
         <div class="col-sm-6">
             <?php
             $list = KoneksiEkspansi::find()->all();
@@ -353,15 +588,16 @@ use kartik\file\FileInput;
             </div>
         </div>
     </div>
-
     <!-- <?= $form->field($model, 'id_servicer')->textInput() ?> -->
+    <div class="col-md-12">
+        <div class="col pull-right">
+            <div class="form-group ">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+            </div>
+        </div>
+    </div>
     <div class="container">
-        <p></p>
     </div>
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-    </div>
-
     <?php ActiveForm::end(); ?>
 
 </div>

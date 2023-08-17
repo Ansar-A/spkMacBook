@@ -8,6 +8,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -68,21 +69,31 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('createPostUser')) {
+        if (\Yii::$app->user->can('superAdmin')) {
             // create post
-
             $model = new User();
 
+            $model->scenario = 'update';
             if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'id' => $model->id]);
+                if ($model->load($this->request->post())) {
+                    $model->photo = UploadedFile::getInstance($model, 'photo');
+                    if ($model->validate()) {
+                        if (!is_null($model->photo)) {
+                            $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                            $model->photo->saveAs($filename);
+                            $model->photo = $filename;
+                            Yii::$app->getSession()->setFlash('success', '');
+                        }
+                        $model->save(false);
+                        return $this->redirect(['view', 'id' => $model->id]);
+                    }
                 }
             } else {
                 $model->loadDefaultValues();
             }
-
             return $this->render('create', [
                 'model' => $model,
+
             ]);
         } else {
             \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
@@ -100,13 +111,26 @@ class UserController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load($this->request->post())) {
+            $model->photo = UploadedFile::getInstance($model, 'photo');
+            if ($model->validate()) {
+                if (!is_null($model->photo)) {
+                    $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                    $model->photo->saveAs($filename);
+                    $model->photo = $filename;
+                }
+
+                $model->save(false);
+
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         }
 
         return $this->render('update', [
             'model' => $model,
+
         ]);
     }
 
@@ -119,9 +143,14 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if (\Yii::$app->user->can('superAdmin')) {
+            $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            return $this->redirect(['user/index']);
+        }
     }
 
     /**

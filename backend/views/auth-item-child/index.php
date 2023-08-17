@@ -13,32 +13,43 @@ use yii\grid\GridView;
 $this->title = 'Auth Item Children';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="auth-item-child-index">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card-box">
+                    <div class="auth-item-child-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+                        <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Create Auth Item Child', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+                        <p>
+                            <?= Html::a('Create Auth Item Child', ['create'], ['class' => 'btn btn-success']) ?>
+                        </p>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+                        <?php //echo $this->render('_search', ['model' => $searchModel]);
+                        ?>
 
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
-
-            'parent',
-            'child',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, AuthItemChild $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'parent' => $model->parent, 'child' => $model->child]);
-                 }
-            ],
-        ],
-    ]); ?>
-
-
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'summary' => '',
+                            'columns' => [
+                                [
+                                    'class' => 'yii\grid\SerialColumn'
+                                ],
+                                'parent',
+                                'child',
+                                [
+                                    'class' => ActionColumn::className(),
+                                    'urlCreator' => function ($action, AuthItemChild $model, $key, $index, $column) {
+                                        return Url::toRoute([$action, 'parent' => $model->parent, 'child' => $model->child]);
+                                    }
+                                ],
+                            ],
+                        ]); ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
+use PHPUnit\TextUI\XmlConfiguration\Constant;
 use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
@@ -50,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-8">
+            <div class="col-sm-9">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-4">
                         <div class="mini-stat clearfix card-box">
@@ -114,12 +115,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?php // echo $this->render('_search', ['model' => $searchModel]); 
                     ?>
                     <?= GridView::widget([
+
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
-                        //'bootstrap' => true,
                         'responsive' => true,
-                        //'bordered' => false,
                         'striped' => false,
+                        'resizableColumns' => true,
+                        'persistResize' => true,
+                        'floatHeader' => true,
+                        //'bootstrap' => true,
+                        //'bordered' => false,
                         //'condensed' => false,
                         //'responsiveWrap' => false,
                         //'hover' => true,
@@ -129,10 +134,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'showPageSummary' => true,
                         //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
                         //'summaryOptions' => ['class' => 'summary'],
-
-                        'resizableColumns' => true,
-                        'persistResize' => true,
-                        'floatHeader' => true,
                         //'showPageSummary' => true,
                         'columns' => [
                             [
@@ -171,6 +172,15 @@ $this->params['breadcrumbs'][] = $this->title;
                             // ['class' => 'yii\grid\SerialColumn'],
                             'id',
                             'username',
+                            // [
+                            //     'label' => 'Username',
+                            //     'headerOptions' => [
+                            //         'class' => 'text-center'
+                            //     ],
+                            //     'value' => function ($model) {
+                            //         return $model->username;
+                            //     }
+                            // ],
                             //'photo',
                             //'address',
                             //'auth_key',
@@ -178,6 +188,29 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'password_reset_token',
                             //'email:email',
                             //'status',
+                            [
+                                'attribute' => 'status',
+                                'format' => 'raw',
+                                'filter'    => [10 => "Active", 9 => "Suspended"],
+                                'value' => function ($data, $key, $index, $column) {
+                                    if ($data->status == 10) {
+                                        return '<span class="label label-table label-success">Active</span>';
+                                    } else {
+                                        return '<span class="label label-table label-danger">Suspended</span>';
+                                    }
+                                }
+
+                            ]
+                            // [
+                            //     'attribute' => 'status',
+                            //     'value' => function ($data, $key, $index, $column) {
+                            //         if ($data->status == 10) {
+                            //             return 'Active';
+                            //         } else {
+                            //             return 'Inactive';
+                            //         }
+                            //     }
+                            // ]
                             //'created_at',
                             //'updated_at',
                             //'verification_token',
@@ -212,20 +245,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]); ?>
                 </div>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="card-box p-0">
                     <div class="profile-widget text-center">
-
                         <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                         <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <p class="text-muted"><i class="fa fa-map-marker"></i> <?php echo Yii::$app->user->identity->address ?></p>
                         <a href="#" class="btn btn-sm btn-purple m-t-20">Follow Fb</a>
                         <a href="#" class="btn btn-sm btn-pink m-t-20">ig</a>
                         <p class="m-t-10 text-muted p-20">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                         <ul class="list-inline widget-list clearfix">
-                            <li class="col-md-4"><span>2.109</span>Followers</li>
-                            <li class="col-md-4"><span>596</span>Photos</li>
-                            <li class="col-md-4"><span>902</span>Like</li>
+                            <li class="col-md-6"><span>109</span>Follow</li>
+                            <li class="col-md-6"><span>596</span>Photos</li>
                         </ul>
                     </div>
                 </div>

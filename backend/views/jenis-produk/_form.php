@@ -9,15 +9,11 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="jenis-produk-form">
-
     <?php $form = ActiveForm::begin(); ?>
-
     <?= $form->field($model, 'jenis')->textInput(['maxlength' => true]) ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success']) ?>
+        <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cancel</button>
     </div>
-
     <?php ActiveForm::end(); ?>
-
 </div>

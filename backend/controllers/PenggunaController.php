@@ -67,7 +67,7 @@ class PenggunaController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('createPostUser')) {
+        if (\Yii::$app->user->can('superAdmin')) {
             $model = new Pengguna();
 
             if ($this->request->isPost) {
@@ -116,9 +116,15 @@ class PenggunaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        if (\Yii::$app->user->can('superAdmin')) {
+            $this->findModel($id)->delete();
+
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            return $this->redirect(['pengguna/index']);
+        }
     }
 
     /**

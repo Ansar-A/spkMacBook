@@ -191,43 +191,14 @@ AppAsset::register($this);
                         <li class="has_sub">
                             <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
                         </li>
-                        <li class="text-muted menu-title">User</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> Servicer </span> <span class="menu-arrow"></span> </a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
-                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
-                            </ul>
-                        </li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-paint-bucket"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['pengguna/index']) ?>">Pengguna</a></li>
-                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
-                            </ul>
-                        </li>
-                        <li class="text-muted menu-title">SPK MacBook</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-pencil-alt"></i><span> Detail Produk </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['detail-produk/index']) ?>">Detail</a></li>
-                                <li><a href="<?= Url::to(['ketahanan-macbook/index']) ?>">Ketahanan MacBook</a></li>
-                                <li><a href="<?= Url::to(['performa-macbook/index']) ?>">Performa MacBook</a></li>
-                                <li><a href="<?= Url::to(['kondisi-macbook/index']) ?>">Kondisi MacBook</a></li>
-                                <li><a href="<?= Url::to(['keamanan-macbook/index']) ?>">Keamanan MacBook</a></li>
-                                <li><a href="<?= Url::to(['data-spk/index']) ?>">SPK MacBook</a></li>
-                                <li><a href="#">info</a></li>
-                            </ul>
-                        </li>
                         <li class="text-muted menu-title">MacBook</li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-menu-alt"></i><span>Data MacBook</span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-apple"></i><span>Data MacBook</span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= Url::to(['produk/index']) ?>">MacBook</a></li>
                                 <li><a href="tables-datatable.html">info</a></li>
                             </ul>
                         </li>
-
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span class="menu-arrow"></span><span> Component </span></a>
                             <ul class="list-unstyled">
@@ -241,66 +212,48 @@ AppAsset::register($this);
                                 <li><a href="<?= Url::to(['nirkabel/index']) ?>">Nirkabel</a></li>
                                 <li><a href="<?= Url::to(['ukuran-berat/index']) ?>">Ukuran & Berat</a></li>
                                 <li><a href="<?= Url::to(['kamera/index']) ?>">kamera</a></li>
-                                <li><a href="<?= Url::to(['builtin-Apps/index']) ?>">Builtin Apps</a></li>
+                                <li><a href="<?= Url::to(['builtin-apps/index']) ?>">Builtin Apps</a></li>
                                 <li><a href="<?= Url::to(['audio/index']) ?>">Audio</a></li>
                                 <li><a href="<?= Url::to(['koneksi-ekspansi/index']) ?>">Koneksi & Ekspansi</a></li>
 
                             </ul>
                         </li>
-
-                        <li class="text-muted menu-title">Access</li>
-
+                        <li class="text-muted menu-title">SPK MacBook</li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-files"></i><span> Access Control </span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-panel"></i><span> Detail Produk </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?= Url::to(['detail-produk/index']) ?>">Detail</a></li>
+                                <li><a href="<?= Url::to(['ketahanan-macbook/index']) ?>">Ketahanan MacBook</a></li>
+                                <li><a href="<?= Url::to(['performa-macbook/index']) ?>">Performa MacBook</a></li>
+                                <li><a href="<?= Url::to(['kondisi-macbook/index']) ?>">Kondisi MacBook</a></li>
+                                <li><a href="<?= Url::to(['keamanan-macbook/index']) ?>">Keamanan MacBook</a></li>
+                                <li><a href="<?= Url::to(['data-spk/index']) ?>">SPK MacBook</a></li>
+                                <li><a href="#">info</a></li>
+                            </ul>
+                        </li>
+                        <li class="text-muted menu-title">User</li>
+                        <li class="has_sub">
+                            <a class="waves-effect"><i class="ti-user"></i> <span> Servicer </span> <span class="menu-arrow"></span> </a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
+                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
+                            </ul>
+                        </li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-id-badge"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?= Url::to(['pengguna/index']) ?>">Pengguna</a></li>
+                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
+                            </ul>
+                        </li>
+                        <li class="text-muted menu-title">Access</li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Access Control </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= Url::to(['auth-item/index']) ?>">AuthItem</a></li>
                                 <li><a href="<?= Url::to(['auth-assignment/index']) ?>">AuthAssignment</a></li>
                                 <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li>
                                 <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li>
-                            </ul>
-                        </li>
-                        <li class="text-muted menu-title">Other</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-gift"></i><span> Extras </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="extra-profile.html">Profile</a></li>
-                                <li><a href="extra-timeline.html">Timeline</a></li>
-                                <li><a href="extra-sitemap.html">Site map</a></li>
-                                <li><a href="extra-invoice.html">Invoice</a></li>
-                                <li><a href="extra-email-template.html">Email template</a></li>
-                                <li><a href="extra-maintenance.html">Maintenance</a></li>
-                                <li><a href="extra-coming-soon.html">Coming-soon</a></li>
-                                <li><a href="extra-faq.html">FAQ</a></li>
-                                <li><a href="extra-search-result.html">Search result</a></li>
-                                <li><a href="extra-gallery.html">Gallery</a></li>
-                                <li><a href="extra-pricing.html">Pricing</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-crown"></i><span class="label label-success pull-right">3</span><span> Apps </span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="apps-calendar.html"> Calendar</a></li>
-                                <li><a href="apps-contact.html"> Contact</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-email"></i><span> Email </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="email-inbox.html"> Inbox</a></li>
-                                <li><a href="email-read.html"> Read Mail</a></li>
-                                <li><a href="email-compose.html"> Compose Mail</a></li>
-                            </ul>
-                        </li>
-
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-widget"></i><span> Layouts </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="layout-leftbar_2.html"> Leftbar with User</a></li>
-                                <li><a href="layout-menu-collapsed.html"> Menu Collapsed</a></li>
-                                <li><a href="layout-menu-small.html"> Small Menu</a></li>
-                                <li><a href="layout-header_2.html"> Header style</a></li>
                             </ul>
                         </li>
 
@@ -322,7 +275,6 @@ AppAsset::register($this);
                         </li>
 
                         <li class="text-muted menu-title">Extra</li>
-
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-user"></i><span> Crm </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">

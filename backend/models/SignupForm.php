@@ -17,6 +17,8 @@ class SignupForm extends Model
     public $photo;
     public $address;
     public $hp;
+    public $tentang;
+    public $get_sosial;
     /**
      * {@inheritdoc}
      */
@@ -34,6 +36,8 @@ class SignupForm extends Model
             ['email', 'string', 'max' => 255],
             ['address', 'required', 'message' => 'Address cannot be blank'],
             ['hp', 'required', 'message' => 'No Telp cannot be blank'],
+            ['tentang', 'required', 'message' => 'No Telp cannot be blank'],
+            ['get_sosial', 'required'],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png, jpeg', 'on' => 'update'],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
 
@@ -59,6 +63,8 @@ class SignupForm extends Model
         $user->photo = $this->photo;
         $user->address = $this->address;
         $user->hp = $this->hp;
+        $user->tentang = $this->tentang;
+        $user->get_sosial = $this->get_sosial;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();

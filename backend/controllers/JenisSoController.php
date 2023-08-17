@@ -55,7 +55,7 @@ class JenisSoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
+        return $this->renderAjax('view', [
             'model' => $this->findModel($id),
         ]);
     }
@@ -68,7 +68,6 @@ class JenisSoController extends Controller
     public function actionCreate()
     {
         $model = new JenisSo();
-
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -76,8 +75,7 @@ class JenisSoController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

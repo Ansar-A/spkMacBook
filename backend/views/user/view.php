@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use kartik\growl\Growl;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
@@ -14,6 +15,27 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('success')) : ?>
+                    <?php echo Growl::widget([
+                        'type' => Growl::TYPE_SUCCESS,
+                        'title' => 'Well done!',
+                        //'icon' => 'fa fa-close',
+                        'body' => '<p>Data berhasil disimpan.</p><p>&nbsp;</p>',
+                        'showSeparator' => true,
+                        'delay' => 0,
+                        'pluginOptions' => [
+                            'showProgressbar' => true,
+                            'placement' => [
+                                'from' => 'top',
+                                'align' => 'right',
+                            ]
+                        ]
+                    ]);
+                    ?>
+                    <?= Yii::$app->session->getFlash('success') ?>
+                <?php endif; ?>
+            </div>
             <div class="col-sm-12">
                 <div class="btn-group pull-right m-t-15">
                     <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
@@ -96,10 +118,14 @@ $this->params['breadcrumbs'][] = $this->title;
                         </p>
                         <?= DetailView::widget([
                             'model' => $model,
+                            'options' => [
+                                'class' => 'table-bordered  table table-hover'
+                            ],
                             'attributes' => [
                                 'id',
                                 'username',
                                 'address',
+                                'tentang',
                                 'hp',
                                 'auth_key',
                                 'password_hash',
@@ -109,6 +135,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'created_at',
                                 'updated_at',
                                 'verification_token',
+                                'get_sosial'
                             ],
                         ]) ?>
                     </div>

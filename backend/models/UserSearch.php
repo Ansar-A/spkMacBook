@@ -18,7 +18,7 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'username', 'status', 'created_at', 'updated_at'], 'integer'],
         ];
     }
 
@@ -40,12 +40,16 @@ class UserSearch extends User
      */
     public function search($params)
     {
+        if (\Yii::$app->user->can('superAdmin')) {
+            $query = User::find();
+        } else {
+            $query = User::find()->where(['id' => Yii::$app->user->identity->id]);
+        }
 
-        $query = User::find();
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 5),
+            'pagination' => array('pageSize' => 4),
         ]);
 
         $this->load($params);
