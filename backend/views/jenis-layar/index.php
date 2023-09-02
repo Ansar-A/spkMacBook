@@ -173,7 +173,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             // ],
                             // ['class' => 'yii\grid\SerialColumn'],
                             'id',
-                            'jenis',
+                            //'jenis',
+                            [
+                                'class' => 'kartik\grid\EditableColumn',
+                                'attribute' => 'jenis',
+                            ]
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -198,7 +202,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'heading' => false,
                             //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                             'type' => 'default',
-                            'before' => Html::a('<i class="md-add-box"></i> Create Jenis Layar', ['create'], ['class' => 'btn btn-success']),
+                            //'before' => Html::a('<i class="md-add-box"></i> Create Jenis Layar', ['create'], ['class' => 'btn btn-success']),
                             // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
                             // 'footer' => false
                         ],

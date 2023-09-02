@@ -2,13 +2,16 @@
 
 namespace backend\controllers;
 
+
 use common\models\Produk;
 use backend\models\ProdukSearch;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use yii\web\UploadedFile;
+use yii\imagine\Image;
 
 /**
  * ProdukController implements the CRUD actions for Produk model.
@@ -42,7 +45,21 @@ class ProdukController extends Controller
     {
         $searchModel = new ProdukSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        // editable
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = Produk::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['Produk']);
+            $post['Produk'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -80,7 +97,11 @@ class ProdukController extends Controller
                     if (!is_null($model->photo)) {
                         $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
                         $model->photo->saveAs($filename);
-                        $model->photo = $filename;
+                        $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
+                        Image::thumbnail('@webroot/' . $filename, 120, 120)
+                            ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 80]);
+
+                        $model->photo = $newfilename;
                         Yii::$app->getSession()->setFlash('success', '');
                     }
                     $model->save(false);
@@ -90,7 +111,7 @@ class ProdukController extends Controller
         } else {
             $model->loadDefaultValues();
         }
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }
@@ -105,16 +126,33 @@ class ProdukController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'update';
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                // $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
+                $model->photo = UploadedFile::getInstance($model, 'photo');
+                if ($model->validate()) {
+                    if (!is_null($model->photo)) {
+                        $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                        $model->photo->saveAs($filename);
+                        $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
+                        Image::thumbnail('@webroot/' . $filename, 120, 120)
+                            ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+                        $model->photo = $newfilename;
+                        Yii::$app->getSession()->setFlash('success', '');
+                    }
+                    $model->save(false);
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+            }
+        } else {
+            $model->loadDefaultValues();
         }
-
-        return $this->render('update', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
-
     /**
      * Deletes an existing Produk model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

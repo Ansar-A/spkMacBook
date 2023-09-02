@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -13,7 +14,6 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'jenis')->textInput(['maxlength' => true]) ?>
     <div class="form-group">
         <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success']) ?>
-        <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cancel</button>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

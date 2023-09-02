@@ -193,7 +193,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'performa',
                             'kondisi',
                             'keamanan',
-                            //'get_spk',
+                            'get_spk',
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),

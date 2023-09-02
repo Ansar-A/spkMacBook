@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 use kartik\growl\Growl;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
@@ -47,16 +48,16 @@ $this->params['breadcrumbs'][] = $this->title;
                         <li><a href="#">Separated link</a></li>
                     </ul>
                 </div>
-                <h4 class="page-title">Basic Tables</h4>
+
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Panel Admin</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['user/index']) ?>">Admin</a>
                     </li>
                     <li class="active">
-                        Tables
+                        View
                     </li>
                 </ol>
             </div>
@@ -127,14 +128,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'address',
                                 'tentang',
                                 'hp',
-                                'auth_key',
-                                'password_hash',
-                                'password_reset_token',
+                                // 'auth_key',
+                                // 'password_hash',
+                                // 'password_reset_token',
                                 'email:email',
                                 'status',
-                                'created_at',
-                                'updated_at',
-                                'verification_token',
+                                // 'created_at',
+                                // 'updated_at',
+                                // 'verification_token',
                                 'get_sosial'
                             ],
                         ]) ?>

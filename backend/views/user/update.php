@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
@@ -23,16 +24,15 @@ $this->params['breadcrumbs'][] = 'Update';
                     <li><a href="#">Separated link</a></li>
                 </ul>
             </div>
-            <h4 class="page-title">Basic Tables</h4>
             <ol class="breadcrumb">
                 <li>
-                    <a href="#">Ubold</a>
+                    <h4 class="page-title">Panel Admin</h4>
                 </li>
                 <li>
-                    <a href="#">Tables</a>
+                    <a href="<?= Url::to(['user/index']) ?>">Admin</a>
                 </li>
                 <li class="active">
-                    Tables
+                    Update
                 </li>
             </ol>
         </div>

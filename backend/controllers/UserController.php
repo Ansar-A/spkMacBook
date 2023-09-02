@@ -8,6 +8,7 @@ use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 use yii\web\UploadedFile;
 
 /**
@@ -43,6 +44,20 @@ class UserController extends Controller
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
+        // if (Yii::$app->request->post('hasEditable')) {
+        //     $id = Yii::$app->request->post('editableKey');
+        //     $status = User::findOne($id);
+
+        //     $out = Json::encode(['output' => '', 'message' => '']);
+        //     $post = [];
+        //     $posted = current($_POST['User']);
+        //     $post['User'] = $posted;
+        //     if ($status->load($post)) {
+        //         $status->save();
+        //     }
+        //     echo $out;
+        //     return;
+        // }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -91,7 +106,7 @@ class UserController extends Controller
             } else {
                 $model->loadDefaultValues();
             }
-            return $this->render('create', [
+            return $this->renderAjax('create', [
                 'model' => $model,
 
             ]);

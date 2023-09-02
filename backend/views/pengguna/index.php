@@ -5,15 +5,15 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
+use yii\bootstrap\Modal;
 
 /** @var yii\web\View $this */
 /** @var backend\models\PenggunaSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = 'Penggunas';
+$this->title = 'Panel Pengguna';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-
 <div class="content">
     <div class="container">
         <div class="row">
@@ -27,30 +27,19 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php endif; ?>
 
             <div class="col-sm-12">
-                <div class="btn-group pull-right m-t-15">
-                    <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
-                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
-                <h4 class="page-title">Basic Tables</h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Pengguna</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Panel Pengguna
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-4">
                         <div class="mini-stat clearfix card-box">
@@ -111,7 +100,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 <div class="pengguna-index">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+                    <div class="row">
+                        <div class="col-sm-2">
+                            <?= Html::button('<i class="md-add-box"></i> Add Pengguna', ['value' => Url::to(['pengguna/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
+                        </div>
+                        <div class="col-sm-10">
+                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
+                    <?php
+                    Modal::begin([
+                        'header' => 'Create',
+                        'id' => 'modal',
+                        'size' => 'modal-lg'
+                    ]);
+                    echo "<div id = 'modalContent'></div>";
+                    Modal::end();
                     ?>
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
@@ -129,7 +133,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'showPageSummary' => true,
                         //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
                         //'summaryOptions' => ['class' => 'summary'],
-
+                        'headerRowOptions' => ['class' => 'table m-0'],
+                        'filterRowOptions' => ['class' => 'table m-0'],
                         'resizableColumns' => true,
                         'persistResize' => true,
                         'floatHeader' => true,
@@ -169,15 +174,17 @@ $this->params['breadcrumbs'][] = $this->title;
                             //     'filter' => Html::activeDropDownList($searchModel, 'username', ArrayHelper::map(User::find()->asArray()->all(), 'id', 'username'), ['class' => 'form-control', 'prompt' => 'Select Category']),
                             // ],
                             // ['class' => 'yii\grid\SerialColumn'],
-                            'id',
-                            'username',
+                            // [
+                            //     'attribute' => 'id',
+                            //     'contentOptions' => ['style' => 'text-align:center'],
+                            // ],
                             //'password_hash',
-                            'email:email',
                             //'status',
                             [
+                                'headerOptions' => ['class' => 'text-center'],
+                                'contentOptions' => ['style' => 'text-align:center'],
                                 'attribute' => 'status',
                                 'format' => 'raw',
-
                                 'filter'    => [10 => "Active", 9 => "Suspended"],
                                 'value' => function ($data, $key, $index, $column) {
                                     if ($data->status == 10) {
@@ -187,17 +194,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
 
-                            ]
+                            ],
+                            [
+                                'headerOptions' => ['class' => 'text-center'],
+                                'attribute' => 'username',
+                            ],
+                            'email:email',
                             //'auth_key',
                             //'password_reset_token',
                             //'created_at',
                             //'updated_at',
                             //'verification_token',
                             //'jenis_kelamin',
-                            //'address',
-                            //'kelurahan',
-                            //'kecamatan',
-                            //'kabupaten',
+                            [
+                                'headerOptions' => ['class' => 'text-center'],
+                                'attribute' => 'address',
+                            ],
+
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -222,71 +235,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'heading' => false,
                             //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                             'type' => 'default',
-                            'before' => Html::a('<i class="md-add-box"></i> Create Pengguna', ['create'], ['class' => 'btn btn-success']),
+                            //'before' => Html::a('<i class="md-add-box"></i> Create Pengguna', ['create'], ['class' => 'btn btn-success']),
                             // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
                             // 'footer' => false
                         ],
                     ]); ?>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card-box m-b-0">
-                    <h4 class=" header-title m-t-0 m-b-20 text-dark">Leads Statics</h4>
-                    <div id="morris-bar-stacked" style="height: 260px; position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"><svg height="260" version="1.1" width="280" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="overflow: hidden; position: relative;">
-                            <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created with Raphaël 2.1.2</desc>
-                            <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs><text x="32.53125" y="221" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
-                                <tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">0</tspan>
-                            </text>
-                            <path fill="none" stroke="#eeeeee" d="M45.03125,221H255" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.53125" y="172" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
-                                <tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">75</tspan>
-                            </text>
-                            <path fill="none" stroke="#eeeeee" d="M45.03125,172H255" stroke-width="0.5" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path><text x="32.53125" y="123" text-anchor="end" font-family="sans-serif" font-size="12px" stroke="none" fill="#888888" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: end; font-family: sans-serif; font-size: 12px; font-weight: normal;" font-weight="normal">
-                                <tspan dy="4" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">150</tspan>
-                            </text>
-
-                            <rect x="48.780691964285715" y="191.6" width="22.496651785714285" height="29.400000000000006" rx="0" ry="0" fill="#34d3eb" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="48.780691964285715" y="74" width="22.496651785714285" height="117.6" rx="0" ry="0" fill="#ebeff2" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="78.77622767857144" y="172" width="22.496651785714285" height="49" rx="0" ry="0" fill="#34d3eb" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="78.77622767857144" y="129.53333333333333" width="22.496651785714285" height="42.46666666666667" rx="0" ry="0" fill="#ebeff2" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="108.77176339285714" y="155.66666666666669" width="22.496651785714285" height="65.33333333333331" rx="0" ry="0" fill="#34d3eb" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="108.77176339285714" y="96.86666666666667" width="22.496651785714285" height="58.80000000000001" rx="0" ry="0" fill="#ebeff2" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-                            <rect x="138.76729910714286" y="172" width="22.496651785714285" height="49" rx="0" ry="0" fill="#34d3eb" stroke="none" fill-opacity="1" style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); fill-opacity: 1;"></rect>
-
-
-                        </svg>
-                        <div class="morris-hover morris-default-style" style="left: 105.516px; top: 90px; display: none;">
-                            <div class="morris-hover-row-label">Thur</div>
-                            <div class="morris-hover-point" style="color: #34d3eb">
-                                Series A:
-                                75
-                            </div>
-                            <div class="morris-hover-point" style="color: #ebeff2">
-                                Series B:
-                                65
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-20">
-                        <h4 class="m-b-20 header-title"><b>Activities</b></h4>
-                        <div class="nicescroll p-l-r-10" style="max-height: 535px; overflow: hidden; outline: none;" tabindex="5000">
-                            <div class="timeline-2">
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <div class="text-muted"><small>5 minutes ago</small></div>
-                                        <p><strong><a href="#" class="text-info">John Doe</a></strong> Uploaded a photo <strong>"DSC000586.jpg"</strong></p>
-                                    </div>
-                                </div>
-                                <div class="time-item">
-                                    <div class="item-info">
-                                        <div class="text-muted"><small>30 minutes ago</small></div>
-                                        <p><a href="" class="text-info">Lorem</a> commented your post.</p>
-                                        <p><em>"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam laoreet tellus ut tincidunt euismod. "</em></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

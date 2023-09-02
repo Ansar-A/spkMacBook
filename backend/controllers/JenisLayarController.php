@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\JenisLayar;
 use backend\models\JenisLayarSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * JenisLayarController implements the CRUD actions for JenisLayar model.
@@ -40,7 +42,20 @@ class JenisLayarController extends Controller
     {
         $searchModel = new JenisLayarSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = JenisLayar::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['JenisLayar']);
+            $post['JenisLayar'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

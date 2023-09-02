@@ -7,6 +7,7 @@ use yii\grid\ActionColumn;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 
+
 /** @var yii\web\View $this */
 /** @var backend\models\JenisProdukSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
@@ -18,96 +19,46 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-                <div class="btn-group pull-right m-t-15">
-                    <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
-                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
-                <h4 class="page-title">Basic Tables</h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Jenis MacBook</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Panel Jenis MacBook
                     </li>
                 </ol>
             </div>
-            <div class="col-lg-12">
-                <div class="panel btn-twitter social-feed-box">
-                    <div class="panel-body">
-                        <div class="">
-                            <span class="text-uppercase font-600 pull-right">Latest Tweets</span>
-                            <i class="fa fa-twitter fa-2x"></i>
-                        </div>
-                        <div id="twitter-slider" class="carousel slide social-feed-slider" data-ride="carousel">
-                            <!-- Indicators -->
-                            <ol class="carousel-indicators m-b-0">
-                                <li data-target="#twitter-slider" data-slide-to="0" class=""></li>
-                                <li data-target="#twitter-slider" data-slide-to="1" class="active"></li>
-                                <li data-target="#twitter-slider" data-slide-to="2" class=""></li>
-                            </ol>
-                            <!-- Wrapper for slides -->
-                            <div class="carousel-inner" role="listbox">
-                                <div class="item">
-                                    <div class="m-t-20">
-                                        <h3 class="text-white m-b-5">Contrary to popular belief, Lorem Ipsum is not simply random text piece of classical Latin...</h3>
-                                        <span class="font-13"><small>10 March, 2016</small></span>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="m-t-20">
-                                        <h3 class="text-white m-b-5">Latin literature from 45 BC,making it over 2000 years old. Contrary to popular belief...</h3>
-                                        <span class="font-13"><small>6 March, 2016</small></span>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="m-t-20">
-                                        <h3 class="text-white m-b-5">Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC...</h3>
-                                        <span class="font-13"><small>6 March, 2016</small></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-9">
                         <div class="jenis-produk-index">
-                            <?php // echo $this->render('_search', ['model' => $searchModel]); 
+                            <?php //echo $this->render('_search', ['model' => $searchModel]);
                             ?>
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-5">
                                     <?= Html::button('<i class="md-add-box"></i> Add Data', ['value' => Url::to(['jenis-produk/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
                                 </div>
-                                <div class="col-sm-3">
-                                    <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button>
-                                        <ul class="dropdown-menu drop-menu-right" role="menu">
-                                            <li><a href="#">Action</a></li>
-                                            <li><a href="#">Another action</a></li>
-                                            <li><a href="#">Something else here</a></li>
-                                            <li class="divider"></li>
-                                            <li><a href="#">Separated link</a></li>
-                                        </ul>
-                                    </div>
+                                <div class="col-sm-7">
+                                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                                 </div>
-
                             </div>
+                            <?php
+                            Modal::begin([
+                                'header' => false,
+                                'id' => 'modal',
+                                'size' => 'modal-lg'
+                            ]);
+                            echo "<div id = 'modalContent'></div>";
+                            Modal::end();
+                            ?>
                             <p></p>
                             <?php
                             Modal::begin([
-                                'header' => 'Create Jenis Produk',
+                                'header' => '<h4>Create Jenis MacBook</h4>',
                                 'id' => 'modal',
                                 'size' => 'modal-lg'
                             ]);
@@ -117,10 +68,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
-                                'filterModel' => $searchModel,
+                                'headerRowOptions' => ['class' => 'table m-0'],
+                                'filterRowOptions' => ['class' => 'table m-0'],
+                                //'filterModel' => $searchModel,
                                 //'bootstrap' => true,
-                                'responsive' => true,
+                                //'responsive' => true,
                                 //'bordered' => false,
+                                'pjax' => true,
                                 'striped' => false,
                                 //'condensed' => false,
                                 //'responsiveWrap' => false,
@@ -139,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'columns' => [
                                     [
                                         'class' => '\kartik\grid\ActionColumn',
-                                        'template' => '{view} {update} {delete}',
+                                        'template' => '{view} {delete}',
                                         'header' => 'Action',
                                         'buttons' => [
                                             'class' => 'btn btn-primary dropdown-toggle',
@@ -148,10 +102,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
                                                 ]);
                                             },
-                                            'update' => function ($url, $model) {
+                                            // 'update' => function ($url, $model) {
 
-                                                return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
-                                            },
+                                            //     return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
+                                            // },
                                             'delete' => function ($url, $model) {
 
                                                 return Html::a('', ['delete', 'id' => $model->id], [
@@ -171,8 +125,14 @@ $this->params['breadcrumbs'][] = $this->title;
                                     //     'filter' => Html::activeDropDownList($searchModel, 'username', ArrayHelper::map(User::find()->asArray()->all(), 'id', 'username'), ['class' => 'form-control', 'prompt' => 'Select Category']),
                                     // ],
                                     // ['class' => 'yii\grid\SerialColumn'],
-                                    'id',
-                                    'jenis',
+                                    //'id',
+                                    [
+                                        'class' => 'kartik\grid\EditableColumn',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'attribute' => 'jenis',
+                                    ],
+                                    'get_ket',
                                 ],
                                 'toolbar' => [
                                     Html::a('<i class="fa fa-refresh"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -209,28 +169,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="product-right-info">
-                                        <h3><b>Mens Fedora Hat CODEblack</b></h3>
-                                        <div class="rating">
-                                            <ul class="list-inline">
-                                                <li><a class="fa fa-star" href=""></a></li>
-                                                <li><a class="fa fa-star" href=""></a></li>
-                                                <li><a class="fa fa-star" href=""></a></li>
-                                                <li><a class="fa fa-star" href=""></a></li>
-                                                <li><a class="fa fa-star-o" href=""></a></li>
-                                            </ul>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <h6><span class="label label-info m-l-5">New</span><b> Chipset</b></h6>
+                                                <h4 class="m-t-20" style="padding-left: 5px;margin-top: 0px;margin-bottom: 0px;"><b>Chipset M3</b></h4>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <img src="<?= Url::to('@web/purple/assets/images/m3.png') ?>" class="thumb-lg img-rounded img-thumbnail" alt="img">
+                                            </div>
                                         </div>
-                                        <h5 class="m-t-20"><b>Stock: </b> 256pcs. <span class="label label-default m-l-5">In Stock</span></h5>
                                         <hr>
-                                        <h5 class="font-600">Product Description</h5>
-                                        <p class="text-muted">Dantes remained confused and silent by this
-                                            explanation of the thoughts which had unconsciously been working in
-                                            his mind, or rather soul; for there are two distinct sorts of ideas,
-                                            those that proceed from the head and those from the heart.</p>
-                                        <div class="m-t-30">
-                                            <button type="button" class="btn btn-white" title="Add to Wish List"><i class="fa fa-heart-o"></i></button>
-                                            <button type="button" class="btn btn-danger waves-effect waves-light m-l-10">
-                                                <span class="btn-label"><i class="fa fa-shopping-cart"></i>
-                                                </span>Buy Now</button>
+                                        <h5 class="font-600">Chipset Description</h5>
+                                        <p class="text-muted">Chip M3 kabarnya sedang diuji menggunakan aplikasi pihak ketiga, guna memastikan kompatibilitasnya dengan ekosistem software Mac. Salah satu versi chip M3 yang sedang diuji kabarnya memiliki total CPU 12 inti, terdiri dari enam inti yang bertugas menangani tugas yang paling intens dan enam inti lainnya untuk menangani operasi dengan daya yang lebih rendah.</p>
+                                        <div class="m-t-30 text-center">
+                                            <a href="https://www.macprices.net/2023/05/14/early-details-of-apples-next-generation-m3-chips/" target="_blank" class="btn btn-info waves-effect waves-light btn-sm">
+                                                <span class="btn-label"><i class="fa fa-info"></i>
+                                                </span>More Info</a>
                                         </div>
                                     </div>
                                 </div>

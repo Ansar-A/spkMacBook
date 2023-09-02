@@ -4,9 +4,14 @@ namespace backend\controllers;
 
 use common\models\JenisProduk;
 use backend\models\JenisProdukSearch;
+use kartik\grid\EditableColumn;
+use Yii;
+use kartik\grid\EditableColumnAction;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 
 /**
  * JenisProdukController implements the CRUD actions for JenisProduk model.
@@ -36,11 +41,27 @@ class JenisProdukController extends Controller
      *
      * @return string
      */
+
+
     public function actionIndex()
     {
         $searchModel = new JenisProdukSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        // editable
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = JenisProduk::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['JenisProduk']);
+            $post['JenisProduk'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\JenisProsesor;
 use backend\models\JenisProsesorSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * JenisProsesorController implements the CRUD actions for JenisProsesor model.
@@ -40,7 +42,20 @@ class JenisProsesorController extends Controller
     {
         $searchModel = new JenisProsesorSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = JenisProsesor::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['JenisProsesor']);
+            $post['JenisProsesor'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

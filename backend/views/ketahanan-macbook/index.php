@@ -55,8 +55,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="col-lg-12">
                         <div class="card-box widget-box-1 bg-white">
                             <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on right"></i>
-                            <h4 class="text-dark">Income status</h4>
-                         
+                            <h4 class="text-dark">Maksimum Kapasitas Daya</h4>
+
                             <p class="text-muted">Total income: $22506 <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
                         </div>
                     </div>
@@ -80,7 +80,6 @@ $this->params['breadcrumbs'][] = $this->title;
                         //'showPageSummary' => true,
                         //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
                         //'summaryOptions' => ['class' => 'summary'],
-
                         'resizableColumns' => true,
                         'persistResize' => true,
                         'floatHeader' => true,
@@ -122,6 +121,22 @@ $this->params['breadcrumbs'][] = $this->title;
                             // ['class' => 'yii\grid\SerialColumn'],
                             'id_ketahanan',
                             'baterai',
+                            'kapasitas_pengisian',
+                            [
+                                'headerOptions' => ['class' => 'text-center'],
+                                'contentOptions' => ['style' => 'text-align:center'],
+                                'attribute' => 'ket',
+                                'format' => 'raw',
+                                'filter'    => ['Normal' => "Normal", 'Replace Soon' => "Replace Soon"],
+                                'value' => function ($data, $key, $index, $column) {
+                                    if ($data->ket == 'Normal') {
+                                        return '<span class="label label-table label-success">Normal</span>';
+                                    } else {
+                                        return '<span class="label label-table label-danger">Replace Soon</span>';
+                                    }
+                                }
+
+                            ],
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -159,14 +174,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                         <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <a href="#" class="btn btn-sm btn-purple m-t-20">Follow Fb</a>
-                        <a href="#" class="btn btn-sm btn-pink m-t-20">ig</a>
-                        <p class="m-t-0 text-muted p-20">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. but also the leap into electronic typesetting, remaining essentially unchanged. essentially unchanged</p>
-                        <ul class="list-inline widget-list clearfix">
-                            <li class="col-md-6"><span>2.109</span>Followers</li>
-                            <li class="col-md-6"><span>596</span>Photos</li>
+                        <a href="https://support.apple.com/id-id/HT201585" class="btn btn-sm btn-purple m-t-20">More Information</a>
+                        <p class="m-t-0 text-muted p-20">Penjelasan mengenai ketahanan seperti apa</p>
 
-                        </ul>
                     </div>
                 </div>
             </div>

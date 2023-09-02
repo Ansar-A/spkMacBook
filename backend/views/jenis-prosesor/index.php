@@ -173,7 +173,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             // ],
                             // ['class' => 'yii\grid\SerialColumn'],
                             'id',
-                            'jenis',
+                            //'jenis',
+                            [
+                                'class' => 'kartik\grid\EditableColumn',
+                                'attribute' => 'jenis',
+                            ]
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),

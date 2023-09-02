@@ -30,6 +30,8 @@ class KetahananMacbook extends \yii\db\ActiveRecord
         return [
             [['baterai'], 'required'],
             [['baterai'], 'integer'],
+            [['kapasitas_pengisian'], 'integer'],
+            [['ket'], 'string', 'max' => 50],
         ];
     }
 
@@ -40,7 +42,9 @@ class KetahananMacbook extends \yii\db\ActiveRecord
     {
         return [
             'id_ketahanan' => 'Id Ketahanan',
-            'baterai' => 'Baterai',
+            'baterai' => 'Circle Count',
+            'kapasitas_pengisian' => 'Kapasitas Pengisian',
+            'ket' => 'Keterangan',
         ];
     }
 

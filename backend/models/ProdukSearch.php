@@ -15,11 +15,12 @@ class ProdukSearch extends Produk
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
-            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill'], 'integer'],
-            [['nama_produk', 'tahun_rilis', 'photo'], 'safe'],
+            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill', 'stock'], 'integer'],
+            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill', 'nama_produk', 'tahun_rilis', 'photo', 'globalSearch'], 'safe'],
             [['harga'], 'number'],
         ];
     }
@@ -43,11 +44,13 @@ class ProdukSearch extends Produk
     public function search($params)
     {
         // menghubungkan produk dengan user yang login
-        $query = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id]);
+        $query = Produk::find();
+        //->where(['id_servicer' => Yii::$app->user->identity->id])
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 4)
         ]);
 
         $this->load($params);
@@ -58,31 +61,13 @@ class ProdukSearch extends Produk
             return $dataProvider;
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'id_servicer' => $this->id_servicer,
-            'tahun_rilis' => $this->tahun_rilis,
-            'id_jenis' => $this->id_jenis,
-            'id_prosesor' => $this->id_prosesor,
-            'id_so' => $this->id_so,
-            'id_layar' => $this->id_layar,
-            'id_penyimpanan' => $this->id_penyimpanan,
-            'get_warna' => $this->get_warna,
-            'get_daya' => $this->get_daya,
-            'get_nirkabel' => $this->get_nirkabel,
-            'get_ukuranberat' => $this->get_ukuranberat,
-            'get_kamera' => $this->get_kamera,
-            'get_builtinApps' => $this->get_builtinApps,
-            'get_audio' => $this->get_audio,
-            'get_koneksiekspansi' => $this->get_koneksiekspansi,
-            'harga' => $this->harga,
-            'get_detaill' => $this->get_detaill,
-        ]);
-
-        $query->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
-            ->andFilterWhere(['like', 'photo', $this->photo]);
-
+        $query
+            ->orFilterWhere(['like', 'id', $this->globalSearch])
+            ->orFilterWhere(['like', 'nama_produk', $this->globalSearch])
+            ->orFilterWhere(['like', 'id_jenis', $this->globalSearch])
+            ->orFilterWhere(['like', 'harga', $this->globalSearch])
+            ->orFilterWhere(['like', 'stock', $this->globalSearch])
+            ->orFilterWhere(['like', 'tahun_rilis', $this->globalSearch]);
         return $dataProvider;
     }
 }

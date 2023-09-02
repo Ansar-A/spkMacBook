@@ -14,11 +14,12 @@ class PenggunaSearch extends Pengguna
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id', 'status', 'jenis_kelamin'], 'integer'],
-            [['username', 'password_hash', 'email', 'auth_key', 'password_reset_token', 'created_at', 'updated_at', 'verification_token', 'address', 'kelurahan', 'kecamatan', 'kabupaten'], 'safe'],
+            [['username', 'password_hash', 'email', 'auth_key', 'password_reset_token', 'created_at', 'updated_at', 'verification_token', 'address',  'globalSearch'], 'safe'],
         ];
     }
 
@@ -63,18 +64,15 @@ class PenggunaSearch extends Pengguna
             'jenis_kelamin' => $this->jenis_kelamin,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'created_at', $this->created_at])
-            ->andFilterWhere(['like', 'updated_at', $this->updated_at])
-            ->andFilterWhere(['like', 'verification_token', $this->verification_token])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'kelurahan', $this->kelurahan])
-            ->andFilterWhere(['like', 'kecamatan', $this->kecamatan])
-            ->andFilterWhere(['like', 'kabupaten', $this->kabupaten]);
+        $query->orFilterWhere(['like', 'username', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_hash', $this->globalSearch])
+            ->orFilterWhere(['like', 'email', $this->globalSearch])
+            ->orFilterWhere(['like', 'auth_key', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
+            ->orFilterWhere(['like', 'created_at', $this->globalSearch])
+            ->orFilterWhere(['like', 'updated_at', $this->globalSearch])
+            ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
+            ->orFilterWhere(['like', 'address', $this->globalSearch]);
 
         return $dataProvider;
     }

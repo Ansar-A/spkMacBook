@@ -15,10 +15,12 @@ class UserSearch extends User
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
-            [['id', 'username', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'username', 'status', 'created_at', 'updated_at', 'globalSearch'], 'integer'],
+            ['address', 'string'],
         ];
     }
 
@@ -64,17 +66,19 @@ class UserSearch extends User
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
+            'address' => $this->address,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
-            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
-            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
-            ->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'address', $this->address])
-            ->andFilterWhere(['like', 'verification_token', $this->verification_token]);
+        $query->orFilterWhere(['like', 'username', $this->globalSearch])
+            ->orFilterWhere(['like', 'auth_key', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_hash', $this->globalSearch])
+            ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
+            ->orFilterWhere(['like', 'email', $this->globalSearch])
+            ->orFilterWhere(['like', 'address', $this->globalSearch])
+            ->orFilterWhere(['like', 'verification_token', $this->globalSearch]);
 
         return $dataProvider;
     }

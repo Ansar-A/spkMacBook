@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -18,7 +19,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList([10 => 'Active', 9 => 'Inactive']) ?>
 
     <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
@@ -30,18 +31,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'jenis_kelamin')->textInput() ?>
+    <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Pria' => 'Pria', 'Wanita' => 'Wanita'], ['prompt' => 'Select Option']) ?>
 
     <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'kelurahan')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'kecamatan')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'kabupaten')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <a href="<?= Url::to(['pengguna/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
     </div>
 
     <?php ActiveForm::end(); ?>

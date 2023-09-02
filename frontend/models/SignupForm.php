@@ -14,6 +14,9 @@ class SignupForm extends Model
     public $username;
     public $email;
     public $password;
+    public $address;
+    public $jenis_kelamin;
+
 
 
     /**
@@ -26,13 +29,14 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\Pengguna', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
+            [['jenis_kelamin'], 'integer'],
+            [['address'], 'string'],
 
             ['email', 'trim'],
             ['email', 'required'],
             ['email', 'email'],
             ['email', 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => '\common\models\Pengguna', 'message' => 'This email address has already been taken.'],
-
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
@@ -52,10 +56,18 @@ class SignupForm extends Model
         $user = new Pengguna();
         $user->username = $this->username;
         $user->email = $this->email;
+        $user->address = $this->address;
+        $user->jenis_kelamin = $this->jenis_kelamin;
+
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-
+        // if ($user->save()) {
+        //     echo 'djbajda';
+        // } else {
+        //     var_dump($user->getErrors());
+        // }
+        // die;
         return $user->save() && $this->sendEmail($user);
     }
 

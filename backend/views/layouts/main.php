@@ -11,6 +11,7 @@ use yii\bootstrap\Nav;
 use yii\helpers\Url;
 
 
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -29,11 +30,10 @@ AppAsset::register($this);
     <?php $this->beginBody() ?>
     <div id="wrapper">
         <div class="topbar">
-
             <!-- LOGO -->
             <div class="topbar-left">
                 <div class="text-center">
-                    <a href="index.html" class="logo"><i class="icon-magnet icon-c-logo"></i><span>Ub<i class="md md-album"></i>ld</span></a>
+                    <a href="<?= Url::to(['site/index']) ?>" class="logo"><i class="fa fa-xing-square"></i></a>
                 </div>
             </div>
 
@@ -188,7 +188,7 @@ AppAsset::register($this);
                     <ul>
 
                         <li class="text-muted menu-title">Dashboard</li>
-                        <li class="has_sub">
+                        <li class="has_sub active">
                             <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
                         </li>
                         <li class="text-muted menu-title">MacBook</li>
@@ -196,7 +196,6 @@ AppAsset::register($this);
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-apple"></i><span>Data MacBook</span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= Url::to(['produk/index']) ?>">MacBook</a></li>
-                                <li><a href="tables-datatable.html">info</a></li>
                             </ul>
                         </li>
                         <li class="has_sub">
@@ -228,22 +227,20 @@ AppAsset::register($this);
                                 <li><a href="<?= Url::to(['kondisi-macbook/index']) ?>">Kondisi MacBook</a></li>
                                 <li><a href="<?= Url::to(['keamanan-macbook/index']) ?>">Keamanan MacBook</a></li>
                                 <li><a href="<?= Url::to(['data-spk/index']) ?>">SPK MacBook</a></li>
-                                <li><a href="#">info</a></li>
                             </ul>
                         </li>
                         <li class="text-muted menu-title">User</li>
                         <li class="has_sub">
-                            <a class="waves-effect"><i class="ti-user"></i> <span> Servicer </span> <span class="menu-arrow"></span> </a>
+                            <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['user/index']) ?>">User</a></li>
-                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
+                                <li><a href="<?= Url::to(['user/index']) ?>">Data Admin</a></li>
                             </ul>
                         </li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-id-badge"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
+                            <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['pengguna/index']) ?>">Pengguna</a></li>
-                                <li><a href="<?= Url::to(['site/info']) ?>">info</a></li>
+                                <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
+                                <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li>
                             </ul>
                         </li>
                         <li class="text-muted menu-title">Access</li>
@@ -256,48 +253,18 @@ AppAsset::register($this);
                                 <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li>
                             </ul>
                         </li>
-
+                        <li class="text-muted menu-title">Keterangan</li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-share"></i><span>Multi Level </span> <span class="menu-arrow"></span></a>
-                            <ul>
-                                <li class="has_sub">
-                                    <a href="javascript:void(0);" class="waves-effect"><span>Menu Level 1.1</span> <span class="menu-arrow"></span></a>
-                                    <ul>
-                                        <li><a href="javascript:void(0);"><span>Menu Level 2.1</span></a></li>
-                                        <li><a href="javascript:void(0);"><span>Menu Level 2.2</span></a></li>
-                                        <li><a href="javascript:void(0);"><span>Menu Level 2.3</span></a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><span>Menu Level 1.2</span></a>
-                                </li>
-                            </ul>
-                        </li>
-
-                        <li class="text-muted menu-title">Extra</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-user"></i><span> Crm </span> <span class="menu-arrow"></span></a>
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Access Keterangan </span> <span class="menu-arrow"></span></a>
                             <ul class="list-unstyled">
-                                <li><a href="crm-dashboard.html"> Dashboard </a></li>
-                                <li><a href="crm-contact.html"> Contacts </a></li>
-                                <li><a href="crm-opportunities.html"> Opportunities </a></li>
-                                <li><a href="crm-leads.html"> Leads </a></li>
-                                <li><a href="crm-customers.html"> Customers </a></li>
+                                <li><a href="<?= Url::to(['ket-komponent/index']) ?>">Keterangan Komponent</a></li>
+
                             </ul>
                         </li>
-
+                        <li class="text-muted menu-title">Help</li>
                         <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-shopping-cart"></i><span class="label label-warning pull-right">6</span><span> eCommerce </span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="ecommerce-dashboard.html"> Dashboard</a></li>
-                                <li><a href="ecommerce-products.html"> Products</a></li>
-                                <li><a href="ecommerce-product-detail.html"> Product Detail</a></li>
-                                <li><a href="ecommerce-product-edit.html"> Product Edit</a></li>
-                                <li><a href="ecommerce-orders.html"> Orders</a></li>
-                                <li><a href="ecommerce-sellers.html"> Sellers</a></li>
-                            </ul>
+                            <a class="waves-effect"><i class="ti-help"></i><span> Info </span></a>
                         </li>
-
                     </ul>
                     <div class="clearfix"></div>
                 </div>
@@ -310,7 +277,7 @@ AppAsset::register($this);
             </div>
         </main>
         <footer class="footer text-right">
-            © 2016. All rights reserved.
+            © 2023. Uin Alauddin Makassar.
         </footer>
     </div>
     <script>

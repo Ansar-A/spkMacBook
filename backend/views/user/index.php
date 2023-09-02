@@ -6,6 +6,7 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
 use PHPUnit\TextUI\XmlConfiguration\Constant;
+use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
@@ -26,28 +27,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= Yii::$app->session->getFlash('error') ?>
                 </div>
             <?php endif; ?>
-
             <div class="col-sm-12">
-                <div class="btn-group pull-right m-t-15">
-                    <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
-                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
-                <h4 class="page-title">Basic Tables</h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Panel Admin</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Admin
                     </li>
                 </ol>
             </div>
@@ -112,7 +101,22 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                 </div>
                 <div class="user-index">
-                    <?php // echo $this->render('_search', ['model' => $searchModel]); 
+                    <div class="row">
+                        <div class="col-sm-1">
+                            <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
+                        </div>
+                        <div class="col-sm-11">
+                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
+                    <?php
+                    Modal::begin([
+                        'header' => 'Create',
+                        'id' => 'modal',
+                        'size' => 'modal-lg'
+                    ]);
+                    echo "<div id = 'modalContent'></div>";
+                    Modal::end();
                     ?>
                     <?= GridView::widget([
 
@@ -123,6 +127,8 @@ $this->params['breadcrumbs'][] = $this->title;
                         'resizableColumns' => true,
                         'persistResize' => true,
                         'floatHeader' => true,
+                        'headerRowOptions' => ['class' => 'table m-0'],
+                        'filterRowOptions' => ['class' => 'table m-0'],
                         //'bootstrap' => true,
                         //'bordered' => false,
                         //'condensed' => false,
@@ -163,32 +169,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                     },
                                 ],
                             ],
-
-                            // [
-                            //     'attribute' => 'attribute_name',
-                            //     'value' => 'attribute_value',
-                            //     'filter' => Html::activeDropDownList($searchModel, 'username', ArrayHelper::map(User::find()->asArray()->all(), 'id', 'username'), ['class' => 'form-control', 'prompt' => 'Select Category']),
-                            // ],
                             // ['class' => 'yii\grid\SerialColumn'],
-                            'id',
-                            'username',
-                            // [
-                            //     'label' => 'Username',
-                            //     'headerOptions' => [
-                            //         'class' => 'text-center'
-                            //     ],
-                            //     'value' => function ($model) {
-                            //         return $model->username;
-                            //     }
-                            // ],
-                            //'photo',
-                            //'address',
-                            //'auth_key',
-                            //'password_hash',
-                            //'password_reset_token',
-                            //'email:email',
-                            //'status',
                             [
+                                'headerOptions' => ['class' => 'text-center'],
+                                'contentOptions' => ['style' => 'text-align:center'],
                                 'attribute' => 'status',
                                 'format' => 'raw',
                                 'filter'    => [10 => "Active", 9 => "Suspended"],
@@ -200,17 +184,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                     }
                                 }
 
-                            ]
-                            // [
-                            //     'attribute' => 'status',
-                            //     'value' => function ($data, $key, $index, $column) {
-                            //         if ($data->status == 10) {
-                            //             return 'Active';
-                            //         } else {
-                            //             return 'Inactive';
-                            //         }
-                            //     }
-                            // ]
+                            ],
+                            'username',
+                            //'photo',
+                            'address',
+                            // 'id',
+                            //'auth_key',
+                            //'password_hash',
+                            //'password_reset_token',
+                            //'email:email',
                             //'created_at',
                             //'updated_at',
                             //'verification_token',
@@ -238,7 +220,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'heading' => false,
                             //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                             'type' => 'default',
-                            'before' => Html::a('<i class="md-add-box"></i> Create Servicer', ['create'], ['class' => 'btn btn-success']),
+                            //'before' => Html::a('<i class="md-add-box"></i> Create Admin', ['create'], ['class' => 'btn btn-success']),
                             // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
                             // 'footer' => false
                         ],

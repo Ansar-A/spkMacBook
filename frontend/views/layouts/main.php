@@ -30,10 +30,13 @@ AppAsset::register($this);
     <header id="topnav">
         <div class="topbar-main">
             <div class="container">
-                <!-- Logo container-->
-                <div class="logo">
-                    <a href="index.html" class="logo"><span>Ub<i class="md md-album"></i>ld</span></a>
+                <!-- LOGO -->
+                <div class="topbar">
+                    <div class="text-center">
+                        <a href="<?= Url::to(['site/index']) ?>" class="logo" style="padding-top: 6px;"><i class="fa fa-xing-square"></i></a>
+                    </div>
                 </div>
+
                 <!-- End Logo container-->
                 <div class="menu-extras">
                     <ul class="nav navbar-nav navbar-right pull-right">
@@ -151,55 +154,43 @@ AppAsset::register($this);
                                 </li>
                             </ul>
                         </li>
-                        <li class="dropdown navbar-c-items">
-                            <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true"><img src="<?= Url::to('@web/menu/assets/images/users/avatar-1.jpg') ?>" alt="user-img" class="img-circle"> </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="javascript:void(0)"><i class="ti-user text-custom m-r-10"></i> Profile</a></li>
-                                <li><a href="javascript:void(0)"><i class="ti-settings text-custom m-r-10"></i> Settings</a></li>
-                                <li><a href="javascript:void(0)"><i class="ti-lock text-custom m-r-10"></i> Lock screen</a></li>
-                                <li class="divider"></li>
-                                <li><a href="<?= Url::to(['site/logout']) ?>" data-method="POST"><i class=" ti-power-off text-danger m-r-10"></i> Logout</a></li>
-                            </ul>
-                        </li>
+                        <?php if (Yii::$app->user->isGuest) : ?>
+                            <li>
+                                <a class="btn btn-instagram waves-effect waves-light" href="<?= Url::to(['site/login']) ?>">Login <i class="glyphicon glyphicon-log-in"></i></span></a>
+                            </li>
+                        <?php else : ?>
+                            <li class="dropdown navbar-c-items">
+                                <a href="" class="dropdown-toggle waves-effect waves-light profile" data-toggle="dropdown" aria-expanded="true"><img src="<?= Url::to('@web/menu/assets/images/users/avatar-1.jpg') ?>" alt="user-img" class="img-circle"> </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0)"><i class="ti-user text-custom m-r-10"></i> Profile</a></li>
+                                    <li><a href="javascript:void(0)"><i class="ti-settings text-custom m-r-10"></i> Settings</a></li>
+                                    <li><a href="javascript:void(0)"><i class="ti-lock text-custom m-r-10"></i> Lock screen</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="<?= Url::to(['site/logout']) ?>" data-method="POST"><i class=" ti-power-off text-danger m-r-10"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        <?php endif ?>
                     </ul>
                 </div>
             </div>
         </div>
-
-        <div class="navbar-custom">
+        <div class="navbar-custom ">
             <div class="container">
                 <div id="navigation" class="active">
-                    <ul class="navigation-menu">
+                    <ul class="navigation-menu ">
                         <li class="has-submenu">
                             <a style="color: black;" href="<?= Url::to(['site/index']) ?>">
                                 Home
                             </a>
+
                         </li>
                         <li class="has-submenu">
-                            <a href="#">
+                            <a href="<?= Url::to(['produk/index']) ?>">
                                 Find your MacBook
                             </a>
-                            <ul class="submenu">
-                                <li><a href="ui-buttons.html">Buttons</a></li>
-                                <li><a href="ui-loading-buttons.html">Loading Buttons</a></li>
-                                <li><a href="ui-panels.html">Panels</a></li>
-                                <li><a href="ui-portlets.html">Portlets</a></li>
-                                <li><a href="ui-checkbox-radio.html">Checkboxs-Radios</a></li>
-                                <li><a href="ui-tabs.html">Tabs</a></li>
-                                <li><a href="ui-modals.html">Modals</a></li>
-                                <li><a href="ui-progressbars.html">Progress Bars</a></li>
-                                <li><a href="ui-notification.html">Notification</a></li>
-                                <li><a href="ui-images.html">Images</a></li>
-                                <li><a href="ui-carousel.html">Carousel</a>
-                                </li>
-                                <li><a href="ui-video.html">Video</a>
-                                </li>
-                                <li><a href="ui-bootstrap.html">Bootstrap UI</a></li>
-                                <li><a href="ui-typography.html">Typography</a></li>
-                            </ul>
                         </li>
                         <li class="has-submenu">
-                            <a style="color: black;" href="#">
+                            <a style="color: black;" href="<?= Url::to(['site/budgetset']) ?>">
                                 components
                             </a>
                             <ul class="submenu megamenu">
@@ -349,7 +340,15 @@ AppAsset::register($this);
     </header>
     <main role="main">
         <?= $content ?>
-        <p></p>
+        <div class="card-box">
+            <div class="panel-body">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </p>
+            </div>
+        </div>
+        <div class="container">
+        </div>
         <footer class="footer text-right">
             <div class="container">
                 <div class="row">
@@ -378,10 +377,6 @@ AppAsset::register($this);
             </div>
         </footer>
     </main>
-
-
-
-
     <?php $this->endBody() ?>
 </body>
 

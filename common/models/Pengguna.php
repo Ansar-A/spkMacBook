@@ -27,7 +27,7 @@ use Yii;
  * @property string $kecamatan
  * @property string $kabupaten
  */
-class Pengguna extends ActiveRecord implements IdentityInterface
+class Pengguna extends \yii\db\ActiveRecord implements IdentityInterface
 {
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
@@ -51,16 +51,16 @@ class Pengguna extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
-            ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
-            [['username', 'email', 'created_at', 'updated_at', 'jenis_kelamin', 'address', 'kelurahan', 'kecamatan', 'kabupaten'], 'required'],
-            [['status', 'jenis_kelamin'], 'integer'],
-            [['username'], 'string', 'max' => 50],
+
+            [['username', 'email', 'jenis_kelamin', 'address'], 'required'],
+            [['status'], 'integer'],
+            [['username', 'jenis_kelamin'], 'string', 'max' => 50],
             [['password_hash', 'password_reset_token', 'verification_token', 'address'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 25],
             [['auth_key'], 'string', 'max' => 32],
             [['created_at', 'updated_at'], 'string', 'max' => 11],
-            [['kelurahan', 'kecamatan', 'kabupaten'], 'string', 'max' => 100],
+            [['address'], 'string'],
+
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
@@ -85,9 +85,6 @@ class Pengguna extends ActiveRecord implements IdentityInterface
             'verification_token' => 'Verification Token',
             'jenis_kelamin' => 'Jenis Kelamin',
             'address' => 'Address',
-            'kelurahan' => 'Kelurahan',
-            'kecamatan' => 'Kecamatan',
-            'kabupaten' => 'Kabupaten',
         ];
     }
 

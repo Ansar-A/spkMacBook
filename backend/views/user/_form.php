@@ -7,6 +7,7 @@ use yii\helpers\Html;
 use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
@@ -15,8 +16,8 @@ use yii\helpers\ArrayHelper;
 <div class="user-form">
     <?php $form = ActiveForm::begin([]); ?>
     <div class="row">
-        <div class="col-sm-8">
-            <div class="col-md-6">
+        <div class="col-sm-6">
+            <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'username', [
                     'feedbackIcon' => [
@@ -29,7 +30,7 @@ use yii\helpers\ArrayHelper;
                 ])->textInput(['placeholder' => 'Enter username...'])->label('');
                 ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'email', [
                     'feedbackIcon' => [
@@ -42,7 +43,7 @@ use yii\helpers\ArrayHelper;
                 ])->textInput(['placeholder' => 'Enter email...'])->label('');
                 ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-8">
                 <?php
                 echo $form->field($model, 'hp', [
                     'feedbackIcon' => [
@@ -55,12 +56,12 @@ use yii\helpers\ArrayHelper;
                 ])->textInput(['type' => 'number'], ['placeholder' => 'Enter Hp...'])->label('');
                 ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <?php
                 echo $form->field($model, 'status')->dropDownList(['10' => 'Active', '9' => 'Inactive'])->label('');
                 ?>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'address', [
                     'feedbackIcon' => [
@@ -74,7 +75,7 @@ use yii\helpers\ArrayHelper;
                 ?>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'tentang', [
                     'feedbackIcon' => [
@@ -88,7 +89,7 @@ use yii\helpers\ArrayHelper;
                 ?>
             </div>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="col-md-12">
                 <?= $form->field($model, 'photo')->widget(FileInput::className(), [
                     'options' => ['accept' => 'photos/*'],
@@ -99,16 +100,12 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <hr>
-                    <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-                </div>
-            </div>
-        </div>
+
+    <div class="form-group">
+        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <a href="<?= Url::to(['user/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
     </div>
+
 
     <?php ActiveForm::end(); ?>
 </div>

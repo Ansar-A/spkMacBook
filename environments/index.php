@@ -1,4 +1,5 @@
 <?php
+
 /**
  * The manifest of files that are local to specific environment.
  * This file returns a list of environments that the application
@@ -47,6 +48,9 @@ return [
             'common/config/codeception-local.php',
             'frontend/config/main-local.php',
         ],
+        'createSymlink' => [
+            'frontend/web/photos' => 'backend/web/photos'
+        ]
     ],
     'Production' => [
         'path' => 'prod',

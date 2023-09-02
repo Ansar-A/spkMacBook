@@ -54,4 +54,8 @@ class JenisProduk extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Produk::class, ['id_jenis' => 'id']);
     }
+    public function getKetKomponent()
+    {
+        return $this->hasOne(KetKomponent::class, ['id' => 'get_ket']);
+    }
 }

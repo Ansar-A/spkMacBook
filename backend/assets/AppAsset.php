@@ -23,6 +23,7 @@ class AppAsset extends AssetBundle
 
     ];
     public $js = [
+
         "js/main.js",
         "purple/assets/js/modernizr.min.js",
         "purple/assets/js/jquery.min.js",
@@ -41,7 +42,8 @@ class AppAsset extends AssetBundle
         "purple/assets/plugins/morris/morris.min.js",
         "purple/assets/plugins/raphael/raphael-min.js",
         "purple/assets/plugins/jquery-knob/jquery.knob.js",
-
+        //
+        "purple/assets/pages/jquery.dashboard.js",
         "purple/assets/js/jquery.core.js",
         "purple/assets/js/jquery.app.js",
     ];

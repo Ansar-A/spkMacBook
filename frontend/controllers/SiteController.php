@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use common\models\LikeProduk;
+use common\models\Produk;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -10,11 +12,13 @@ use yii\web\BadRequestHttpException;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-use common\models\LoginForm;
+use frontend\models\LoginForm;
 use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use frontend\models\ProdukSearch;
+use yii\data\ActiveDataProvider;
 
 /**
  * Site controller
@@ -32,12 +36,12 @@ class SiteController extends Controller
                 'only' => ['logout', 'index'],
                 'rules' => [
                     [
-                        'actions' => ['login'],
+                        'actions' => ['login', 'index'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['logout', 'index'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -75,7 +79,24 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchmodel = new ProdukSearch();
+        $dataprovider = $searchmodel->search($this->request->queryParams);
+
+        $query = Produk::find();
+        $dataprovider = new ActiveDataProvider([
+            'query' => $query,
+            'pagination' => ['pageSize' => 4],
+
+        ]);
+        return $this->render('index', [
+            'query' => $query,
+            'searchmodel' => $searchmodel,
+            'dataprovider' => $dataprovider
+        ]);
+    }
+    public function actionFind()
+    {
+        return $this->render('find');
     }
 
     /**
@@ -260,5 +281,9 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+    public function actionBudgetset()
+    {
+        return $this->render('budgetset');
     }
 }

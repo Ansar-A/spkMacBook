@@ -7,12 +7,15 @@ use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use backend\models\ResendVerificationEmailForm;
 use common\models\LoginForm;
+use common\models\Pengguna;
+use common\models\Produk;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
 use InvalidArgumentException;
+
 use yii\web\BadRequestHttpException;
 use yii\web\UploadedFile;
 
@@ -122,8 +125,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
-        return $this->render('index');
+        $DB = Yii::$app->db;
+        $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM `produk` GROUP BY nama_produk")->queryAll();
+        $namaProduk = Produk::find()->groupBy("nama_produk")->all();
+        return $this->render('index', compact("ts", "namaProduk"));
     }
 
     /**
@@ -272,13 +277,5 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
-    }
-
-
-
-    //info
-    public function actionInfo()
-    {
-        return $this->render('info');
     }
 }

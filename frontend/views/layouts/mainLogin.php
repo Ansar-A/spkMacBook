@@ -27,6 +27,7 @@ LoginAsset::register($this);
 <body>
     <?php $this->beginBody() ?>
     <main>
+
         <?= $content ?>
     </main>
     <script>

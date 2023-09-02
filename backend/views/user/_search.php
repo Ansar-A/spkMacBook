@@ -14,30 +14,15 @@ use yii\widgets\ActiveForm;
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-
-    <?= $form->field($model, 'id') ?>
-
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'auth_key') ?>
-
-    <?= $form->field($model, 'password_hash') ?>
-
-    <?= $form->field($model, 'password_reset_token') ?>
-
-    <?php // echo $form->field($model, 'email') ?>
-
-    <?php // echo $form->field($model, 'status') ?>
-
-    <?php // echo $form->field($model, 'created_at') ?>
-
-    <?php // echo $form->field($model, 'updated_at') ?>
-
-    <?php // echo $form->field($model, 'verification_token') ?>
-
-    <div class="form-group">
-        <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
+    <div class="row">
+        <div class="col-sm-5 pull-right" style="padding-bottom: 10px;">
+            <div class="input-group">
+                <?= $form->field($model, 'globalSearch')->textInput(['placeholder' => 'Search...'])->label('') ?>
+                <span class="input-group-btn">
+                    <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn waves-effect waves-light btn-primary']) ?>
+                </span>
+            </div>
+        </div>
     </div>
 
     <?php ActiveForm::end(); ?>

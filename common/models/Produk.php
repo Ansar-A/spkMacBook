@@ -44,6 +44,7 @@ use Yii;
  */
 class Produk extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -55,12 +56,13 @@ class Produk extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [
             [['nama_produk', 'id_servicer', 'tahun_rilis', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'photo', 'harga', 'get_detaill'], 'required'],
-            [['id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill'], 'integer'],
-            [['tahun_rilis', 'photo'], 'safe'],
+            [['id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill', 'stock'], 'integer'],
+            [['tahun_rilis', 'id_jenis', 'photo', 'globalSearch'], 'safe'],
             [['harga'], 'number'],
             [['nama_produk'], 'string', 'max' => 255],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
@@ -88,6 +90,7 @@ class Produk extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama_produk' => 'Nama Produk',
+            'stock' => 'Stok',
             'id_servicer' => 'Id Servicer',
             'tahun_rilis' => 'Tahun Rilis',
             'id_jenis' => 'Jenis MacBook',
@@ -244,5 +247,14 @@ class Produk extends \yii\db\ActiveRecord
     public function getSo()
     {
         return $this->hasOne(JenisSo::class, ['id' => 'id_so']);
+    }
+
+    public function getLikeProduk()
+    {
+        return $this->hasMany(LikeProduk::class, ['get_likeProduk' => 'id']);
+    }
+    public function getDetailProduk()
+    {
+        return $this->hasOne(DetailProduk::class, ['id_detail' => 'get_detaill']);
     }
 }

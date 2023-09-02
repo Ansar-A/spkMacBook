@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\JenisSo;
 use backend\models\JenisSoSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * JenisSoController implements the CRUD actions for JenisSo model.
@@ -40,7 +42,20 @@ class JenisSoController extends Controller
     {
         $searchModel = new JenisSoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = JenisSo::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['JenisSo']);
+            $post['JenisSo'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -55,7 +70,7 @@ class JenisSoController extends Controller
      */
     public function actionView($id)
     {
-        return $this->renderAjax('view', [
+        return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
     }

@@ -18,6 +18,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cancel</button>
     </div>
 
     <?php ActiveForm::end(); ?>

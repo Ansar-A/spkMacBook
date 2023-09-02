@@ -80,7 +80,6 @@ class DetailProduk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(KeamananMacbook::class, ['id_keamanan' => 'keamanan']);
     }
-
     /**
      * Gets query for [[Ketahanan0]].
      *
@@ -90,7 +89,6 @@ class DetailProduk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(KetahananMacbook::class, ['id_ketahanan' => 'ketahanan']);
     }
-
     /**
      * Gets query for [[Kondisi0]].
      *
@@ -100,7 +98,6 @@ class DetailProduk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(KondisiMacbook::class, ['id_kondisi' => 'kondisi']);
     }
-
     /**
      * Gets query for [[Performa0]].
      *
@@ -109,5 +106,9 @@ class DetailProduk extends \yii\db\ActiveRecord
     public function getPerforma0()
     {
         return $this->hasOne(PerformaMacbook::class, ['id_performa' => 'performa']);
+    }
+    public function getDataSpk()
+    {
+        return $this->hasOne(DataSpk::class, ['id_spk' => 'get_spk']);
     }
 }
