@@ -9,12 +9,18 @@ $this->title = 'Create Jenis Penyimpanan';
 $this->params['breadcrumbs'][] = ['label' => 'Jenis Penyimpanans', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="jenis-penyimpanan-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="jenis-penyimpanan-create">
+                        <?= $this->render('_form', [
+                            'model' => $model,
+                        ]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

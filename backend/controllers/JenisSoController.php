@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\JenisSo;
 use backend\models\JenisSoSearch;
+use common\models\KetKomponentSo;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -42,6 +43,7 @@ class JenisSoController extends Controller
     {
         $searchModel = new JenisSoSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        $query = JenisSo::find();
         if (Yii::$app->request->post('hasEditable')) {
             $id = Yii::$app->request->post('editableKey');
             $jenis = JenisSo::findOne($id);
@@ -57,6 +59,7 @@ class JenisSoController extends Controller
             return;
         }
         return $this->render('index', [
+            'query' => $query,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

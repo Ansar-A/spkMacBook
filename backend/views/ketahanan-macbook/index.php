@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
+use yii\widgets\ListView;
 
 /** @var yii\web\View $this */
 /** @var backend\models\KetahananMacbookSearch $searchModel */
@@ -17,73 +18,43 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <!-- display error message -->
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
 
             <div class="col-sm-12">
-                <div class="btn-group pull-right m-t-15">
-                    <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
-                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
-                <h4 class="page-title">Basic Tables</h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Ketahanan MacBook</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Panel Ketahanan
                     </li>
                 </ol>
             </div>
             <div class="col-sm-9">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-box widget-box-1 bg-white">
-                            <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on right"></i>
-                            <h4 class="text-dark">Maksimum Kapasitas Daya</h4>
-
-                            <p class="text-muted">Total income: $22506 <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
-                        </div>
-                    </div>
-                </div>
                 <div class="ketahanan-macbook-index">
                     <?php // echo $this->render('_search', ['model' => $searchModel]); 
                     ?>
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
-                        //'bootstrap' => true,
+                        'headerRowOptions' => ['class' => 'table m-0'],
+                        'filterRowOptions' => ['class' => 'table m-0'],
                         'responsive' => true,
-                        //'bordered' => false,
                         'striped' => false,
-                        //'condensed' => false,
-                        //'responsiveWrap' => false,
-                        //'hover' => true,
-                        //'containerOptions' => false,
-                        //'perfectScrollbar' => false,
-                        //'summary' => '',
-                        //'showPageSummary' => true,
-                        //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
-                        //'summaryOptions' => ['class' => 'summary'],
                         'resizableColumns' => true,
                         'persistResize' => true,
                         'floatHeader' => true,
-                        //'showPageSummary' => true,
                         'columns' => [
                             [
                                 'class' => '\kartik\grid\ActionColumn',
@@ -113,12 +84,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                             ],
 
-                            // [
-                            //     'attribute' => 'attribute_name',
-                            //     'value' => 'attribute_value',
-                            //     'filter' => Html::activeDropDownList($searchModel, 'username', ArrayHelper::map(User::find()->asArray()->all(), 'id', 'username'), ['class' => 'form-control', 'prompt' => 'Select Category']),
-                            // ],
-                            // ['class' => 'yii\grid\SerialColumn'],
                             'id_ketahanan',
                             'baterai',
                             'kapasitas_pengisian',
@@ -161,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             'heading' => false,
                             //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                             'type' => 'default',
-                            'before' => Html::a('<i class="md-add-box"></i> Create Ketahanan', ['create'], ['class' => 'btn btn-success']),
+                            'before' => Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-success']),
                             // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
                             // 'footer' => false
                         ],
@@ -169,14 +134,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card-box p-0">
-                    <div class="profile-widget text-center">
-
-                        <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                        <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <a href="https://support.apple.com/id-id/HT201585" class="btn btn-sm btn-purple m-t-20">More Information</a>
-                        <p class="m-t-0 text-muted p-20">Penjelasan mengenai ketahanan seperti apa</p>
-
+                <div class="card-box product-detail-box">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="product-right-info">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6><span class="label label-info m-l-5">New</span><b> Information</b></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h5 class="font-600" style="padding-left: 5px;">Ketahanan Description</h5>
+                                <p class="text-muted" style="padding-left: 5px;">Bicara performa, laptop ini sudah sangat sering saya pakai untuk edit video dengan kompleksitas tinggi yang membutuhkan rendering berjam-jam, mengedit desain produk dan bangunan dalam 3D, coding, membuat musik, dan beberapa pekerjaan berat lainnya yang mungkin orang lain akan berpikir "apa kuat macbook air buat jalanin itu?".</p>
+                                <div class="m-t-30 text-center">
+                                    <a href="https://id.quora.com/Berapa-lama-ketahanan-MacBook-Jika-saya-ingin-membeli-laptop-yang-bertahan-7-hingga-10-tahun-apa-saran-laptop-yang-bagus-baik-Windows-maupun-Apple" target="_blank" class="btn btn-info waves-effect waves-light btn-sm">
+                                        <span class="btn-label"><i class="fa fa-info"></i>
+                                        </span>More Info</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

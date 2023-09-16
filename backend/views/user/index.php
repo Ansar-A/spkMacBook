@@ -1,9 +1,12 @@
 <?php
 
 use common\models\User;
+use kartik\form\ActiveForm;
+use kartik\grid\CheckboxColumn;
+use kartik\grid\ActionColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\ActionColumn;
+
 use kartik\grid\GridView;
 use PHPUnit\TextUI\XmlConfiguration\Constant;
 use yii\bootstrap\Modal;
@@ -15,18 +18,26 @@ use yii\helpers\ArrayHelper;
 
 $this->title = 'Users';
 $this->params['breadcrumbs'][] = $this->title;
+$totalStatus = User::find()->count();
+$active = User::find()->where(['status' => Yii::$app->user->identity->id])->count('status');
+// $inactive = JenisProduk::find()->count();
+
+
 ?>
+
 <div class="content">
     <div class="container">
         <div class="row">
-            <!-- display error message -->
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
@@ -40,21 +51,21 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-9">
-                <div class="row">
+            <div class="col-sm-12">
+                <!-- <div class="row">
                     <div class="col-md-6 col-sm-6 col-lg-4">
                         <div class="mini-stat clearfix card-box">
                             <span class="mini-stat-icon bg-info"><i class="ion-social-usd text-white"></i></span>
                             <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">5154</span>
+                                <span class="counter text-dark" data-plugin="counterup"></span>
                                 Total
                             </div>
                             <div class="tiles-progress">
                                 <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">60%</span></h5>
+                                    <h5 class="text-uppercase">Admin Suspended</h5>
                                     <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete</span>
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+
                                         </div>
                                     </div>
                                 </div>
@@ -65,15 +76,15 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="mini-stat clearfix card-box">
                             <span class="mini-stat-icon bg-warning"><i class="ion-ios7-cart text-white"></i></span>
                             <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">876</span>
-                                New
+                                <span class="counter text-dark" data-plugin="counterup"></span>
+                                Total
                             </div>
                             <div class="tiles-progress">
                                 <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">90%</span></h5>
+                                    <h5 class="text-uppercase">Admin Active</h5>
                                     <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                            <span class="sr-only">90% Complete</span>
+                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+
                                         </div>
                                     </div>
                                 </div>
@@ -84,31 +95,33 @@ $this->params['breadcrumbs'][] = $this->title;
                         <div class="mini-stat clearfix card-box">
                             <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
                             <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">4775</span>
-                                New
+                                <span class="counter text-dark" data-plugin="counterup"></span>
+                                Total
                             </div>
                             <div class="tiles-progress">
                                 <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">57%</span></h5>
+                                    <h5 class="text-uppercase">Total Admin</h5>
                                     <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                            <span class="sr-only">57% Complete</span>
+                                        <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <div class="user-index">
                     <div class="row">
                         <div class="col-sm-1">
-                            <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
+
+                            <?= Html::button('<i class="md-add-box"></i> Add', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
                         </div>
                         <div class="col-sm-11">
                             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                         </div>
                     </div>
+
                     <?php
                     Modal::begin([
                         'header' => 'Create',
@@ -119,7 +132,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     Modal::end();
                     ?>
                     <?= GridView::widget([
-
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
                         'responsive' => true,
@@ -158,7 +170,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
                                     },
                                     'delete' => function ($url, $model) {
-
                                         return Html::a('', ['delete', 'id' => $model->id], [
                                             'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
                                             'data' => [
@@ -167,9 +178,30 @@ $this->params['breadcrumbs'][] = $this->title;
                                             ],
                                         ]);
                                     },
+                                    // 'delete' => function ($url, $model) {
+                                    //     return Html::a('', $url, [
+                                    //         'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
+                                    //         'data' => [
+                                    //             'method' => 'POST',
+                                    //             'confirm' => 'Yakin ingin menghapus item ini?',
+
+                                    //         ],
+                                    //     ]);
+                                    // },
                                 ],
                             ],
+
                             // ['class' => 'yii\grid\SerialColumn'],
+                            [
+                                'header' => '',
+                                //'contentOptions' => ['style' => 'max-width:20px;'],
+                                // 'contentOptions' => ['style' => 'text-align:center'],
+                                'headerOptions' => ['class' => 'text-center'],
+                                'format' => 'raw',
+                                'value' => function ($model) {
+                                    return '<center>' . Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']) . '</center>';
+                                }
+                            ],
                             [
                                 'headerOptions' => ['class' => 'text-center'],
                                 'contentOptions' => ['style' => 'text-align:center'],
@@ -183,11 +215,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return '<span class="label label-table label-danger">Suspended</span>';
                                     }
                                 }
-
                             ],
+                            'id',
                             'username',
                             //'photo',
                             'address',
+                            'hp',
                             // 'id',
                             //'auth_key',
                             //'password_hash',
@@ -196,6 +229,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             //'created_at',
                             //'updated_at',
                             //'verification_token',
+
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -225,21 +259,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'footer' => false
                         ],
                     ]); ?>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="card-box p-0">
-                    <div class="profile-widget text-center">
-                        <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                        <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <a href="#" class="btn btn-sm btn-purple m-t-20">Follow Fb</a>
-                        <a href="#" class="btn btn-sm btn-pink m-t-20">ig</a>
-                        <p class="m-t-10 text-muted p-20">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-                        <ul class="list-inline widget-list clearfix">
-                            <li class="col-md-6"><span>109</span>Follow</li>
-                            <li class="col-md-6"><span>596</span>Photos</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>

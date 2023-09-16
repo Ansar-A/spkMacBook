@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\AuthItem;
 use backend\models\AuthItemSearch;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -21,6 +22,36 @@ class AuthItemController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                // 'access' => [
+                //     'class' => AccessControl::class,
+                //     'rules' => [
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['index'],
+                //             'roles' => ['managePost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['view'],
+                //             'roles' => ['viewPost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['create'],
+                //             'roles' => ['createPost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['update'],
+                //             'roles' => ['updatePost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['delete'],
+                //             'roles' => ['deletePost'],
+                //         ],
+                //     ],
+                // ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -38,13 +69,18 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthItemSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePost')) {
+            $searchModel = new AuthItemSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,10 +91,16 @@ class AuthItemController extends Controller
      */
     public function actionView($name)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($name),
-        ]);
+        if (\Yii::$app->user->can('viewPost')) {
+            return $this->render('view', [
+                'model' => $this->findModel($name),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-item/index']);
+        }
     }
+
 
     /**
      * Creates a new AuthItem model.
@@ -67,19 +109,24 @@ class AuthItemController extends Controller
      */
     public function actionCreate()
     {
-        $model = new AuthItem();
+        if (\Yii::$app->user->can('createPost')) {
+            $model = new AuthItem();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'name' => $model->name]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'name' => $model->name]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-item/index']);
+        }
     }
 
     /**
@@ -91,15 +138,20 @@ class AuthItemController extends Controller
      */
     public function actionUpdate($name)
     {
-        $model = $this->findModel($name);
+        if (\Yii::$app->user->can('updatePost')) {
+            $model = $this->findModel($name);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'name' => $model->name]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'name' => $model->name]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-item/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +163,14 @@ class AuthItemController extends Controller
      */
     public function actionDelete($name)
     {
-        $this->findModel($name)->delete();
+        if (\Yii::$app->user->can('updatePost')) {
+            $this->findModel($name)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-item/index']);
+        }
     }
 
     /**

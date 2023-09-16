@@ -1,5 +1,7 @@
 <?php
 
+use common\models\AuthItem;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,16 +13,27 @@ use yii\widgets\ActiveForm;
 <div class="auth-assignment-form">
 
     <?php $form = ActiveForm::begin(); ?>
+    <?php
+    $list = AuthItem::find()->all();
+    echo $form->field($model, 'item_name')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'name',
+            function ($list) {
+                return $list->name;
+            },
+        ),
+        ['prompt' => 'Pilih...']
+    );
+    ?>
+    <!-- <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'placeholder' => 'lihat id Admin']) ?>
 
-    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-        <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Cancel</button>
     </div>
 
     <?php ActiveForm::end(); ?>

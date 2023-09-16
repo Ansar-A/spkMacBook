@@ -14,11 +14,12 @@ class AudioSearch extends Audio
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_audio'], 'integer'],
-            [['audio'], 'safe'],
+            [['audio', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -57,11 +58,11 @@ class AudioSearch extends Audio
         }
 
         // grid filtering conditions
-        $query->andFilterWhere([
-            'id_audio' => $this->id_audio,
-        ]);
+        // $query->andFilterWhere([
+        //     'id_audio' => $this->id_audio,
+        // ]);
 
-        $query->andFilterWhere(['like', 'audio', $this->audio]);
+        $query->orFilterWhere(['like', 'audio', $this->globalSearch]);
 
         return $dataProvider;
     }

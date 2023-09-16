@@ -14,11 +14,12 @@ class KameraSearch extends Kamera
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_kamera'], 'integer'],
-            [['kamera'], 'safe'],
+            [['kamera', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,7 +62,7 @@ class KameraSearch extends Kamera
             'id_kamera' => $this->id_kamera,
         ]);
 
-        $query->andFilterWhere(['like', 'kamera', $this->kamera]);
+        $query->orFilterWhere(['like', 'kamera', $this->globalSearch]);
 
         return $dataProvider;
     }

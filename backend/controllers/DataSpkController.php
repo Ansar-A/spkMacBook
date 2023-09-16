@@ -38,13 +38,18 @@ class DataSpkController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DataSpkSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostSPK')) {
+            $searchModel = new DataSpkSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +60,14 @@ class DataSpkController extends Controller
      */
     public function actionView($id_spk)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_spk),
-        ]);
+        if (\Yii::$app->user->can('viewPostSPK')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id_spk),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['data-spk/index']);
+        }
     }
 
     /**
@@ -67,19 +77,24 @@ class DataSpkController extends Controller
      */
     public function actionCreate()
     {
-        $model = new DataSpk();
+        if (\Yii::$app->user->can('createPostSPK')) {
+            $model = new DataSpk();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_spk' => $model->id_spk]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_spk' => $model->id_spk]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['data-spk/index']);
+        }
     }
 
     /**
@@ -91,15 +106,20 @@ class DataSpkController extends Controller
      */
     public function actionUpdate($id_spk)
     {
-        $model = $this->findModel($id_spk);
+        if (\Yii::$app->user->can('updatePostSPK')) {
+            $model = $this->findModel($id_spk);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_spk' => $model->id_spk]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_spk' => $model->id_spk]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['data-spk/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +131,14 @@ class DataSpkController extends Controller
      */
     public function actionDelete($id_spk)
     {
-        $this->findModel($id_spk)->delete();
+        if (\Yii::$app->user->can('deletePostSPK')) {
+            $this->findModel($id_spk)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['data-spk/index']);
+        }
     }
 
     /**

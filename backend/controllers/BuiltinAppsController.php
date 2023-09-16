@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\BuiltinApps;
 use backend\models\BuiltinAppsSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * BuiltinAppsController implements the CRUD actions for BuiltinApps model.
@@ -40,7 +42,20 @@ class BuiltinAppsController extends Controller
     {
         $searchModel = new BuiltinAppsSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = BuiltinApps::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['BuiltinApps']);
+            $post['BuiltinApps'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -77,7 +92,7 @@ class BuiltinAppsController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

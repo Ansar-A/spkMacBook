@@ -14,11 +14,12 @@ class WarnaSearch extends Warna
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_warna'], 'integer'],
-            [['warna'], 'safe'],
+            [['warna', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,7 +62,7 @@ class WarnaSearch extends Warna
             'id_warna' => $this->id_warna,
         ]);
 
-        $query->andFilterWhere(['like', 'warna', $this->warna]);
+        $query->orFilterWhere(['like', 'warna', $this->globalSearch]);
 
         return $dataProvider;
     }

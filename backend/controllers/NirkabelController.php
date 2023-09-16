@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\Nirkabel;
 use backend\models\NirkabelSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * NirkabelController implements the CRUD actions for Nirkabel model.
@@ -40,7 +42,20 @@ class NirkabelController extends Controller
     {
         $searchModel = new NirkabelSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = Nirkabel::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['Nirkabel']);
+            $post['Nirkabel'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -77,7 +92,7 @@ class NirkabelController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

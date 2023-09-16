@@ -14,11 +14,12 @@ class KoneksiEkspansiSearch extends KoneksiEkspansi
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_koneksi'], 'integer'],
-            [['koneksiEkspansi'], 'safe'],
+            [['koneksiEkspansi', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,7 +62,7 @@ class KoneksiEkspansiSearch extends KoneksiEkspansi
             'id_koneksi' => $this->id_koneksi,
         ]);
 
-        $query->andFilterWhere(['like', 'koneksiEkspansi', $this->koneksiEkspansi]);
+        $query->orFilterWhere(['like', 'koneksiEkspansi', $this->globalSearch]);
 
         return $dataProvider;
     }

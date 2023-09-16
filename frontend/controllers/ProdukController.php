@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use yii\filters\AccessControl;
 use common\models\Produk;
 use frontend\models\ProdukSearch;
 use yii\data\ActiveDataProvider;
@@ -22,6 +23,22 @@ class ProdukController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                // 'access' => [
+                //     'class' => AccessControl::class,
+                //     'only' => [],
+                //     'rules' => [
+                //         [
+                //             'actions' => [],
+                //             'allow' => true,
+                //             'roles' => ['?'],
+                //         ],
+                //         [
+                //             'actions' => ['index'],
+                //             'allow' => true,
+                //             'roles' => ['@'],
+                //         ],
+                //     ],
+                // ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -42,13 +59,12 @@ class ProdukController extends Controller
         $searchModel = new ProdukSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        //$query = Produk::find();
+        // $query = Produk::find();
         // $dataProvider = new ActiveDataProvider([
         //     'query' => $query,
         //     'pagination' => [
         //         'pageSize' => 8,
         //     ],
-
         // ]);
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -138,5 +154,12 @@ class ProdukController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionDetailProduk($id)
+    {
+        $model = Produk::findOne($id);
+
+        return $this->render('produkdetail',  ['model' => $model]);
     }
 }

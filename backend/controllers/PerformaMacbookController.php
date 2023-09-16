@@ -38,13 +38,18 @@ class PerformaMacbookController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PerformaMacbookSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostPerforma')) {
+            $searchModel = new PerformaMacbookSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +60,14 @@ class PerformaMacbookController extends Controller
      */
     public function actionView($id_performa)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_performa),
-        ]);
+        if (\Yii::$app->user->can('viewPostPerforma')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id_performa),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['performa-macbook/index']);
+        }
     }
 
     /**
@@ -67,19 +77,24 @@ class PerformaMacbookController extends Controller
      */
     public function actionCreate()
     {
-        $model = new PerformaMacbook();
+        if (\Yii::$app->user->can('createPostPerforma')) {
+            $model = new PerformaMacbook();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_performa' => $model->id_performa]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_performa' => $model->id_performa]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['performa-macbook/index']);
+        }
     }
 
     /**
@@ -91,15 +106,20 @@ class PerformaMacbookController extends Controller
      */
     public function actionUpdate($id_performa)
     {
-        $model = $this->findModel($id_performa);
+        if (\Yii::$app->user->can('updatePostPerforma')) {
+            $model = $this->findModel($id_performa);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_performa' => $model->id_performa]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_performa' => $model->id_performa]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['performa-macbook/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +131,14 @@ class PerformaMacbookController extends Controller
      */
     public function actionDelete($id_performa)
     {
-        $this->findModel($id_performa)->delete();
+        if (\Yii::$app->user->can('deletePostPerforma')) {
+            $this->findModel($id_performa)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['performa-macbook/index']);
+        }
     }
 
     /**

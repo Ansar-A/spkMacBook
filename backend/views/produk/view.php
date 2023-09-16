@@ -95,6 +95,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'get_koneksiekspansi',
                                 'harga',
                                 'get_detaill',
+                                // [
+                                //     'attribute' => 'get_detaill',
+                                //     'value' => function ($model) {
+                                //         return $model->detailProduk->spk->dataF;
+                                //     },
+                                // ],
+                                // [
+                                //     'attribute' => 'get_detaill',
+                                //     'value' => function ($model) {
+                                //         return $model->detailProduk->spk->dataT;
+                                //     },
+                                // ],
+                                // [
+                                //     'attribute' => 'get_detaill',
+                                //     'value' => function ($model) {
+                                //         return $model->detailProduk->spk->rSquare;
+                                //     },
+                                // ]
                             ],
                         ]) ?>
                     </div>

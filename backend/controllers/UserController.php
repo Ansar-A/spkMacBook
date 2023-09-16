@@ -4,6 +4,7 @@ namespace backend\controllers;
 
 use common\models\User;
 use backend\models\UserSearch;
+use common\models\AuthAssignment;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -39,29 +40,34 @@ class UserController extends Controller
      *
      * @return string
      */
+
     public function actionIndex()
     {
-        $searchModel = new UserSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostAdmin')) {
+            $searchModel = new UserSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+            // if (Yii::$app->request->post('hasEditable')) {
+            //     $id = Yii::$app->request->post('editableKey');
+            //     $status = User::findOne($id);
 
-        // if (Yii::$app->request->post('hasEditable')) {
-        //     $id = Yii::$app->request->post('editableKey');
-        //     $status = User::findOne($id);
-
-        //     $out = Json::encode(['output' => '', 'message' => '']);
-        //     $post = [];
-        //     $posted = current($_POST['User']);
-        //     $post['User'] = $posted;
-        //     if ($status->load($post)) {
-        //         $status->save();
-        //     }
-        //     echo $out;
-        //     return;
-        // }
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            //     $out = Json::encode(['output' => '', 'message' => '']);
+            //     $post = [];
+            //     $posted = current($_POST['User']);
+            //     $post['User'] = $posted;
+            //     if ($status->load($post)) {
+            //         $status->save();
+            //     }
+            //     echo $out;
+            //     return;
+            // }
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -72,9 +78,14 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (\Yii::$app->user->can('viewPostAdmin')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['user/index']);
+        }
     }
 
     /**
@@ -84,10 +95,9 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('superAdmin')) {
+        if (\Yii::$app->user->can('createPostAdmin')) {
             // create post
             $model = new User();
-
             $model->scenario = 'update';
             if ($this->request->isPost) {
                 if ($model->load($this->request->post())) {
@@ -111,10 +121,11 @@ class UserController extends Controller
 
             ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
             return $this->redirect(['user/index']);
         }
     }
+
 
     /**
      * Updates an existing User model.
@@ -125,28 +136,33 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
-        $model->scenario = 'update';
+        if (\Yii::$app->user->can('updatePostAdmin')) {
+            $model = $this->findModel($id);
+            $model->scenario = 'update';
 
-        if ($model->load($this->request->post())) {
-            $model->photo = UploadedFile::getInstance($model, 'photo');
-            if ($model->validate()) {
-                if (!is_null($model->photo)) {
-                    $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
-                    $model->photo->saveAs($filename);
-                    $model->photo = $filename;
+            if ($model->load($this->request->post())) {
+                $model->photo = UploadedFile::getInstance($model, 'photo');
+                if ($model->validate()) {
+                    if (!is_null($model->photo)) {
+                        $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                        $model->photo->saveAs($filename);
+                        $model->photo = $filename;
+                    }
+
+                    $model->save(false);
+
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
-
-                $model->save(false);
-
-                return $this->redirect(['view', 'id' => $model->id]);
             }
+
+            return $this->render('update', [
+                'model' => $model,
+
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['user/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-
-        ]);
     }
 
     /**
@@ -156,14 +172,14 @@ class UserController extends Controller
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete($id = '')
     {
-        if (\Yii::$app->user->can('superAdmin')) {
-            $this->findModel($id)->delete();
+        if (\Yii::$app->user->can('deletePostAdmin')) {
 
+            $this->findModel($id)->delete();
             return $this->redirect(['index']);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
             return $this->redirect(['user/index']);
         }
     }

@@ -74,7 +74,6 @@ use yii\helpers\Url;
                 ])->textarea(['placeholder' => 'Enter address...'])->label('');
                 ?>
             </div>
-
             <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'tentang', [
@@ -99,6 +98,7 @@ use yii\helpers\Url;
                 ])->label(''); ?>
             </div>
         </div>
+
     </div>
 
     <div class="form-group">

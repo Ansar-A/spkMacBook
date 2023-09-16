@@ -24,6 +24,15 @@ $totalJenis = JenisProduk::find()->count(); ?>
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+            <div class="col-sm-12">
                 <div class="btn-group pull-right m-t-10">
                     <h6 class="text-dark">
                         <p><i class="fa fa-calendar"></i><span id="tanggalwaktu"></span></p>
@@ -176,15 +185,14 @@ $totalJenis = JenisProduk::find()->count(); ?>
                                 'value' => function ($model) {
                                     return $model->jenis->jenis;
                                 },
-                                'filter' => ArrayHelper::map(JenisProduk::find()->all(), 'id', 'jenis'),
-                                'filterType' => GridView::FILTER_SELECT2,
-                                'filterWidgetOptions' => [
-                                    'options' => ['prompt' => ''],
-                                    'pluginOptions' => [
-                                        'allowClear' => false,
-                                    ],
-
-                                ],
+                                // 'filter' => ArrayHelper::map(JenisProduk::find()->all(), 'id', 'jenis'),
+                                // 'filterType' => GridView::FILTER_SELECT2,
+                                // 'filterWidgetOptions' => [
+                                //     'options' => ['prompt' => ''],
+                                //     'pluginOptions' => [
+                                //         'allowClear' => false,
+                                //     ],
+                                // ],
                                 'headerOptions' => ['class' => 'text-center']
                             ],
                             [
@@ -215,7 +223,35 @@ $totalJenis = JenisProduk::find()->count(); ?>
                             //'get_builtinApps',
                             //'get_audio',
                             //'get_koneksiekspansi',
-                            //'get_detaill',
+                            'get_detaill',
+                            // [
+                            //     'class' => 'kartik\grid\EditableColumn',
+                            //     'attribute' =>  'get_detaill',
+                            //     'headerOptions' => ['class' => 'text-center']
+                            // ],
+
+                            // [
+                            //     'header' => 'Data F',
+                            //     'attribute' => 'get_detaill',
+                            //     'value' => function ($model) {
+                            //         return $model->detailProduk->spk->dataF;
+                            //     },
+                            // ],
+                            // [
+                            //     'header' => 'Data T',
+                            //     'attribute' => 'get_detaill',
+                            //     'value' => function ($model) {
+                            //         return $model->detailProduk->spk->dataT;
+                            //     },
+                            // ],
+                            // [
+                            //     'header' => 'R Square',
+                            //     'attribute' => 'get_detaill',
+                            //     'value' => function ($model) {
+                            //         return $model->detailProduk->spk->rSquare;
+                            //     },
+                            // ]
+
                         ],
                         'toolbar' => [
                             Html::a('Reset ', ['index'], ['class' => 'btn btn-info']),
@@ -246,12 +282,6 @@ $totalJenis = JenisProduk::find()->count(); ?>
                         ],
                     ]); ?>
                 </div>
-            </div>
-
-            <div class="col-sm-12 ">
-                <a href="<?= Url::to(['site/index']) ?>" type="button" class="btn btn-default btn-rounded btn-custom waves-effect waves-light pull-right">
-                    <span class="btn-label"><i class="fa fa-arrow-left"></i>
-                    </span>Back</a>
             </div>
         </div>
     </div>

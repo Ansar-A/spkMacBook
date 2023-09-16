@@ -31,7 +31,7 @@ class DataSpk extends \yii\db\ActiveRecord
     {
         return [
             [['rSquare', 'dataF', 'dataT'], 'required'],
-            [['rSquare', 'dataF', 'dataT'], 'integer'],
+            [['dataF', 'rSquare',  'dataT'], 'string']
         ];
     }
 

@@ -78,7 +78,7 @@ class AuthItemChildController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }

@@ -14,11 +14,13 @@ class UkuranBeratSearch extends UkuranBerat
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_ukuranberat'], 'integer'],
             [['tinggi', 'panjang', 'lebar', 'berat'], 'number'],
+            [['tinggi', 'panjang', 'lebar', 'berat', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -65,6 +67,11 @@ class UkuranBeratSearch extends UkuranBerat
             'berat' => $this->berat,
         ]);
 
+        $query->orFilterWhere(['like', 'id_ukuranberat', $this->globalSearch])
+            ->orFilterWhere(['like', 'tinggi', $this->globalSearch])
+            ->orFilterWhere(['like', 'panjang', $this->globalSearch])
+            ->orFilterWhere(['like', 'lebar', $this->globalSearch])
+            ->orFilterWhere(['like', 'berat', $this->globalSearch]);
         return $dataProvider;
     }
 }

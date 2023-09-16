@@ -12,6 +12,8 @@ use kartik\password\PasswordInput;
 use kartik\file\FileInput;
 use yii\helpers\ArrayHelper;
 
+// var_dump($model->getErrors());
+// die();
 $this->title = 'Signup';
 ?>
 <div class="account-pages"></div>
@@ -21,21 +23,21 @@ $this->title = 'Signup';
     <div class="container">
         <div class="row">
             <div class="col-sm-10 col-sm-offset-1">
-                <div class="wrapper-page signup-signin-page">
+                <div class="wrapper-page signup-signin-page" style="margin-left: 150px; margin-right: 150px;">
                     <div class="card-box">
                         <div class="row">
                             <div class="profile-widget text-center">
                                 <div class="bg-custom bg-profile"></div>
                                 <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                                <h3>
-                                    <font face="Optima">SPK MacBook Bekas</font>
-                                </h3>
+                                <h4>
+                                    <font>SPK MacBook Bekas</font>
+                                </h4>
                             </div>
                         </div>
                         <div class="panel-body">
                             <div class="row">
                                 <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <?= $form->field($model, 'username', [
                                         'feedbackIcon' => [
                                             'prefix' => 'fa fa-user',
@@ -65,8 +67,14 @@ $this->title = 'Signup';
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
                                     <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About...']); ?>
                                 </div>
-                                <div class="col-md-6">
-
+                                <div class="col-md-5">
+                                    <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
+                                        'options' => ['accept' => 'photos/*'],
+                                        'pluginOptions' => [
+                                            'showUpload' => false
+                                        ],
+                                    ]);
+                                    ?>
                                     <?= $form->field($model, 'hp', [
                                         'feedbackIcon' => [
                                             'prefix' => 'fa fa-phone',
@@ -78,21 +86,17 @@ $this->title = 'Signup';
                                     ])->widget('yii\widgets\MaskedInput', [
                                         'mask' => '999-999-999-999'
                                     ]);
-                                    ?> <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
-                                            'options' => ['accept' => 'photos/*'],
-                                            'pluginOptions' => [
-                                                'showUpload' => false
-                                            ],
-                                        ]); ?>
+                                    ?>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6"></div>
                                 <div class="col-md-6">
                                     <div class="form-group pull-right">
-                                        <a class="text-dark"><?= Html::resetButton('', ['class' => 'fa fa-refresh m-r-5 btn btn-transparan']) ?>Reset</a>
+                                        <a class="text-dark"><?= Html::resetButton('', ['class' => 'fa fa-refresh m-r-5 btn btn-transparan']) ?></a>
                                     </div>
                                 </div>
+
                             </div>
                             <div class="form-group m-t-20 m-b-0">
                                 <div class="col-sm-12 text-center">
@@ -108,8 +112,8 @@ $this->title = 'Signup';
                                         <hr>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                     <div class="row">

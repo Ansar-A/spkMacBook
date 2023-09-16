@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /** @var yii\web\View $this */
@@ -11,27 +12,46 @@ $this->params['breadcrumbs'][] = ['label' => 'Jenis Layars', 'url' => ['index']]
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
-<div class="jenis-layar-view">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <h4 class="page-title">Layar</h4>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['jenis-layar/index']) ?>">Panel Layar</a>
+                    </li>
+                    <li class="active">
+                        View
+                    </li>
+                </ol>
+            </div>
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="jenis-layar-view">
+                        <p>
+                            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                                'class' => 'btn btn-danger',
+                                'data' => [
+                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'method' => 'post',
+                                ],
+                            ]) ?>
+                        </p>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'jenis',
-        ],
-    ]) ?>
-
+                        <?= DetailView::widget([
+                            'model' => $model,
+                            'attributes' => [
+                                'id',
+                                'jenis',
+                            ],
+                        ]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

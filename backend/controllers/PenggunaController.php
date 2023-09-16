@@ -38,13 +38,18 @@ class PenggunaController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new PenggunaSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostPengguna')) {
+            $searchModel = new PenggunaSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +60,14 @@ class PenggunaController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        if (\Yii::$app->user->can('viewPostPengguna')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['pengguna/index']);
+        }
     }
 
     /**
@@ -67,7 +77,8 @@ class PenggunaController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('superAdmin')) {
+
+        if (\Yii::$app->user->can('createPostPengguna')) {
             $model = new Pengguna();
 
             if ($this->request->isPost) {
@@ -82,7 +93,7 @@ class PenggunaController extends Controller
                 'model' => $model,
             ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
             return $this->redirect(['pengguna/index']);
         }
     }
@@ -96,15 +107,20 @@ class PenggunaController extends Controller
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        if (\Yii::$app->user->can('updatePostPengguna')) {
+            $model = $this->findModel($id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['pengguna/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -117,12 +133,12 @@ class PenggunaController extends Controller
     public function actionDelete($id)
     {
 
-        if (\Yii::$app->user->can('superAdmin')) {
+        if (\Yii::$app->user->can('deletePostPengguna')) {
             $this->findModel($id)->delete();
 
             return $this->redirect(['index']);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu Access Admin');
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
             return $this->redirect(['pengguna/index']);
         }
     }

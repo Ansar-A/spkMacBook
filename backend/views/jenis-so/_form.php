@@ -1,7 +1,10 @@
 <?php
 
+use common\models\KetKomponentSo;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+
 
 /** @var yii\web\View $this */
 /** @var common\models\JenisSo $model */
@@ -13,6 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'jenis')->textInput(['maxlength' => true]) ?>
+
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>

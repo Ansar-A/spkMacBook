@@ -32,7 +32,7 @@ class UkuranBerat extends \yii\db\ActiveRecord
     {
         return [
             [['tinggi', 'panjang', 'lebar', 'berat'], 'required'],
-            [['tinggi', 'panjang', 'lebar', 'berat'], 'number'],
+            [['tinggi', 'panjang', 'lebar', 'berat'], 'string'],
         ];
     }
 

@@ -1,6 +1,9 @@
 <?php
 
+use common\models\KetDetailKetahanan;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -18,6 +21,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <a href="<?= Url::to(['ketahanan-macbook/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
     </div>
 
     <?php ActiveForm::end(); ?>

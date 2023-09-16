@@ -29,7 +29,7 @@ class Daya extends \yii\db\ActiveRecord
     {
         return [
             [['informasi_baterai'], 'required'],
-            [['informasi_baterai'], 'integer'],
+            [['informasi_baterai'], 'string'],
         ];
     }
 

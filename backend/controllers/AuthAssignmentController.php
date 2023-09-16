@@ -2,11 +2,14 @@
 
 namespace backend\controllers;
 
+use yii\filters\AccessControl;
 use common\models\AuthAssignment;
 use backend\models\AuthAssignmentSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * AuthAssignmentController implements the CRUD actions for AuthAssignment model.
@@ -21,6 +24,36 @@ class AuthAssignmentController extends Controller
         return array_merge(
             parent::behaviors(),
             [
+                // 'access' => [
+                //     'class' => AccessControl::class,
+                //     'rules' => [
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['index'],
+                //             'roles' => ['managePost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['view'],
+                //             'roles' => ['viewPost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['create'],
+                //             'roles' => ['createPost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['update'],
+                //             'roles' => ['updatePost'],
+                //         ],
+                //         [
+                //             'allow' => true,
+                //             'actions' => ['delete'],
+                //             'roles' => ['deletePost'],
+                //         ],
+                //     ],
+                // ],
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
@@ -38,13 +71,18 @@ class AuthAssignmentController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new AuthAssignmentSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePost')) {
+            $searchModel = new AuthAssignmentSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -56,9 +94,14 @@ class AuthAssignmentController extends Controller
      */
     public function actionView($item_name, $user_id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($item_name, $user_id),
-        ]);
+        if (\Yii::$app->user->can('viewPost')) {
+            return $this->render('view', [
+                'model' => $this->findModel($item_name, $user_id),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-assignment/index']);
+        }
     }
 
     /**
@@ -68,19 +111,22 @@ class AuthAssignmentController extends Controller
      */
     public function actionCreate()
     {
-        $model = new AuthAssignment();
-
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+        if (\Yii::$app->user->can('createPost')) {
+            $model = new AuthAssignment();
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
+            return $this->render('create', [
+                'model' => $model,
+            ]);
         } else {
-            $model->loadDefaultValues();
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-assignment/index']);
         }
-
-        return $this->renderAjax('create', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -93,15 +139,20 @@ class AuthAssignmentController extends Controller
      */
     public function actionUpdate($item_name, $user_id)
     {
-        $model = $this->findModel($item_name, $user_id);
+        if (\Yii::$app->user->can('updatePost')) {
+            $model = $this->findModel($item_name, $user_id);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'item_name' => $model->item_name, 'user_id' => $model->user_id]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-assignment/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -114,9 +165,13 @@ class AuthAssignmentController extends Controller
      */
     public function actionDelete($item_name, $user_id)
     {
-        $this->findModel($item_name, $user_id)->delete();
-
-        return $this->redirect(['index']);
+        if (\Yii::$app->user->can('deletePost')) {
+            $this->findModel($item_name, $user_id)->delete();
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['auth-assignment/index']);
+        }
     }
 
     /**

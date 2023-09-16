@@ -9,12 +9,19 @@ $this->title = 'Create Warna';
 $this->params['breadcrumbs'][] = ['label' => 'Warnas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="warna-create">
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="warna-create">
+                        <?= $this->render('_form', [
+                            'model' => $model,
+                        ]) ?>
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

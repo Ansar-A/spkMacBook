@@ -17,14 +17,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <!-- display error message -->
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
 
             <div class="col-sm-12">
                 <ol class="breadcrumb">

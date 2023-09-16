@@ -6,6 +6,7 @@ use backend\models\SignupForm;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use backend\models\ResendVerificationEmailForm;
+use common\models\JenisProduk;
 use common\models\LoginForm;
 use common\models\Pengguna;
 use common\models\Produk;
@@ -126,8 +127,8 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $DB = Yii::$app->db;
-        $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM `produk` GROUP BY nama_produk")->queryAll();
-        $namaProduk = Produk::find()->groupBy("nama_produk")->all();
+        $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM `produk` GROUP BY id_jenis")->queryAll();
+        $namaProduk = JenisProduk::find()->groupBy("jenis")->all();
         return $this->render('index', compact("ts", "namaProduk"));
     }
 
@@ -166,8 +167,6 @@ class SiteController extends Controller
         $model = new SignupForm();
         // $authItems = AuthItem::find()->all();
         if ($model->load($this->request->post())) {
-
-            //$model->since = \Yii::$app->formatter->asDate($model->since, 'yyyy-MM-dd');
             $model->photo = UploadedFile::getInstance($model, 'photo');
             if ($model->validate()) {
                 if (!is_null($model->photo)) {
@@ -176,7 +175,6 @@ class SiteController extends Controller
                     $model->photo = $filename;
                 }
                 $model->signup();
-
                 return $this->goBack();
             }
         }
@@ -277,5 +275,10 @@ class SiteController extends Controller
         return $this->render('resendVerificationEmail', [
             'model' => $model
         ]);
+    }
+
+    public function actionInfo()
+    {
+        return $this->render('info');
     }
 }

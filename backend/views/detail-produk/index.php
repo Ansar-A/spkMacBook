@@ -1,6 +1,12 @@
 <?php
 
+use common\models\DataSpk;
 use common\models\DetailProduk;
+use common\models\KetahananMacbook;
+use common\models\KeamananMacbook;
+use common\models\KondisiMacbook;
+use common\models\PerformaMacbook;
+
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -9,7 +15,12 @@ use kartik\grid\GridView;
 /** @var yii\web\View $this */
 /** @var backend\models\DetailProdukSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
-
+$totalDetail = DetailProduk::find()->count();
+$maxSpk = DataSpk::find()->count('id_spk');
+$maxKetahanan = KetahananMacbook::find()->count('id_ketahanan');
+$maxKeamanan = KeamananMacbook::find()->count('id_keamanan');
+$maxKondisi = KondisiMacbook::find()->count('id_kondisi');
+$maxPerforma = PerformaMacbook::find()->count('id_performa');
 $this->title = 'Detail Produks';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -17,14 +28,15 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <!-- display error message -->
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
 
             <div class="col-sm-12">
                 <div class="btn-group pull-right m-t-15">
@@ -37,91 +49,51 @@ $this->params['breadcrumbs'][] = $this->title;
                         <li><a href="#">Separated link</a></li>
                     </ul>
                 </div>
-                <h4 class="page-title">Basic Tables</h4>
+
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Detail Produk</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Panel Detail Produk
                     </li>
                 </ol>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-12">
                 <div class="row">
-                    <div class="col-md-6 col-sm-6 col-lg-3">
+                    <div class="col-sm-6">
                         <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-info"><i class="ion-social-usd text-white"></i></span>
+                            <span class="mini-stat-icon bg-custom"><i class="fa fa-pie-chart text-white"></i></span>
                             <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">5154</span>
+                                <span class="counter text-dark" data-plugin="counterup"><?php echo $totalDetail ?></span>
                                 Total
                             </div>
                             <div class="tiles-progress">
                                 <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">60%</span></h5>
+                                    <h5 class="text-uppercase">Detail</h5>
                                     <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-                                            <span class="sr-only">60% Complete</span>
+                                        <div class="progress-bar progress-bar-custom" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-6 col-sm-6 col-lg-3">
+                    <div class="col-sm-6">
                         <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-warning"><i class="ion-ios7-cart text-white"></i></span>
+                            <span class="mini-stat-icon bg-info"><i class="fa fa-wpforms text-white"></i></span>
                             <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">876</span>
-                                New
+                                <span class="counter text-dark" data-plugin="counterup"><?php echo $maxSpk ?></span>
+                                Total
                             </div>
                             <div class="tiles-progress">
                                 <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">90%</span></h5>
+                                    <h5 class="text-uppercase">Spk</h5>
                                     <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-                                            <span class="sr-only">90% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-3">
-                        <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
-                            <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">4775</span>
-                                New
-                            </div>
-                            <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">57%</span></h5>
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                            <span class="sr-only">57% Complete</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-3">
-                        <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
-                            <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup">4775</span>
-                                New
-                            </div>
-                            <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase">Target <span class="pull-right">57%</span></h5>
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 57%">
-                                            <span class="sr-only">57% Complete</span>
+                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                                         </div>
                                     </div>
                                 </div>
@@ -135,6 +107,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
+                        'headerRowOptions' => ['class' => 'table m-0'],
+                        'filterRowOptions' => ['class' => 'table m-0'],
                         //'bootstrap' => true,
                         'responsive' => true,
                         //'bordered' => false,
@@ -189,11 +163,60 @@ $this->params['breadcrumbs'][] = $this->title;
                             // ],
                             // ['class' => 'yii\grid\SerialColumn'],
                             'id_detail',
-                            'ketahanan',
-                            'performa',
-                            'kondisi',
-                            'keamanan',
-                            'get_spk',
+                            //'ketahanan',
+                            // [
+                            //     'header' => 'Baterai',
+                            //     'attribute' => 'ketahanan',
+                            //     'value' => function ($model) {
+                            //         return $model->ketahanan0->baterai;
+                            //     },
+                            // ],
+                            //'performa',
+                            // [
+                            //     'header' => 'RAM',
+                            //     'attribute' =>  'performa',
+                            //     'value' => function ($model) {
+                            //         return $model->performa0->ram;
+                            //     },
+                            // ],
+                            //'kondisi',
+                            // [
+                            //     'header' => 'Kondisi Layar',
+                            //     'attribute' =>  'kondisi',
+                            //     'value' => function ($model) {
+                            //         return $model->kondisi0->kondisi_layar;
+                            //     },
+                            // ],
+                            //'keamanan',
+                            // [
+                            //     'header' => 'Garansi',
+                            //     'attribute' =>  'keamanan',
+                            //     'value' => function ($model) {
+                            //         return $model->keamanan0->garansi;
+                            //     },
+                            // ],
+                            //'get_spk',
+                            [
+                                'header' => 'Data F',
+                                'attribute' =>  'get_spk',
+                                'value' => function ($model) {
+                                    return $model->spk->dataF;
+                                },
+                            ],
+                            [
+                                'header' => 'Data T',
+                                'attribute' =>  'get_spk',
+                                'value' => function ($model) {
+                                    return $model->spk->dataT;
+                                },
+                            ],
+                            [
+                                'header' => 'R',
+                                'attribute' =>  'get_spk',
+                                'value' => function ($model) {
+                                    return $model->spk->rSquare;
+                                },
+                            ],
                         ],
                         'toolbar' => [
                             Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -218,30 +241,86 @@ $this->params['breadcrumbs'][] = $this->title;
                             'heading' => false,
                             //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                             'type' => 'default',
-                            'before' => Html::a('<i class="md-add-box"></i> Create Detail Produk', ['create'], ['class' => 'btn btn-success']),
+                            'before' => Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-success']),
                             // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
                             // 'footer' => false
                         ],
                     ]); ?>
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="card-box p-0">
-                    <div class="profile-widget text-center">
-
-                        <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                        <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <a href="#" class="btn btn-sm btn-purple m-t-20">Follow Fb</a>
-                        <a href="#" class="btn btn-sm btn-pink m-t-20">ig</a>
-                        <p class="m-t-0 text-muted p-20">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. but also the leap into electronic typesetting, remaining essentially unchanged. essentially unchanged</p>
-                        <ul class="list-inline widget-list clearfix">
-                            <li class="col-md-6"><span>2.109</span>Followers</li>
-                            <li class="col-md-6"><span>596</span>Photos</li>
-
-                        </ul>
+            <!-- <div class="col-md-6 col-sm-6 col-lg-3">
+                <div class="mini-stat clearfix card-box">
+                    <span class="mini-stat-icon bg-inverse"><i class="fa fa-hourglass-start text-white"></i></span>
+                    <div class="mini-stat-info text-right text-dark">
+                        <span class="counter text-dark" data-plugin="counterup"><?php echo $maxPerforma ?></span>
+                        Total
+                    </div>
+                    <div class="tiles-progress">
+                        <div class="m-t-20">
+                            <h5 class="text-uppercase">Performa</h5>
+                            <div class="progress progress-sm m-0">
+                                <div class="progress-bar progress-bar-inverse" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="col-md-6 col-sm-6 col-lg-3">
+                <div class="mini-stat clearfix card-box">
+                    <span class="mini-stat-icon bg-warning"><i class="fa fa-gg-circle text-white"></i></span>
+                    <div class="mini-stat-info text-right text-dark">
+                        <span class="counter text-dark" data-plugin="counterup"><?php echo $maxKetahanan ?></span>
+                        Total
+                    </div>
+                    <div class="tiles-progress">
+                        <div class="m-t-20">
+                            <h5 class="text-uppercase">Ketahanan</h5>
+                            <div class="progress progress-sm m-0">
+                                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-3">
+                <div class="mini-stat clearfix card-box">
+                    <span class="mini-stat-icon bg-pink"><i class="fa fa-bug text-white"></i></span>
+                    <div class="mini-stat-info text-right text-dark">
+                        <span class="counter text-dark" data-plugin="counterup"><?php echo $maxKeamanan ?></span>
+                        Total
+                    </div>
+                    <div class="tiles-progress">
+                        <div class="m-t-20">
+                            <h5 class="text-uppercase">Keamanan</h5>
+                            <div class="progress progress-sm m-0">
+                                <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-lg-3">
+                <div class="mini-stat clearfix card-box">
+                    <span class="mini-stat-icon bg-primary"><i class="fa fa-cogs text-white"></i></span>
+                    <div class="mini-stat-info text-right text-dark">
+                        <span class="counter text-dark" data-plugin="counterup"><?php echo $maxKondisi ?></span>
+                        Total
+                    </div>
+                    <div class="tiles-progress">
+                        <div class="m-t-20">
+                            <h5 class="text-uppercase">Kondisi</h5>
+                            <div class="progress progress-sm m-0">
+                                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> -->
         </div>
     </div>
 </div>

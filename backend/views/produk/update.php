@@ -11,10 +11,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Produks', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+
+
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-sm-12">
                 <div class="card-box">
                     <div class="produk-update">
                         <?= $this->render('_form', [

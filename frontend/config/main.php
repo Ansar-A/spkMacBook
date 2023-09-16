@@ -42,6 +42,18 @@ return [
             'showScriptName' => false,
             'rules' => [],
         ],
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'js' => [
+                        'max/js/main.js',
+                    ]
+                ],
+            ],
+        ],
 
     ],
     'params' => $params,

@@ -34,6 +34,11 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * {@inheritdoc}
      */
+    // public function isSuperAdmin()
+    // {
+    //     if ($this->) {
+    //     }
+    // }
     public static function tableName()
     {
         return '{{%user}}';
@@ -55,12 +60,10 @@ class User extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'default', 'value' => self::STATUS_INACTIVE],
+            ['status', 'default', 'value' => self::STATUS_ACTIVE],
             ['status', 'in', 'range' => [self::STATUS_ACTIVE, self::STATUS_INACTIVE, self::STATUS_DELETED]],
             [['tentang', 'photo', 'username', 'hp', 'address', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png, jpeg', 'on' => 'update'],
-
-
         ];
     }
 

@@ -9,12 +9,18 @@ $this->title = 'Create Koneksi Ekspansi';
 $this->params['breadcrumbs'][] = ['label' => 'Koneksi Ekspansis', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="koneksi-ekspansi-create">
-
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
-
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card-box">
+                    <div class="koneksi-ekspansi-create">
+                        <?= $this->render('_form', [
+                            'model' => $model,
+                        ]) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -19,8 +19,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'username', 'status', 'created_at', 'updated_at', 'globalSearch'], 'integer'],
-            ['address', 'string'],
+            [['id', 'username', 'status', 'created_at', 'updated_at', 'globalSearch', 'hp'], 'integer'],
+            ['address',  'string'],
         ];
     }
 
@@ -42,11 +42,12 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        if (\Yii::$app->user->can('superAdmin')) {
+        if (\Yii::$app->user->can('deletePostAdmin')) {
             $query = User::find();
         } else {
             $query = User::find()->where(['id' => Yii::$app->user->identity->id]);
         }
+
 
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
@@ -69,6 +70,9 @@ class UserSearch extends User
             'address' => $this->address,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'hp' => $this->hp,
+
+
 
         ]);
 
@@ -78,8 +82,9 @@ class UserSearch extends User
             ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
             ->orFilterWhere(['like', 'email', $this->globalSearch])
             ->orFilterWhere(['like', 'address', $this->globalSearch])
-            ->orFilterWhere(['like', 'verification_token', $this->globalSearch]);
+            ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
 
+            ->orFilterWhere(['like', 'hp', $this->globalSearch]);
         return $dataProvider;
     }
 }

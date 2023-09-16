@@ -28,7 +28,7 @@ class JenisLayar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis'], 'required'],
+            [['jenis',], 'required'],
             [['jenis'], 'string', 'max' => 244],
         ];
     }
@@ -41,6 +41,7 @@ class JenisLayar extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'jenis' => 'Jenis',
+
         ];
     }
 

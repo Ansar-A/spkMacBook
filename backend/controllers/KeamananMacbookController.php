@@ -38,13 +38,19 @@ class KeamananMacbookController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new KeamananMacbookSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        if (\Yii::$app->user->can('managePostKeamanan')) {
+            $searchModel = new KeamananMacbookSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
+            $query = KeamananMacbook::find();
+            return $this->render('index', [
+                'query' => $query,
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +61,14 @@ class KeamananMacbookController extends Controller
      */
     public function actionView($id_keamanan)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_keamanan),
-        ]);
+        if (\Yii::$app->user->can('viewPostKeamanan')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id_keamanan),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['keamanan-macbook/index']);
+        }
     }
 
     /**
@@ -67,19 +78,24 @@ class KeamananMacbookController extends Controller
      */
     public function actionCreate()
     {
-        $model = new KeamananMacbook();
+        if (\Yii::$app->user->can('createPostKeamanan')) {
+            $model = new KeamananMacbook();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_keamanan' => $model->id_keamanan]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_keamanan' => $model->id_keamanan]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['keamanan-macbook/index']);
+        }
     }
 
     /**
@@ -91,15 +107,20 @@ class KeamananMacbookController extends Controller
      */
     public function actionUpdate($id_keamanan)
     {
-        $model = $this->findModel($id_keamanan);
+        if (\Yii::$app->user->can('updatePostKeamanan')) {
+            $model = $this->findModel($id_keamanan);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_keamanan' => $model->id_keamanan]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_keamanan' => $model->id_keamanan]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['keamanan-macbook/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +132,14 @@ class KeamananMacbookController extends Controller
      */
     public function actionDelete($id_keamanan)
     {
-        $this->findModel($id_keamanan)->delete();
+        if (\Yii::$app->user->can('detelePostKeamanan')) {
+            $this->findModel($id_keamanan)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['keamanan-macbook/index']);
+        }
     }
 
     /**

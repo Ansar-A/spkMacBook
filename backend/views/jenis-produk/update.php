@@ -14,13 +14,12 @@ $this->params['breadcrumbs'][] = 'Update';
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Panel Jenis Produk</h4>
+                        <h4 class="page-title">Jenis Produk</h4>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['jenis-produk/index']) ?>">Jenis Produk</a>
+                        <a href="<?= Url::to(['jenis-produk/index']) ?>">Panel Jenis Produk</a>
                     </li>
                     <li class="active">
                         Update

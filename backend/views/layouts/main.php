@@ -186,11 +186,11 @@ AppAsset::register($this);
                 <!--- Divider -->
                 <div id="sidebar-menu">
                     <ul>
-
                         <li class="text-muted menu-title">Dashboard</li>
                         <li class="has_sub active">
                             <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
                         </li>
+
                         <li class="text-muted menu-title">MacBook</li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-apple"></i><span>Data MacBook</span> <span class="menu-arrow"></span></a>
@@ -198,6 +198,19 @@ AppAsset::register($this);
                                 <li><a href="<?= Url::to(['produk/index']) ?>">MacBook</a></li>
                             </ul>
                         </li>
+                        <li class="text-muted menu-title">SPK MacBook</li>
+                        <li class="has_sub">
+                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-panel"></i><span> Detail Produk </span> <span class="menu-arrow"></span></a>
+                            <ul class="list-unstyled">
+                                <li><a href="<?= Url::to(['detail-produk/index']) ?>">Detail</a></li>
+                                <li><a href="<?= Url::to(['ketahanan-macbook/index']) ?>">Ketahanan MacBook</a></li>
+                                <li><a href="<?= Url::to(['performa-macbook/index']) ?>">Performa MacBook</a></li>
+                                <li><a href="<?= Url::to(['kondisi-macbook/index']) ?>">Kondisi MacBook</a></li>
+                                <li><a href="<?= Url::to(['keamanan-macbook/index']) ?>">Keamanan MacBook</a></li>
+                                <li><a href="<?= Url::to(['data-spk/index']) ?>">SPK MacBook</a></li>
+                            </ul>
+                        </li>
+                        <li class="text-muted menu-title">Komponent</li>
                         <li class="has_sub">
                             <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span class="menu-arrow"></span><span> Component </span></a>
                             <ul class="list-unstyled">
@@ -217,18 +230,6 @@ AppAsset::register($this);
 
                             </ul>
                         </li>
-                        <li class="text-muted menu-title">SPK MacBook</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-panel"></i><span> Detail Produk </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['detail-produk/index']) ?>">Detail</a></li>
-                                <li><a href="<?= Url::to(['ketahanan-macbook/index']) ?>">Ketahanan MacBook</a></li>
-                                <li><a href="<?= Url::to(['performa-macbook/index']) ?>">Performa MacBook</a></li>
-                                <li><a href="<?= Url::to(['kondisi-macbook/index']) ?>">Kondisi MacBook</a></li>
-                                <li><a href="<?= Url::to(['keamanan-macbook/index']) ?>">Keamanan MacBook</a></li>
-                                <li><a href="<?= Url::to(['data-spk/index']) ?>">SPK MacBook</a></li>
-                            </ul>
-                        </li>
                         <li class="text-muted menu-title">User</li>
                         <li class="has_sub">
                             <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span class="menu-arrow"></span> </a>
@@ -240,7 +241,7 @@ AppAsset::register($this);
                             <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
                             <ul class="list-unstyled">
                                 <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
-                                <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li>
+                                <!-- <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li> -->
                             </ul>
                         </li>
                         <li class="text-muted menu-title">Access</li>
@@ -249,22 +250,15 @@ AppAsset::register($this);
                             <ul class="list-unstyled">
                                 <li><a href="<?= Url::to(['auth-item/index']) ?>">AuthItem</a></li>
                                 <li><a href="<?= Url::to(['auth-assignment/index']) ?>">AuthAssignment</a></li>
-                                <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li>
-                                <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li>
-                            </ul>
-                        </li>
-                        <li class="text-muted menu-title">Keterangan</li>
-                        <li class="has_sub">
-                            <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Access Keterangan </span> <span class="menu-arrow"></span></a>
-                            <ul class="list-unstyled">
-                                <li><a href="<?= Url::to(['ket-komponent/index']) ?>">Keterangan Komponent</a></li>
-
+                                <!-- <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li> -->
+                                <!-- <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li> -->
                             </ul>
                         </li>
                         <li class="text-muted menu-title">Help</li>
                         <li class="has_sub">
-                            <a class="waves-effect"><i class="ti-help"></i><span> Info </span></a>
+                            <a href="<?= Url::to(['site/info']) ?>" class="waves-effect"><i class="ti-help"></i><span> Info </span></a>
                         </li>
+
                     </ul>
                     <div class="clearfix"></div>
                 </div>

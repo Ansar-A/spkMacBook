@@ -1,6 +1,9 @@
 <?php
 
 /** @var yii\web\View $this */
+
+use yii\helpers\Url;
+
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
@@ -14,14 +17,12 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="clearfix"></div>
 <div class="wrapper-page">
     <div class="card-box">
-        <div class="panel-heading">
-            <h3 class="text-center"> Sign In to <strong class="text-custom">SPK MacBook</strong></h3>
-        </div>
+        <div class="bg-custom bg-profile"></div>
+        <!-- <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail pull-center" alt="img"> -->
         <div class="panel-body">
             <h1><?= Html::encode($this->title) ?></h1>
-
-            <p>Please fill out the following fields to login:</p>
-
+            <p>SPK MacBook Bekas Layak Pakai</p>
+            <hr>
             <div class="row">
                 <div class="col-lg-12">
                     <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
@@ -30,16 +31,16 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label('') ?>
 
-                    <?= $form->field($model, 'rememberMe')->checkbox() ?>
+                    <?= $form->field($model, 'rememberMe')->checkbox(['type' => 'checkbox']) ?>
 
                     <div class="form-group text-center m-t-40">
-                        <?= Html::submitButton('LOG IN', ['class' => 'btn btn-pink btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton('LOG IN', ['class' => 'btn btn-primary btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
                     </div>
-                    <div class="my-1 mx-0" style="color:#999;">
+                    <!-- <div class="my-1 mx-0" style="color:#999;">
                         <i class="fa fa-lock m-r-5"></i><?= Html::a('forgot password ?', ['site/request-password-reset']) ?>
                         <br>
                         Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-                    </div>
+                    </div> -->
                     <?php ActiveForm::end(); ?>
                 </div>
             </div>

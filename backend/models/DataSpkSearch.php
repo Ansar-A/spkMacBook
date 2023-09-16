@@ -2,6 +2,8 @@
 
 namespace backend\models;
 
+use Yii;
+
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\DataSpk;
@@ -40,12 +42,11 @@ class DataSpkSearch extends DataSpk
     public function search($params)
     {
         $query = DataSpk::find();
-
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 4),
+            'pagination' => array('pageSize' => 5),
         ]);
 
         $this->load($params);

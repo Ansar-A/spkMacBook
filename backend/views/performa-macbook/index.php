@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
+use yii\widgets\ListView;
 
 /** @var yii\web\View $this */
 /** @var backend\models\PerformaMacbookSearch $searchModel */
@@ -17,56 +18,38 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <!-- display error message -->
-            <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                <div class="alert alert-danger alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Saved!</h4>
-                    <?= Yii::$app->session->getFlash('error') ?>
-                </div>
-            <?php endif; ?>
+            <div class="col-sm-12">
+                <?php if (Yii::$app->session->hasFlash('error')) : ?>
+                    <div class="alert alert-danger alert-dismissable">
+                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                        <h4><i class="icon fa fa-check"></i>Not Access!</h4>
+                        <?= Yii::$app->session->getFlash('error') ?>
+                    </div>
+                <?php endif; ?>
+            </div>
 
             <div class="col-sm-12">
-                <div class="btn-group pull-right m-t-15">
-                    <!-- <button type="button" class="btn btn-default dropdown-toggle waves-effect waves-light" data-toggle="dropdown" aria-expanded="false">Settings <span class="m-l-5"><i class="fa fa-cog"></i></span></button> -->
-                    <ul class="dropdown-menu drop-menu-right" role="menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
-                </div>
-                <h4 class="page-title">Basic Tables</h4>
                 <ol class="breadcrumb">
                     <li>
-                        <a href="#">Ubold</a>
+                        <h4 class="page-title">Performa MacBook</h4>
                     </li>
                     <li>
-                        <a href="#">Tables</a>
+                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
                     </li>
                     <li class="active">
-                        Tables
+                        Panel Performa
                     </li>
                 </ol>
             </div>
             <div class="col-sm-9">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card-box widget-box-1 bg-white">
-                            <i class="fa fa-info-circle text-muted pull-right inform" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Tooltip on right"></i>
-                            <h4 class="text-dark">Income status</h4>
-
-                            <p class="text-muted">Total income: $22506 <span class="pull-right"><i class="fa fa-caret-up text-primary m-r-5"></i>10.25%</span></p>
-                        </div>
-                    </div>
-                </div>
                 <div class="performa-macbook-index">
                     <?php // echo $this->render('_search', ['model' => $searchModel]); 
                     ?>
                     <?= GridView::widget([
                         'dataProvider' => $dataProvider,
                         'filterModel' => $searchModel,
+                        'headerRowOptions' => ['class' => 'table m-0'],
+                        'filterRowOptions' => ['class' => 'table m-0'],
                         //'bootstrap' => true,
                         'responsive' => true,
                         //'bordered' => false,
@@ -157,19 +140,25 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="card-box p-0">
-                    <div class="profile-widget text-center">
-
-                        <img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                        <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                        <a href="#" class="btn btn-sm btn-purple m-t-20">Follow Fb</a>
-                        <a href="#" class="btn btn-sm btn-pink m-t-20">ig</a>
-                        <p class="m-t-0 text-muted p-20">It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. but also the leap into electronic typesetting, remaining essentially unchanged. essentially unchanged</p>
-                        <ul class="list-inline widget-list clearfix">
-                            <li class="col-md-6"><span>2.109</span>Followers</li>
-                            <li class="col-md-6"><span>596</span>Photos</li>
-
-                        </ul>
+                <div class="card-box product-detail-box">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="product-right-info">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h6><span class="label label-info m-l-5">New</span><b> Information</b></h6>
+                                    </div>
+                                </div>
+                                <hr>
+                                <h5 class="font-600" style="padding-left: 5px;">Performa Description</h5>
+                                <p class="text-muted" style="padding-left: 5px;">Salah satu hal paling sederhana yang dapat dilakukan untuk meningkatkan performa iMac atau MacBook adalah dengan menutup semua aplikasi atau program yang tidak digunakan. Mac Anda mungkin memakan memori dan daya CPU untuk program yang jarang Anda gunakan. Oleh sebab itu, ruang dan beban kerja Mac perlu dibebaskan dari program yang tidak diinginkan yang memperlambat performa.</p>
+                                <div class="m-t-30 text-center">
+                                    <a href="https://www.kingston.com/id/blog/pc-performance/tips-to-speed-up-mac" target="_blank" class="btn btn-info waves-effect waves-light btn-sm">
+                                        <span class="btn-label"><i class="fa fa-info"></i>
+                                        </span>More Info</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

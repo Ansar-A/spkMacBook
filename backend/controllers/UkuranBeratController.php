@@ -4,9 +4,11 @@ namespace backend\controllers;
 
 use common\models\UkuranBerat;
 use backend\models\UkuranBeratSearch;
+use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * UkuranBeratController implements the CRUD actions for UkuranBerat model.
@@ -40,7 +42,20 @@ class UkuranBeratController extends Controller
     {
         $searchModel = new UkuranBeratSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = UkuranBerat::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['UkuranBerat']);
+            $post['UkuranBerat'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -77,7 +92,7 @@ class UkuranBeratController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

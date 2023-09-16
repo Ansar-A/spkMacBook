@@ -14,11 +14,12 @@ class JenisPenyimpananSearch extends JenisPenyimpanan
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['jenis'], 'safe'],
+            [['jenis', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,7 +62,7 @@ class JenisPenyimpananSearch extends JenisPenyimpanan
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'jenis', $this->jenis]);
+        $query->orFilterWhere(['like', 'jenis', $this->globalSearch]);
 
         return $dataProvider;
     }

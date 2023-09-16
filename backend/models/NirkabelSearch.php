@@ -14,11 +14,12 @@ class NirkabelSearch extends Nirkabel
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_nirkabel'], 'integer'],
-            [['wifi', 'bluetooth'], 'safe'],
+            [['wifi', 'bluetooth', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,8 +62,8 @@ class NirkabelSearch extends Nirkabel
             'id_nirkabel' => $this->id_nirkabel,
         ]);
 
-        $query->andFilterWhere(['like', 'wifi', $this->wifi])
-            ->andFilterWhere(['like', 'bluetooth', $this->bluetooth]);
+        $query->orFilterWhere(['like', 'wifi', $this->globalSearch])
+            ->orFilterWhere(['like', 'bluetooth', $this->globalSearch]);
 
         return $dataProvider;
     }

@@ -31,176 +31,6 @@ use yii\helpers\Url;
         <div class="col-md-6">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Basic</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="p-10">
-                        <div class="col-xs-12">
-                            <?= $form->field($model, 'nama_produk')->textInput(['maxlength' => true]) ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?= $form->field($model, 'harga')->textInput(['type' => 'number']) ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?= $form->field($model, 'stock')->textInput(['type' => 'number']) ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisProduk::find()->all();
-                            echo $form->field($model, 'id_jenis')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisProsesor::find()->all();
-                            echo $form->field($model, 'id_prosesor')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisSo::find()->all();
-                            echo $form->field($model, 'id_so')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisPenyimpanan::find()->all();
-                            echo $form->field($model, 'id_penyimpanan')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?= $form->field($model, 'tahun_rilis')->widget(DatePicker::classname(), [
-                                'options' => ['placeholder' => 'Tahun Rilis...'],
-                                'pluginOptions' => [
-                                    'autoclose' => true,
-                                    'format' => 'dd-M-yyyy',
-                                ]
-                            ]); ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">SPK</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="p-10">
-                        <h4><b>SPK</b></h4>
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->spk->rSquare;
-                                            },
-                                        ),
-                                        ['prompt' => 'R Square...']
-                                    )->label('Detail SPK');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->spk->dataF;
-                                            },
-                                        ),
-                                        ['prompt' => 'data F...']
-                                    )->label('Detail SPK');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->spk->dataT;
-                                            },
-                                        ),
-                                        ['prompt' => 'data T...']
-                                    )->label('Detail SPK');
-                                    ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Photo</h3>
-                </div>
-                <div class="panel-body">
-                    <div class="p-10">
-                        <div class="col-sm-12">
-                            <?= $form->field($model, 'photo')->widget(FileInput::className(), [
-                                'options' => ['accept' => 'photos/*'],
-                                'pluginOptions' => [
-                                    'showUpload' => false,
-                                    'browseLabel' => '',
-                                    'removeLabel' => '',
-                                    'mainClass' => 'input-group-lg',
-                                    'fileimageuploaded' => true,
-                                ]
-                            ]);
-                            ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
                     <h3 class="panel-title">Spesifikasi Teknis</h3>
                 </div>
                 <div class="panel-body">
@@ -415,189 +245,140 @@ use yii\helpers\Url;
             </div>
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Detail</h3>
+                    <h3 class="panel-title">Get ID Detail</h3>
                 </div>
                 <div class="panel-body">
                     <div class="p-10">
                         <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <?php
+                                    $list = DetailProduk::find()->all();
+                                    echo $form->field($model, 'get_detaill')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_detail',
+                                            function ($list) {
+                                                return $list->id_detail;
+                                            },
+                                        ),
+                                        ['prompt' => 'get ID Detail...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Photo</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="p-10">
+                        <div class="col-sm-12">
+                            <?= $form->field($model, 'photo')->widget(FileInput::className(), [
+                                'options' => ['accept' => 'photos/*'],
+                                'pluginOptions' => [
+                                    'showUpload' => false,
+                                    'browseLabel' => '',
+                                    'removeLabel' => '',
+                                    'mainClass' => 'input-group-lg',
+                                    'fileimageuploaded' => true,
+                                ]
+                            ]);
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Basic</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="p-10">
+                        <div class="col-xs-12">
+                            <?= $form->field($model, 'nama_produk')->textInput(['maxlength' => true]) ?>
+                        </div>
+                        <div class="col-xs-12">
+                            <?= $form->field($model, 'harga')->textInput(['type' => 'number']) ?>
+                        </div>
+                        <div class="col-xs-12">
+                            <?= $form->field($model, 'stock')->textInput(['type' => 'number']) ?>
+                        </div>
+                        <div class="col-xs-12">
                             <?php
-                            $list = DetailProduk::find()->all();
-                            echo $form->field($model, 'get_detaill')->dropDownList(
+                            $list = JenisProduk::find()->all();
+                            echo $form->field($model, 'id_jenis')->dropDownList(
                                 ArrayHelper::map(
                                     $list,
-                                    'id_detail',
+                                    'id',
                                     function ($list) {
-                                        return $list->ketahanan0->baterai;
+                                        return $list->jenis;
                                     },
                                 ),
-                                ['prompt' => 'baterai...']
-                            )->label('Detail Ketahanan');
+                                ['prompt' => 'Select...']
+                            );
                             ?>
                         </div>
                         <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->performa0->ram;
-                                            },
-                                        ),
-                                        ['prompt' => 'ram...']
-                                    )->label('Detail Performa');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->performa0->vga;
-                                            },
-                                        ),
-                                        ['prompt' => 'vga...']
-                                    )->label('Detail Performa');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->performa0->prosesor;
-                                            },
-                                        ),
-                                        ['prompt' => 'prosesor...']
-                                    )->label('Detail Performa');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->performa0->storage;
-                                            },
-                                        ),
-                                        ['prompt' => 'storage...']
-                                    )->label('Detail Performa');
-                                    ?>
-                                </div>
-                            </div>
+                            <?php
+                            $list = JenisProsesor::find()->all();
+                            echo $form->field($model, 'id_prosesor')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id',
+                                    function ($list) {
+                                        return $list->jenis;
+                                    },
+                                ),
+                                ['prompt' => 'Select...']
+                            );
+                            ?>
                         </div>
                         <div class="col-xs-12">
-                            <div class="row">
-                                <!-- keamanan -->
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->keamanan0->no_seri;
-                                            },
-                                        ),
-                                        ['prompt' => 'No Seri...']
-                                    )->label('Detail keamanan');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->keamanan0->garansi;
-                                            },
-                                        ),
-                                        ['prompt' => 'garansi...']
-                                    )->label('Detail keamanan');
-                                    ?>
-                                </div>
-                            </div>
+                            <?php
+                            $list = JenisSo::find()->all();
+                            echo $form->field($model, 'id_so')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id',
+                                    function ($list) {
+                                        return $list->jenis;
+                                    },
+                                ),
+                                ['prompt' => 'Select...']
+                            );
+                            ?>
                         </div>
                         <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->kondisi0->kondisi_layar;
-                                            },
-                                        ),
-                                        ['prompt' => 'kondisi layar...']
-                                    )->label('Detail kondisi');
-                                    ?>
-                                </div>
-                                <div class="col-xs-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->kondisi0->audio;
-                                            },
-                                        ),
-                                        ['prompt' => 'audio...']
-                                    )->label('Detail kondisi');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->kondisi0->keyboard;
-                                            },
-                                        ),
-                                        ['prompt' => 'keyboard...']
-                                    )->label('Detail kondisi');
-                                    ?>
-                                </div>
-                                <div class="col-sm-6">
-                                    <?php
-                                    $list = DetailProduk::find()->all();
-                                    echo $form->field($model, 'get_detaill')->dropDownList(
-                                        ArrayHelper::map(
-                                            $list,
-                                            'id_detail',
-                                            function ($list) {
-                                                return $list->kondisi0->tracpad;
-                                            },
-                                        ),
-                                        ['prompt' => 'tracpad...']
-                                    )->label('Detail kondisi');
-                                    ?>
-                                </div>
-
-                            </div>
-
+                            <?php
+                            $list = JenisPenyimpanan::find()->all();
+                            echo $form->field($model, 'id_penyimpanan')->dropDownList(
+                                ArrayHelper::map(
+                                    $list,
+                                    'id',
+                                    function ($list) {
+                                        return $list->jenis;
+                                    },
+                                ),
+                                ['prompt' => 'Select...']
+                            );
+                            ?>
+                        </div>
+                        <div class="col-xs-12">
+                            <?= $form->field($model, 'tahun_rilis')->widget(DatePicker::classname(), [
+                                'options' => ['placeholder' => 'Tahun Rilis...'],
+                                'pluginOptions' => [
+                                    'autoclose' => true,
+                                    'format' => 'dd-M-yyyy',
+                                ]
+                            ]); ?>
                         </div>
                     </div>
                 </div>
@@ -608,7 +389,7 @@ use yii\helpers\Url;
     <div class="col-md-12">
         <div class="form-group text-center">
             <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success']) ?>
-            <a href="<?= Url::to(['produk/index']) ?>" type="button" class="btn btn-white waves-effect">Close</a>
+            <a href="<?= Url::to(['produk/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
         </div>
     </div>
     <?php ActiveForm::end(); ?>

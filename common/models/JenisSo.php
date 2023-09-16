@@ -42,6 +42,7 @@ class JenisSo extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'jenis' => 'Jenis',
+
         ];
     }
 

@@ -33,15 +33,15 @@ class SiteController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout', 'index'],
+                'only' => ['logout'],
                 'rules' => [
                     [
-                        'actions' => ['login', 'index'],
+                        'actions' => ['login', 'index', 'about'],
                         'allow' => true,
                         'roles' => ['?'],
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -79,24 +79,20 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $searchmodel = new ProdukSearch();
-        $dataprovider = $searchmodel->search($this->request->queryParams);
+        $searchModel = new ProdukSearch();
+        $dataProvider = $searchModel->search($this->request->queryParams);
 
         $query = Produk::find();
-        $dataprovider = new ActiveDataProvider([
+        $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => ['pageSize' => 4],
 
         ]);
         return $this->render('index', [
             'query' => $query,
-            'searchmodel' => $searchmodel,
-            'dataprovider' => $dataprovider
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
         ]);
-    }
-    public function actionFind()
-    {
-        return $this->render('find');
     }
 
     /**
@@ -220,7 +216,7 @@ class SiteController extends Controller
      */
     public function actionResetPassword($token)
     {
-
+        $this->layout = 'mainresetpassword';
         try {
             $model = new ResetPasswordForm($token);
         } catch (InvalidArgumentException $e) {

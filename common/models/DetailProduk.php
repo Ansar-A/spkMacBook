@@ -111,4 +111,8 @@ class DetailProduk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(DataSpk::class, ['id_spk' => 'get_spk']);
     }
+    // public function getProduk()
+    // {
+    //     return $this->hasMany(Produk::class, ['id_detail' => 'get_detaill']);
+    // }
 }

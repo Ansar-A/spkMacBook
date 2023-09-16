@@ -18,7 +18,6 @@ $this->title = 'Login';
 <div class="clearfix"></div>
 <div class="wrapper-page">
     <div class="car-box">
-
         <?php if (Yii::$app->session->hasFlash('error')) : ?>
             <div class="alert alert-danger alert-dismissable">
                 <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
@@ -65,9 +64,7 @@ $this->title = 'Login';
                             <div class="col-md-6">
                                 <div class="form-group pull-right">
                                     <a class="text-dark"><i class="md md-lock-open m-r-5" style="color: #5c39ac;"></i></i><?= Html::a('Forgot password?', ['site/request-password-reset']) ?></a>
-
                                 </div>
-
                             </div>
                         </div>
 
@@ -102,26 +99,6 @@ $this->title = 'Login';
                                         Remember me
                                     </label>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group m-t-20 m-b-0">
-                            <div class="col-sm-12 text-center">
-                                <h4><b>Sign in with</b></h4>
-                            </div>
-                        </div>
-                        <div class="form-group m-b-0 text-center">
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-facebook waves-effect waves-light m-t-20">
-                                    <i class="fa fa-facebook m-r-5"></i> Facebook
-                                </button>
-
-                                <button type="button" class="btn btn-twitter waves-effect waves-light m-t-20">
-                                    <i class="fa fa-twitter m-r-5"></i> Twitter
-                                </button>
-
-                                <button type="button" class="btn btn-googleplus waves-effect waves-light m-t-20">
-                                    <i class="fa fa-google-plus m-r-5"></i> Google+
-                                </button>
                             </div>
                         </div>
                     </div>

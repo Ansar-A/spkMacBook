@@ -6,6 +6,8 @@ use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
+use yii\widgets\DetailView;
+use yii\widgets\ListView;
 
 
 /** @var yii\web\View $this */
@@ -14,6 +16,7 @@ use yii\bootstrap\Modal;
 
 $this->title = 'Jenis Produks';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="content">
     <div class="container">
@@ -31,13 +34,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     </li>
                 </ol>
             </div>
-
             <div class="col-sm-12">
                 <div class="row">
                     <div class="col-sm-9">
                         <div class="jenis-produk-index">
-                            <?php //echo $this->render('_search', ['model' => $searchModel]);
-                            ?>
                             <div class="row">
                                 <div class="col-sm-5">
                                     <?= Html::button('<i class="md-add-box"></i> Add Data', ['value' => Url::to(['jenis-produk/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
@@ -56,15 +56,6 @@ $this->params['breadcrumbs'][] = $this->title;
                             Modal::end();
                             ?>
                             <p></p>
-                            <?php
-                            Modal::begin([
-                                'header' => '<h4>Create Jenis MacBook</h4>',
-                                'id' => 'modal',
-                                'size' => 'modal-lg'
-                            ]);
-                            echo "<div id = 'modalContent'></div>";
-                            Modal::end();
-                            ?>
 
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
@@ -132,7 +123,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'contentOptions' => ['style' => 'text-align:center'],
                                         'attribute' => 'jenis',
                                     ],
-                                    'get_ket',
+                                    //'get_ket',
                                 ],
                                 'toolbar' => [
                                     Html::a('<i class="fa fa-refresh"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
@@ -172,17 +163,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <div class="row">
                                             <div class="col-sm-6">
                                                 <h6><span class="label label-info m-l-5">New</span><b> Chipset</b></h6>
-                                                <h4 class="m-t-20" style="padding-left: 5px;margin-top: 0px;margin-bottom: 0px;"><b>Chipset M3</b></h4>
+                                                <h4 class="m-t-20" style="padding-left: 5px;margin-top: 0px; margin-bottom: 0px;">
+                                                    <b>
+                                                        Chipset M3
+                                                    </b>
+                                                </h4>
                                             </div>
                                             <div class="col-sm-6">
-                                                <img src="<?= Url::to('@web/purple/assets/images/m3.png') ?>" class="thumb-lg img-rounded img-thumbnail" alt="img">
+                                                <img src="<?php echo Url::to('@web/purple/assets/images/m3.png') ?>" class="thumb-lg img-rounded img-thumbnail" alt="img">
                                             </div>
                                         </div>
                                         <hr>
-                                        <h5 class="font-600">Chipset Description</h5>
-                                        <p class="text-muted">Chip M3 kabarnya sedang diuji menggunakan aplikasi pihak ketiga, guna memastikan kompatibilitasnya dengan ekosistem software Mac. Salah satu versi chip M3 yang sedang diuji kabarnya memiliki total CPU 12 inti, terdiri dari enam inti yang bertugas menangani tugas yang paling intens dan enam inti lainnya untuk menangani operasi dengan daya yang lebih rendah.</p>
+                                        <h5 class="font-600" style="padding-left: 5px;">Chipset Description</h5>
+                                        <p class="text-muted" style="padding-left: 5px;">Apple is developing the next several iterations of its M-series Apple silicon chips, and the chips coming in late 2023 and 2024 will be the "M3" series. The M3 chips will use updated TSMC chip manufacturing technology to make them faster and more efficient than ever before.</p>
                                         <div class="m-t-30 text-center">
-                                            <a href="https://www.macprices.net/2023/05/14/early-details-of-apples-next-generation-m3-chips/" target="_blank" class="btn btn-info waves-effect waves-light btn-sm">
+                                            <a href="https://www.macrumors.com/guide/m3/" target="_blank" class="btn btn-info waves-effect waves-light btn-sm">
                                                 <span class="btn-label"><i class="fa fa-info"></i>
                                                 </span>More Info</a>
                                         </div>

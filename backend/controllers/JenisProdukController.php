@@ -47,6 +47,7 @@ class JenisProdukController extends Controller
     {
         $searchModel = new JenisProdukSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $query = JenisProduk::find();
         // editable
         if (Yii::$app->request->post('hasEditable')) {
             $id = Yii::$app->request->post('editableKey');
@@ -63,6 +64,7 @@ class JenisProdukController extends Controller
             return;
         }
         return $this->render('index', [
+            'query' => $query,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

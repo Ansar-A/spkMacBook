@@ -14,10 +14,12 @@ class DayaSearch extends Daya
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_daya', 'informasi_baterai'], 'integer'],
+            [['id_daya', 'informasi_baterai', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -58,8 +60,9 @@ class DayaSearch extends Daya
         // grid filtering conditions
         $query->andFilterWhere([
             'id_daya' => $this->id_daya,
-            'informasi_baterai' => $this->informasi_baterai,
         ]);
+
+        $query->orFilterWhere(['like', 'informasi_baterai', $this->globalSearch]);
 
         return $dataProvider;
     }

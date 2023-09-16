@@ -14,11 +14,12 @@ class BuiltinAppsSearch extends BuiltinApps
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
             [['id_builtinApps'], 'integer'],
-            [['builtinApp'], 'safe'],
+            [['builtinApp', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -61,7 +62,7 @@ class BuiltinAppsSearch extends BuiltinApps
             'id_builtinApps' => $this->id_builtinApps,
         ]);
 
-        $query->andFilterWhere(['like', 'builtinApp', $this->builtinApp]);
+        $query->orFilterWhere(['like', 'builtinApp', $this->globalSearch]);
 
         return $dataProvider;
     }

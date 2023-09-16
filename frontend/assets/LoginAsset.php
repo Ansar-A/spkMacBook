@@ -20,8 +20,8 @@ class LoginAsset extends AssetBundle
         "menu/assets/css/responsive.css",
     ];
     public $js = [
-        "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js",
-        "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js",
+        // "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js",
+        // "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js",
         "menu/assets/js/modernizr.min.js",
         "menu/assets/js/jquery.min.js",
         "menu/assets/js/bootstrap.min.js",

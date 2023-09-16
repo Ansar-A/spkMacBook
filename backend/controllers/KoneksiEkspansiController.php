@@ -2,6 +2,8 @@
 
 namespace backend\controllers;
 
+use Yii;
+use yii\helpers\Json;
 use common\models\KoneksiEkspansi;
 use backend\models\KoneksiEkspansiSearch;
 use yii\web\Controller;
@@ -40,7 +42,20 @@ class KoneksiEkspansiController extends Controller
     {
         $searchModel = new KoneksiEkspansiSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
+        if (Yii::$app->request->post('hasEditable')) {
+            $id = Yii::$app->request->post('editableKey');
+            $jenis = KoneksiEkspansi::findOne($id);
 
+            $out = Json::encode(['output' => '', 'message' => '']);
+            $post = [];
+            $posted = current($_POST['KoneksiEkspansi']);
+            $post['KoneksiEkspansi'] = $posted;
+            if ($jenis->load($post)) {
+                $jenis->save();
+            }
+            echo $out;
+            return;
+        }
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -77,7 +92,7 @@ class KoneksiEkspansiController extends Controller
             $model->loadDefaultValues();
         }
 
-        return $this->render('create', [
+        return $this->renderAjax('create', [
             'model' => $model,
         ]);
     }

@@ -38,13 +38,18 @@ class KondisiMacbookController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new KondisiMacbookSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostKondisi')) {
+            $searchModel = new KondisiMacbookSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +60,14 @@ class KondisiMacbookController extends Controller
      */
     public function actionView($id_kondisi)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_kondisi),
-        ]);
+        if (\Yii::$app->user->can('viewPostKondisi')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id_kondisi),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['kondisi-macbook/index']);
+        }
     }
 
     /**
@@ -67,19 +77,24 @@ class KondisiMacbookController extends Controller
      */
     public function actionCreate()
     {
-        $model = new KondisiMacbook();
+        if (\Yii::$app->user->can('createPostKondisi')) {
+            $model = new KondisiMacbook();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_kondisi' => $model->id_kondisi]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_kondisi' => $model->id_kondisi]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['kondisi-macbook/index']);
+        }
     }
 
     /**
@@ -91,15 +106,20 @@ class KondisiMacbookController extends Controller
      */
     public function actionUpdate($id_kondisi)
     {
-        $model = $this->findModel($id_kondisi);
+        if (\Yii::$app->user->can('updatePostKondisi')) {
+            $model = $this->findModel($id_kondisi);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_kondisi' => $model->id_kondisi]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_kondisi' => $model->id_kondisi]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['kondisi-macbook/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +131,14 @@ class KondisiMacbookController extends Controller
      */
     public function actionDelete($id_kondisi)
     {
-        $this->findModel($id_kondisi)->delete();
+        if (\Yii::$app->user->can('deletePostKondisi')) {
+            $this->findModel($id_kondisi)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['kondisi-macbook/index']);
+        }
     }
 
     /**

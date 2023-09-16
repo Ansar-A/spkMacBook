@@ -38,13 +38,18 @@ class DetailProdukController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new DetailProdukSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        if (\Yii::$app->user->can('managePostDetail')) {
+            $searchModel = new DetailProdukSearch();
+            $dataProvider = $searchModel->search($this->request->queryParams);
 
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+            return $this->render('index', [
+                'searchModel' => $searchModel,
+                'dataProvider' => $dataProvider,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['site/index']);
+        }
     }
 
     /**
@@ -55,9 +60,14 @@ class DetailProdukController extends Controller
      */
     public function actionView($id_detail)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id_detail),
-        ]);
+        if (\Yii::$app->user->can('viewPostDetail')) {
+            return $this->render('view', [
+                'model' => $this->findModel($id_detail),
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['detail-produk/index']);
+        }
     }
 
     /**
@@ -67,19 +77,24 @@ class DetailProdukController extends Controller
      */
     public function actionCreate()
     {
-        $model = new DetailProduk();
+        if (\Yii::$app->user->can('createPostDetail')) {
+            $model = new DetailProduk();
 
-        if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_detail' => $model->id_detail]);
+            if ($this->request->isPost) {
+                if ($model->load($this->request->post()) && $model->save()) {
+                    return $this->redirect(['view', 'id_detail' => $model->id_detail]);
+                }
+            } else {
+                $model->loadDefaultValues();
             }
-        } else {
-            $model->loadDefaultValues();
-        }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['detail-produk/index']);
+        }
     }
 
     /**
@@ -91,15 +106,20 @@ class DetailProdukController extends Controller
      */
     public function actionUpdate($id_detail)
     {
-        $model = $this->findModel($id_detail);
+        if (\Yii::$app->user->can('updatePostDetail')) {
+            $model = $this->findModel($id_detail);
 
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_detail' => $model->id_detail]);
+            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id_detail' => $model->id_detail]);
+            }
+
+            return $this->render('update', [
+                'model' => $model,
+            ]);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['detail-produk/index']);
         }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
     }
 
     /**
@@ -111,9 +131,14 @@ class DetailProdukController extends Controller
      */
     public function actionDelete($id_detail)
     {
-        $this->findModel($id_detail)->delete();
+        if (\Yii::$app->user->can('deletePostDetail')) {
+            $this->findModel($id_detail)->delete();
 
-        return $this->redirect(['index']);
+            return $this->redirect(['index']);
+        } else {
+            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
+            return $this->redirect(['detail-produk/index']);
+        }
     }
 
     /**

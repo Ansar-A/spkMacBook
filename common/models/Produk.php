@@ -79,6 +79,7 @@ class Produk extends \yii\db\ActiveRecord
             [['get_warna'], 'exist', 'skipOnError' => true, 'targetClass' => Warna::class, 'targetAttribute' => ['get_warna' => 'id_warna']],
             [['get_nirkabel'], 'exist', 'skipOnError' => true, 'targetClass' => Nirkabel::class, 'targetAttribute' => ['get_nirkabel' => 'id_nirkabel']],
             [['get_ukuranberat'], 'exist', 'skipOnError' => true, 'targetClass' => UkuranBerat::class, 'targetAttribute' => ['get_ukuranberat' => 'id_ukuranberat']],
+            [['get_detaill'], 'exist', 'skipOnError' => true, 'targetClass' => DetailProduk::class, 'targetAttribute' => ['get_detaill' => 'id_detail']],
         ];
     }
 
@@ -108,7 +109,7 @@ class Produk extends \yii\db\ActiveRecord
             'get_koneksiekspansi' => 'Koneksiekspansi',
             'photo' => 'Photo',
             'harga' => 'Harga',
-            'get_detaill' => 'Detail',
+            'get_detaill' => 'Get ID Detail',
         ];
     }
 
@@ -124,7 +125,7 @@ class Produk extends \yii\db\ActiveRecord
     }
 
 
-    public function getGetAudio()
+    public function getAudio()
     {
         return $this->hasOne(Audio::class, ['id_audio' => 'get_audio']);
     }
@@ -134,7 +135,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetBuiltinApps()
+    public function getBuiltinApps()
     {
         return $this->hasOne(BuiltinApps::class, ['id_builtinApps' => 'get_builtinApps']);
     }
@@ -144,7 +145,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetDaya()
+    public function getDaya()
     {
         return $this->hasOne(Daya::class, ['id_daya' => 'get_daya']);
     }
@@ -154,7 +155,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetKamera()
+    public function getKamera()
     {
         return $this->hasOne(Kamera::class, ['id_kamera' => 'get_kamera']);
     }
@@ -164,7 +165,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetKoneksiekspansi()
+    public function getKoneksiekspansi()
     {
         return $this->hasOne(KoneksiEkspansi::class, ['id_koneksi' => 'get_koneksiekspansi']);
     }
@@ -174,7 +175,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetNirkabel()
+    public function getNirkabel()
     {
         return $this->hasOne(Nirkabel::class, ['id_nirkabel' => 'get_nirkabel']);
     }
@@ -184,7 +185,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetUkuranberat()
+    public function getUkuranberat()
     {
         return $this->hasOne(UkuranBerat::class, ['id_ukuranberat' => 'get_ukuranberat']);
     }
@@ -194,7 +195,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetWarna()
+    public function getWarna()
     {
         return $this->hasOne(Warna::class, ['id_warna' => 'get_warna']);
     }
@@ -249,10 +250,10 @@ class Produk extends \yii\db\ActiveRecord
         return $this->hasOne(JenisSo::class, ['id' => 'id_so']);
     }
 
-    public function getLikeProduk()
-    {
-        return $this->hasMany(LikeProduk::class, ['get_likeProduk' => 'id']);
-    }
+    // public function getLikeProduk()
+    // {
+    //     return $this->hasMany(LikeProduk::class, ['get_likeProduk' => 'id']);
+    // }
     public function getDetailProduk()
     {
         return $this->hasOne(DetailProduk::class, ['id_detail' => 'get_detaill']);

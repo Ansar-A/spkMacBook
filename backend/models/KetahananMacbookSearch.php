@@ -5,6 +5,7 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\KetahananMacbook;
+use common\models\KetDetailKetahanan;
 use Yii;
 
 /**
@@ -18,7 +19,7 @@ class KetahananMacbookSearch extends KetahananMacbook
     public function rules()
     {
         return [
-            [['id_ketahanan', 'baterai'], 'integer'],
+            [['id_ketahanan', 'baterai', 'kapasitas_pengisian'], 'integer'],
         ];
     }
 
@@ -60,6 +61,7 @@ class KetahananMacbookSearch extends KetahananMacbook
         $query->andFilterWhere([
             'id_ketahanan' => $this->id_ketahanan,
             'baterai' => $this->baterai,
+            'kapasitas_pengisian' => $this->kapasitas_pengisian,
         ]);
 
         return $dataProvider;

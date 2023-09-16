@@ -4,21 +4,18 @@
 use frontend\controllers\SiteController;
 use yii\helpers\Url;
 ?>
-<div class="col-sm-6 col-lg-3 col-md-4">
-    <div class="product-list-box thumb" style="margin-top:8px">
-        <a href="javascript:void(0);" class="image-popup" title="Screenshot-1">
-            <img src="<?= Url::to('@web/' . $model->photo) ?>" class="thumb-img" alt="work-thumbnail">
-        </a>
-        <div class="product-action">
-            <a href="#" class="btn btn-success btn-sm"><i class="md md-mode-edit"></i></a>
-            <a href="#" class="btn btn-danger btn-sm"><i class="md md-close"></i></a>
-        </div>
-        <div class="detail">
-            <h5 class="m-t-0 text-center"><a href="" class="text-dark"><b><?php echo $model->nama_produk ?></b></a> </h5>
-            <div class="rating text-center">
-                <h5><span class="badge badge-info">Stock: <?php echo  $model->stock ?></span></h5>
+<div class="portfolio-item col-lg-4 col-sm-2 mockups">
+    <div class="he-wrap tpl6 market-item">
+        <img class="lazyOwl" alt="" src="<?= Url::to('@web/' . $model->photo) ?>" style="display: block; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease;">
+        <div class="he-view">
+            <div class="bg a0" data-animate="fadeIn">
+                <h3 class="a1" data-animate="fadeInDown"><?php echo $model->nama_produk ?></h3>
+                <a href="<?= Url::to(['detail-produk', 'id' => $model->id]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                <!-- <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Like</a> -->
+                <div class="rating text-center a2" data-animate="fadeIn">
+                    <?php echo 'Rp ' . $model->harga ?>
+                </div>
             </div>
-            <h6 class="m-0 text-center"> <span class="text-dark"><?php echo 'Rp ' . $model->harga ?></span></h6>
         </div>
     </div>
 </div>
