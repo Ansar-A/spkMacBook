@@ -1,5 +1,8 @@
 <?php
 
+use common\models\AuthItem;
+use common\models\AuthItemChild;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -11,11 +14,31 @@ use yii\widgets\ActiveForm;
 <div class="auth-item-child-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
-    <?= $form->field($model, 'parent')->textInput(['maxlength' => true]) ?>
-
+    <?php
+    $list = AuthItemChild::find()->all();
+    echo $form->field($model, 'parent')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'parent',
+            function ($list) {
+                return $list->parent0->name;
+            },
+        ),
+    );
+    ?>
     <?= $form->field($model, 'child')->textInput(['maxlength' => true]) ?>
-
+    <?php
+    // $list = AuthItemChild::find()->all();
+    // echo $form->field($model, 'child')->dropDownList(
+    //     ArrayHelper::map(
+    //         $list,
+    //         'child',
+    //         function ($list) {
+    //             return $list->child0->name;
+    //         },
+    //     ),
+    // );
+    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

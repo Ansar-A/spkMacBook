@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -12,10 +13,11 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'jenis')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'jenis')->textarea()->label("Jenis Penyimpanan") ?>
 
-    <div class="form-group">
+    <div class="form-group text-right">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <a href="<?= Url::to(['jenis-penyimpanan/index']) ?>" type="button" class="btn btn-white waves-effect md md-reply"></a>
     </div>
 
     <?php ActiveForm::end(); ?>

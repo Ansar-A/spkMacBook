@@ -31,8 +31,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label('') ?>
 
-                    <?= $form->field($model, 'rememberMe')->checkbox(['type' => 'checkbox']) ?>
-
+                    <!-- <?= $form->field($model, 'rememberMe')->checkbox(['type' => 'checkbox']) ?> -->
+                    <?= $form->field($model, 'rememberMe')->checkbox(['template' => "<div class=\"col-lg-12\" style=\"padding-left: 0px\"> {input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>"]) ?>
                     <div class="form-group text-center m-t-40">
                         <?= Html::submitButton('LOG IN', ['class' => 'btn btn-primary btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
                     </div>

@@ -19,8 +19,8 @@ class UserSearch extends User
     public function rules()
     {
         return [
-            [['id', 'username', 'status', 'created_at', 'updated_at', 'globalSearch', 'hp'], 'integer'],
-            ['address',  'string'],
+            [['id', 'username', 'status', 'created_at', 'updated_at', 'hp'], 'integer'],
+            [['address', 'globalSearch'], 'string'],
         ];
     }
 
@@ -42,9 +42,9 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        if (\Yii::$app->user->can('deletePostAdmin')) {
+        if (\Yii::$app->user->can('SuperAdmin')) {
             $query = User::find();
-        } else {
+        } else if (\Yii::$app->user->can('Admin')) {
             $query = User::find()->where(['id' => Yii::$app->user->identity->id]);
         }
 
@@ -83,7 +83,6 @@ class UserSearch extends User
             ->orFilterWhere(['like', 'email', $this->globalSearch])
             ->orFilterWhere(['like', 'address', $this->globalSearch])
             ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
-
             ->orFilterWhere(['like', 'hp', $this->globalSearch]);
         return $dataProvider;
     }

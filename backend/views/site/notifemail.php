@@ -18,7 +18,7 @@ $this->title = 'Landing Page';
             <p class="text-muted">
                 Welcome to SPK MacBook Bekas
             </p>
-            <p><a href="https://mail.google.com/mail/u/0/#inbox" type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Email</a></p>
+            <p><a href="https://mail.google.com/mail/u/0/#inbox" type="button" class="btn btn-primary btn-rounded waves-effect waves-light">Cek Email</a></p>
             <hr>
         </div>
         <div class="row">

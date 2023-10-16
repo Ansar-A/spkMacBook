@@ -48,20 +48,20 @@ class ProdukController extends Controller
             $searchModel = new ProdukSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             // editable
-            if (Yii::$app->request->post('hasEditable')) {
-                $id = Yii::$app->request->post('editableKey');
-                $jenis = Produk::findOne($id);
+            // if (Yii::$app->request->post('hasEditable')) {
+            //     $id = Yii::$app->request->post('editableKey');
+            //     $jenis = Produk::findOne($id);
 
-                $out = Json::encode(['output' => '', 'message' => '']);
-                $post = [];
-                $posted = current($_POST['Produk']);
-                $post['Produk'] = $posted;
-                if ($jenis->load($post)) {
-                    $jenis->save();
-                }
-                echo $out;
-                return;
-            }
+            //     $out = Json::encode(['output' => '', 'message' => '']);
+            //     $post = [];
+            //     $posted = current($_POST['Produk']);
+            //     $post['Produk'] = $posted;
+            //     if ($jenis->load($post)) {
+            //         $jenis->save(true);
+            //     }
+            //     echo $out;
+            //     return;
+            // }
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -80,14 +80,9 @@ class ProdukController extends Controller
      */
     public function actionView($id)
     {
-        if (\Yii::$app->user->can('viewPostProduk')) {
-            return $this->render('view', [
-                'model' => $this->findModel($id),
-            ]);
-        } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['produk/index']);
-        }
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
     }
 
     /**
@@ -97,40 +92,36 @@ class ProdukController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('createPostProduk')) {
-            $model = new Produk();
-            $model->id_servicer = Yii::$app->user->identity->id;
-            $model->scenario = 'update';
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post())) {
-                    $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
-                    $model->photo = UploadedFile::getInstance($model, 'photo');
-                    if ($model->validate()) {
-                        if (!is_null($model->photo)) {
-                            $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
-                            $model->photo->saveAs($filename);
-                            $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
-                            Image::thumbnail('@webroot/' . $filename, 800, 550)
-                                ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
 
-                            $model->photo = $newfilename;
-                            Yii::$app->getSession()->setFlash('success', '');
-                        }
-                        $model->save(false);
-                        return $this->redirect(['view', 'id' => $model->id]);
+        $model = new Produk();
+        $model->id_servicer = Yii::$app->user->identity->id;
+        $model->scenario = 'update';
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
+                $model->photo = UploadedFile::getInstance($model, 'photo');
+                if ($model->validate()) {
+                    if (!is_null($model->photo)) {
+                        $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                        $model->photo->saveAs($filename);
+                        $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
+                        Image::thumbnail('@webroot/' . $filename, 800, 550)
+                            ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
+
+                        $model->photo = $newfilename;
+                        Yii::$app->getSession()->setFlash('success', '');
                     }
+                    $model->save(false);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
-            } else {
-                $model->loadDefaultValues();
             }
-
-            return $this->renderAjax('create', [
-                'model' => $model,
-            ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['produk/index']);
+            $model->loadDefaultValues();
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
     /**
      * Updates an existing Produk model.
@@ -141,38 +132,34 @@ class ProdukController extends Controller
      */
     public function actionUpdate($id)
     {
-        if (\Yii::$app->user->can('updatePostProduk')) {
-            $model = $this->findModel($id);
-            $model->scenario = 'update';
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post())) {
-                    // $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
-                    $model->photo = UploadedFile::getInstance($model, 'photo');
-                    if ($model->validate()) {
-                        if (!is_null($model->photo)) {
-                            $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
-                            $model->photo->saveAs($filename);
-                            $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
-                            Image::thumbnail('@webroot/' . $filename, 800, 550)
-                                ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
 
-                            $model->photo = $newfilename;
-                            Yii::$app->getSession()->setFlash('success', '');
-                        }
-                        $model->save(false);
-                        return $this->redirect(['view', 'id' => $model->id]);
+        $model = $this->findModel($id);
+        $model->scenario = 'update';
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                // $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
+                $model->photo = UploadedFile::getInstance($model, 'photo');
+                if ($model->validate()) {
+                    if (!is_null($model->photo)) {
+                        $filename = 'photos/' . md5(microtime()) . '.' . $model->photo->extension;
+                        $model->photo->saveAs($filename);
+                        $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
+                        Image::thumbnail('@webroot/' . $filename, 800, 550)
+                            ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
+
+                        $model->photo = $newfilename;
+                        Yii::$app->getSession()->setFlash('success', '');
                     }
+                    $model->save(false);
+                    return $this->redirect(['view', 'id' => $model->id]);
                 }
-            } else {
-                $model->loadDefaultValues();
             }
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['produk/index']);
+            $model->loadDefaultValues();
         }
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
     /**
      * Deletes an existing Produk model.
@@ -183,13 +170,9 @@ class ProdukController extends Controller
      */
     public function actionDelete($id)
     {
-        if (\Yii::$app->user->can('deletePostProduk')) {
-            $this->findModel($id)->delete();
-            return $this->redirect(['index']);
-        } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['produk/index']);
-        }
+
+        $this->findModel($id)->delete();
+        return $this->redirect(['index']);
     }
 
     /**

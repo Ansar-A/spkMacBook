@@ -32,16 +32,18 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-box">
                     <div class="jenis-penyimpanan-view">
                         <p>
-                            <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                                'class' => 'btn btn-danger',
-                                'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
-                                    'method' => 'post',
-                                ],
-                            ]) ?>
+                            <?php if (\Yii::$app->user->can('deletePost')) : ?>
+                                <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+                                <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                                    'class' => 'btn btn-danger',
+                                    'data' => [
+                                        'confirm' => 'Are you sure you want to delete this item?',
+                                        'method' => 'post',
+                                    ],
+                                ]) ?>
+                            <?php else : ?>
+                            <?php endif ?>
                         </p>
-
                         <?= DetailView::widget([
                             'model' => $model,
                             'attributes' => [

@@ -52,213 +52,232 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                 </ol>
             </div>
             <div class="col-sm-12">
-                <!-- <div class="row">
-                    <div class="col-md-6 col-sm-6 col-lg-4">
-                        <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-info"><i class="ion-social-usd text-white"></i></span>
-                            <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup"></span>
-                                Total
-                            </div>
-                            <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase">Admin Suspended</h5>
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-4">
-                        <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-warning"><i class="ion-ios7-cart text-white"></i></span>
-                            <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup"></span>
-                                Total
-                            </div>
-                            <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase">Admin Active</h5>
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-6 col-lg-4">
-                        <div class="mini-stat clearfix card-box">
-                            <span class="mini-stat-icon bg-pink"><i class="ion-android-contacts text-white"></i></span>
-                            <div class="mini-stat-info text-right text-dark">
-                                <span class="counter text-dark" data-plugin="counterup"></span>
-                                Total
-                            </div>
-                            <div class="tiles-progress">
-                                <div class="m-t-20">
-                                    <h5 class="text-uppercase">Total Admin</h5>
-                                    <div class="progress progress-sm m-0">
-                                        <div class="progress-bar progress-bar-pink" role="progressbar" aria-valuenow="57" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="user-index">
                     <div class="row">
-                        <div class="col-sm-1">
+                        <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                            <div class="col-sm-1">
+                                <?= Html::button('<i class="md-add-box"></i> Add User', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
+                            </div>
 
-                            <?= Html::button('<i class="md-add-box"></i> Add', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
-                        </div>
-                        <div class="col-sm-11">
+                        <?php else : ?>
+                        <?php endif ?>
+                        <div class="col-sm-11 pull-right">
                             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                         </div>
                     </div>
 
                     <?php
                     Modal::begin([
-                        'header' => 'Create',
+                        'header' => 'Create User',
                         'id' => 'modal',
                         'size' => 'modal-lg'
                     ]);
                     echo "<div id = 'modalContent'></div>";
                     Modal::end();
                     ?>
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
-                        'filterModel' => $searchModel,
-                        'responsive' => true,
-                        'striped' => false,
-                        'resizableColumns' => true,
-                        'persistResize' => true,
-                        'floatHeader' => true,
-                        'headerRowOptions' => ['class' => 'table m-0'],
-                        'filterRowOptions' => ['class' => 'table m-0'],
-                        //'bootstrap' => true,
-                        //'bordered' => false,
-                        //'condensed' => false,
-                        //'responsiveWrap' => false,
-                        //'hover' => true,
-                        //'containerOptions' => false,
-                        //'perfectScrollbar' => false,
-                        //'summary' => '',
-                        //'showPageSummary' => true,
-                        //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
-                        //'summaryOptions' => ['class' => 'summary'],
-                        //'showPageSummary' => true,
-                        'columns' => [
-                            [
-                                'class' => '\kartik\grid\ActionColumn',
-                                'template' => '{view} {update} {delete}',
-                                'header' => 'Action',
-                                'buttons' => [
-                                    'class' => 'btn btn-primary dropdown-toggle',
-                                    'view' => function ($url, $model) {
-                                        return Html::a('', ['view', 'id' => $model->id], [
-                                            'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
-                                        ]);
-                                    },
-                                    'update' => function ($url, $model) {
+                    <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'responsive' => true,
+                            'striped' => false,
+                            'resizableColumns' => true,
+                            'persistResize' => true,
+                            'floatHeader' => true,
+                            'headerRowOptions' => ['class' => 'table m-0'],
+                            'filterRowOptions' => ['class' => 'table m-0'],
+                            //'bootstrap' => true,
+                            //'bordered' => false,
+                            //'condensed' => false,
+                            //'responsiveWrap' => false,
+                            //'hover' => true,
+                            //'containerOptions' => false,
+                            //'perfectScrollbar' => false,
+                            //'summary' => '',
+                            //'showPageSummary' => true,
+                            //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
+                            //'summaryOptions' => ['class' => 'summary'],
+                            //'showPageSummary' => true,
+                            'columns' => [
+                                [
+                                    'class' => '\kartik\grid\ActionColumn',
+                                    'template' => '{view} {update} {delete}',
+                                    'header' => 'Action',
+                                    'buttons' => [
+                                        'class' => 'btn btn-primary dropdown-toggle',
+                                        'view' => function ($url, $model) {
+                                            return Html::a('', ['view', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
+                                            ]);
+                                        },
+                                        'update' => function ($url, $model) {
 
-                                        return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
-                                    },
-                                    'delete' => function ($url, $model) {
-                                        return Html::a('', ['delete', 'id' => $model->id], [
-                                            'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
-                                            'data' => [
-                                                'confirm' => 'Yakin ingin menghapus item ini?',
-                                                'method' => 'post',
-                                            ],
-                                        ]);
-                                    },
-                                    // 'delete' => function ($url, $model) {
-                                    //     return Html::a('', $url, [
-                                    //         'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
-                                    //         'data' => [
-                                    //             'method' => 'POST',
-                                    //             'confirm' => 'Yakin ingin menghapus item ini?',
+                                            return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
+                                        },
+                                        'delete' => function ($url, $model) {
+                                            return Html::a('', ['delete', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
+                                                'data' => [
+                                                    'confirm' => 'Yakin ingin menghapus item ini?',
+                                                    'method' => 'post',
+                                                ],
+                                            ]);
+                                        },
+                                        // 'delete' => function ($url, $model) {
+                                        //     return Html::a('', $url, [
+                                        //         'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
+                                        //         'data' => [
+                                        //             'method' => 'POST',
+                                        //             'confirm' => 'Yakin ingin menghapus item ini?',
 
-                                    //         ],
-                                    //     ]);
-                                    // },
+                                        //         ],
+                                        //     ]);
+                                        // },
+                                    ],
                                 ],
-                            ],
 
-                            // ['class' => 'yii\grid\SerialColumn'],
-                            [
-                                'header' => '',
-                                //'contentOptions' => ['style' => 'max-width:20px;'],
-                                // 'contentOptions' => ['style' => 'text-align:center'],
-                                'headerOptions' => ['class' => 'text-center'],
-                                'format' => 'raw',
-                                'value' => function ($model) {
-                                    return '<center>' . Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']) . '</center>';
-                                }
-                            ],
-                            [
-                                'headerOptions' => ['class' => 'text-center'],
-                                'contentOptions' => ['style' => 'text-align:center'],
-                                'attribute' => 'status',
-                                'format' => 'raw',
-                                'filter'    => [10 => "Active", 9 => "Suspended"],
-                                'value' => function ($data, $key, $index, $column) {
-                                    if ($data->status == 10) {
-                                        return '<span class="label label-table label-success">Active</span>';
-                                    } else {
-                                        return '<span class="label label-table label-danger">Suspended</span>';
+                                // ['class' => 'yii\grid\SerialColumn'],
+                                [
+                                    'header' => '',
+                                    //'contentOptions' => ['style' => 'max-width:20px;'],
+                                    // 'contentOptions' => ['style' => 'text-align:center'],
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'format' => 'raw',
+                                    'value' => function ($model) {
+                                        return '<center>' . Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']) . '</center>';
                                     }
-                                }
-                            ],
-                            'id',
-                            'username',
-                            //'photo',
-                            'address',
-                            'hp',
-                            // 'id',
-                            //'auth_key',
-                            //'password_hash',
-                            //'password_reset_token',
-                            //'email:email',
-                            //'created_at',
-                            //'updated_at',
-                            //'verification_token',
+                                ],
+                                [
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'attribute' => 'status',
+                                    'format' => 'raw',
+                                    'filter'    => [10 => "Active", 9 => "Suspended"],
+                                    'value' => function ($data, $key, $index, $column) {
+                                        if ($data->status == 10) {
+                                            return '<span class="label label-table label-success">Active</span>';
+                                        } else {
+                                            return '<span class="label label-table label-danger">Suspended</span>';
+                                        }
+                                    }
+                                ],
+                                'id',
+                                'username',
+                                //'photo',
+                                'address',
+                                'hp',
+                                // 'id',
+                                //'auth_key',
+                                //'password_hash',
+                                //'password_reset_token',
+                                //'email:email',
+                                //'created_at',
+                                //'updated_at',
+                                //'verification_token',
 
-                        ],
-                        'toolbar' => [
-                            Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
-                            // Html::a('<i class="md md-person-add"></i>', ['create'], [
-                            //     'type' => 'button',
-                            //     'class' => 'btn btn-success'
-                            // ]),
-                            // [
-                            //     'content' =>
-                            //     Html::button('<i class="md md-my-library-add"></i>', [
-                            //         'type' => 'button',
-                            //         'class' => 'btn btn-success'
-                            //     ]) . ' ' .
-                            //         Html::a('<i class="md md-redo"></i>', ['grid-demo'], [
-                            //             'class' => 'btn btn-secondary btn-default',
-                            //         ]),
-                            // ],
-                            '{export}',
-                            '{toggleData}'
-                        ],
-                        'panel' => [
-                            'heading' => false,
-                            //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
-                            'type' => 'default',
-                            //'before' => Html::a('<i class="md-add-box"></i> Create Admin', ['create'], ['class' => 'btn btn-success']),
-                            // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
-                            // 'footer' => false
-                        ],
-                    ]); ?>
+                            ],
+                            'toolbar' => [
+                                Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                // Html::a('<i class="md md-person-add"></i>', ['create'], [
+                                //     'type' => 'button',
+                                //     'class' => 'btn btn-success'
+                                // ]),
+                                // [
+                                //     'content' =>
+                                //     Html::button('<i class="md md-my-library-add"></i>', [
+                                //         'type' => 'button',
+                                //         'class' => 'btn btn-success'
+                                //     ]) . ' ' .
+                                //         Html::a('<i class="md md-redo"></i>', ['grid-demo'], [
+                                //             'class' => 'btn btn-secondary btn-default',
+                                //         ]),
+                                // ],
+                                '{export}',
+                                '{toggleData}'
+                            ],
+                            'panel' => [
+                                'heading' => false,
+                                //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
+                                'type' => 'default',
+                                //'before' => Html::a('<i class="md-add-box"></i> Create Admin', ['create'], ['class' => 'btn btn-success']),
+                                // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                // 'footer' => false
+                            ],
+                        ]); ?>
+                    <?php else : ?>
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'responsive' => true,
+                            'striped' => false,
+                            'resizableColumns' => true,
+                            'persistResize' => true,
+                            'floatHeader' => true,
+                            'headerRowOptions' => ['class' => 'table m-0'],
+                            'filterRowOptions' => ['class' => 'table m-0'],
+                            'columns' => [
+                                [
+                                    'class' => '\kartik\grid\ActionColumn',
+                                    'template' => '{view} {update}',
+                                    'header' => 'Action',
+                                    'buttons' => [
+                                        'class' => 'btn btn-primary dropdown-toggle',
+                                        'view' => function ($url, $model) {
+                                            return Html::a('', ['view', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
+                                            ]);
+                                        },
+                                        'update' => function ($url, $model) {
+
+                                            return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
+                                        },
+                                    ],
+                                ],
+
+                                [
+                                    'label' => '',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'format' => 'raw',
+                                    'value' => function ($model) {
+                                        return '<center>' . Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']) . '</center>';
+                                    }
+                                ],
+                                [
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'attribute' => 'status',
+                                    'format' => 'raw',
+                                    'filter'    => [10 => "Active", 9 => "Suspended"],
+                                    'value' => function ($data, $key, $index, $column) {
+                                        if ($data->status == 10) {
+                                            return '<span class="label label-table label-success">Active</span>';
+                                        } else {
+                                            return '<span class="label label-table label-danger">Suspended</span>';
+                                        }
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'id',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                ],
+                                // 'id',
+                                'username',
+                                'address',
+                                'hp',
+                            ],
+                            'toolbar' => [
+                                Html::a('<i class="fas fa-redo"></i> Refresh', ['index'], ['class' => 'btn btn-info']),
+                                '{export}',
+                                // '{toggleData}'
+                            ],
+                            'panel' => [
+                                'heading' => false,
+
+                                'type' => 'default',
+                            ],
+                        ]); ?>
+                    <?php endif ?>
+
                 </div>
             </div>
         </div>

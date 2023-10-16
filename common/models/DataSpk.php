@@ -19,6 +19,8 @@ class DataSpk extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+    public $akumulasi;
+
     public static function tableName()
     {
         return 'data_spk';
@@ -30,8 +32,9 @@ class DataSpk extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['rSquare', 'dataF', 'dataT'], 'required'],
-            [['dataF', 'rSquare',  'dataT'], 'string']
+            [['get_dataRKetahanan', 'get_dataRKeamanan', 'get_dataRKondisi', 'get_dataRPerforma',], 'required'],
+
+            [['get_dataRKetahanan', 'get_dataRKeamanan', 'get_dataRKondisi', 'get_dataRPerforma'], 'integer']
         ];
     }
 
@@ -42,9 +45,10 @@ class DataSpk extends \yii\db\ActiveRecord
     {
         return [
             'id_spk' => 'Id Spk',
-            'rSquare' => 'R Square',
-            'dataF' => 'Data F',
-            'dataT' => 'Data T',
+            'get_dataRKetahanan' => 'Get DataR Ketahanan',
+            'get_dataRKeamanan' => 'Get DataR Keamanan',
+            'get_dataRKondisi' => 'Get DataR Kondisi',
+            'get_dataRPerforma' => 'Get DataR Performa'
         ];
     }
 
@@ -53,8 +57,28 @@ class DataSpk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getDetailProduks()
+    public function getProduks()
     {
-        return $this->hasMany(DetailProduk::class, ['get_spk' => 'id_spk']);
+        return $this->hasMany(Produk::class, ['get_detaill' => 'id_spk']);
+    }
+    //get_spkKetahanan
+    public function getSpkKeamanan()
+    {
+        return $this->hasOne(SpkKeamanan::class, ['id' => 'get_dataRKeamanan']);
+    }
+    //get_SpkKetahanan
+    public function getSpkKetahanan()
+    {
+        return $this->hasOne(SpkKetahanan::class, ['id' => 'get_dataRKetahanan']);
+    }
+    //get_SpkKondisi
+    public function getSpkKondisi()
+    {
+        return $this->hasOne(SpkKondisi::class, ['id' => 'get_dataRKondisi']);
+    }
+    //get_SpkPerforma
+    public function getSpkPerforma()
+    {
+        return $this->hasOne(SpkPerforma::class, ['id' => 'get_dataRPerforma']);
     }
 }

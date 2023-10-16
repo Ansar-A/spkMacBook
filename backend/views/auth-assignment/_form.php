@@ -1,5 +1,6 @@
 <?php
 
+use common\models\AuthAssignment;
 use common\models\AuthItem;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -28,7 +29,7 @@ use yii\widgets\ActiveForm;
     ?>
     <!-- <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'placeholder' => 'lihat id Admin']) ?>
+    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'placeholder' => 'lihat ID Panel Admin']) ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 

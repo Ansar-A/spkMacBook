@@ -69,7 +69,7 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        if (\Yii::$app->user->can('managePost')) {
+        if (\Yii::$app->user->can('managePostAuth')) {
             $searchModel = new AuthItemSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -91,14 +91,10 @@ class AuthItemController extends Controller
      */
     public function actionView($name)
     {
-        if (\Yii::$app->user->can('viewPost')) {
-            return $this->render('view', [
-                'model' => $this->findModel($name),
-            ]);
-        } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['auth-item/index']);
-        }
+
+        return $this->render('view', [
+            'model' => $this->findModel($name),
+        ]);
     }
 
 
@@ -109,24 +105,20 @@ class AuthItemController extends Controller
      */
     public function actionCreate()
     {
-        if (\Yii::$app->user->can('createPost')) {
-            $model = new AuthItem();
 
-            if ($this->request->isPost) {
-                if ($model->load($this->request->post()) && $model->save()) {
-                    return $this->redirect(['view', 'name' => $model->name]);
-                }
-            } else {
-                $model->loadDefaultValues();
+        $model = new AuthItem();
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'name' => $model->name]);
             }
-
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['auth-item/index']);
+            $model->loadDefaultValues();
         }
+
+        return $this->render('create', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -138,20 +130,16 @@ class AuthItemController extends Controller
      */
     public function actionUpdate($name)
     {
-        if (\Yii::$app->user->can('updatePost')) {
-            $model = $this->findModel($name);
 
-            if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'name' => $model->name]);
-            }
+        $model = $this->findModel($name);
 
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['auth-item/index']);
+        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'name' => $model->name]);
         }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     /**
@@ -163,14 +151,10 @@ class AuthItemController extends Controller
      */
     public function actionDelete($name)
     {
-        if (\Yii::$app->user->can('updatePost')) {
-            $this->findModel($name)->delete();
 
-            return $this->redirect(['index']);
-        } else {
-            \Yii::$app->getSession()->setFlash('error', 'Perlu izin Author');
-            return $this->redirect(['auth-item/index']);
-        }
+        $this->findModel($name)->delete();
+
+        return $this->redirect(['index']);
     }
 
     /**

@@ -19,7 +19,7 @@ class DataSpkSearch extends DataSpk
     public function rules()
     {
         return [
-            [['id_spk', 'rSquare', 'dataF', 'dataT'], 'integer'],
+            [['id_spk', 'get_dataRKetahanan', 'get_dataRKeamanan', 'get_dataRKondisi', 'get_dataRPerforma'], 'integer'],
         ];
     }
 
@@ -60,9 +60,10 @@ class DataSpkSearch extends DataSpk
         // grid filtering conditions
         $query->andFilterWhere([
             'id_spk' => $this->id_spk,
-            'rSquare' => $this->rSquare,
-            'dataF' => $this->dataF,
-            'dataT' => $this->dataT,
+            'get_dataRKetahanan' => $this->get_dataRKetahanan,
+            'get_dataRKeamanan' => $this->get_dataRKeamanan,
+            'get_dataRKondisi' => $this->get_dataRKondisi,
+            'get_dataRPerforma' => $this->get_dataRPerforma,
         ]);
 
         return $dataProvider;

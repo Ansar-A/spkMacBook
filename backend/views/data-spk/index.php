@@ -107,9 +107,35 @@ $this->params['breadcrumbs'][] = $this->title;
                                     // ],
                                     // ['class' => 'yii\grid\SerialColumn'],
                                     'id_spk',
-                                    'rSquare',
-                                    'dataF',
-                                    'dataT',
+                                    // 'rSquare',
+                                    // 'dataF',
+                                    // 'dataT',
+                                    [
+                                        'attribute' => 'get_dataRKetahanan',
+                                        'value' => function ($model) {
+                                            return $model->spkKetahanan->dataF;
+                                        },
+                                    ],
+                                    [
+                                        'attribute' =>
+                                        'get_dataRKeamanan',
+                                        'value' => function ($model) {
+                                            return $model->spkKeamanan->dataF;
+                                        },
+                                    ],
+                                    [
+                                        'attribute' =>  'get_dataRKondisi',
+                                        'value' => function ($model) {
+                                            return $model->spkKondisi->dataF;
+                                        },
+                                    ],
+                                    [
+                                        'attribute' =>
+                                        'get_dataRPerforma',
+                                        'value' => function ($model) {
+                                            return $model->spkPerforma->dataF;
+                                        },
+                                    ],
                                 ],
                                 'toolbar' => [
                                     Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),

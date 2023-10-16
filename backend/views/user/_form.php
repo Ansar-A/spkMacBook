@@ -16,7 +16,7 @@ use yii\helpers\Url;
 <div class="user-form">
     <?php $form = ActiveForm::begin([]); ?>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-7">
             <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'username', [
@@ -88,7 +88,7 @@ use yii\helpers\Url;
                 ?>
             </div>
         </div>
-        <div class="col-sm-6">
+        <div class="col-sm-5">
             <div class="col-md-12">
                 <?= $form->field($model, 'photo')->widget(FileInput::className(), [
                     'options' => ['accept' => 'photos/*'],
@@ -98,14 +98,13 @@ use yii\helpers\Url;
                 ])->label(''); ?>
             </div>
         </div>
-
+        <div class="col-sm-12 text-center" style="padding-top:50px;">
+            <div class="form-group">
+                <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+                <a href="<?= Url::to(['user/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-        <a href="<?= Url::to(['user/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
-    </div>
-
 
     <?php ActiveForm::end(); ?>
 </div>

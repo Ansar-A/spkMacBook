@@ -31,6 +31,7 @@ class JenisProduk extends \yii\db\ActiveRecord
             [['jenis'], 'required'],
             [['jenis'], 'string', 'max' => 255],
             [['jenis'], 'unique'],
+
         ];
     }
 

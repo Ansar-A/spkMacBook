@@ -21,9 +21,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li>
                         <a href="<?= Url::to(['produk/index']) ?>">Panel Produk</a>
                     </li>
+                    <!-- <li class="active">
+                        Create
+                    </li> -->
                 </ol>
             </div>
-
             <div class="col-sm-12">
                 <div class="produk-create">
                     <?= $this->render('_form', [

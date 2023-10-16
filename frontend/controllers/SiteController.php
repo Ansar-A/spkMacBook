@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\LikeProduk;
 use common\models\Produk;
+use common\models\SpkKelayakan;
 use frontend\models\ResendVerificationEmailForm;
 use frontend\models\VerifyEmailForm;
 use Yii;
@@ -18,6 +19,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use frontend\models\ProdukSearch;
+use frontend\models\SpkKelayakanSearch;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -28,33 +30,33 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::class,
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['login', 'index', 'about'],
-                        'allow' => true,
-                        'roles' => ['?'],
-                    ],
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::class,
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
+    // public function behaviors()
+    // {
+    //     return [
+    //         'access' => [
+    //             'class' => AccessControl::class,
+    //             'only' => [],
+    //             'rules' => [
+    //                 [
+    //                     'actions' => ['login', 'index', 'about'],
+    //                     'allow' => true,
+    //                     'roles' => ['?'],
+    //                 ],
+    //                 [
+    //                     'actions' => ['logout'],
+    //                     'allow' => true,
+    //                     'roles' => ['@'],
+    //                 ],
+    //             ],
+    //         ],
+    //         'verbs' => [
+    //             'class' => VerbFilter::class,
+    //             'actions' => [
+    //                 'logout' => ['post'],
+    //             ],
+    //         ],
+    //     ];
+    // }
 
     /**
      * {@inheritdoc}
@@ -79,10 +81,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new ProdukSearch();
+        $searchModel = new SpkKelayakanSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        $query = Produk::find();
+        $query = SpkKelayakan::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => ['pageSize' => 4],
@@ -171,7 +173,7 @@ class SiteController extends Controller
      */
     public function actionSignup()
     {
-        $this->layout = 'MainSignup';
+        $this->layout = 'mainSignup';
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post()) && $model->signup()) {
             Yii::$app->session->setFlash('success', 'Thank you for registration. Please check your inbox for verification email.');

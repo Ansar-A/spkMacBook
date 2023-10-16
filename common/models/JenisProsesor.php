@@ -28,9 +28,9 @@ class JenisProsesor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['jenis'], 'required'],
-            [['jenis'], 'string', 'max' => 255],
-            [['jenis'], 'unique'],
+            [['jenisProsesor'], 'required'],
+            [['jenisProsesor'], 'string', 'max' => 255],
+            [['jenisProsesor'], 'unique'],
         ];
     }
 
@@ -41,7 +41,7 @@ class JenisProsesor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'jenis' => 'Jenis',
+            'jenisProsesor' => 'jenisProsesor',
         ];
     }
 

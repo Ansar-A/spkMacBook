@@ -41,7 +41,6 @@ class PenggunaController extends Controller
         if (\Yii::$app->user->can('managePostPengguna')) {
             $searchModel = new PenggunaSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
-
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,

@@ -77,42 +77,136 @@ $this->params['breadcrumbs'][] = $this->title;
                                         return Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']);
                                     }
                                 ],
-                                'id_servicer',
+                                [
+                                    'attribute' => 'id_servicer',
+                                    'value' => function ($model) {
+                                        return $model->user->username;
+                                    }
+                                ],
                                 'tahun_rilis',
-                                'id_jenis',
-                                'stock',
-                                'id_prosesor',
-                                'id_so',
-                                'id_layar',
-                                'id_penyimpanan',
-                                'get_warna',
-                                'get_daya',
-                                'get_nirkabel',
-                                'get_ukuranberat',
-                                'get_kamera',
-                                'get_builtinApps',
-                                'get_audio',
-                                'get_koneksiekspansi',
+                                [
+                                    'attribute' => 'id_jenis',
+                                    'value' => function ($model) {
+                                        return $model->jenis->jenis;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'id_prosesor',
+                                    'value' => function ($model) {
+                                        return $model->prosesors->jenisProsesor;
+                                    }
+                                ],
+                                [
+                                    'attribute'  => 'id_so',
+                                    'value' => function ($model) {
+                                        return $model->so->jenis;
+                                    }
+                                ],
+                                [
+                                    'attribute'  => 'id_layar',
+                                    'value' => function ($model) {
+                                        return $model->layar->jenis;
+                                    }
+                                ],
+                                [
+                                    'attribute'  => 'id_penyimpanan',
+                                    'value' => function ($model) {
+                                        return $model->penyimpanan->jenis;
+                                    }
+                                ],
+                                [
+                                    'attribute'  => 'get_warna',
+                                    'value' => function ($model) {
+                                        return $model->warna->warna;
+                                    }
+                                ],
+                                [
+                                    'attribute'  => 'get_daya',
+                                    'value' => function ($model) {
+                                        return $model->daya->informasi_baterai;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Wifi',
+                                    'attribute'  => 'get_nirkabel',
+                                    'value' => function ($model) {
+                                        return $model->nirkabel->wifi;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Bluetooth',
+                                    'attribute'  => 'get_nirkabel',
+                                    'value' => function ($model) {
+                                        return $model->nirkabel->bluetooth;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Panjang',
+                                    'attribute'  => 'get_ukuranberat',
+                                    'value' => function ($model) {
+                                        return $model->ukuranberat->panjang;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Lebar',
+                                    'attribute'  => 'get_ukuranberat',
+                                    'value' => function ($model) {
+                                        return $model->ukuranberat->lebar;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Tinggi',
+                                    'attribute'  => 'get_ukuranberat',
+                                    'value' => function ($model) {
+                                        return $model->ukuranberat->tinggi;
+                                    }
+                                ],
+                                [
+                                    'label' => 'Berat',
+                                    'attribute'  => 'get_ukuranberat',
+                                    'value' => function ($model) {
+                                        return $model->ukuranberat->berat;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'get_kamera',
+                                    'value' => function ($model) {
+                                        return $model->kameras->kamera;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'get_builtinApps',
+                                    'value' => function ($model) {
+                                        return $model->builtinApps->builtinApp;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'get_audio',
+                                    'value' => function ($model) {
+                                        return $model->audios->audio;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'get_koneksiekspansi',
+                                    'value' => function ($model) {
+                                        return $model->koneksiekspansi->koneksiEkspansi;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'get_informasi_ram',
+                                    'value' => function ($model) {
+                                        return $model->ram->ram;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'get_informasi_vga',
+                                    'value' => function ($model) {
+                                        return $model->vga->vga;
+                                    }
+                                ],
                                 'harga',
-                                'get_detaill',
-                                // [
-                                //     'attribute' => 'get_detaill',
-                                //     'value' => function ($model) {
-                                //         return $model->detailProduk->spk->dataF;
-                                //     },
-                                // ],
-                                // [
-                                //     'attribute' => 'get_detaill',
-                                //     'value' => function ($model) {
-                                //         return $model->detailProduk->spk->dataT;
-                                //     },
-                                // ],
-                                // [
-                                //     'attribute' => 'get_detaill',
-                                //     'value' => function ($model) {
-                                //         return $model->detailProduk->spk->rSquare;
-                                //     },
-                                // ]
+                                'baterai',
+                                //'ket',
                             ],
                         ]) ?>
                     </div>

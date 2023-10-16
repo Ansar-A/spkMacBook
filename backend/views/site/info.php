@@ -23,11 +23,12 @@ $this->title = 'Info';
                     </div>
                     <div class="panel-body">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Aplikasi Sistem Pendukung Keputusan (DSS) Penentuan MacBook Bekas Layak Pakai merupakan aplikasi yang dapat digunakan untuk menentukan MacBook bekas yang paling sesuai berdasarkan kualitas dengan tolak ukur budget yang disediakan.
                         </p>
+
                     </div>
                     <div class="panel-footer">
-                        Uin Alauddin Makassar.2019
+                        Uin Alauddin Makassar
                     </div>
                 </div>
             </div>

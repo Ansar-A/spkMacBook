@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="bg-custom bg-profile"></div>
             <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail" alt="img">
             <h4>SPK MacBook Bekas</h4>
-            <p class="text-muted"><i class="fa fa-apple"></i> Reset password</p>
+            <p class="text-muted">Reset Password Form</p>
             <hr>
             <p>Silakan masukkan kata sandi baru Anda:</p>
             <div class="panel-body text-left">

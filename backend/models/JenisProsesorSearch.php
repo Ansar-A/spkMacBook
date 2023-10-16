@@ -5,6 +5,8 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\JenisProsesor;
+use Yii;
+
 
 /**
  * JenisProsesorSearch represents the model behind the search form of `common\models\JenisProsesor`.
@@ -19,7 +21,7 @@ class JenisProsesorSearch extends JenisProsesor
     {
         return [
             [['id'], 'integer'],
-            [['jenis', 'globalSearch'], 'safe'],
+            [['jenisProsesor', 'globalSearch'], 'safe'],
         ];
     }
 
@@ -62,7 +64,7 @@ class JenisProsesorSearch extends JenisProsesor
             'id' => $this->id,
         ]);
 
-        $query->orFilterWhere(['like', 'jenis', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'jenisProsesor', $this->globalSearch]);
 
         return $dataProvider;
     }

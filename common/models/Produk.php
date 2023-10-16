@@ -26,7 +26,7 @@ use Yii;
  * @property int $get_koneksiekspansi
  * @property string $photo
  * @property float $harga
- * @property int $get_detaill
+
  *
  * @property Audio $getAudio
  * @property BuiltinApps $getBuiltinApps
@@ -48,6 +48,8 @@ class Produk extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
+    public $akumulasi;
     public static function tableName()
     {
         return 'produk';
@@ -60,11 +62,12 @@ class Produk extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nama_produk', 'id_servicer', 'tahun_rilis', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'photo', 'harga', 'get_detaill'], 'required'],
-            [['id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_detaill', 'stock'], 'integer'],
+            [['nama_produk', 'id_servicer', 'tahun_rilis', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'photo', 'harga', 'baterai', 'ket', 'kapasitas_pengisian', 'no_seri', 'garansi', 'get_informasi_ram', 'get_informasi_vga'], 'required'],
+            [['id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_informasi_ram', 'get_informasi_ram'], 'integer'],
+            [['baterai',  'kapasitas_pengisian',], 'integer'],
             [['tahun_rilis', 'id_jenis', 'photo', 'globalSearch'], 'safe'],
             [['harga'], 'number'],
-            [['nama_produk'], 'string', 'max' => 255],
+            [['nama_produk', 'ket', 'no_seri', 'garansi'], 'string', 'max' => 255],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
             [['id_jenis'], 'exist', 'skipOnError' => true, 'targetClass' => JenisProduk::class, 'targetAttribute' => ['id_jenis' => 'id']],
             [['get_builtinApps'], 'exist', 'skipOnError' => true, 'targetClass' => BuiltinApps::class, 'targetAttribute' => ['get_builtinApps' => 'id_builtinApps']],
@@ -79,7 +82,8 @@ class Produk extends \yii\db\ActiveRecord
             [['get_warna'], 'exist', 'skipOnError' => true, 'targetClass' => Warna::class, 'targetAttribute' => ['get_warna' => 'id_warna']],
             [['get_nirkabel'], 'exist', 'skipOnError' => true, 'targetClass' => Nirkabel::class, 'targetAttribute' => ['get_nirkabel' => 'id_nirkabel']],
             [['get_ukuranberat'], 'exist', 'skipOnError' => true, 'targetClass' => UkuranBerat::class, 'targetAttribute' => ['get_ukuranberat' => 'id_ukuranberat']],
-            [['get_detaill'], 'exist', 'skipOnError' => true, 'targetClass' => DetailProduk::class, 'targetAttribute' => ['get_detaill' => 'id_detail']],
+            [['get_informasi_ram'], 'exist', 'skipOnError' => true, 'targetClass' => InformasiRam::class, 'targetAttribute' => ['get_informasi_ram' => 'id']],
+            [['get_informasi_vga'], 'exist', 'skipOnError' => true, 'targetClass' => InformasiVga::class, 'targetAttribute' => ['get_informasi_vga' => 'id']],
         ];
     }
 
@@ -91,7 +95,6 @@ class Produk extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'nama_produk' => 'Nama Produk',
-            'stock' => 'Stok',
             'id_servicer' => 'Id Servicer',
             'tahun_rilis' => 'Tahun Rilis',
             'id_jenis' => 'Jenis MacBook',
@@ -107,9 +110,19 @@ class Produk extends \yii\db\ActiveRecord
             'get_builtinApps' => 'Builtin Apps',
             'get_audio' => 'Audio',
             'get_koneksiekspansi' => 'Koneksiekspansi',
+            'get_informasi_ram' => 'Informasi RAM',
+            'get_informasi_vga' => 'Informasi VGA',
             'photo' => 'Photo',
             'harga' => 'Harga',
-            'get_detaill' => 'Get ID Detail',
+            'informasi_ram',
+            // spk ketahanan
+            'baterai' => 'Baterai',
+            'ket' => 'Keterangan',
+            'kapasitas_pengisian' => 'Kapasitas Pengisian',
+
+            // spk keamanan
+            'no_seri' => 'No Seri',
+            'garansi' => 'Garansi',
         ];
     }
 
@@ -125,7 +138,7 @@ class Produk extends \yii\db\ActiveRecord
     }
 
 
-    public function getAudio()
+    public function getAudios()
     {
         return $this->hasOne(Audio::class, ['id_audio' => 'get_audio']);
     }
@@ -155,7 +168,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getKamera()
+    public function getKameras()
     {
         return $this->hasOne(Kamera::class, ['id_kamera' => 'get_kamera']);
     }
@@ -235,7 +248,7 @@ class Produk extends \yii\db\ActiveRecord
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getProsesor()
+    public function getProsesors()
     {
         return $this->hasOne(JenisProsesor::class, ['id' => 'id_prosesor']);
     }
@@ -249,13 +262,16 @@ class Produk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(JenisSo::class, ['id' => 'id_so']);
     }
-
-    // public function getLikeProduk()
-    // {
-    //     return $this->hasMany(LikeProduk::class, ['get_likeProduk' => 'id']);
-    // }
-    public function getDetailProduk()
+    public function getSpkKelayakan()
     {
-        return $this->hasOne(DetailProduk::class, ['id_detail' => 'get_detaill']);
+        return $this->hasMany(SpkKelayakan::class, ['get_produk' => 'id']);
+    }
+    public function getRam()
+    {
+        return $this->hasOne(InformasiRam::class, ['id' => 'get_informasi_ram']);
+    }
+    public function getVga()
+    {
+        return $this->hasOne(InformasiVga::class, ['id' => 'get_informasi_vga']);
     }
 }

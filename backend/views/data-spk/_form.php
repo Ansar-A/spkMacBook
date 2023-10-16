@@ -1,5 +1,10 @@
 <?php
 
+use common\models\SpkKeamanan;
+use common\models\SpkKetahanan;
+use common\models\SpkKondisi;
+use common\models\SpkPerforma;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -12,12 +17,58 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'rSquare')->textInput() ?>
-
-    <?= $form->field($model, 'dataF')->textInput() ?>
-
-    <?= $form->field($model, 'dataT')->textInput() ?>
-
+    <?php
+    $list = SpkKeamanan::find()->all();
+    echo $form->field($model, 'get_dataRKeamanan')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'id',
+            function ($list) {
+                return $list->dataR;
+            },
+        ),
+        ['prompt' => 'Select...']
+    );
+    ?>
+    <?php
+    $list = SpkKetahanan::find()->all();
+    echo $form->field($model, 'get_dataRKetahanan')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'id',
+            function ($list) {
+                return $list->dataR;
+            },
+        ),
+        ['prompt' => 'Select...']
+    );
+    ?>
+    <?php
+    $list = SpkKondisi::find()->all();
+    echo $form->field($model, 'get_dataRKondisi')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'id',
+            function ($list) {
+                return $list->dataR;
+            },
+        ),
+        ['prompt' => 'Select...']
+    );
+    ?>
+    <?php
+    $list = SpkPerforma::find()->all();
+    echo $form->field($model, 'get_dataRPerforma')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'id',
+            function ($list) {
+                return $list->dataR;
+            },
+        ),
+        ['prompt' => 'Select...']
+    );
+    ?>
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
     </div>

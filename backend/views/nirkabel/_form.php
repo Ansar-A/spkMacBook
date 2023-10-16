@@ -1,7 +1,9 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+
 
 /** @var yii\web\View $this */
 /** @var common\models\Nirkabel $model */
@@ -12,12 +14,13 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'wifi')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'wifi')->textarea() ?>
 
-    <?= $form->field($model, 'bluetooth')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'bluetooth')->textarea() ?>
 
-    <div class="form-group">
+    <div class="form-group text-right">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <a href="<?= Url::to(['nirkabel/index']) ?>" type="button" class="btn btn-white waves-effect md md-reply"></a>
     </div>
 
     <?php ActiveForm::end(); ?>

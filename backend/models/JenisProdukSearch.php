@@ -43,7 +43,7 @@ class JenisProdukSearch extends JenisProduk
     public function search($params)
     {
         $query = JenisProduk::find();
-
+        //->where(['id_servicer' => Yii::$app->user->identity->id])
         // add conditions that should always apply here
 
         $dataProvider = new ActiveDataProvider([
