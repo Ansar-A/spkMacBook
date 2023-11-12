@@ -2,7 +2,6 @@
 
 use common\models\Audio;
 use common\models\BuiltinApps;
-use common\models\DataSpk;
 use common\models\Daya;
 use common\models\InformasiRam;
 use common\models\InformasiVga;
@@ -22,6 +21,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\date\DatePicker;
 use kartik\file\FileInput;
+use kartik\money\MaskMoney;
 use yii\helpers\Url;
 
 /** @var yii\web\View $this */
@@ -29,52 +29,181 @@ use yii\helpers\Url;
 /** @var yii\widgets\ActiveForm $form */
 
 ?>
+
 <div class="produk-form">
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-custom panel-border">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Basic</h3>
                 </div>
                 <div class="panel-body">
                     <div class="p-10">
                         <div class="col-xs-12">
-                            <?= $form->field($model, 'nama_produk')->textInput(['maxlength' => true]) ?>
+                            <?= $form->field($model, 'nama_produk')->textInput(['maxlength' => true, 'placeholder' => 'Nama Produk...'])->label('') ?>
                         </div>
                         <div class="col-xs-12">
-                            <?= $form->field($model, 'harga')->textInput(['type' => 'number']) ?>
-                        </div>
+                            <?php echo $form->field($model, 'harga')->widget(MaskMoney::class, [
+                                'pluginOptions' => [
+                                    'prefix' => 'Rp. ', // Simbol mata uang
+                                    'suffix' => '', // Suffix, jika diperlukan
+                                    'allowNegative' => false, // Mencegah angka negatif
+                                    'thousands' => '.', // Separator ribuan
+                                    'decimal' => ',', // Separator desimal
+                                    'precision' => 0, // Jumlah angka desimal
+                                ],
 
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisProduk::find()->all();
-                            echo $form->field($model, 'id_jenis')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
+                            ])->label(''); ?>
                         </div>
                         <div class="col-xs-12">
-                            <?php
-                            $list = JenisSo::find()->all();
-                            echo $form->field($model, 'id_so')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = JenisProduk::find()->all();
+                                    echo $form->field($model, 'id_jenis')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->jenis;
+                                            },
+                                        ),
+                                        ['prompt' => 'Jenis MacBook...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['jenis-produk/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = JenisSo::find()->all();
+                                    echo $form->field($model, 'id_so')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->jenis;
+                                            },
+                                        ),
+                                        ['prompt' => 'Sistem Operasi...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['jenis-so/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = InformasiRam::find()->all();
+                                    echo $form->field($model, 'get_informasi_ram')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->ram;
+                                            },
+                                        ),
+                                        ['prompt' => 'Info RAM...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['informasi-ram/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = InformasiVga::find()->all();
+                                    echo $form->field($model, 'get_informasi_vga')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->vga;
+                                            },
+                                        ),
+                                        ['prompt' => 'Info VGA...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['informasi-vga/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = JenisProsesor::find()->all();
+                                    echo $form->field($model, 'id_prosesor')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->jenisProsesor;
+                                            },
+                                        ),
+                                        ['prompt' => 'Info Prosesor...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['jenis-prosesor/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = JenisPenyimpanan::find()->all();
+                                    echo $form->field($model, 'id_penyimpanan')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->jenis;
+                                            },
+                                        ),
+                                        ['prompt' => 'Info Storage...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['jenis-penyimpanan/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-12">
                             <?= $form->field($model, 'tahun_rilis')->widget(DatePicker::classname(), [
@@ -83,81 +212,15 @@ use yii\helpers\Url;
                                     'autoclose' => true,
                                     'format' => 'dd-M-yyyy',
                                 ]
-                            ]); ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = InformasiRam::find()->all();
-                            echo $form->field($model, 'get_informasi_ram')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->ram;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            )->label("Informasi RAM");
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = InformasiVga::find()->all();
-                            echo $form->field($model, 'get_informasi_vga')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->vga;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            )->label("Informasi VGA");
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisProsesor::find()->all();
-                            echo $form->field($model, 'id_prosesor')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenisProsesor;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            )->label("Informasi Prosesor");
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = JenisPenyimpanan::find()->all();
-                            echo $form->field($model, 'id_penyimpanan')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            )->label("Informasi Storage");
-                            ?>
+                            ])->label(''); ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
-                <div class="panel-heading">
+            <div class="panel panel-custom panel-border">
+                <div class=" panel-heading">
                     <div class="row">
                         <div class="col-sm-6">
-                            <h3 class="panel-title">Baterai MacBook</h3>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="https://support.apple.com/id-id/HT201585" class="btn btn-instagram waves-effect waves-light btn-sm" target="_blank">
-                                <i class="fa fa-info"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
@@ -166,53 +229,86 @@ use yii\helpers\Url;
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'baterai')->textInput(['type' => 'number'])->label("Cycle Count") ?>
+                                    <?= $form->field($model, 'baterai')->textInput(['type' => 'number', 'placeholder' => 'Cycle Count...'])->label('') ?>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'ket')->dropDownList(['Normal' => 'Normal', 'Replace Soon' => 'Replace Soon'], ['prompt' => 'Select...'])->label("Kondisi") ?>
+                                    <?= $form->field($model, 'ket')->dropDownList(['Normal' => 'Normal', 'Replace Soon' => 'Replace Soon'])->label('') ?>
                                 </div>
                             </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'kapasitas_pengisian')->textInput(['type' => 'number'])->label("Kapasitas Pengisian Penuh") ?>
+                                    <?= $form->field($model, 'kapasitas_pengisian')->textInput(['type' => 'number', 'placeholder' => 'Kapasitas Pengisian Penuh...'])->label('') ?>
                                 </div>
                             </div>
                         </div>
-
+                    </div>
+                    <div class="col-sm-12 text-right">
+                        <a href="https://support.apple.com/id-id/HT201585" type="button" class="btn btn-info btn-sm waves-effect waves-light">
+                            <i class="fa fa-info m-r-5"></i> more info
+                        </a>
                     </div>
                 </div>
             </div>
-
-            <div class="panel panel-default">
+            <div class="panel panel-custom panel-border">
                 <div class="panel-heading">
-                    <h3 class="panel-title">No. Seri & Garansi Produk</h3>
+                    <!-- <h3 class="panel-title">No. Seri & Garansi Produk</h3> -->
                 </div>
                 <div class="panel-body">
                     <div class="p-10">
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'no_seri')->textInput() ?>
+                                    <?= $form->field($model, 'no_seri')->textInput(['placeholder' => 'No Seri...'])->label('') ?>
                                 </div>
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'garansi')->textInput()->label("Informasi Garansi") ?>
+                                    <?= $form->field($model, 'garansi')->textarea(['placeholder' => 'Info Garansi...'])->label('') ?>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                <div class="panel panel-custom panel-border">
+                    <div class="panel-heading">
+                    </div>
+                    <div class="panel-body">
+                        <div class="p-10">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-sm-12" style="padding-right: 12px;">
+                                        <?php
+                                        $list = User::find()->all();
+                                        echo $form->field($model, 'id_servicer')->dropDownList(
+                                            ArrayHelper::map(
+                                                $list,
+                                                'id',
+                                                function ($list) {
+                                                    return $list->username;
+                                                },
+                                            ),
+                                            ['prompt' => 'Toko...']
+                                        )->label('');
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <?php else : ?>
+            <?php endif ?>
         </div>
         <div class="col-md-6">
-            <div class="panel panel-default">
+            <div class="panel panel-custom panel-border">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Photo</h3>
+                    <!-- <h3 class="panel-title">Photo</h3> -->
                 </div>
                 <div class="panel-body">
                     <div class="p-10">
@@ -226,126 +322,195 @@ use yii\helpers\Url;
                                     'mainClass' => 'input-group-lg',
                                     'fileimageuploaded' => true,
                                 ]
-                            ]);
+                            ])->label('');
                             ?>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="panel panel-default">
+            <div class="panel panel-custom panel-border">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Spesifikasi Teknis</h3>
                 </div>
                 <div class="panel-body">
                     <div class="p-10">
                         <div class="col-xs-12">
-                            <?php
-                            $list = JenisLayar::find()->all();
-                            echo $form->field($model, 'id_layar')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id',
-                                    function ($list) {
-                                        return $list->jenis;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = Warna::find()->all();
-                            echo $form->field($model, 'get_warna')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_warna',
-                                    function ($list) {
-                                        return $list->warna;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = Daya::find()->all();
-                            echo $form->field($model, 'get_daya')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_daya',
-                                    function ($list) {
-                                        return $list->informasi_baterai;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = Audio::find()->all();
-                            echo $form->field($model, 'get_audio')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_audio',
-                                    function ($list) {
-                                        return $list->audio;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = KoneksiEkspansi::find()->all();
-                            echo $form->field($model, 'get_koneksiekspansi')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_koneksi',
-                                    function ($list) {
-                                        return $list->koneksiEkspansi;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = Kamera::find()->all();
-                            echo $form->field($model, 'get_kamera')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_kamera',
-                                    function ($list) {
-                                        return $list->kamera;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
-                        </div>
-                        <div class="col-xs-12">
-                            <?php
-                            $list = BuiltinApps::find()->all();
-                            echo $form->field($model, 'get_builtinApps')->dropDownList(
-                                ArrayHelper::map(
-                                    $list,
-                                    'id_builtinApps',
-                                    function ($list) {
-                                        return $list->builtinApp;
-                                    },
-                                ),
-                                ['prompt' => 'Select...']
-                            );
-                            ?>
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = JenisLayar::find()->all();
+                                    echo $form->field($model, 'id_layar')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id',
+                                            function ($list) {
+                                                return $list->jenis;
+                                            },
+                                        ),
+                                        ['prompt' => 'Jenis Layar...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['jenis-layar/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-12">
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = Warna::find()->all();
+                                    echo $form->field($model, 'get_warna')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_warna',
+                                            function ($list) {
+                                                return $list->warna;
+                                            },
+                                        ),
+                                        ['prompt' => 'Warna...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['warna/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = Daya::find()->all();
+                                    echo $form->field($model, 'get_daya')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_daya',
+                                            function ($list) {
+                                                return $list->informasi_baterai;
+                                            },
+                                        ),
+                                        ['prompt' => 'Daya...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['daya/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = Audio::find()->all();
+                                    echo $form->field($model, 'get_audio')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_audio',
+                                            function ($list) {
+                                                return $list->audio;
+                                            },
+                                        ),
+                                        ['prompt' => 'Audio...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['audio/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = KoneksiEkspansi::find()->all();
+                                    echo $form->field($model, 'get_koneksiekspansi')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_koneksi',
+                                            function ($list) {
+                                                return $list->koneksiEkspansi;
+                                            },
+                                        ),
+                                        ['prompt' => 'Koneksi Ekspansi...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['koneksi-ekspansi/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = Kamera::find()->all();
+                                    echo $form->field($model, 'get_kamera')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_kamera',
+                                            function ($list) {
+                                                return $list->kamera;
+                                            },
+                                        ),
+                                        ['prompt' => 'Kamera...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['kamera/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
+                                    <?php
+                                    $list = BuiltinApps::find()->all();
+                                    echo $form->field($model, 'get_builtinApps')->dropDownList(
+                                        ArrayHelper::map(
+                                            $list,
+                                            'id_builtinApps',
+                                            function ($list) {
+                                                return $list->builtinApp;
+                                            },
+                                        ),
+                                        ['prompt' => 'Builtin Apps...']
+                                    )->label('');
+                                    ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['builtin-apps/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <div class="col-sm-9">
                                     <?php
                                     $list = Nirkabel::find()->all();
                                     echo $form->field($model, 'get_nirkabel')->dropDownList(
@@ -357,10 +522,18 @@ use yii\helpers\Url;
                                             },
                                         ),
                                         ['prompt' => 'wifi...']
-                                    );
+                                    )->label('');
                                     ?>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['nirkabel/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-9">
                                     <?php
                                     $list = Nirkabel::find()->all();
                                     echo $form->field($model, 'get_nirkabel')->dropDownList(
@@ -371,12 +544,26 @@ use yii\helpers\Url;
                                                 return $list->bluetooth;
                                             },
                                         ),
-                                        ['prompt' => 'bluetooth...']
-                                    )->label('&nbsp;');
+                                        ['prompt' => 'Bluetooth...']
+                                    )->label('');
                                     ?>
+                                </div>
+                                <div class="col-sm-3" style="padding-top: 22px; ">
+                                    <a href="<?= Url::to(['nirkabel/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                                        <span class="btn-label"><i class="md-add-box"></i>
+                                        </span>New
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel panel-custom panel-border">
+                <div class="panel-heading">
+                </div>
+                <div class="panel-body">
+                    <div class="p-10">
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-xs-6">
@@ -391,7 +578,7 @@ use yii\helpers\Url;
                                             },
                                         ),
                                         ['prompt' => 'tinggi...']
-                                    );
+                                    )->label('&nbsp;');
                                     ?>
                                 </div>
                                 <div class="col-xs-6">
@@ -444,40 +631,14 @@ use yii\helpers\Url;
                             </div>
                         </div>
                     </div>
+                    <div class="col-sm-12 text-right" style="padding-right: 5px;">
+                        <a href="<?= Url::to(['ukuran-berat/index']) ?>" type="button" class="btn btn-primary waves-effect waves-light" style="right: 5px;">
+                            <span class="btn-label"><i class="md-add-box"></i>
+                            </span>New
+                        </a>
+                    </div>
                 </div>
             </div>
-
-            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">Toko MacBook</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div class="p-10">
-                            <div class="col-xs-12">
-                                <div class="row">
-                                    <div class="col-sm-12">
-                                        <?php
-                                        $list = User::find()->all();
-                                        echo $form->field($model, 'id_servicer')->dropDownList(
-                                            ArrayHelper::map(
-                                                $list,
-                                                'id',
-                                                function ($list) {
-                                                    return $list->username;
-                                                },
-                                            ),
-                                        )->label("Toko");
-                                        ?>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            <?php else : ?>
-            <?php endif ?>
         </div>
     </div>
     <hr>

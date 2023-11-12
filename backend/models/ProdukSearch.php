@@ -52,7 +52,7 @@ class ProdukSearch extends Produk
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            // 'pagination' => array('pageSize' => 6)
+            'pagination' => array('pageSize' => 5)
         ]);
 
         $this->load($params);
@@ -63,12 +63,19 @@ class ProdukSearch extends Produk
             return $dataProvider;
         }
 
+        // $query
+        //     ->orFilterWhere(['like', 'id', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'nama_produk', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'id_jenis', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'harga', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'tahun_rilis', $this->globalSearch]);
         $query
-            ->orFilterWhere(['like', 'id', $this->globalSearch])
-            ->orFilterWhere(['like', 'nama_produk', $this->globalSearch])
-            ->orFilterWhere(['like', 'id_jenis', $this->globalSearch])
-            ->orFilterWhere(['like', 'harga', $this->globalSearch])
-            ->orFilterWhere(['like', 'tahun_rilis', $this->globalSearch]);
+            ->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
+            ->andFilterWhere(['like', 'id_jenis', $this->id_jenis])
+            ->andFilterWhere(['like', 'harga', $this->harga])
+            ->andFilterWhere(['like', 'tahun_rilis', $this->tahun_rilis])
+            ->andFilterWhere(['like', 'id_servicer', $this->id_servicer]);
         return $dataProvider;
     }
 }

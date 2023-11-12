@@ -11,7 +11,6 @@ use yii\widgets\ListView;
 
 $this->title = 'My Yii Application';
 ?>
-
 <section id="intro">
     <div class="container">
         <div class="ror">
@@ -82,65 +81,7 @@ $this->title = 'My Yii Application';
         </div>
     </div>
 </section>
-<!-- end section -->
 
-<section class="section5">
-    <div class="container">
-        <div class="col-lg-6 col-md-6 col-sm-12 columns">
-            <div class="widget" data-effect="slide-left">
-                <img src="<?= Url::to('@web/max/img/bgside.png') ?>" alt="">
-            </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 columns">
-            <div class="widget clearfix">
-                <div class="services_lists">
-                    <div class="services_lists_boxes clearfix">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="services_lists_boxes_icon" data-effect="slide-bottom">
-                                <a class=""> <i class="active dm-icon-medium fa fa-user fa-2x"></i> </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9">
-                            <div class="servicetitle">
-                                <h4>Create an Account</h4>
-                                <hr>
-                            </div>
-                            <p>Silahkan buat akun untuk dapat menentukan pilihan anda!</p>
-                        </div>
-                    </div>
-                    <div class="services_lists_boxes clearfix">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="services_lists_boxes_icon" data-effect="slide-bottom">
-                                <a href="#" class=""> <i class="active dm-icon-medium fa fa-search fa-2x"></i> </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9">
-                            <div class="servicetitle">
-                                <h4>Find your MacBook</h4>
-                                <hr>
-                            </div>
-                            <p>Anda dapat langsung menentukan MacBook</p>
-                        </div>
-                    </div>
-                    <div class="services_lists_boxes clearfix">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="services_lists_boxes_icon_none effect-slide-bottom in" data-effect="slide-bottom" style="transition: all 0.7s ease-in-out 0s;">
-                                <a href="#" class=""> <i class="active dm-icon-medium fa fa-laptop fa-2x"></i> </a>
-                            </div>
-                        </div>
-                        <div class="col-lg-9 col-md-9 col-sm-9">
-                            <div class="servicetitle">
-                                <h4>Spesifict Detail</h4>
-                                <hr>
-                            </div>
-                            <p>Menyajikan informasi spesfik mengenai laptop MacBook yang anda cari.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="section2">
     <div class="container">
         <div class="message text-center">

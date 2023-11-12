@@ -22,13 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Warna</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
+                        <a href="<?= Url::to(['warna/index']) ?>">Warna</a>
                     </li>
                     <li class="active">
-                        Panel Warna
+                        Index
                     </li>
                 </ol>
             </div>
@@ -88,14 +88,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         //'id',
                                         //'jenis',
                                         [
-                                            'class' => 'kartik\grid\EditableColumn',
-                                            'attribute' => 'warna',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                        ],
-                                        [
                                             'class' => '\kartik\grid\ActionColumn',
-                                            'template' => '{view}  {delete}',
+                                            'template' => '{view}',
                                             'header' => 'Action',
                                             'buttons' => [
                                                 'class' => 'btn btn-primary dropdown-toggle',
@@ -120,9 +114,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                 },
                                             ],
                                         ],
+                                        [
+                                            'class' => 'kartik\grid\EditableColumn',
+                                            'attribute' => 'warna',
+                                            'headerOptions' => ['class' => 'text-center'],
+                                            'contentOptions' => ['style' => 'text-align:center'],
+                                        ],
                                     ],
                                     'toolbar' => [
-                                        Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                        Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
                                         // Html::a('<i class="md md-person-add"></i>', ['create'], [
                                         //     'type' => 'button',
                                         //     'class' => 'btn btn-success'

@@ -1,10 +1,10 @@
 <?php
 
-use common\models\Produk;
-use common\models\Pengguna;
 use yii\helpers\ArrayHelper;
+use common\models\LikeProduk;
+use common\models\Pengguna;
+use common\models\SpkKelayakan;
 use yii\helpers\Html;
-use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
@@ -15,23 +15,21 @@ use yii\widgets\ActiveForm;
 <div class="like-produk-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
     <?php
-    $list = Produk::find()->all();
-    echo $form->field($model, 'get_likeProduk')->dropDownList(
+    $list = SpkKelayakan::find()->all();
+    echo $form->field($model, 'produk_id')->dropDownList(
         ArrayHelper::map(
             $list,
-            'id',
+            'id_kelayakan',
             function ($list) {
-                return $list->nama_produk;
+                return $list->kode_produk;
             },
         ),
-        ['prompt' => 'Select...']
-    );
+    )->label('Produk');
     ?>
     <?php
     $list = Pengguna::find()->all();
-    echo $form->field($model, 'get_pengguna')->dropDownList(
+    echo $form->field($model, 'user_id')->dropDownList(
         ArrayHelper::map(
             $list,
             'id',
@@ -39,13 +37,11 @@ use yii\widgets\ActiveForm;
                 return $list->username;
             },
         ),
-        ['prompt' => 'Select...']
-    );
+    )->label('Produk');
     ?>
 
     <div class="form-group">
         <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
-        <a href="<?= Url::to(['like-produk/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
     </div>
 
     <?php ActiveForm::end(); ?>

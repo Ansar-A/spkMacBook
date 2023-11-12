@@ -1,6 +1,6 @@
 <?php
 
-use frontend\controllers\SiteController;
+use common\models\LikeProduk;
 use yii\helpers\Url;
 ?>
 <div class="portfolio-item col-lg-4 col-sm-2 mockups">
@@ -12,8 +12,14 @@ use yii\helpers\Url;
                     <?php echo $model->produk->nama_produk ?>
                 </h3>
                 <a href="<?= Url::to(['detail-produk', 'id_kelayakan' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
-                <!-- <a href="checkout.html" class="dmbutton a2" data-animate="fadeIn">Like</a> -->
-                <div class="rating text-center a2" data-animate="fadeIn">
+                <?php if (Yii::$app->user->isGuest) : ?>
+
+                <?php elseif (LikeProduk::find()->where(['user_id' => Yii::$app->user->identity->id, 'produk_id' => $model->id_kelayakan])->exists()) : ?>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/unlike', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Unlike</a>
+                <?php else : ?>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/like', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Like</a>
+                <?php endif; ?>
+                <div class="text-white  a2" data-animate="fadeIn">
                     <?php echo 'Rp ' . $model->produk->harga ?>
                 </div>
             </div>

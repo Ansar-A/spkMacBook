@@ -7,9 +7,9 @@ use Yii;
 /**
  * This is the model class for table "like_produk".
  *
- * @property int $id_like
- * @property int $get_likeProduk
- * @property int $get_pengguna
+ * @property int $id
+ * @property int $produk_id
+ * @property int $produk_id
  *
  * @property Produk $getLikeProduk
  * @property Pengguna $getPengguna
@@ -23,50 +23,59 @@ class LikeProduk extends \yii\db\ActiveRecord
     {
         return 'like_produk';
     }
-
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['get_likeProduk', 'get_pengguna',], 'required'],
-            [['get_likeProduk', 'get_pengguna',], 'integer'],
-            [['get_likeProduk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_likeProduk' => 'id']],
-            [['get_pengguna'], 'exist', 'skipOnError' => true, 'targetClass' => Pengguna::class, 'targetAttribute' => ['get_pengguna' => 'id']],
+            [['produk_id', 'user_id'], 'required'],
+            [['id', 'produk_id', 'user_id',], 'integer'],
+            ['created_at', 'time']
         ];
     }
-
     /**
      * {@inheritdoc}
      */
     public function attributeLabels()
     {
         return [
-            'id_like' => 'Id Like',
-            'get_likeProduk' => 'MacBook Like',
-            'get_pengguna' => 'Pengguna',
-
+            'id' => 'Id Like',
+            'produk_id' => 'Kode Produk',
+            'user_id' => 'Pengguna',
+            'created_at' => 'Time'
         ];
     }
-
     /**
      * Gets query for [[GetLikeProduk]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetLikeProduk()
+    public function getKelayakan()
     {
-        return $this->hasOne(Produk::class, ['id' => 'get_likeProduk']);
+        return $this->hasOne(SpkKelayakan::class, ['id_kelayakan' => 'produk_id']);
     }
-
     /**
      * Gets query for [[GetPengguna]].
      *
      * @return \yii\db\ActiveQuery
      */
-    public function getGetPengguna()
+    public function getPengguna()
     {
-        return $this->hasOne(Pengguna::class, ['id' => 'get_pengguna']);
+        return $this->hasOne(Pengguna::class, ['id' => 'user_id']);
+    }
+
+    public function safeUp()
+    {
+        $this->createTable('like_produk', [
+            'id' => $this->primaryKey(),
+            'user_id' => $this->integer()->notNull(),
+            'produk_id' => $this->integer()->notNull(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+        ]);
+    }
+    public function safeDown()
+    {
+        $this->dropTable('like_produk');
     }
 }

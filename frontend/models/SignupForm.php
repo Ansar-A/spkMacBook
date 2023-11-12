@@ -15,7 +15,6 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $address;
-    public $jenis_kelamin;
 
 
 
@@ -29,7 +28,6 @@ class SignupForm extends Model
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\Pengguna', 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
-            [['jenis_kelamin'], 'integer'],
             [['address'], 'string'],
 
             ['email', 'trim'],
@@ -57,7 +55,7 @@ class SignupForm extends Model
         $user->username = $this->username;
         $user->email = $this->email;
         $user->address = $this->address;
-        $user->jenis_kelamin = $this->jenis_kelamin;
+
 
         $user->setPassword($this->password);
         $user->generateAuthKey();

@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Layar</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['jenis-layar/index']) ?>">Panel Layar</a>
+                        <a href="<?= Url::to(['jenis-layar/index']) ?>">Jenis Layar</a>
                     </li>
                     <li class="active">
                         View
@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-box">
                     <div class="jenis-layar-view">
                         <p>
-                            <?php if (\Yii::$app->user->can('deletePost')) : ?>
+                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
                                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                                     'class' => 'btn btn-danger',

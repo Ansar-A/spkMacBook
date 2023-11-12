@@ -1,0 +1,154 @@
+/* SCSS variables */
+body {
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.wrapper {
+  width: 800px;
+  display: grid;
+  grid-gap: 2rem;
+}
+
+.breadcrumbs {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  font-size: 0.9rem;
+  background-color: white;
+  overflow: hidden;
+}
+.breadcrumbs li {
+  display: contents;
+}
+.breadcrumbs li .breadcrumb,
+.breadcrumbs li [itemprop=name] {
+  display: flex;
+  align-items: center;
+}
+.breadcrumbs li .breadcrumb {
+  position: relative;
+  color: #004f62;
+  outline: none;
+}
+.breadcrumbs li .breadcrumb .material-icons {
+  font-size: 1.5em;
+  margin-right: 0.5rem;
+  opacity: 0.85;
+}
+.breadcrumbs li a.breadcrumb {
+  text-decoration: none;
+}
+.breadcrumbs li a.breadcrumb .material-icons {
+  transition: transform 150ms;
+}
+.breadcrumbs li a.breadcrumb:active .material-icons {
+  transform: scale(0.8);
+}
+
+/* First variation */
+.breadcrumbs.breadcrumbs--one {
+  padding: 0 0 0 1rem;
+  border-color: #93b4bd;
+  border-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+.breadcrumbs.breadcrumbs--one li .breadcrumb {
+  position: relative;
+  margin-left: -1rem;
+  margin-right: 1rem;
+}
+.breadcrumbs.breadcrumbs--one li [itemprop=name] {
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+}
+.breadcrumbs.breadcrumbs--one li a.breadcrumb {
+  text-decoration: none;
+  background: linear-gradient(to right, white 0%, #f2f6f7 50%);
+}
+.breadcrumbs.breadcrumbs--one li a.breadcrumb:hover, .breadcrumbs.breadcrumbs--one li a.breadcrumb:hover::after, .breadcrumbs.breadcrumbs--one li a.breadcrumb:focus, .breadcrumbs.breadcrumbs--one li a.breadcrumb:focus::after {
+  background: #004f62;
+  color: #f2f6f7;
+}
+.breadcrumbs.breadcrumbs--one li a.breadcrumb::after {
+  content: "";
+  display: block;
+  width: 1.5rem;
+  height: 1.5rem;
+  z-index: 1;
+  margin-right: -0.75rem;
+  background-color: #f2f6f7;
+  border: 3px solid #93b4bd;
+  transform: rotate(45deg) skew(15deg, 15deg);
+  transform-origin: center;
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  border-radius: 0 4px 0 0;
+}
+.breadcrumbs.breadcrumbs--one li:first-child [itemprop=name] {
+  padding-left: 1.5rem;
+}
+
+/* Second variation */
+.breadcrumbs.breadcrumbs--two li .breadcrumb [itemprop=name] {
+  padding: 0.5rem 1.5rem;
+}
+.breadcrumbs.breadcrumbs--two li a.breadcrumb {
+  position: relative;
+}
+.breadcrumbs.breadcrumbs--two li a.breadcrumb::after {
+  content: "";
+  display: block;
+  height: 100%;
+  width: 0.8rem;
+  z-index: 1;
+  margin-right: -0.5rem;
+  clip-path: polygon(45% 0, 100% 50%, 45% 100%, 0% 100%, 55% 50%, 0% 0%);
+  background-color: #b3cad0;
+}
+.breadcrumbs.breadcrumbs--two li a.breadcrumb:hover, .breadcrumbs.breadcrumbs--two li a.breadcrumb:hover::after, .breadcrumbs.breadcrumbs--two li a.breadcrumb:focus, .breadcrumbs.breadcrumbs--two li a.breadcrumb:focus::after {
+  text-decoration: underline;
+}
+
+/* Globals */
+* {
+  box-sizing: border-box;
+  outline-color: #004f62;
+}
+
+html {
+  font-family: "Lato", sans-serif;
+}
+
+body {
+  height: 100vh;
+  background-color: #b3cad0;
+}
+
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+}
+
+/* Icon font (ideally SVG instead) */
+.material-icons {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  font-size: inherit;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "liga";
+}/*# sourceMappingURL=style.css.map */

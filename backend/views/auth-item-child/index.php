@@ -16,26 +16,31 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
+            <div class="col-sm-12">
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth-item-child/index']) ?>"><i class="ti-key"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Item Child</a>
+                    </li>
+                    <li class="active">
+                        Index
+                    </li>
+                </ol>
+            </div>
             <div class="col-lg-12">
-                <div class="panel panel-color panel-custom">
-                    <div class="panel-heading" style="padding-top: 0px; padding-bottom: 0px;">
-                        <ol class="breadcrumb" style="padding-top: 2px; padding-bottom: 10px;">
-                            <li>
-                                <h4 class="page-title text-white">Auth Item Child</h4>
-                            </li>
-                            <li>
-                                <a href="<?= Url::to(['site/index']) ?>">Home</a>
-                            </li>
-                            <li class="text-white">
-                                Panel Auth Item Child
-                            </li>
-                        </ol>
+                <div class="panel panel-border panel-custom">
+                    <div class="panel-heading">
                     </div>
                     <div class="panel-body">
                         <div class="auth-item-child-index">
 
                             <p>
-                                <?= Html::a('Create Auth Item Child', ['create'], ['class' => 'btn btn-success']) ?>
+                                <?= Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-primary waves-effect waves-light']) ?>
                             </p>
 
                             <?php // echo $this->render('_search', ['model' => $searchModel]); 
@@ -53,7 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'class' => 'yii\grid\ActionColumn',
                                         'contentOptions' => ['style' => 'text-align:center'],
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'template' => '{view} {update} {delete}',
+                                        'template' => '{view} {update}',
                                         'header' => 'Action',
                                         'buttons' => [
                                             'class' => 'btn btn-primary dropdown-toggle',

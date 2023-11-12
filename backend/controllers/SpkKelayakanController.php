@@ -2,14 +2,18 @@
 
 namespace backend\controllers;
 
+use common\models\UploadForm;
 use common\models\SpkKelayakan;
 use backend\models\SpkKelayakanSearch;
+use Exception;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
+
 use yii\web\UploadedFile;
-use yii\imagine\Image;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+
 
 /**
  * SpkKelayakanController implements the CRUD actions for SpkKelayakan model.
@@ -100,11 +104,11 @@ class SpkKelayakanController extends Controller
     public function actionUpdate($id_kelayakan)
     {
         $model = $this->findModel($id_kelayakan);
-
-        if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+        if ($this->request->isPost && $model->load($this->request->post())) {
+            if ($model->save()) {
+                return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+            }
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -139,4 +143,53 @@ class SpkKelayakanController extends Controller
 
         throw new NotFoundHttpException('The requested page does not exist.');
     }
+    public function actionUpload()
+    {
+        $model = new UploadForm();
+        // $model->scenario = UploadForm::SCENARIO_IMPORT;
+        if (($model->load(Yii::$app->request->post()))) {
+            $model->importFile = UploadedFile::getInstance($model, 'importFile');
+
+            if ($model->upload()) {
+
+                // $filename = 'berkas/' . md5(microtime()) . '.' . $model->importFile->extension;
+
+                $file = Yii::getAlias('@webroot/' . $model->filename);
+                $spreadsheet = IOFactory::load($file);
+                $worksheet = $spreadsheet->getActiveSheet();
+                $highestRow = $worksheet->getHighestRow();
+                // $highestColumn = $worksheet->getHighestColumn();
+                for ($row = 2; $row <= $highestRow; $row++) {
+                    $cellValue = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $cellValue = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                    // var_dump($cellValue);
+                    $model = new SpkKelayakan();
+                    $model->dataR = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+                    $model->Rsquare = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+                    $model->dataF = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+                    $model->T_keamanan = $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+                    $model->T_ketahanan = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+                    $model->T_kondisi = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+                    $model->T_performa = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+                    $model->save();
+                }
+                // die;
+                Yii::$app->session->setFlash('success', 'Data berhasil diimpor');
+                return $this->redirect(['index']);
+            }
+        }
+        return $this->render('upload', [
+            'model' => $model,
+
+        ]);
+    }
+
+    // kode_otomatis
+
+
 }

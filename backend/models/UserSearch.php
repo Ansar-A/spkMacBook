@@ -20,7 +20,7 @@ class UserSearch extends User
     {
         return [
             [['id', 'username', 'status', 'created_at', 'updated_at', 'hp'], 'integer'],
-            [['address', 'globalSearch'], 'string'],
+            [['address', 'globalSearch', 'fb'], 'string'],
         ];
     }
 
@@ -71,9 +71,7 @@ class UserSearch extends User
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'hp' => $this->hp,
-
-
-
+            'fb' => $this->fb,
         ]);
 
         $query->orFilterWhere(['like', 'username', $this->globalSearch])
@@ -83,6 +81,7 @@ class UserSearch extends User
             ->orFilterWhere(['like', 'email', $this->globalSearch])
             ->orFilterWhere(['like', 'address', $this->globalSearch])
             ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
+            ->orFilterWhere(['like', 'fb', $this->globalSearch])
             ->orFilterWhere(['like', 'hp', $this->globalSearch]);
         return $dataProvider;
     }

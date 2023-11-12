@@ -15,44 +15,50 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="account-pages"></div>
 <div class="clearfix"></div>
-<div class="wrapper-page">
-    <div class="card-box">
-        <div class="bg-custom bg-profile"></div>
-        <!-- <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail pull-center" alt="img"> -->
-        <div class="panel-body">
-            <h1><?= Html::encode($this->title) ?></h1>
-            <p>SPK MacBook Bekas Layak Pakai</p>
-            <hr>
-            <div class="row">
-                <div class="col-lg-12">
-                    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+<section class="section1">
+    <div class="container clearfix">
+        <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
+            <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top:180px">
+                <h2 class="title">
+                    <span>Welcome !</span>
+                    <hr>
+                </h2>
+                <p>Selamat datang di Sistem Pendukung Keputusan Penentuan MacBook Bekas, aplikasi yang dapat membantu anda dalam menentukan MacBook bekas terbaik.</p>
+                <p>Anda hanya perlu memasukkan budget yang anda miliki, aplikasi akan menampilkan MacBook bekas yang memiliki kualitas terbaik berdasarkan Performa, Keamanan, Ketahanan dan Kondisi komponen yang terbaik.</p>
+                <p class="withpadding">Belum punya Akun? <a href="/yii-spk/frontend/web/site/signup">Click Here</a> untuk registrasi sekarang.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top:85px">
+                <div class="wrapper-page">
+                    <div class="card-box">
+                        <div class="panel-body">
+                            <h2 class="title">
+                                <span>Login Form</span>
+                            </h2>
+                            <p>SPK MacBook Bekas</p>
+                            <hr>
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
+                                    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Username', 'autofocus' => true])->label('') ?>
+                                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label('') ?>
+                                    <hr>
+                                    <!-- <?= $form->field($model, 'rememberMe')->checkbox(['template' => "<div class=\"col-lg-12\" style=\"padding-left: 0px\"> {input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>"])->label('Remember me') ?> -->
+                                    <div class="form-group">
+                                        <div class=" col-xs-5" style="padding-left:0%">
+                                            <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block  waves-effect waves-light', 'name' => 'login-button']) ?>
+                                        </div>
+                                    </div>
+                                    <?php ActiveForm::end(); ?>
+                                </div>
+                            </div>
 
-                    <?= $form->field($model, 'username')->textInput(['placeholder' => 'Username', 'autofocus' => true])->label('') ?>
-
-                    <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label('') ?>
-
-                    <!-- <?= $form->field($model, 'rememberMe')->checkbox(['type' => 'checkbox']) ?> -->
-                    <?= $form->field($model, 'rememberMe')->checkbox(['template' => "<div class=\"col-lg-12\" style=\"padding-left: 0px\"> {input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>"]) ?>
-                    <div class="form-group text-center m-t-40">
-                        <?= Html::submitButton('LOG IN', ['class' => 'btn btn-primary btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
+                        </div>
                     </div>
-                    <!-- <div class="my-1 mx-0" style="color:#999;">
-                        <i class="fa fa-lock m-r-5"></i><?= Html::a('forgot password ?', ['site/request-password-reset']) ?>
-                        <br>
-                        Need new verification email? <?= Html::a('Resend', ['site/resend-verification-email']) ?>
-                    </div> -->
-                    <?php ActiveForm::end(); ?>
                 </div>
+                <!-- end login -->
             </div>
         </div>
+        <!-- end content -->
     </div>
-    <div class="row">
-        <div class="col-sm-12 text-center">
-            <p>
-                <font>Tidak punya akun?</font> <a href="/yii-spk/frontend/web/site/signup" class="text-primary m-l-5"><b>
-                        <font>Sign Up</font>
-                    </b></a>
-            </p>
-        </div>
-    </div>
-</div>
+    <!-- end container -->
+</section>

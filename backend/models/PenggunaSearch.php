@@ -18,7 +18,7 @@ class PenggunaSearch extends Pengguna
     public function rules()
     {
         return [
-            [['id', 'status', 'jenis_kelamin'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['username', 'password_hash', 'email', 'auth_key', 'password_reset_token', 'created_at', 'updated_at', 'verification_token', 'address',  'globalSearch'], 'safe'],
         ];
     }
@@ -47,6 +47,7 @@ class PenggunaSearch extends Pengguna
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 4)
         ]);
 
         $this->load($params);
@@ -61,7 +62,6 @@ class PenggunaSearch extends Pengguna
         $query->andFilterWhere([
             'id' => $this->id,
             'status' => $this->status,
-            'jenis_kelamin' => $this->jenis_kelamin,
         ]);
 
         $query->orFilterWhere(['like', 'username', $this->globalSearch])

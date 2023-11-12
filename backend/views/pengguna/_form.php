@@ -13,15 +13,25 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+    <div class="row">
+        <div class="col-sm-6">
+            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
+            <?= $form->field($model, 'address')->textarea(['maxlength' => true]) ?>
+        </div>
+        <div class="col-sm-6">
 
-    <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'status')->dropDownList([10 => 'Active', 9 => 'Inactive']) ?>
+        </div>
+    </div>
 
-    <?= $form->field($model, 'email')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'password_hash')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'status')->dropDownList([10 => 'Active', 9 => 'Inactive']) ?>
-
-    <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
+    <!-- <?= $form->field($model, 'auth_key')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'password_reset_token')->textInput(['maxlength' => true]) ?>
 
@@ -29,11 +39,8 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'updated_at')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'verification_token')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'jenis_kelamin')->dropDownList(['Pria' => 'Pria', 'Wanita' => 'Wanita'], ['prompt' => 'Select Option']) ?>
-
-    <?= $form->field($model, 'address')->textInput(['maxlength' => true]) ?>
 
 
     <div class="form-group">

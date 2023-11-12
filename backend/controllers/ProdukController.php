@@ -2,7 +2,7 @@
 
 namespace backend\controllers;
 
-
+use backend\assets\SweetAlertAsset;
 use common\models\Produk;
 use backend\models\ProdukSearch;
 use Yii;
@@ -12,6 +12,7 @@ use yii\filters\VerbFilter;
 use yii\helpers\Json;
 use yii\web\UploadedFile;
 use yii\imagine\Image;
+use yii2mod\alert\Alert;
 
 /**
  * ProdukController implements the CRUD actions for Produk model.
@@ -44,7 +45,8 @@ class ProdukController extends Controller
 
     public function actionIndex()
     {
-        if (\Yii::$app->user->can('managePostProduk')) {
+
+        if (\Yii::$app->user->can('SuperAdmin')) {
             $searchModel = new ProdukSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             // editable
@@ -80,7 +82,20 @@ class ProdukController extends Controller
      */
     public function actionView($id)
     {
+        Alert::widget([
+            'options' => [
+                'title' => 'Konfirmasi',
+                'text' => 'Apakah Anda yakin ingin melanjutkan?',
+                'type' => Alert::TYPE_SUCCESS,
+                // 'showCancelButton' => true,
+                'confirmButtonText' => 'Ya',
+                // 'cancelButtonText' => 'Tidak',
+                'confirmButtonColor' => '#3085d6',
+                'cancelButtonColor' => '#d33',
+            ]
+        ]);
         return $this->render('view', [
+
             'model' => $this->findModel($id),
         ]);
     }
@@ -109,7 +124,8 @@ class ProdukController extends Controller
                             ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
 
                         $model->photo = $newfilename;
-                        Yii::$app->getSession()->setFlash('success', '');
+                        // Yii::$app->getSession()->setFlash('success', '');
+
                     }
                     $model->save(false);
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -148,7 +164,7 @@ class ProdukController extends Controller
                             ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
 
                         $model->photo = $newfilename;
-                        Yii::$app->getSession()->setFlash('success', '');
+                        // Yii::$app->getSession()->setFlash('success', '');
                     }
                     $model->save(false);
                     return $this->redirect(['view', 'id' => $model->id]);

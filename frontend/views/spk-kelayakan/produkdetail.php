@@ -2,6 +2,7 @@
 
 /** @var yii\web\View $this */
 
+use common\models\LikeProduk;
 use common\models\Produk;
 use yii\bootstrap\Carousel;
 use yii\helpers\Html;
@@ -109,6 +110,7 @@ $this->title = 'My Yii Application';
 
                             </div>
                         </div>
+
                     </div>
                     <div class="tab-pane" id="kelayakan">
                         <div class="details_section">
@@ -120,16 +122,18 @@ $this->title = 'My Yii Application';
                                             <hr>
                                         </div>
                                         <div class="icn-main-container">
-                                            <span class="icn-container"><?php echo $model->dataRKetahanan ?></span>
+                                            <span class="icn-container"><?php echo $model->dataR ?></span>
                                         </div>
                                         <p>Tingkat Ketahanan</p>
                                         <ul class="pricing">
                                             <li><?php echo $model->produk->baterai ?> Cicle Count</li>
                                             <li><?php echo $model->produk->kapasitas_pengisian ?> Pengisian</li>
-                                            <li><?php echo $model->RsquareKetahanan ?> R Square</li>
-                                            <li><?php echo $model->dataFKetahanan ?> Data F</li>
-                                            <li><?php echo $model->T_cicleCount ?> T Cicle Count</li>
-                                            <li><?php echo $model->T_kapasitasPengisian ?> T Pengisian</li>
+                                            <li><?php echo $model->Rsquare ?> R Square</li>
+                                            <li><?php echo $model->dataF ?> Data F</li>
+                                            <li><?php echo $model->T_keamanan ?> T Keamanan</li>
+                                            <li><?php echo $model->T_ketahanan ?> T ketahanan</li>
+                                            <li><?php echo $model->T_kondisi ?> T kondisi</li>
+                                            <li><?php echo $model->T_performa ?> T performa</li>
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
                                     </div>
@@ -147,10 +151,7 @@ $this->title = 'My Yii Application';
                                         <ul class="pricing">
                                             <li><?php echo $model->produk->no_seri ?> (No Seri)</li>
                                             <li><?php echo $model->produk->garansi ?> Garansi</li>
-                                            <li><?php echo $model->RsquareKeamanan ?> R Square</li>
-                                            <li><?php echo $model->dataFKeamanan ?> Data F</li>
-                                            <li><?php echo $model->T_noSeri ?> T No Seri</li>
-                                            <li><?php echo $model->T_garansi ?> T Garansi</li>
+
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
                                     </div>
@@ -162,26 +163,12 @@ $this->title = 'My Yii Application';
                                             <hr>
                                         </div>
                                         <div class="icn-main-container">
-                                            <span class="icn-container"><?php echo $model->dataRKondisi ?></span>
+                                            <span class="icn-container"><?php echo $model->dataR ?></span>
                                         </div>
                                         <p>Tingkat Kondisi</p>
                                         <ul class="pricing">
-                                            <li><?php echo $model->produk->kondisi_layar ?> Kondisi Layar</li>
-                                            <li><?php echo $model->produk->keyboard ?> Kondisi Keyboard</li>
-                                            <li><?php echo $model->produk->tracpad ?> Kondisi Tracpad</li>
-                                            <li><?php echo $model->produk->audio ?> Kondisi Audio</li>
-                                            <li><?php echo $model->produk->kamera ?> Kondisi Kamera</li>
-                                            <li><?php echo $model->produk->koneksi ?> Kondisi Koneksi</li>
-                                            <li><?php echo $model->produk->kondisi_port ?> Kondisi Port</li>
-                                            <li><?php echo $model->RsquareKondisi ?> R Square</li>
-                                            <li><?php echo $model->dataFKondisi ?> Data F</li>
-                                            <li><?php echo $model->T_layar ?> T Kondisi Layar</li>
-                                            <li><?php echo $model->T_keyboard ?> T Kondisi Keyboard</li>
-                                            <li><?php echo $model->T_tracpad ?> T Kondisi Tracpad</li>
-                                            <li><?php echo $model->T_audio ?> T Kondisi Audio</li>
-                                            <li><?php echo $model->T_kamera ?> T Kondisi Kamera</li>
-                                            <li><?php echo $model->T_koneksi ?> T Kondisi Koneksi</li>
-                                            <li><?php echo $model->T_port ?> T Kondisi Port</li>
+                                            <!--  -->
+
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
                                     </div>
@@ -193,20 +180,12 @@ $this->title = 'My Yii Application';
                                             <hr>
                                         </div>
                                         <div class="icn-main-container">
-                                            <span class="icn-container"><?php echo $model->dataRPerforma ?></span>
+                                            <span class="icn-container"><?php echo $model->dataR ?></span>
                                         </div>
                                         <p>Tingkat Performa</p>
                                         <ul class="pricing">
-                                            <li><?php echo $model->produk->ram ?> RAM</li>
-                                            <li><?php echo $model->produk->vga ?> VGA</li>
-                                            <li><?php echo $model->produk->prosesor ?> Prosesor</li>
-                                            <li><?php echo $model->produk->storage ?> Storage</li>
-                                            <li><?php echo $model->RsquarePerforma ?> R Square</li>
-                                            <li><?php echo $model->dataFPerforma ?> Data F</li>
-                                            <li><?php echo $model->T_ram ?> T RAM</li>
-                                            <li><?php echo $model->T_vga ?> T VGA</li>
-                                            <li><?php echo $model->T_presesor ?> T Prosesor</li>
-                                            <li><?php echo $model->T_storage ?> T Storage</li>
+
+
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
                                     </div>

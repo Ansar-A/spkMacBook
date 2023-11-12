@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use Symfony\Contracts\Service\Attribute\Required;
 use Yii;
 
 /**
@@ -44,11 +45,12 @@ class SpkKelayakan extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
-
+    // public $kode_produk;
     public static function tableName()
     {
         return 'spk_kelayakan';
     }
+
 
     /**
      * {@inheritdoc}
@@ -56,11 +58,11 @@ class SpkKelayakan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dataRKetahanan', 'dataRKeamanan', 'dataRKondisi', 'dataRPerforma', 'RsquareKetahanan', 'RsquareKeamanan', 'RsquareKondisi', 'RsquarePerforma', 'dataFKetahanan', 'dataFKeamanan', 'dataFKondisi', 'dataFPerforma', 'T_cicleCount', 'T_kapasitasPengisian', 'T_noSeri', 'T_garansi', 'T_ram', 'T_vga', 'T_presesor', 'T_storage', 'T_layar', 'T_keyboard', 'T_tracpad', 'T_audio', 'T_kamera', 'T_koneksi', 'T_port', 'get_produk', 'photo',], 'required'],
-            [['dataRKetahanan', 'dataRKeamanan', 'dataRKondisi', 'dataRPerforma', 'RsquareKetahanan', 'RsquareKeamanan', 'RsquareKondisi', 'RsquarePerforma', 'dataFKetahanan', 'dataFKeamanan', 'dataFKondisi', 'dataFPerforma', 'get_produk'], 'integer'],
-            [['T_cicleCount', 'T_kapasitasPengisian', 'T_noSeri', 'T_garansi', 'T_ram', 'T_vga', 'T_presesor', 'T_storage', 'T_layar', 'T_keyboard', 'T_tracpad', 'T_audio', 'T_kamera', 'T_koneksi', 'T_port'], 'number'],
-            ['kode_produk', 'string'],
-            [['kode_produk'], 'safe'],
+            [['dataR', 'Rsquare', 'dataF',  'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'required'],
+            [['get_produk'], 'integer'],
+            [['dataR', 'Rsquare', 'dataF', 'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa',], 'number'],
+            // ['kode_produk', 'string'],
+            // [['kode_produk',], 'safe'],
             [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
         ];
     }
@@ -72,62 +74,44 @@ class SpkKelayakan extends \yii\db\ActiveRecord
     {
         return [
             'id_kelayakan' => 'Id Kelayakan',
-            'dataRKetahanan' => 'Data R Ketahanan',
-            'dataRKeamanan' => 'Data R Keamanan',
-            'dataRKondisi' => 'Data R Kondisi',
-            'dataRPerforma' => 'Data R Performa',
-            'RsquareKetahanan' => 'Rsquare Ketahanan',
-            'RsquareKeamanan' => 'Rsquare Keamanan',
-            'RsquareKondisi' => 'Rsquare Kondisi',
-            'RsquarePerforma' => 'Rsquare Performa',
-            'dataFKetahanan' => 'Data F Ketahanan',
-            'dataFKeamanan' => 'Data F Keamanan',
-            'dataFKondisi' => 'Data F Kondisi',
-            'dataFPerforma' => 'Data F Performa',
-            'T_cicleCount' => 'T Cicle Count',
-            'T_kapasitasPengisian' => 'T Kapasitas Pengisian',
-            'T_noSeri' => 'T No Seri',
-            'T_garansi' => 'T Garansi',
-            'T_ram' => 'T Ram',
-            'T_vga' => 'T Vga',
-            'T_presesor' => 'T Presesor',
-            'T_storage' => 'T Storage',
-            'T_layar' => 'T Layar',
-            'T_keyboard' => 'T Keyboard',
-            'T_tracpad' => 'T Tracpad',
-            'T_audio' => 'T Audio',
-            'T_kamera' => 'T Kamera',
-            'T_koneksi' => 'T Koneksi',
-            'T_port' => 'T Port',
-            'get_produk' => 'ID Produk',
-            'kode_produk' => 'Kode Produk',
+            'dataR' => 'R Square',
+            'Rsquare' => 'Adjusted R Square',
+            'dataF' => 'F',
+            'T_ketahanan' => 'T Ketahanan',
+            'T_keamanan' => 'T Keamanan',
+            'T_kondisi' => 'T Kondisi',
+            'T_performa' => 'T Performa',
+            'get_produk' => 'Get Produk',
+            // 'kode_produk' => 'Kode Produk',
+            'importFile' => 'Import File',
 
         ];
     }
-
     /**
      * Gets query for [[GetProduk]].
      *
      * @return \yii\db\ActiveQuery
      */
+    public function getLikeProduk()
+    {
+        return $this->hasMany(LikeProduk::class, ['produk_id' => 'id_kelayakan']);
+    }
     public function getProduk()
     {
         return $this->hasOne(Produk::class, ['id' => 'get_produk']);
     }
-    public function beforeSave($insert)
-    {
-        if ($this->isNewRecord) { // Hanya lakukan ini jika sedang membuat record baru
-            $this->kode_produk = $this->generateKodeProduk(); // Panggil method generateKodeProduk
-        }
 
-        return parent::beforeSave($insert);
-    }
+    // public function beforeSave($insert)
+    // {
+    //     if ($this->isNewRecord) {
+    //         $this->kode_produk = $this->generateKodeProduk();
+    //     }
+    //     return parent::beforeSave($insert);
+    // }
 
-    protected function generateKodeProduk()
-    {
-        // Logika untuk menghasilkan kode otomatis
-        // Misalnya, Anda dapat mengambil jumlah barang yang sudah ada dan menambahkannya satu angka.
-        $count = SpkKelayakan::find()->count();
-        return 'BRG' . str_pad($count + 1, 4, '0', STR_PAD_LEFT); // Format kode sesuai kebutuhan Anda
-    }
+    // protected function generateKodeProduk()
+    // {
+    //     $count = SpkKelayakan::find()->count();
+    //     return 'BRG' . str_pad($count + 1, 4, '0', STR_PAD_LEFT);
+    // }
 }

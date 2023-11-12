@@ -21,7 +21,6 @@ use Yii;
  * @property string $created_at
  * @property string $updated_at
  * @property string|null $verification_token
- * @property int $jenis_kelamin
  * @property string $address
  * @property string $kelurahan
  * @property string $kecamatan
@@ -52,15 +51,14 @@ class Pengguna extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
 
-            [['username', 'email', 'jenis_kelamin', 'address'], 'required'],
+            [['username', 'email',  'address'], 'required'],
             [['status'], 'integer'],
-            [['username', 'jenis_kelamin'], 'string', 'max' => 50],
+            [['username',], 'string', 'max' => 50],
             [['password_hash', 'password_reset_token', 'verification_token', 'address'], 'string', 'max' => 255],
             [['email'], 'string', 'max' => 25],
             [['auth_key'], 'string', 'max' => 32],
             [['created_at', 'updated_at'], 'string', 'max' => 11],
             [['address'], 'string'],
-
             [['username'], 'unique'],
             [['email'], 'unique'],
             [['password_reset_token'], 'unique'],
@@ -83,7 +81,6 @@ class Pengguna extends \yii\db\ActiveRecord implements IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
             'verification_token' => 'Verification Token',
-            'jenis_kelamin' => 'Jenis Kelamin',
             'address' => 'Address',
         ];
     }

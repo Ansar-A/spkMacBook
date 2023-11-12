@@ -40,7 +40,7 @@ class InformasiRam extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'ram' => 'Ram',
+            'ram' => 'RAM',
         ];
     }
 

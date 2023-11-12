@@ -5,7 +5,9 @@ use kartik\file\FileInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
+// use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
+use kartik\form\ActiveField;
 
 /** @var yii\web\View $this */
 /** @var common\models\SpkKelayakan $model */
@@ -13,117 +15,131 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="spk-kelayakan-form">
-    <?php $form = ActiveForm::begin(); ?> <div class="row">
-        <div class="col-sm-6">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="panel-title">Ketahanan</h3>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="https://support.apple.com/id-id/HT201585" class="btn btn-instagram waves-effect waves-light btn-sm" target="_blank">
-                                <i class="fa fa-info"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <?= $form->field($model, 'dataRKetahanan')->textInput() ?>
-                    <?= $form->field($model, 'RsquareKetahanan')->textInput() ?>
-                    <?= $form->field($model, 'dataFKetahanan')->textInput() ?>
-                    <?= $form->field($model, 'T_cicleCount')->textInput() ?>
-                    <?= $form->field($model, 'T_kapasitasPengisian')->textInput() ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="panel-title">Keamanan</h3>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="https://support.apple.com/id-id/HT201585" class="btn btn-instagram waves-effect waves-light btn-sm" target="_blank">
-                                <i class="fa fa-info"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel-body">
-                    <?= $form->field($model, 'dataRKeamanan')->textInput() ?>
-                    <?= $form->field($model, 'RsquareKeamanan')->textInput() ?>
-                    <?= $form->field($model, 'dataFKeamanan')->textInput() ?>
-                    <?= $form->field($model, 'T_noSeri')->textInput() ?>
-                    <?= $form->field($model, 'T_garansi')->textInput() ?>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-8">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="panel-title">Kondisi</h3>
-                        </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="https://support.apple.com/id-id/HT201585" class="btn btn-instagram waves-effect waves-light btn-sm" target="_blank">
-                                <i class="fa fa-info"></i>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="panel-body">
-                    <?= $form->field($model, 'dataRKondisi')->textInput() ?>
-                    <?= $form->field($model, 'RsquareKondisi')->textInput() ?>
-                    <?= $form->field($model, 'dataFKondisi')->textInput() ?>
-                    <?= $form->field($model, 'T_layar')->textInput() ?>
-                    <?= $form->field($model, 'T_keyboard')->textInput() ?>
-                    <?= $form->field($model, 'T_tracpad')->textInput() ?>
-                    <?= $form->field($model, 'T_audio')->textInput() ?>
-                    <?= $form->field($model, 'T_kamera')->textInput() ?>
-                    <?= $form->field($model, 'T_koneksi')->textInput() ?>
-                    <?= $form->field($model, 'T_port')->textInput() ?>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-
                     <div class="row">
-                        <div class="col-sm-6">
-                            <h3 class="panel-title">Performa</h3>
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'dataR', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'placement' => 'right',
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</div>'); ?>
+                            <!-- <?= $form->field($model, 'dataR')->textInput(['placeholder' => 'R Square Ketahanan'])->label('') ?> -->
                         </div>
-                        <div class="col-sm-6 text-right">
-                            <a href="https://support.apple.com/id-id/HT201585" class="btn btn-instagram waves-effect waves-light btn-sm" target="_blank">
-                                <i class="fa fa-info"></i>
-                            </a>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'Rsquare', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'Rsquare')->textInput(['placeholder' => 'Adjusted R Square'])->label('') ?> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'dataF', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'dataF')->textInput(['placeholder' => 'Uji F Ketahanan'])->label('') ?> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'T_ketahanan', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'T_ketahanan')->textInput(['placeholder' => 'Uji T Cycle Count'])->label('') ?> -->
+                        </div>
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'T_keamanan', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'T_keamanan')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
+                        </div>
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'T_kondisi', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'T_kondisi')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
+                        </div>
+                        <div class="col-sm-12">
+                            <?php echo $form->field($model, 'T_performa', [
+                                'hintType' => ActiveField::HINT_SPECIAL,
+                                'hintSettings' => [
+                                    'iconBesideInput' => true,
+                                    'onLabelClick' => false,
+                                    'onLabelHover' => false,
+                                    'onIconClick' => true,
+                                    'onIconHover' => true,
+                                    'title' => '<i class="fas fa-info-sign"></i> Note'
+                                ]
+                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
+                            <!-- <?= $form->field($model, 'T_performa')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
                         </div>
                     </div>
                 </div>
-                <div class="panel-body">
-                    <?= $form->field($model, 'dataRPerforma')->textInput() ?>
-                    <?= $form->field($model, 'RsquarePerforma')->textInput() ?>
-                    <?= $form->field($model, 'dataFPerforma')->textInput() ?>
-                    <?= $form->field($model, 'T_ram')->textInput() ?>
-                    <?= $form->field($model, 'T_vga')->textInput() ?>
-                    <?= $form->field($model, 'T_presesor')->textInput() ?>
-                    <?= $form->field($model, 'T_storage')->textInput() ?>
-                </div>
             </div>
         </div>
-
-        <div class="col-sm-6">
+        <div class="col-sm-4">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <h3 class="panel-title">Produk</h3>
                 </div>
                 <div class="panel-body">
-
                     <?php
                     $list = Produk::find()->all();
                     echo $form->field($model, 'get_produk')->dropDownList(
@@ -131,7 +147,7 @@ use yii\widgets\ActiveForm;
                             $list,
                             'id',
                             function ($list) {
-                                return $list->id;
+                                return 'ID ' . $list->id . ' - ' . $list->nama_produk;
                             },
                         ),
                         ['prompt' => 'Select...']
@@ -139,12 +155,14 @@ use yii\widgets\ActiveForm;
                     ?>
                 </div>
             </div>
+            <div class="form-group">
+                <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success'], ['data-style' => 'zoom-in']) ?>
+                <a href="<?= Url::to(['spk-kelayakan/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
+            </div>
         </div>
     </div>
-    <div class="form-group text-center">
-        <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success'], ['data-style' => 'zoom-in']) ?>
-        <a href="<?= Url::to(['spk-kelayakan/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
-    </div>
+
+
     <?php ActiveForm::end(); ?>
 
 </div>

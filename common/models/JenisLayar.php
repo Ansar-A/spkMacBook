@@ -40,7 +40,7 @@ class JenisLayar extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'jenis' => 'Jenis',
+            'jenis' => 'Jenis Layar',
 
         ];
     }

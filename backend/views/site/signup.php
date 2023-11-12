@@ -16,9 +16,71 @@ use yii\helpers\ArrayHelper;
 // die();
 $this->title = 'Signup';
 ?>
+<html>
+
+<head>
+    <style>
+        .bg-custom {
+            background-image: linear-gradient(to right,
+                    #667eea,
+                    #8e37d7);
+            box-shadow: 0 1px 5px 0 rgba(116, 79, 168, 0.75);
+            border-top-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+
+        .card-box {
+            border-top-left-radius: 50px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .bn632-hover {
+            width: 170px;
+            font-size: 14px;
+            font-weight: 450;
+            color: #fff;
+            cursor: pointer;
+            margin: 5px;
+            height: 45px;
+            text-align: center;
+            border: none;
+            background-size: 300% 100%;
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:hover {
+            background-position: 100% 0;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:focus {
+            outline: none;
+        }
+
+        .bn632-hover.bn20 {
+            background-image: linear-gradient(to right,
+                    #667eea,
+                    #764ba2,
+                    #6b8dd6,
+                    #8e37d7);
+            box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+        }
+    </style>
+</head>
+
+</html>
 <div class="account-pages"></div>
 <div class="clearfix"></div>
-
 <div class="content">
     <div class="container">
         <div class="row">
@@ -29,9 +91,24 @@ $this->title = 'Signup';
                             <div class="profile-widget text-center">
                                 <div class="bg-custom bg-profile"></div>
                                 <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                                <h4>
+                                <!-- <h4 style="padding-top: 20px;">
                                     <font>SPK MacBook Bekas</font>
-                                </h4>
+                                </h4> -->
+                                <div class="form-group m-t-20 m-b-0">
+                                    <div class="col-sm-12 text-center">
+                                        <div class="col-lg-4">
+                                            <hr>
+                                        </div>
+                                        <div class="col-lg-4" style="padding-top: 2px;">
+                                            <h5>
+                                                <font>SPK MacBook Bekas</font>
+                                            </h5>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <hr>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="panel-body">
@@ -64,6 +141,7 @@ $this->title = 'Signup';
                                             'toggleMask' => false
                                         ]
                                     ])->passwordInput(['placeholder' => 'Enter password...']); ?>
+
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
                                     <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About...']); ?>
                                 </div>
@@ -75,18 +153,9 @@ $this->title = 'Signup';
                                         ],
                                     ]);
                                     ?>
-                                    <?= $form->field($model, 'hp', [
-                                        'feedbackIcon' => [
-                                            'prefix' => 'fa fa-phone',
-                                            'default' => 'fa fa-phone',
-                                            'success' => 'check-circle',
-                                            'error' => 'exclamation-circle',
-                                            'defaultOptions' => ['class' => 'text-custom']
-                                        ]
-                                    ])->widget('yii\widgets\MaskedInput', [
-                                        'mask' => '999-999-999-999'
-                                    ]);
+                                    <?= $form->field($model, 'hp')->textInput(['type' => 'number']);
                                     ?>
+                                    <!-- <?= $form->field($model, 'fb')->textInput() ?> -->
                                 </div>
                             </div>
                             <div class="row">
@@ -105,14 +174,13 @@ $this->title = 'Signup';
                                     </div>
                                     <div class="col-lg-4">
                                         <div class="form-group">
-                                            <?= Html::submitButton('SINGUP', ['class' => 'btn btn-block btn-primary', 'name' => 'signup-button']) ?>
+                                            <?= Html::submitButton('Signup', ['class' => 'bn632-hover bn20 btn-sm', 'name' => 'signup-button']) ?>
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <hr>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>

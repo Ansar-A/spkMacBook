@@ -25,12 +25,9 @@ use yii\web\IdentityInterface;
  */
 class User extends ActiveRecord implements IdentityInterface
 {
-
     const STATUS_DELETED = 0;
     const STATUS_INACTIVE = 9;
     const STATUS_ACTIVE = 10;
-
-
     /**
      * {@inheritdoc}
      */
@@ -62,7 +59,7 @@ class User extends ActiveRecord implements IdentityInterface
         return [
             ['status', 'default', 'value' => self::STATUS_INACTIVE],
             ['status', 'in', 'range' => [self::STATUS_INACTIVE, self::STATUS_ACTIVE, self::STATUS_DELETED]],
-            [['tentang', 'photo', 'username', 'hp', 'address', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token'], 'safe'],
+            [['tentang', 'photo', 'username', 'hp', 'address', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'verification_token', 'fb', 'ig'], 'safe'],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png, jpeg', 'on' => 'update'],
         ];
     }
@@ -223,5 +220,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function getProduks()
     {
         return $this->hasMany(Produk::class, ['id_servicer' => 'id']);
+    }
+    public function getAuth()
+    {
+        return $this->hasMany(AuthAssignment::class, ['user_id' => 'id']);
     }
 }

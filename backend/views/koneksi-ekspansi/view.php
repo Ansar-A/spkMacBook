@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-box">
                     <div class="koneksi-ekspansi-view">
                         <p>
-                            <?php if (\Yii::$app->user->can('deletePost')) : ?>
+                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
                                 <?= Html::a('Update', ['update', 'id_koneksi' => $model->id_koneksi], ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Delete', ['delete', 'id_koneksi' => $model->id_koneksi], [
                                     'class' => 'btn btn-danger',

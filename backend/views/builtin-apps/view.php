@@ -32,7 +32,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-box">
                     <div class="builtin-apps-view">
                         <p>
-                            <?php if (\Yii::$app->user->can('deletePost')) : ?>
+                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
                                 <?= Html::a('Update', ['update', 'id_builtinApps' => $model->id_builtinApps], ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Delete', ['delete', 'id_builtinApps' => $model->id_builtinApps], [
                                     'class' => 'btn btn-danger',

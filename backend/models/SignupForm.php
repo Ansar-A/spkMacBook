@@ -19,7 +19,7 @@ class SignupForm extends Model
     public $hp;
     public $tentang;
     public $get_sosial;
-
+    public $fb;
     /**
      * {@inheritdoc}
      */
@@ -29,8 +29,8 @@ class SignupForm extends Model
             ['username', 'trim'],
             ['username', 'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
-            ['username', 'string', 'min' => 2, 'max' => 255],
-
+            [['username'], 'string', 'min' => 2, 'max' => 255],
+            [['fb'], 'string', 'min' => 2, 'max' => 255],
             ['email', 'trim'],
             ['email',  'required'],
             ['email', 'email'],
@@ -41,7 +41,6 @@ class SignupForm extends Model
             // ['get_sosial', 'required'],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'jpg, png, jpeg', 'on' => 'update'],
             ['email', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This email address has already been taken.'],
-
             ['password', 'required'],
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
@@ -65,7 +64,7 @@ class SignupForm extends Model
         $user->address = $this->address;
         $user->hp = $this->hp;
         $user->tentang = $this->tentang;
-
+        $user->fb = $this->fb;
         // $user->get_sosial = $this->get_sosial;
         $user->setPassword($this->password);
         $user->generateAuthKey();

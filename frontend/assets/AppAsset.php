@@ -53,8 +53,6 @@ class AppAsset extends AssetBundle
 
         // "menu/assets/js/jquery.core.js",
         // "menu/assets/js/jquery.app.js",
-
-
         // JavaScript Libraries
         "max/lib/jquery/jquery.min.js",
         "max/lib/bootstrap/js/bootstrap.min.js",

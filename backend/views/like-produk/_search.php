@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /** @var yii\web\View $this */
-/** @var backend\models\LikeProdukSearch $model */
+/** @var frontend\models\LikeProdukSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
 
@@ -24,6 +24,7 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
     </div>
+    <p></p>
     <?php ActiveForm::end(); ?>
 
 </div>

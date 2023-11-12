@@ -9,21 +9,15 @@ use yii\widgets\ActiveForm;
 ?>
 
 <div class="produk-search">
-
     <?php $form = ActiveForm::begin([
         'action' => ['index'],
         'method' => 'get',
     ]); ?>
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="input-group">
-                <?= $form->field($model, 'globalSearch')->textInput(['placeholder' => 'Search...'])->label('') ?>
-                <span class="input-group-btn">
-                    <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn waves-effect waves-light btn-primary']) ?>
-                </span>
-            </div>
-        </div>
+    <div class="input-group">
+        <span class="input-group-btn">
+            <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn waves-effect waves-light btn-primary']) ?>
+        </span>
+        <?= $form->field($model, 'globalSearch')->textInput(['placeholder' => 'Search here...'])->label('') ?>
     </div>
     <?php ActiveForm::end(); ?>
-
 </div>

@@ -127,9 +127,9 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $DB = Yii::$app->db;
-        $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM `produk` GROUP BY id_jenis")->queryAll();
-        $namaProduk = JenisProduk::find()->groupBy("jenis")->all();
-        return $this->render('index', compact("ts", "namaProduk"));
+        $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM produk GROUP BY id_jenis")->queryAll();
+        $namaProduk = JenisProduk::find()->groupBy('jenis')->all();
+        return $this->render('index', compact('ts', 'namaProduk'));
     }
 
     /**
@@ -194,7 +194,12 @@ class SiteController extends Controller
 
         return $this->goHome();
     }
-
+    public function actionFirs()
+    {
+        $this->layout = 'mainFirs';
+        Yii::$app->user->logout();
+        return $this->render('firs');
+    }
 
     public function actionWelcome()
     {

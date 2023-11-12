@@ -16,10 +16,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
-
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Panel Pengguna</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['pengguna/index']) ?>"><i class="icon-people"></i></a>
                     </li>
                     <li>
                         <a href="<?= Url::to(['pengguna/index']) ?>">Pengguna</a>
@@ -57,7 +59,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 //'created_at',
                                 //'updated_at',
                                 //'verification_token',
-                                'jenis_kelamin',
                                 'address',
                             ],
                         ]) ?>

@@ -13,10 +13,14 @@ $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="content">
     <div class="container">
+
         <div class="col-sm-12">
             <ol class="breadcrumb">
                 <li>
-                    <h4 class="page-title">Panel Admin</h4>
+                    <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
+                </li>
+                <li>
+                    <a href="<?= Url::to(['user/index']) ?>"><i class="ti-user"></i></a>
                 </li>
                 <li>
                     <a href="<?= Url::to(['user/index']) ?>">Admin</a>

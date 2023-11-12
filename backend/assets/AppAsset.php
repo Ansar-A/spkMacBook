@@ -20,10 +20,11 @@ class AppAsset extends AssetBundle
         "purple/assets/css/icons.css",
         "purple/assets/css/pages.css",
         "purple/assets/css/responsive.css",
+        'purple/assets/plugins/jquery.steps/css/jquery.steps.css',
+
 
     ];
     public $js = [
-
         "js/main.js",
         "purple/assets/js/modernizr.min.js",
         "purple/assets/js/jquery.min.js",
@@ -46,9 +47,11 @@ class AppAsset extends AssetBundle
         "purple/assets/pages/jquery.dashboard.js",
         "purple/assets/js/jquery.core.js",
         "purple/assets/js/jquery.app.js",
+        'js/yii-override.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
+        'backend\assets\SweetAlertAsset'
     ];
 }

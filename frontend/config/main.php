@@ -12,6 +12,11 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'formatter' => [
+            'class' => 'yii\i18n\formatter',
+            'thousandSeparator' => ',',
+            'decimalSeparator' => '.',
+        ],
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
@@ -49,7 +54,7 @@ return [
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
                     'js' => [
-                        'max/js/main.js',
+                        'max/lib/jquery/jquery.min.js',
                     ]
                 ],
             ],

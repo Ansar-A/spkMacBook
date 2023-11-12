@@ -15,50 +15,30 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <div class="btn-group pull-right m-t-10">
-                    <h6 class="text-dark">
-                        <p><i class="fa fa-calendar"></i><span id="tanggalwaktu"></span></p>
-                        <script>
-                            var tw = new Date();
-                            if (tw.getTimezoneOffset() == 0)(a = tw.getTime() + (7 * 60 * 60 * 1000))
-                            else(a = tw.getTime());
-                            tw.setTime(a);
-                            var tahun = tw.getFullYear();
-                            var hari = tw.getDay();
-                            var bulan = tw.getMonth();
-                            var tanggal = tw.getDate();
-                            var hariarray = new Array(" Minggu,", " Senin,", " Selasa,", " Rabu,", " Kamis,", " Jum'at,", " Sabtu,");
-                            var bulanarray = new Array("Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "Nopember", "Desember");
-                            document.getElementById("tanggalwaktu").innerHTML = hariarray[hari] + " " + tanggal + " " + bulanarray[bulan] + " " + tahun;
-                        </script>
-                    </h6>
-                </div>
+            <div class="col-sm-12">
 
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">View SPK</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
-                    </li>
-                    <li>
-                        <a href="<?= Url::to(['spk-kelayakan/index']) ?>">Panel SPK</a>
+                        <a href="<?= Url::to(['spk-kelayakan/index']) ?>">SPK Kelayakan</a>
                     </li>
                     <li class="active">
                         View
                     </li>
                 </ol>
+
             </div>
             <div class="col-md-12">
                 <div class="card-box">
                     <div class="spk-kelayakan-view">
                         <p>
-                            <?= Html::a('Update', ['update', 'id_kelayakan' => $model->id_kelayakan], ['class' => 'btn btn-primary']) ?>
-                            <?= Html::a('Delete', ['delete', 'id_kelayakan' => $model->id_kelayakan], [
-                                'class' => 'btn btn-danger',
+                            <?= Html::a('', ['update', 'id_kelayakan' => $model->id_kelayakan], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']) ?>
+                            <?= Html::a('', ['delete', 'id_kelayakan' => $model->id_kelayakan], [
+                                'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
                                 'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
+                                    'confirm' => 'Yakin untuk menghapus item ini?',
                                     'method' => 'post',
                                 ],
                             ]) ?>
@@ -66,56 +46,48 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= DetailView::widget([
                             'model' => $model,
                             'attributes' => [
+                                'produk.nama_produk',
+                                'produk.user.username',
+                                // [
+                                //     'attribute' => 'get_produk',
+                                //     'label' => 'Nama Produk',
+                                //     'value' => function ($model) {
+                                //         return $model->produk->nama_produk;
+                                //     }
+                                // ],
+                                // [
+                                //     'attribute' => 'get_produk',
+                                //     'label' => 'Toko',
+                                //     'value' => function ($model) {
+                                //         return $model->produk->user->username;
+                                //     }
+                                // ],
+                                // [
+                                //     'label' => 'Photo',
+                                //     'format' => 'raw',
+                                //     'value' => function ($model) {
+                                //         return Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']);
+                                //     }
+                                // ],
+                                // 'kode_produk',
+                                // 'get_produk',
                                 [
-                                    'attribute' => 'get_produk',
-                                    'label' => 'Nama Produk',
-                                    'value' => function ($model) {
-                                        return $model->produk->nama_produk;
-                                    }
+                                    'attribute' => 'dataR',
+                                    'label' => 'R Square'
                                 ],
                                 [
-                                    'attribute' => 'get_produk',
-                                    'label' => 'Toko',
-                                    'value' => function ($model) {
-                                        return $model->produk->user->username;
-                                    }
+                                    'attribute' => 'Rsquare',
+                                    'label' => 'Adjusted R Square'
                                 ],
                                 [
-                                    'label' => 'Photo',
-                                    'format' => 'raw',
-                                    'value' => function ($model) {
-                                        return Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']);
-                                    }
+                                    'attribute' => 'dataF',
+                                    'label' => 'F'
                                 ],
-                                'kode_produk',
-                                'get_produk',
-                                'dataRKetahanan',
-                                'dataRKeamanan',
-                                'dataRKondisi',
-                                'dataRPerforma',
-                                'RsquareKetahanan',
-                                'RsquareKeamanan',
-                                'RsquareKondisi',
-                                'RsquarePerforma',
-                                'dataFKetahanan',
-                                'dataFKeamanan',
-                                'dataFKondisi',
-                                'dataFPerforma',
-                                'T_cicleCount',
-                                'T_kapasitasPengisian',
-                                'T_noSeri',
-                                'T_garansi',
-                                'T_ram',
-                                'T_vga',
-                                'T_presesor',
-                                'T_storage',
-                                'T_layar',
-                                'T_keyboard',
-                                'T_tracpad',
-                                'T_audio',
-                                'T_kamera',
-                                'T_koneksi',
-                                'T_port',
+
+                                'T_ketahanan',
+                                'T_keamanan',
+                                'T_kondisi',
+                                'T_performa',
                                 'id_kelayakan',
                             ],
                         ]) ?>

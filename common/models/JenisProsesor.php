@@ -41,7 +41,7 @@ class JenisProsesor extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'jenisProsesor' => 'jenisProsesor',
+            'jenisProsesor' => 'Prosesor',
         ];
     }
 

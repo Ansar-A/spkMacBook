@@ -40,7 +40,6 @@ class LikeProdukController extends Controller
     {
         $searchModel = new LikeProdukSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -49,14 +48,14 @@ class LikeProdukController extends Controller
 
     /**
      * Displays a single LikeProduk model.
-     * @param int $id_like Id Like
+     * @param int $id Id Like
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id_like)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id_like),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -71,47 +70,43 @@ class LikeProdukController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_like' => $model->id_like]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
-        return $this->renderAjax('create', [
+        return $this->render('create', [
             'model' => $model,
         ]);
     }
-
     /**
      * Updates an existing LikeProduk model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id_like Id Like
+     * @param int $id Id Like
      * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionUpdate($id_like)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id_like);
-
+        $model = $this->findModel($id);
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_like' => $model->id_like]);
+            return $this->redirect(['view', 'id' => $model->id]);
         }
-
         return $this->render('update', [
             'model' => $model,
         ]);
     }
-
     /**
      * Deletes an existing LikeProduk model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id_like Id Like
+     * @param int $id Id Like
      * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionDelete($id_like)
+    public function actionDelete($id)
     {
-        $this->findModel($id_like)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -119,13 +114,13 @@ class LikeProdukController extends Controller
     /**
      * Finds the LikeProduk model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id_like Id Like
+     * @param int $id Id Like
      * @return LikeProduk the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id_like)
+    protected function findModel($id)
     {
-        if (($model = LikeProduk::findOne(['id_like' => $id_like])) !== null) {
+        if (($model = LikeProduk::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

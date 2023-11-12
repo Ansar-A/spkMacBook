@@ -18,13 +18,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Auth Item</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['auth-item/index']) ?>">Panel Auth Item</a>
+                        <a href="<?= Url::to(['auth-item/index']) ?>"><i class="ti-key"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth-item/index']) ?>">Auth Item</a>
                     </li>
                     <li class="active">
-                        Create
+                        View
                     </li>
                 </ol>
             </div>

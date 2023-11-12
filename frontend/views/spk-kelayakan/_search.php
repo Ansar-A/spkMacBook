@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use kartik\money\MaskMoney;
 
 /** @var yii\web\View $this */
 /** @var frontend\models\SpkKelayakanSearch $model */

@@ -42,7 +42,7 @@ class JenisProduk extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'jenis' => 'Jenis',
+            'jenis' => 'Jenis MacBook',
 
         ];
     }

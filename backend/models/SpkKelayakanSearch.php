@@ -14,12 +14,14 @@ class SpkKelayakanSearch extends SpkKelayakan
     /**
      * {@inheritdoc}
      */
+    public $globalSearch;
     public function rules()
     {
         return [
-            [['id_kelayakan', 'dataRKetahanan', 'dataRKeamanan', 'dataRKondisi', 'dataRPerforma', 'RsquareKetahanan', 'RsquareKeamanan', 'RsquareKondisi', 'RsquarePerforma', 'dataFKetahanan', 'dataFKeamanan', 'dataFKondisi', 'dataFPerforma', 'get_produk'], 'integer'],
-            [['T_cicleCount', 'T_kapasitasPengisian', 'T_noSeri', 'T_garansi', 'T_ram', 'T_vga', 'T_presesor', 'T_storage', 'T_layar', 'T_keyboard', 'T_tracpad', 'T_audio', 'T_kamera', 'T_koneksi', 'T_port'], 'number'],
-            ['kode_produk', 'string']
+            [['id_kelayakan', 'dataR',  'Rsquare', 'dataF', 'get_produk'], 'integer'],
+            [['T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'number'],
+            [['globalSearch'], 'safe'],
+            // ['kode_produk', 'string']
         ];
     }
 
@@ -47,6 +49,9 @@ class SpkKelayakanSearch extends SpkKelayakan
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 5,
+            ]
         ]);
 
         $this->load($params);
@@ -60,34 +65,14 @@ class SpkKelayakanSearch extends SpkKelayakan
         // grid filtering conditions
         $query->andFilterWhere([
             'id_kelayakan' => $this->id_kelayakan,
-            'dataRKetahanan' => $this->dataRKetahanan,
-            'dataRKeamanan' => $this->dataRKeamanan,
-            'dataRKondisi' => $this->dataRKondisi,
-            'dataRPerforma' => $this->dataRPerforma,
-            'RsquareKetahanan' => $this->RsquareKetahanan,
-            'RsquareKeamanan' => $this->RsquareKeamanan,
-            'RsquareKondisi' => $this->RsquareKondisi,
-            'RsquarePerforma' => $this->RsquarePerforma,
-            'dataFKetahanan' => $this->dataFKetahanan,
-            'dataFKeamanan' => $this->dataFKeamanan,
-            'dataFKondisi' => $this->dataFKondisi,
-            'dataFPerforma' => $this->dataFPerforma,
-            'T_cicleCount' => $this->T_cicleCount,
-            'T_kapasitasPengisian' => $this->T_kapasitasPengisian,
-            'T_noSeri' => $this->T_noSeri,
-            'T_garansi' => $this->T_garansi,
-            'T_ram' => $this->T_ram,
-            'T_vga' => $this->T_vga,
-            'T_presesor' => $this->T_presesor,
-            'T_storage' => $this->T_storage,
-            'T_layar' => $this->T_layar,
-            'T_keyboard' => $this->T_keyboard,
-            'T_tracpad' => $this->T_tracpad,
-            'T_audio' => $this->T_audio,
-            'T_kamera' => $this->T_kamera,
-            'T_koneksi' => $this->T_koneksi,
-            'T_port' => $this->T_port,
-            'kode_produk' => $this->kode_produk,
+            'dataR' => $this->dataR,
+            'Rsquare' => $this->Rsquare,
+            'dataF' => $this->dataF,
+            'T_ketahanan' => $this->T_ketahanan,
+            'T_keamanan' => $this->T_keamanan,
+            'T_kondisi' => $this->T_kondisi,
+            'T_performa' => $this->T_performa,
+            // 'kode_produk' => $this->kode_produk,
             'get_produk' => $this->get_produk,
         ]);
 

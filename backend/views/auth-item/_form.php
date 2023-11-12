@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <!-- <?= $form->field($model, 'updated_at')->textInput() ?> -->
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

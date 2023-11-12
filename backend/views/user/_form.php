@@ -13,6 +13,7 @@ use yii\helpers\Url;
 /** @var common\models\User $model */
 /** @var yii\widgets\ActiveForm $form */
 ?>
+
 <div class="user-form">
     <?php $form = ActiveForm::begin([]); ?>
     <div class="row">
@@ -96,6 +97,16 @@ use yii\helpers\Url;
                         'showUpload' => false
                     ]
                 ])->label(''); ?>
+            </div>
+            <div class="col-md-12">
+                <?php
+                echo $form->field($model, 'fb')->textInput(['placeholder' => 'Input Fb...'])->label('');
+                ?>
+            </div>
+            <div class="col-md-12">
+                <?php
+                echo $form->field($model, 'ig')->textInput(['placeholder' => 'Input Ig...'])->label('');
+                ?>
             </div>
         </div>
         <div class="col-sm-12 text-center" style="padding-top:50px;">

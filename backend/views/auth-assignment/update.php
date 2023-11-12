@@ -17,10 +17,13 @@ $this->params['breadcrumbs'][] = 'Update';
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Auth Assignment</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['auth-assignment/index']) ?>">Panel Auth Assignment</a>
+                        <a href="<?= Url::to(['auth-assignment/index']) ?>"><i class="ti-key"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth-assignment/index']) ?>">Auth Assignment</a>
                     </li>
                     <li class="active">
                         Update

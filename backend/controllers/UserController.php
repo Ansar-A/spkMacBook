@@ -46,6 +46,7 @@ class UserController extends Controller
         if (\Yii::$app->user->can('managePostAdmin')) {
             $searchModel = new UserSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
+            // $query = User::find();
             // if (Yii::$app->request->post('hasEditable')) {
             //     $id = Yii::$app->request->post('editableKey');
             //     $status = User::findOne($id);
@@ -61,6 +62,7 @@ class UserController extends Controller
             //     return;
             // }
             return $this->render('index', [
+                // 'query' => $query,
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

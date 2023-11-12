@@ -38,7 +38,7 @@ class InformasiVga extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'vga' => 'Vga',
+            'vga' => 'VGA',
         ];
     }
     /**

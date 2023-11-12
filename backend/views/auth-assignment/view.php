@@ -18,10 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Auth Assignment</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['auth-assignment/index']) ?>">Panel Auth Assignment</a>
+                        <a href="<?= Url::to(['auth-assignment/index']) ?>"><i class="ti-key"></i></a>
+                    </li>
+                    <li>
+                        <a href="<?= Url::to(['auth-assignment/index']) ?>">Auth Assignment</a>
                     </li>
                     <li class="active">
                         View
@@ -45,7 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $model,
                             'attributes' => [
                                 'item_name',
-                                'user_id',
+                                [
+                                    'attribute' => 'user_id',
+                                    'value' => function ($model) {
+                                        return $model->admin->username;
+                                    }
+                                ],
                                 'created_at',
                             ],
                         ]) ?>

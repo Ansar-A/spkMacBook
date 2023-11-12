@@ -39,7 +39,12 @@
         "kartik-v/yii2-number": "dev-master",
         "2amigos/yii2-chartjs-widget": "~2.0",
         "kartik-v/yii2-editors": "@dev",
-        "kartik-v/yii2-icons": "@dev"
+        "kartik-v/yii2-icons": "@dev",
+        "yii2mod/yii2-sweet-alert": "*",
+        "kartik-v/yii2-money": "dev-master",
+        "kartik-v/yii2-detail-view": "dev-master",
+        "phpoffice/phpspreadsheet": "^1.29",
+        "kartik-v/yii2-builder": "dev-master"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

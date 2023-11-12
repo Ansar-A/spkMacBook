@@ -2,6 +2,7 @@
 
 namespace frontend\models;
 
+use common\models\Produk;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\SpkKelayakan;
@@ -20,8 +21,8 @@ class SpkKelayakanSearch extends SpkKelayakan
     public function rules()
     {
         return [
-            [['id_kelayakan', 'dataRKetahanan', 'dataRKeamanan', 'dataRKondisi', 'dataRPerforma', 'RsquareKetahanan', 'RsquareKeamanan', 'RsquareKondisi', 'RsquarePerforma', 'dataFKetahanan', 'dataFKeamanan', 'dataFKondisi', 'dataFPerforma', 'get_produk', 'budgetMin', 'budgetMax'], 'integer'],
-            [['T_cicleCount', 'T_kapasitasPengisian', 'T_noSeri', 'T_garansi', 'T_ram', 'T_vga', 'T_presesor', 'T_storage', 'T_layar', 'T_keyboard', 'T_tracpad', 'T_audio', 'T_kamera', 'T_koneksi', 'T_port'], 'number'],
+            [['id_kelayakan', 'dataR', 'Rsquare', 'dataF', 'T_ketahanan',  'T_keamanan',  'T_kondisi',  'T_performa', 'get_produk', 'budgetMin', 'budgetMax'], 'integer'],
+            [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
         ];
     }
 
@@ -43,7 +44,8 @@ class SpkKelayakanSearch extends SpkKelayakan
      */
     public function search($params)
     {
-        $query = SpkKelayakan::find()->joinWith('produk')->select(" *, (dataRKetahanan + dataRKeamanan + dataRKondisi + dataRPerforma) / 4 as akumulasi");
+        //$query = SpkKelayakan::find()->joinWith('produk')->select(" *, (T_ketahanan + T_keamanan + T_kondisi + T_performa) / 4 as akumulasi");
+        $query = SpkKelayakan::find()->joinWith('produk')->select(" *, Rsquare  as akumulasi");
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -58,14 +60,11 @@ class SpkKelayakanSearch extends SpkKelayakan
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
-        if ($this->load($params) && !$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
+        $this->load($params);
+        if (!$this->validate()) {
             return $dataProvider;
         }
 
-        // grid filtering conditions
         $query->andFilterWhere([
             'between', 'produk.harga', $this->budgetMin, $this->budgetMax,
         ]);

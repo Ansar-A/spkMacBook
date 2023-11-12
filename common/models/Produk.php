@@ -65,8 +65,8 @@ class Produk extends \yii\db\ActiveRecord
             [['nama_produk', 'id_servicer', 'tahun_rilis', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'photo', 'harga', 'baterai', 'ket', 'kapasitas_pengisian', 'no_seri', 'garansi', 'get_informasi_ram', 'get_informasi_vga'], 'required'],
             [['id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'get_informasi_ram', 'get_informasi_ram'], 'integer'],
             [['baterai',  'kapasitas_pengisian',], 'integer'],
-            [['tahun_rilis', 'id_jenis', 'photo', 'globalSearch'], 'safe'],
-            [['harga'], 'number'],
+            [['tahun_rilis', 'id_jenis', 'photo', 'globalSearch', 'harga'], 'safe'],
+            // [['harga'], 'number'],
             [['nama_produk', 'ket', 'no_seri', 'garansi'], 'string', 'max' => 255],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
             [['id_jenis'], 'exist', 'skipOnError' => true, 'targetClass' => JenisProduk::class, 'targetAttribute' => ['id_jenis' => 'id']],
@@ -84,6 +84,7 @@ class Produk extends \yii\db\ActiveRecord
             [['get_ukuranberat'], 'exist', 'skipOnError' => true, 'targetClass' => UkuranBerat::class, 'targetAttribute' => ['get_ukuranberat' => 'id_ukuranberat']],
             [['get_informasi_ram'], 'exist', 'skipOnError' => true, 'targetClass' => InformasiRam::class, 'targetAttribute' => ['get_informasi_ram' => 'id']],
             [['get_informasi_vga'], 'exist', 'skipOnError' => true, 'targetClass' => InformasiVga::class, 'targetAttribute' => ['get_informasi_vga' => 'id']],
+
         ];
     }
 
@@ -262,10 +263,7 @@ class Produk extends \yii\db\ActiveRecord
     {
         return $this->hasOne(JenisSo::class, ['id' => 'id_so']);
     }
-    public function getSpkKelayakan()
-    {
-        return $this->hasMany(SpkKelayakan::class, ['get_produk' => 'id']);
-    }
+
     public function getRam()
     {
         return $this->hasOne(InformasiRam::class, ['id' => 'get_informasi_ram']);
@@ -273,5 +271,9 @@ class Produk extends \yii\db\ActiveRecord
     public function getVga()
     {
         return $this->hasOne(InformasiVga::class, ['id' => 'get_informasi_vga']);
+    }
+    public function getSpkKelayakan()
+    {
+        return $this->hasMany(SpkKelayakan::class, ['get_produk' => 'id']);
     }
 }

@@ -14,6 +14,67 @@ use kartik\checkbox\CheckboxX;
 
 $this->title = 'Login';
 ?>
+<html>
+
+<head>
+    <style>
+        .bg-custom {
+            background-image: linear-gradient(to right,
+                    #667eea,
+                    #8e37d7);
+            box-shadow: 0 1px 5px 0 rgba(116, 79, 168, 0.75);
+            border-top-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .card-box {
+            border-top-left-radius: 50px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .bn632-hover {
+            width: 170px;
+            font-size: 14px;
+            font-weight: 450;
+            color: #fff;
+            cursor: pointer;
+            margin: 5px;
+            height: 45px;
+            text-align: center;
+            border: none;
+            background-size: 300% 100%;
+            border-top-left-radius: 20px;
+            border-bottom-right-radius: 20px;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:hover {
+            background-position: 100% 0;
+            moz-transition: all .4s ease-in-out;
+            -o-transition: all .4s ease-in-out;
+            -webkit-transition: all .4s ease-in-out;
+            transition: all .4s ease-in-out;
+        }
+
+        .bn632-hover:focus {
+            outline: none;
+        }
+
+        .bn632-hover.bn20 {
+            background-image: linear-gradient(to right,
+                    #667eea,
+                    #764ba2,
+                    #6b8dd6,
+                    #8e37d7);
+            box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+        }
+    </style>
+</head>
+
+</html>
 <div class="account-pages"></div>
 <div class="clearfix"></div>
 <div class="wrapper-page">
@@ -33,13 +94,13 @@ $this->title = 'Login';
             </div>
         <?php endif; ?>
 
-        <div class="card-box p-0">
+        <div class="card-box">
             <div class="profile-widget text-center">
                 <div class="bg-custom bg-profile"></div>
                 <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail" alt="img">
-                <h4>
+                <h5>
                     <font>SPK MacBook Bekas</font>
-                </h4>
+                </h5>
                 <div class="container">
                     <div class="panel-body text-left">
                         <?php $form = ActiveForm::begin([
@@ -70,16 +131,8 @@ $this->title = 'Login';
 
                         <div class="form-group m-t-20 m-b-0">
                             <div class="col-sm-12 text-center">
-                                <div class="col-lg-4">
-                                    <hr>
-                                </div>
-                                <div class="col-lg-4">
-                                    <div class="form-group text-center">
-                                        <?= Html::submitButton('Login', ['class' => 'btn btn-primary btn-block text-uppercase waves-effect waves-light', 'name' => 'login-button']) ?>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4">
-                                    <hr>
+                                <div class="form-group text-center">
+                                    <?= Html::submitButton('Login', ['class' => 'bn632-hover bn20 btn-sm', 'name' => 'login-button']) ?>
                                 </div>
                             </div>
                         </div>
@@ -101,6 +154,7 @@ $this->title = 'Login';
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace frontend\controllers;
 
+use common\models\LikeProduk;
 use Yii;
 use common\models\Produk;
 use common\models\SpkKelayakan;
@@ -68,9 +69,19 @@ class SpkKelayakanController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($produk_id)
     {
         $model = new SpkKelayakan();
+
+        //new
+        if (Yii::$app->user->isGuest) {
+            // Redirect atau tampilkan pesan untuk pengguna yang belum masuk.
+            return $this->redirect(['site/login']);
+        }
+        $model = new LikeProduk();
+        $model->user_id = Yii::$app->user->identity->id;
+        $model->produk_id = $produk_id;
+        //new
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -82,6 +93,7 @@ class SpkKelayakanController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+            'id' => $produk_id,
         ]);
     }
 

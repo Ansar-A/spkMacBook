@@ -18,72 +18,49 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="account-pages"></div>
 <div class="clearfix"></div>
-
-<div class="content">
-    <div class="container">
-        <div class="row">
-
-            <div class="wrapper-page">
+<section class="section1">
+    <div class="container clearfix">
+        <div class="content col-lg-12 col-md-12 col-sm-12 clearfix">
+            <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top:180px">
+                <h2 class="title">
+                    <span>Welcome to Register!</span>
+                    <hr>
+                </h2>
+                <p>Selamat datang di Sistem Pendukung Keputusan Penentuan MacBook Bekas, aplikasi yang dapat membantu anda dalam menentukan MacBook bekas terbaik.</p>
+                <p>Anda hanya perlu memasukkan budget yang anda miliki, aplikasi akan menampilkan MacBook bekas yang memiliki kualitas terbaik berdasarkan Performa, Keamanan, Ketahanan dan Kondisi komponen yang terbaik.</p>
+                <p class="withpadding">Sudah punya Akun? <a href="<?= Url::to(['site/login']) ?>" class="text-primary m-l-5">Click Here</a> untuk Login.</p>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top:50px">
                 <div class="card-box">
-                    <div class="row">
-                        <div class="profile-widget">
-                            <h1>
-                                <font>Sign Up</font>
-                            </h1>
-                            <p>SPK MacBook Bekas Layak Pakai</p>
+                    <div class="wrapper-page">
+                        <div class="row">
                             <hr>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12">
                             <?php $form = ActiveForm::begin(['id' => 'form-signup', 'class' => 'form-horizontal m-t-20']); ?>
 
-                            <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Username') ?>
+                            <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'placeholder' => 'Username'])->label('') ?>
 
-                            <?= $form->field($model, 'email')->textInput([])->label('Email') ?>
+                            <?= $form->field($model, 'email')->textInput(['placeholder' => 'Input your email'])->label('') ?>
 
-                            <?= $form->field($model, 'password')->widget(PasswordInput::classname(), [])->label('Password'); ?>
+                            <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label(''); ?>
 
-
-                            <?= $form->field($model, 'jenis_kelamin')->textInput()->label('Jenis Kelamin') ?>
-
-                            <?= $form->field($model, 'address')->textInput()->label('Address') ?>
-
+                            <?= $form->field($model, 'address')->textarea(['placeholder' => 'Alamat'])->label('') ?>
+                            <hr>
                             <div class="form-group">
-                                <div class="col-sm-12">
-                                    <div class="row">
-                                        <div class=" col-xs-12">
-                                            <?= Html::submitButton('SIGN UP', ['class' => 'btn btn-primary btn-block text-uppercase waves-effect waves-light', 'name' => 'signup-button']) ?>
-                                        </div>
-                                        <div class="col-xs-12">
-                                            <div class="checkbox checkbox-primary text-center">
-                                                <input id="checkbox-signup" type="checkbox" checked="checked">
-                                                <label for="checkbox-signup">
-                                                    <font>I accept</font> <a href="">
-                                                        <font>syarat dan Ketentuan</font>
-                                                    </a>
-                                                </label>
-                                            </div>
-                                        </div>
+
+                                <div class="row">
+                                    <div class=" col-xs-5">
+                                        <?= Html::submitButton('Register Now', ['class' => 'btn btn-primary btn-block waves-effect waves-light', 'name' => 'signup-button']) ?>
                                     </div>
                                 </div>
+
                             </div>
+                            <?php ActiveForm::end(); ?>
                         </div>
                     </div>
-                    <?php ActiveForm::end(); ?>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-12 text-center">
-                    <p>
-                        <font>Sudah punya akun?</font><a href="<?= Url::to(['site/login']) ?>" class="text-primary m-l-5"><b>
-                                <font>Sign In</font>
-                            </b></a>
-                    </p>
                 </div>
             </div>
         </div>
-
+        <!-- end content -->
     </div>
-</div>
+    <!-- end container -->
+</section>

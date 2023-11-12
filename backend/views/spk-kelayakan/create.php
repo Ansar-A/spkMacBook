@@ -14,17 +14,19 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="container">
         <div class="row">
             <div class="col-sm-12">
+
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">SPK Kelayakan</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['spk-kelayakan/index']) ?>">Panel SPK</a>
+                        <a href="<?= Url::to(['spk-kelayakan/index']) ?>">SPK Kelayakan</a>
                     </li>
                     <li class="active">
                         Create
                     </li>
                 </ol>
+
             </div>
             <div class="col-sm-12">
                 <div class="spk-kelayakan-create">

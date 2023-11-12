@@ -2,6 +2,7 @@
 
 use common\models\AuthAssignment;
 use common\models\AuthItem;
+use common\models\User;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -25,16 +26,27 @@ use yii\widgets\ActiveForm;
             },
         ),
         ['prompt' => 'Pilih...']
-    );
+    )
     ?>
     <!-- <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?> -->
 
-    <?= $form->field($model, 'user_id')->textInput(['maxlength' => true, 'placeholder' => 'lihat ID Panel Admin']) ?>
+    <?php
+    $list = User::find()->all();
+    echo $form->field($model, 'user_id')->dropDownList(
+        ArrayHelper::map(
+            $list,
+            'id',
+            function ($list) {
+                return $list->username;
+            },
+        ),
+        ['prompt' => 'User...']
+    ) ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

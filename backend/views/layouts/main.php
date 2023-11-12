@@ -1,17 +1,22 @@
 <?php
 
 /** @var \yii\web\View $this */
+
+use common\models\LikeProduk;
+
 /** @var string $content */
 
+use yii2mod\alert\Alert;
 use backend\assets\AppAsset;
-use common\widgets\Alert;
 use yii\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\helpers\Url;
 
 AppAsset::register($this);
+$totalLike = LikeProduk::find()->count();
 ?>
+
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>" class="h-100">
@@ -22,6 +27,12 @@ AppAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <style>
+        .navbar {
+            /* background: linear-gradient(to top, #FF6C22, #FF9209); */
+            background: rgb(113, 58, 190);
+        }
+    </style>
 </head>
 
 <body class="fixed-left">
@@ -34,7 +45,6 @@ AppAsset::register($this);
                     <a href="<?= Url::to(['site/index']) ?>" class="logo"><i class="fa fa-xing-square"></i></a>
                 </div>
             </div>
-
             <!-- Button mobile view to collapse sidebar menu -->
             <div class="navbar navbar-default" role="navigation">
                 <div class="container">
@@ -45,29 +55,25 @@ AppAsset::register($this);
                             </button>
                             <span class="clearfix"></span>
                         </div>
-                        <!-- <form role="search" class="navbar-left app-search pull-left hidden-xs">
-                            <input type="text" placeholder="Search..." class="form-control">
+                        <form role="search" class="navbar-left app-search pull-left hidden-xs">
+                            <input style="width: 300px;" type="text" placeholder="Search..." class="form-control">
                             <a href=""><i class="fa fa-search"></i></a>
-                        </form> -->
+                        </form>
                         <ul class="nav navbar-nav navbar-right pull-right">
-
-                            <li style="padding-top: 10px;">
-                                <button type="button" class="btn btn-default" data-container="body" title="" data-toggle="popover" data-placement="bottom" data-content="All access to SPK MacBook Bekas" data-original-title="" aria-describedby="popover112562">
-                                    <?php echo Yii::$app->user->identity->username ?>
-                                </button>
+                            <li class="dropdown top-menu-item-xs">
+                                <a href="<?= Url::to(['like-produk/index']) ?>" data-target="#" class="dropdown-toggle waves-effect waves-light">
+                                    <i class="fa fa-heart"></i> <span class="badge badge-xs badge-danger"><?php echo $totalLike ?></span>
+                                </a>
                             </li>
                             <li class="hidden-xs">
                                 <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i class="icon-size-fullscreen"></i></a>
                             </li>
-                            <!-- <li class="hidden-xs">
-                                <a href="#" class="right-bar-toggle waves-effect waves-light"><i class="icon-settings"></i></a>
-                            </li> -->
                             <li class="dropdown top-menu-item-xs">
-                                <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="true"><img src="<?= Url::to('@web/' . Yii::$app->user->identity->photo) ?>" alt="user-img" class="img-circle"> </a>
+                                <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" alt="user-img" class="img-circle"> </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?= Url::to(['user/index']) ?>"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
                                     <li><a href="javascript:void(0)"><i class="ti-settings m-r-10 text-custom"></i> Settings</a></li>
-                                    <!-- <li><a href="javascript:void(0)"><i class="ti-lock m-r-10 text-custom"></i> Lock screen</a></li> -->
+                                    <li><a href="<?= Url::to(['site/firs']) ?>"><i class="ti-lock m-r-10 text-custom"></i> Lock screen</a></li>
                                     <li class="divider"></li>
                                     <li><a href="<?= Url::to(['site/logout']) ?>" data-method="POST"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
                                 </ul>
@@ -83,20 +89,19 @@ AppAsset::register($this);
                     <ul>
                         <li class="text-muted menu-title">Dashboard</li>
                         <li class="has_sub active">
-                            <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="ti-home"></i> <span> Home </span></a>
+                            <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="fa fa-desktop"></i> <span> Dashboard </span></a>
                         </li>
-
                         <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
                             <li class="text-muted menu-title">MacBook</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-apple"></i><span>Data MacBook</span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-apple"></i><span>MacBook</span> <span style="color:#714ABA" class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['produk/index']) ?>">MacBook</a></li>
+                                    <li><a href="<?= Url::to(['produk/index']) ?>">Data MacBook</a></li>
                                 </ul>
                             </li>
                             <li class="text-muted menu-title">Komponent</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span class="menu-arrow"></span><span> Component </span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span style="color:#714ABA" class="menu-arrow"></span><span> Component </span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['jenis-produk/index']) ?>">Jenis MacBook</a></li>
                                     <li><a href="<?= Url::to(['jenis-so/index']) ?>">Sistem Operasi</a></li>
@@ -117,33 +122,36 @@ AppAsset::register($this);
                             </li>
                             <li class="text-muted menu-title">SPK Kelayakan</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-stats-up"></i><span class="menu-arrow"></span><span> SPK </span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-stats-up"></i><span style="color:#714ABA" class="menu-arrow"></span><span> SPK </span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['spk-kelayakan/index']) ?>">Kelayakan</a></li>
+                                    <li><a href="<?= Url::to(['spk-kelayakan/index']) ?>">Kelayakan MacBook</a></li>
                                 </ul>
                             </li>
                             <li class="text-muted menu-title">User</li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['user/index']) ?>">Data Admin</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span>
+                                    <span style="color:#714ABA" class="menu-arrow">
+                                    </span>
+                                </a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
-                                    <!-- <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li> -->
+                                    <li><a href="<?= Url::to(['like-produk/index']) ?>">Like Produk</a></li>
                                 </ul>
                             </li>
                             <li class="text-muted menu-title">Access</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Access Control </span> <span class="menu-arrow"></span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Access Control </span> <span style="color:#714ABA" class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['auth-item/index']) ?>">AuthItem</a></li>
-                                    <li><a href="<?= Url::to(['auth-assignment/index']) ?>">AuthAssignment</a></li>
+                                    <li><a href="<?= Url::to(['auth-item/index']) ?>">Auth Item</a></li>
+                                    <li><a href="<?= Url::to(['auth-assignment/index']) ?>">Auth Assignment</a></li>
                                     <!-- <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li> -->
-                                    <li><a href="<?= Url::to(['auth-item-child/index']) ?>">AuthItemChild</a></li>
+                                    <li><a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Item Child</a></li>
                                 </ul>
                             </li>
                         <?php elseif (\Yii::$app->user->can('Admin')) : ?>
@@ -156,7 +164,7 @@ AppAsset::register($this);
                             </li>
                             <li class="text-muted menu-title">Komponent</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span class="menu-arrow"></span><span> Component </span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-bar-chart"></i><span style="color:#714ABA" class="menu-arrow"></span><span> Component </span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['jenis-produk/index']) ?>">Jenis MacBook</a></li>
                                     <li><a href="<?= Url::to(['jenis-so/index']) ?>">Sistem Operasi</a></li>
@@ -177,13 +185,13 @@ AppAsset::register($this);
                             </li>
                             <li class="text-muted menu-title">User</li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['user/index']) ?>">Data Admin</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
                                     <!-- <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li> -->
@@ -213,6 +221,7 @@ AppAsset::register($this);
     <script>
         var resizefunc = [];
     </script>
+
     <?php $this->endBody() ?>
 </body>
 

@@ -93,7 +93,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ],
                                 [
                                     'class' => '\kartik\grid\ActionColumn',
-                                    'template' => '{view}  {delete}',
+                                    'template' => '{view}',
                                     'header' => 'Action',
                                     'buttons' => [
                                         'class' => 'btn btn-primary dropdown-toggle',

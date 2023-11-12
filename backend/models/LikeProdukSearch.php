@@ -18,7 +18,7 @@ class LikeProdukSearch extends LikeProduk
     public function rules()
     {
         return [
-            [['id_like', 'get_likeProduk', 'get_pengguna', 'globalSearch'], 'integer'],
+            [['id', 'produk_id', 'user_id', 'globalSearch'], 'integer'],
         ];
     }
 
@@ -46,6 +46,7 @@ class LikeProdukSearch extends LikeProduk
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => array('pageSize' => 4)
         ]);
 
         $this->load($params);
@@ -63,9 +64,9 @@ class LikeProdukSearch extends LikeProduk
         //     'get_pengguna' => $this->get_pengguna,
 
         // ]);
-        $query->orFilterWhere(['like', 'id_like', $this->globalSearch])
-            ->orFilterWhere(['like', 'get_likeProduk', $this->globalSearch])
-            ->orFilterWhere(['like', 'get_pengguna', $this->globalSearch]);
+        $query->orFilterWhere(['like', 'id', $this->globalSearch])
+            ->orFilterWhere(['like', 'produk_id', $this->globalSearch])
+            ->orFilterWhere(['like', 'user_id', $this->globalSearch]);
 
         return $dataProvider;
     }
