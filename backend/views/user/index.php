@@ -1,12 +1,13 @@
 <?php
 
 use common\models\User;
+use kartik\editable\Editable;
 use kartik\form\ActiveForm;
 use kartik\grid\CheckboxColumn;
 use kartik\grid\ActionColumn;
+use kartik\grid\EditableColumn;
 use yii\helpers\Html;
 use yii\helpers\Url;
-
 use kartik\grid\GridView;
 use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
@@ -227,9 +228,10 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                 <div class="col-sm-2" style="padding-top: 4px; padding-left:0%">
                                     <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
                                 </div>
+                                <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                             <?php else : ?>
                             <?php endif ?>
-                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+
                         </div>
                     </div>
 
@@ -305,6 +307,16 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     ],
 
                                     // ['class' => 'yii\grid\SerialColumn'],
+
+                                    [
+                                        'attribute' =>     'id',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search ID...',
+                                        ],
+                                    ],
                                     [
                                         'header' => '',
                                         //'contentOptions' => ['style' => 'max-width:20px;'],
@@ -319,12 +331,18 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'attribute' =>    'username',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search by ID...',
+                                        ],
                                     ],
                                     [
+                                        'class' => 'kartik\grid\EditableColumn',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],
                                         'attribute' => 'status',
                                         'format' => 'raw',
+                                        'label' => 'Status',
                                         'filter'    => [10 => "Active", 9 => "Suspended"],
                                         'value' => function ($data, $key, $index, $column) {
                                             if ($data->status == 10) {
@@ -332,8 +350,10 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                             } else {
                                                 return '<span class="label label-table label-danger">Suspended</span>';
                                             }
-                                        }
+                                        },
                                     ],
+
+
                                     // [
                                     //     'attribute' =>   'id',
                                     //     'headerOptions' => ['class' => 'text-center'],
@@ -474,7 +494,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                 ],
                             ]); ?>
                         <?php endif ?>
-
                     </div>
                 </div>
                 <div class="col-sm-3">

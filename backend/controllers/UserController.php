@@ -46,23 +46,23 @@ class UserController extends Controller
         if (\Yii::$app->user->can('managePostAdmin')) {
             $searchModel = new UserSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
-            // $query = User::find();
-            // if (Yii::$app->request->post('hasEditable')) {
-            //     $id = Yii::$app->request->post('editableKey');
-            //     $status = User::findOne($id);
+            $query = User::find();
+            if (Yii::$app->request->post('hasEditable')) {
+                $id = Yii::$app->request->post('editableKey');
+                $status = User::findOne($id);
 
-            //     $out = Json::encode(['output' => '', 'message' => '']);
-            //     $post = [];
-            //     $posted = current($_POST['User']);
-            //     $post['User'] = $posted;
-            //     if ($status->load($post)) {
-            //         $status->save();
-            //     }
-            //     echo $out;
-            //     return;
-            // }
+                $out = Json::encode(['output' => '', 'message' => '']);
+                $post = [];
+                $posted = current($_POST['User']);
+                $post['User'] = $posted;
+                if ($status->load($post)) {
+                    $status->save();
+                }
+                echo $out;
+                return;
+            }
             return $this->render('index', [
-                // 'query' => $query,
+                'query' => $query,
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
             ]);

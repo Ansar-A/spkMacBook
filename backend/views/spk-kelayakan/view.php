@@ -47,7 +47,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'model' => $model,
                             'attributes' => [
                                 'produk.nama_produk',
-                                'produk.user.username',
+                                [
+                                    'attribute' =>  'produk.user.username',
+                                    'label' => 'Toko',
+                                ],
+
                                 // [
                                 //     'attribute' => 'get_produk',
                                 //     'label' => 'Nama Produk',

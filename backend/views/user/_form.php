@@ -8,6 +8,7 @@ use kartik\form\ActiveForm;
 use kartik\select2\Select2;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use kartik\editable\Editable;
 
 /** @var yii\web\View $this */
 /** @var common\models\User $model */
@@ -44,6 +45,11 @@ use yii\helpers\Url;
                 ])->textInput(['placeholder' => 'Enter email...'])->label('');
                 ?>
             </div>
+            <div class="col-md-4">
+                <?php
+                echo $form->field($model, 'status')->dropDownList(['prompt' => 'Status Admin...', '10' => 'Active', '9' => 'Inactive'])->label('');
+                ?>
+            </div>
             <div class="col-md-8">
                 <?php
                 echo $form->field($model, 'hp', [
@@ -57,11 +63,7 @@ use yii\helpers\Url;
                 ])->textInput(['type' => 'number'], ['placeholder' => 'Enter Hp...'])->label('');
                 ?>
             </div>
-            <div class="col-md-4">
-                <?php
-                echo $form->field($model, 'status')->dropDownList(['10' => 'Active', '9' => 'Inactive'])->label('');
-                ?>
-            </div>
+
             <div class="col-md-12">
                 <?php
                 echo $form->field($model, 'address', [
@@ -94,6 +96,8 @@ use yii\helpers\Url;
                 <?= $form->field($model, 'photo')->widget(FileInput::className(), [
                     'options' => ['accept' => 'photos/*'],
                     'pluginOptions' => [
+                        'initialPreview' => Url::to('@web/' . $model->photo),
+                        'initialPreviewAsData' => true,
                         'showUpload' => false
                     ]
                 ])->label(''); ?>

@@ -15,13 +15,13 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="content">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title">Jenis Penyimpanan</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['jenis-penyimpanan/index']) ?>">Panel Jenis Penyimpanan</a>
+                        <a href="<?= Url::to(['jenis-penyimpanan/index']) ?>">Storage</a>
                     </li>
                     <li class="active">
                         View

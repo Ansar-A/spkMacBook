@@ -163,6 +163,7 @@ $totalPengguna = Pengguna::find()->count();
                             echo "<div id = 'modalContent'></div>";
                             Modal::end();
                             ?>
+
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'filterModel' => $searchModel,
@@ -286,6 +287,8 @@ $totalPengguna = Pengguna::find()->count();
                                     // 'footer' => false
                                 ],
                             ]); ?>
+
+
                         </div>
                     </div>
                     <div class="col-sm-3">

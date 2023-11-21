@@ -20,13 +20,13 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
-                        <h4 class="page-title"> Informasi RAM</h4>
+                        <a href="<?= Url::to(['site/index']) ?>"><i class="fa fa-desktop"></i></a>
                     </li>
                     <li>
-                        <a href="<?= Url::to(['site/index']) ?>">Home</a>
+                        <a href="<?= Url::to(['informasi-ram/index']) ?>">RAM</a>
                     </li>
                     <li class="active">
-                        Panel Informasi RAM
+                        Index
                     </li>
                 </ol>
             </div>
@@ -80,12 +80,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'columns' => [
 
                                             // 'id',
-                                            [
-                                                'class' => 'kartik\grid\EditableColumn',
-                                                'attribute' =>  'ram',
-                                                'headerOptions' => ['class' => 'text-center'],
-                                                'contentOptions' => ['style' => 'text-align:center'],
-                                            ],
+
                                             [
                                                 'class' => '\kartik\grid\ActionColumn',
                                                 'template' => '{view}',
@@ -113,10 +108,15 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     },
                                                 ],
                                             ],
-
+                                            [
+                                                'class' => 'kartik\grid\EditableColumn',
+                                                'attribute' =>  'ram',
+                                                'headerOptions' => ['class' => 'text-center'],
+                                                'contentOptions' => ['style' => 'text-align:center'],
+                                            ],
                                         ],
                                         'toolbar' => [
-                                            Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                            Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
                                             // Html::a('<i class="md md-person-add"></i>', ['create'], [
                                             //     'type' => 'button',
                                             //     'class' => 'btn btn-success'

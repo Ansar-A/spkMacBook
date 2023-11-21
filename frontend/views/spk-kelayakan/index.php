@@ -11,11 +11,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <section class="post-wrapper-top">
-    <!-- <div class="container">
+    <div class="container">
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
-    </div> -->
+    </div>
 </section>
 <section class="section1">
     <div class="container clearfix">

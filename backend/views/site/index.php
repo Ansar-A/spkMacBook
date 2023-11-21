@@ -3,14 +3,21 @@
 /** @var yii\web\View $this */
 
 use common\models\Pengguna;
+use common\models\Produk;
 use common\models\SpkKelayakan;
 use common\models\User;
 use dosamigos\chartjs\ChartJs;
 use yii\helpers\Url;
 
 $this->title = 'My Yii Application';
+
 $totalPengguna = Pengguna::find()->count();
-$totalProduk = SpkKelayakan::find()->count();
+if (\Yii::$app->user->can('SuperAdmin')) {
+    $totalProduk = Produk::find()->count();
+} else {
+    $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
+}
+// $totalProduk = SpkKelayakan::find()->count();
 // $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
 $totalServicer = User::find()->count();
 
@@ -46,11 +53,10 @@ foreach ($namaProduk as $namaP) {
             display: flex;
             flex-direction: column;
             align-items: center;
-
             /* background-color: rgba(113, 113, 113, 0.6);
             backdrop-filter: blur(20px); */
             text-align: center;
-            border: 1px solid #FFFFFF;
+            /* border: 1px solid #FFFFFF; */
             /* Transform Propertys */
             --rotate-animation: rotate(45deg);
             --scale-animation: scale(0);
@@ -297,12 +303,150 @@ foreach ($namaProduk as $namaP) {
             font-weight: 800;
         }
 
-        /* button  */
+        /* tes */
+        @import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .courses-container {
+            padding-bottom: 20px;
+        }
+
+        .course {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+            display: flex;
+            max-width: 100%;
+            /* margin: 20px; */
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .course h6 {
+            opacity: 0.6;
+            margin: 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .course h2 {
+            letter-spacing: 1px;
+            margin: 10px 0;
+        }
+
+        .course-preview {
+            background-color: rgb(113, 58, 190);
+            color: #fff;
+            padding: 30px;
+            max-width: 250px;
+        }
+
+        .course-preview a {
+            color: #fff;
+            display: inline-block;
+            font-size: 12px;
+            opacity: 0.6;
+            margin-top: 30px;
+            text-decoration: none;
+        }
+
+        .course-info {
+            padding: 30px;
+            position: relative;
+            width: 100%;
+        }
+
+        .progress-container {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            text-align: right;
+            width: 150px;
+        }
+
+        .progress {
+            background-color: #ddd;
+            border-radius: 3px;
+            height: 5px;
+            width: 300px;
+        }
+
+        .progress::after {
+            border-radius: 3px;
+            background: rgb(113, 58, 190);
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 5px;
+            width: 100%;
+        }
+
+        .progress-text {
+            font-size: 10px;
+            opacity: 0.6;
+            letter-spacing: 1px;
+        }
+
+        .btn {
+            background-color: rgb(113, 58, 190);
+            border: 0;
+            border-radius: 10px;
+            box-shadow: 0 10px 10px rgba(0, 0, 0, 0.2);
+            color: #fff;
+            font-size: 16px;
+            padding: 12px 25px;
+            position: absolute;
+            bottom: 30px;
+            right: 30px;
+            letter-spacing: 1px;
+        }
+
+
+        .floating-btn {
+            border-radius: 10px;
+            background-color: rgb(113, 58, 190);
+            border: 1px solid rgb(113, 58, 190);
+            box-shadow: 0 16px 22px -17px #03153B;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 20px;
+            padding: 12px 20px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 999;
+        }
+
+        .floating-btn:hover {
+            background-color: #ffffff;
+            color: #001F61;
+        }
+
+        .floating-btn:focus {
+            outline: none;
+        }
+
+
+        @media screen and (max-width: 480px) {
+
+            .social-panel-container.visible {
+                transform: translateX(0px);
+            }
+
+            .floating-btn {
+                right: 10px;
+            }
+        }
     </style>
 </head>
 
 </html>
-<div class="content">
+<div class="content" id="up">
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -314,51 +458,74 @@ foreach ($namaProduk as $namaP) {
                     </div>
                 <?php endif; ?>
             </div>
+            <div class="col-sm-12">
+                <div class="courses-container">
+                    <div class="course">
+                        <div class="course-preview">
+                            <h6 style="color: white;">New</h6>
+                            <h4 style="color: white;">Simple and Inovatif</h4>
+                            <a href="#">View all information <i class="fa fa-exclamation"></i></a>
+                        </div>
+                        <div class="course-info">
+                            <div class="progress-container">
+                                <div class="progress"></div>
+                                <span class="progress-text">
+                                    <!-- 6/9 Challenges -->
+                                </span>
+                            </div>
+                            <h6>Website</h6>
+                            <h3>Sistem Pendukung Keputusan Penentuan <br>MacBook Bekas</h3>
+                            <?php if (Yii::$app->user->can('SuperAdmin')) : ?>
+                                <a style="height: 40px; width: 120px; padding-top:9px" type="button" class="btn" href="<?= Url::to(['spk-kelayakan/index']) ?>">Start</a>
+                            <?php else : ?>
+                                <a style="height: 40px; width: 120px; padding-top:9px" type="button" class="btn" href="<?= Url::to(['produk/index']) ?>">Start</a>
+                            <?php endif ?>
 
-            <div class="col-sm-12" style="padding-bottom:20px; ">
-                <div class="card" style="border-radius:5px;">
-                    <p style="padding-top:20px"></p>
-                    <span class="title">Sistem Pendukung Keputusan</span>
-                    <span class="text-white">Penentuan MacBook Bekas Layak Pakai</span>
-                    <p></p>
-                    <span class="small-text">version 1.0</span>
-                    <div class="button-list" style="padding-top: 30px;">
-                        <!-- <a href="<?= Url::to(['site/info']) ?>" type="button" class="btn btn-facebook waves-effect waves-light">
-                            <i class="fa fa-info m-r-5"></i> More info
-                        </a> -->
-                        <button type="button" class="btn btn-youtube waves-effect waves-light">
-                            <i class="fa fa-youtube m-r-5"></i> Youtube
-                        </button>
-                        <button type="button" class="btn btn-instagram waves-effect waves-light">
-                            <i class="fa fa-instagram m-r-5"></i> Instagram
-                        </button>
-                        <button type="button" class="btn btn-github waves-effect waves-light">
-                            <i class="fa fa-github m-r-5"></i> Github
-                        </button>
+                        </div>
                     </div>
                 </div>
+                <a type="button" class="floating-btn" href="#up">
+                    <i class="fa fa-sort-asc"></i>
+                </a>
+
             </div>
+
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="col-sm-4">
-                        <div class="widget-panel widget-style-2 bg-white"><i class="md md-people text-primary" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
-                            <h2 class="m-0 text-dark counter font-600"><?php echo $totalServicer ?></h2>
-                            <div class="text-muted m-t-5">Admin</div>
+                    <?php if (Yii::$app->user->can('SuperAdmin')) : ?>
+                        <div class="col-sm-4">
+                            <div class="widget-panel widget-style-2 bg-white"><i class="md md-people text-primary" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
+                                <h2 class="m-0 text-dark counter font-600"><?php echo $totalServicer ?></h2>
+                                <div class="text-muted m-t-5">Admin</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="widget-panel widget-style-2 bg-white"><i class="md md-assessment text-info" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
+                                <h2 class="m-0 text-dark counter font-600"><?php echo $totalProduk ?></h2>
+                                <div class="text-muted m-t-5">Product</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
+                                <h2 class="m-0 text-dark counter font-600"><?php echo $totalPengguna ?></h2>
+                                <div class="text-muted m-t-5">Pengguna</div>
+                            </div>
+                        </div>
+                    <?php else : ?>
+                        <div class="col-sm-6">
+                            <div class="widget-panel widget-style-2 bg-white"><i class="md md-assessment text-info" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
+                                <h2 class="m-0 text-dark counter font-600"><?php echo $totalProduk ?></h2>
+                                <div class="text-muted m-t-5">Product</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
+                                <h2 class="m-0 text-dark counter font-600"><?php echo $totalPengguna ?></h2>
+                                <div class="text-muted m-t-5">Pengguna</div>
+                            </div>
+                        </div>
+                    <?php endif ?>
 
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="widget-panel widget-style-2 bg-white"><i class="md md-assessment text-info" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
-                            <h2 class="m-0 text-dark counter font-600"><?php echo $totalProduk ?></h2>
-                            <div class="text-muted m-t-5">Product</div>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success" style="padding-left: 20px; border-left-width: 10px; padding-right: 20px;"></i>
-                            <h2 class="m-0 text-dark counter font-600"><?php echo $totalPengguna ?></h2>
-                            <div class="text-muted m-t-5">Pengguna</div>
-                        </div>
-                    </div>
                     <div class="col-sm-12">
                         <div class="card-box">
                             <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>

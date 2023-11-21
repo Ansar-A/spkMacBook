@@ -27,18 +27,8 @@ AppAsset::register($this);
 
 <body>
     <?php $this->beginBody() ?>
-    <div class="topbar clearfix" style="padding-bottom:8px">
-        <div class="container">
-            <div class="col-lg-12 text-right">
-                <div class="social_buttons">
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-instagram"></i></a>
-                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google+"><i class="fa fa-github"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <header class="header">
+
+    <header class="header" id="#dmtop">
         <div class="container">
             <div class="site-header clearfix" style="padding-top: 10px;">
                 <div class="col-lg-3 col-md-3 col-sm-12 title-area">
@@ -98,6 +88,7 @@ AppAsset::register($this);
             </div>
         </div>
     </footer>
+    <div class="dmtop" style="bottom: 25px;">Scroll to Top</div>
     <?php $this->endBody() ?>
 </body>
 

@@ -42,6 +42,7 @@ use Yii;
  */
 class SpkKelayakan extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -114,4 +115,5 @@ class SpkKelayakan extends \yii\db\ActiveRecord
     //     $count = SpkKelayakan::find()->count();
     //     return 'BRG' . str_pad($count + 1, 4, '0', STR_PAD_LEFT);
     // }
+
 }

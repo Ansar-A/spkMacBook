@@ -160,6 +160,7 @@ class SpkKelayakanController extends Controller
                 $highestRow = $worksheet->getHighestRow();
                 // $highestColumn = $worksheet->getHighestColumn();
                 for ($row = 2; $row <= $highestRow; $row++) {
+
                     $cellValue = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
@@ -169,6 +170,7 @@ class SpkKelayakanController extends Controller
                     $cellValue = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                     // var_dump($cellValue);
                     $model = new SpkKelayakan();
+
                     $model->dataR = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $model->Rsquare = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $model->dataF = $worksheet->getCellByColumnAndRow(3, $row)->getValue();

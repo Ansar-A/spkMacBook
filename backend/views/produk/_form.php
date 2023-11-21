@@ -316,6 +316,8 @@ use yii\helpers\Url;
                             <?= $form->field($model, 'photo')->widget(FileInput::className(), [
                                 'options' => ['accept' => 'photos/*'],
                                 'pluginOptions' => [
+                                    'initialPreview' => Url::to('@web/' . $model->photo),
+                                    'initialPreviewAsData' => true,
                                     'showUpload' => false,
                                     'browseLabel' => '',
                                     'removeLabel' => '',

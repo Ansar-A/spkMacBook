@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <div class="row">
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                     <div class="card">
                         <div style="padding-top: 30px;">
                             <img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="img-circle" alt="profile-image" width="80px" height="80px">
@@ -163,11 +163,24 @@ $this->params['breadcrumbs'][] = $this->title;
                                 </div>
                             <?php endif ?>
                         </div>
-                        <!-- <a class="button" href="#">More</a> -->
+
                     </div>
-                </div>
-                <div class="col-sm-9">
+                </div> -->
+                <div class="col-sm-12">
                     <div class="card-box">
+                        <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                            <div class="panel-heading" style="padding-left: 0px;">
+                                <?= Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']) ?>
+                                <?= Html::a('', ['delete', 'id' => $model->id], [
+                                    'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
+                                    'data' => [
+                                        'confirm' => 'Are you sure you want to delete this item?',
+                                        'method' => 'post',
+                                    ],
+                                ]) ?>
+                            </div>
+                        <?php else : ?>
+                        <?php endif ?>
                         <div class="user-view">
                             <?= DetailView::widget([
                                 'model' => $model,
@@ -175,17 +188,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'class' => 'table-bordered  table table-hover'
                                 ],
                                 'attributes' => [
-                                    // 'id',
+                                    'id',
+                                    [
+                                        'label' => 'Photo',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            return Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']);
+                                        }
+                                    ],
                                     'username',
                                     'address',
-                                    // 'tentang',
-                                    // [
-                                    //     'label' => 'Photo',
-                                    //     'format' => 'raw',
-                                    //     'value' => function ($model) {
-                                    //         return Html::img('@web/' . $model->photo, ['style' => 'heigth: 50px; width:50px;', 'class' => 'img-responsive img-rounded']);
-                                    //     }
-                                    // ],
+                                    'tentang',
+
                                     'hp',
                                     // 'auth_key',
                                     // 'password_hash',

@@ -12,16 +12,21 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        // "menu/assets/plugins/morris/morris.css",
-        // "menu/assets/css/bootstrap.min.css",
-        // "menu/assets/css/core.css",
-        // "menu/assets/css/components.css",
-        // "menu/assets/css/icons.css",
-        // "menu/assets/css/pages.css",
-        // "menu/assets/css/menu.css",
-        // "menu/assets/css/responsive.css",
 
         // template max
+        // "max/lib/bootstrap/css/bootstrap.min.css",
+        // "max/lib/font-awesome/css/font-awesome.min.css",
+        // "max/lib/prettyphoto/css/prettyphoto.css",
+        // "max/lib/hover/hoverex-all.css",
+        // "max/lib/jetmenu/jetmenu.css",
+        // "max/lib/owl-carousel/owl-carousel.css",
+        // "max/css/style.css",
+        // "max/css/colors/blue.css",
+
+        //template 
+        "max/img/favicon.png",
+        "max/img/apple-touch-icon.png",
+        "https://fonts.googleapis.com/css?family=Ruda:400,900,700",
         "max/lib/bootstrap/css/bootstrap.min.css",
         "max/lib/font-awesome/css/font-awesome.min.css",
         "max/lib/prettyphoto/css/prettyphoto.css",
@@ -29,10 +34,11 @@ class AppAsset extends AssetBundle
         "max/lib/jetmenu/jetmenu.css",
         "max/lib/owl-carousel/owl-carousel.css",
         "max/css/style.css",
-        "max/css/colors/blue.css",
+        "max/css/colors/blue.css"
+
     ];
     public $js = [
-        "js/main.js",
+        // "js/main.js",
         // "menu/assets/js/modernizr.min.js",
         // "menu/assets/js/jquery.min.js",
         // "menu/assets/js/bootstrap.min.js",
@@ -54,7 +60,7 @@ class AppAsset extends AssetBundle
         // "menu/assets/js/jquery.core.js",
         // "menu/assets/js/jquery.app.js",
         // JavaScript Libraries
-        "max/lib/jquery/jquery.min.js",
+        // "max/lib/jquery/jquery.min.js",
         "max/lib/bootstrap/js/bootstrap.min.js",
         "max/lib/php-mail-form/validate.js",
         "max/lib/prettyphoto/js/prettyphoto.js",

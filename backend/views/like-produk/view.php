@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12">
                 <div class="card-box">
                     <div class="like-produk-view">
-                        <p>
+                        <!-- <p>
                             <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                                 'class' => 'btn btn-danger',
                                 'data' => [
@@ -42,17 +42,23 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'method' => 'post',
                                 ],
                             ]) ?>
-                        </p>
+                        </p> -->
 
                         <?= DetailView::widget([
                             'model' => $model,
                             'attributes' => [
                                 'id',
-
+                                [
+                                    'label' => 'Toko',
+                                    'attribute' => 'produk_id',
+                                    'value' => function ($model) {
+                                        return $model->kelayakan->produk->user->username;
+                                    }
+                                ],
                                 [
                                     'attribute' => 'produk_id',
                                     'value' => function ($model) {
-                                        return $model->kelayakan->kode_produk;
+                                        return $model->kelayakan->produk->nama_produk;
                                     }
                                 ],
                                 [

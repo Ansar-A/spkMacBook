@@ -260,9 +260,19 @@ if (\Yii::$app->user->can('SuperAdmin')) {
                                 ],
                                 //['class' => 'yii\grid\SerialColumn'],
 
+                                // [
+                                //     'attribute' =>  'id_kelayakan',
+                                //     'label'  => 'ID',
+                                //     'contentOptions' => ['style' => 'text-align:center'],
+                                //     'headerOptions' => ['class' => 'text-center'],
+                                //     'filterInputOptions' => [
+                                //         'class'       => 'form-control',
+                                //         'placeholder' => 'Search...',
+                                //     ],
+                                // ],
                                 [
-                                    'attribute' =>  'id_kelayakan',
-                                    'label'  => 'ID',
+                                    'attribute' =>  'produk.id',
+                                    'label'  => 'ID Produk',
                                     'contentOptions' => ['style' => 'text-align:center'],
                                     'headerOptions' => ['class' => 'text-center'],
                                     'filterInputOptions' => [
@@ -274,7 +284,7 @@ if (\Yii::$app->user->can('SuperAdmin')) {
                                     'contentOptions' => ['style' => 'text-align:center'],
                                     'headerOptions' => ['class' => 'text-center'],
                                     'attribute' => 'produk.nama_produk',
-                                    'label'  => 'ID Produk',
+                                    'label'  => 'Produk',
                                     'filterInputOptions' => [
                                         'class'       => 'form-control',
                                         'placeholder' => 'Search Produk...',
@@ -298,6 +308,7 @@ if (\Yii::$app->user->can('SuperAdmin')) {
                                     'contentOptions' => ['style' => 'text-align:center'],
                                     'headerOptions' => ['class' => 'text-center'],
                                     'attribute' => 'Rsquare',
+                                    // 'format' => ['formattedNilaiFloat', 2],
                                     'label' => 'Adjusted R Square',
                                     'filterInputOptions' => [
                                         'class'       => 'form-control',

@@ -14,7 +14,12 @@ use yii\bootstrap\Nav;
 use yii\helpers\Url;
 
 AppAsset::register($this);
-$totalLike = LikeProduk::find()->count();
+if (\Yii::$app->user->can('SuperAdmin')) {
+    $totalLike = LikeProduk::find()->count();
+} else {
+    $totalLike = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id])->count();
+}
+
 ?>
 
 <?php $this->beginPage() ?>
@@ -194,7 +199,7 @@ $totalLike = LikeProduk::find()->count();
                                 <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
-                                    <!-- <li><a href="<?= Url::to(['like-produk/index']) ?>">Like</a></li> -->
+                                    <li><a href="<?= Url::to(['like-produk/index']) ?>">Like Produk</a></li>
                                 </ul>
                             </li>
                         <?php endif ?>

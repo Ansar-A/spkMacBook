@@ -46,7 +46,7 @@ class ProdukController extends Controller
     public function actionIndex()
     {
 
-        if (\Yii::$app->user->can('SuperAdmin')) {
+        if (\Yii::$app->user->can('managePostProduk')) {
             $searchModel = new ProdukSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             // editable

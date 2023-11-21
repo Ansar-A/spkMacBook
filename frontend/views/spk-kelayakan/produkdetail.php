@@ -23,7 +23,7 @@ $this->title = 'My Yii Application';
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="left-sidebar.html#popular" data-toggle="tab" aria-expanded="false">Basic</a></li>
-                    <li class=""><a href="left-sidebar.html#kelayakan" data-toggle="tab" aria-expanded="true"> Tingkat Kelayakan </a></li>
+                    <li class=""><a href="left-sidebar.html#kelayakan" data-toggle="tab" aria-expanded="true"> Toko </a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="popular">
@@ -54,66 +54,115 @@ $this->title = 'My Yii Application';
                                                 <span class="icon-next"></span>
                                             </a>
                                         </div>
-
                                     </div>
                                 </article>
+                                <!-- detail information -->
+                                <div class="row" style="padding-left: 20px;padding-right: 20px;">
+                                    <div class="col-lg-12 col-md-12 col-sm-12">
+                                        <div class="widget effect-slide-bottom in" data-effect="slide-bottom" style="transition: all 0.7s ease-in-out 0s;">
+                                            <h3 class="title"><i class="fa fa-laptop"></i> Detail Information</h3>
+                                            <ul>
+                                                <li class="version">Layar : <span><?php echo $model->produk->nama_produk ?></span></li>
+                                                <li class="release">Warna : <span><?php echo $model->produk->warna->warna ?></span></li>
+                                                <li class="designer">Daya : <span><?php echo $model->produk->daya->informasi_baterai ?></span></li>
+                                                <li class="designer">Wifi : <span><?php echo $model->produk->nirkabel->wifi ?></span></li>
+                                                <li class="designer">Bluetooth: <span><?php echo $model->produk->nirkabel->bluetooth ?></span></li>
+                                                <li class="designer">Panjang : <span> <?php echo $model->produk->ukuranberat->panjang ?></span></li>
+                                                <li class="designer">Lebar : <span><?php echo $model->produk->ukuranberat->lebar ?></span></li>
+                                                <li class="designer">Berat : <span><?php echo $model->produk->ukuranberat->berat ?></span></li>
+                                                <li class="designer">Tinggi : <span><?php echo $model->produk->ukuranberat->tinggi ?></span></li>
+                                                <li class="designer">Kamera : <span><?php echo $model->produk->kameras->kamera ?></span></li>
+                                                <li class="designer">Builtin App : <span><?php echo $model->produk->builtinApps->builtinApp ?></span></li>
+                                                <li class="designer">Audio : <span><?php echo $model->produk->audios->audio ?></span></li>
+                                                <li class="designer">Koneksi Ekspansi : <span><?php echo $model->produk->koneksiekspansi->koneksiEkspansi ?></span></li>
+                                                <li class="designer">Baterai : <span><?php echo $model->produk->baterai ?></span></li>
+                                                <li class="designer">Kapasitas Pengisian : <span><?php echo $model->produk->kapasitas_pengisian ?></span></li>
+                                            </ul>
+                                            <hr>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 
                             <div class="content col-lg-5 col-md-5 col-sm-5 col-xs-12 clearfix" style="padding-top: 20px;padding-bottom: 0px;">
+
                                 <div class="theme_details">
-                                    <div class="item_price">
-                                        <h3><span><small>Rp</small><?php echo $model->produk->harga ?></span></h3>
-                                    </div>
-                                    <hr>
-                                    <div class="widget effect-slide-bottom in" data-effect="slide-bottom" style="transition: all 0.7s ease-in-out 0s;margin-bottom: 0px;padding-bottom: 0px;padding-top: 14px;">
-                                        <h3 class="title"><i class="fa fa-laptop"></i> <?php echo $model->produk->nama_produk ?></h3>
-                                        <ul class="">
-                                            <li><a><?php echo $model->produk->jenis->jenis ?></a></li>
-                                            <li><a><?php echo  $model->produk->so->jenis ?></a></li>
-                                            <li><a><?php echo $model->produk->prosesors->jenisProsesor ?></a></li>
-                                            <li><a><?php echo $model->produk->penyimpanan->jenis ?></a></li>
-                                            <li><a>Release Date <?php echo $model->produk->tahun_rilis ?></a></li>
+                                    <div class="details_section">
+                                        <h3>Item Details</h3>
+                                        <div class="stat f-container" style="height:120px">
+                                            <div class="f-element col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <i class="fa fa-laptop f1-4x"></i>
+                                                <div class="milestone-counter">
+                                                    <span class=""><?php echo $model->T_ketahanan ?></span>
+                                                    <div class="">Ketahanan</div>
+                                                </div>
+                                            </div>
+                                            <div class="f-element col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <i class="fa fa-laptop f1-4x"></i>
+                                                <div class="milestone-counter">
+                                                    <span class=""><?php echo $model->T_keamanan ?></span>
+                                                    <div class="">Keamanan</div>
+                                                </div>
+                                            </div>
+                                            <div class="f-element col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <i class="fa fa-laptop f1-4x"></i>
+                                                <div class="milestone-counter">
+                                                    <span class=""><?php echo $model->T_kondisi ?></span>
+                                                    <div class="">Kondisi</div>
+                                                </div>
+                                            </div>
+                                            <div class="f-element col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                                <i class="fa fa-laptop f1-4x"></i>
+                                                <div class="milestone-counter">
+                                                    <span class=""><?php echo $model->T_performa ?></span>
+                                                    <div class="">Performa</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="f-element">
+                                            <div class="milestone-counter">
+                                                <span class="stat-count highlight"><?php echo $model->Rsquare ?></span>%
+                                                <div class="milestone-details">Kelayakan</div>
+                                            </div>
+                                        </div>
+
+
+                                        <ul>
+                                            <li class="version">Nama Produk : <span><?php echo $model->produk->nama_produk ?></span></li>
+                                            <li class="release">Harga : <span><small>Rp</small><?php echo $model->produk->harga ?></span></li>
+                                            <li class="designer">Toko : <span><?php echo $model->produk->user->username ?></span></li>
+                                            <li class="designer">Jenis MacBook : <span><?php echo  $model->produk->so->jenis ?></span></li>
+                                            <li class="designer">Prosesor : <span><?php echo $model->produk->prosesors->jenisProsesor ?></span></li>
+                                            <li class="designer">Sistem Operasi : <span><?php echo  $model->produk->so->jenis ?></span></li>
+                                            <li class="designer">Penyimpanan : <span><?php echo $model->produk->penyimpanan->jenis ?></span></li>
+                                            <li class="designer">No Seri : <span> <?php echo $model->produk->no_seri ?></span></li>
+                                            <li class="designer">Garansi : <span> <?php echo $model->produk->garansi ?></span></li>
+                                            <li class="designer">Tahun Rilis : <span><?php echo $model->produk->tahun_rilis ?></span></li>
+
                                         </ul>
                                     </div>
-                                    <!-- buttons -->
-                                    <hr>
-                                    <div class="rating text-center">
-                                        <i class="fa fa-home"></i>
-                                        <i class="">&nbsp;</i>
-                                        <i class="fa fa-instagram"></i>
-                                        <i class="">&nbsp;</i>
-                                        <i class="fa fa-facebook"></i>
 
-                                        <p><?php echo $model->produk->user->username ?></p>
-                                    </div>
-                                    <!-- rating -->
                                 </div>
                             </div>
-                            <div class="row" style="padding-left: 20px;padding-right: 20px;">
-                                <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <div class="widget effect-slide-bottom in" data-effect="slide-bottom" style="transition: all 0.7s ease-in-out 0s;">
-                                        <h3 class="title"><i class="fa fa-laptop"></i> Detail Information</h3>
-                                        <ul class="check">
-                                            <li><a href="#">Warna <?php echo $model->produk->warna->warna ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->daya->informasi_baterai ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->kameras->kamera ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->nirkabel->wifi ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->nirkabel->bluetooth ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->ukuranberat->tinggi ?>, <?php echo $model->produk->ukuranberat->panjang ?>, <?php echo $model->produk->ukuranberat->lebar ?>, <?php echo $model->produk->ukuranberat->berat ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->builtinApps->builtinApp ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->koneksiekspansi->koneksiEkspansi ?></a></li>
-                                            <li><a href="#"><?php echo $model->produk->audios->audio ?></a></li>
-                                        </ul>
-                                        <hr>
-                                    </div>
-                                </div>
 
-                            </div>
                         </div>
 
                     </div>
                     <div class="tab-pane" id="kelayakan">
-                        <div class="details_section">
+                        <div class="portfolio_details">
+                            <div class="details_section">
+                                <h3>About Toko</h3>
+                                <p><?php echo $model->produk->user->tentang ?></p>
+                                <hr>
+                                <ul>
+                                    <li class="version">Toko: <span><a href="#"><?php echo $model->produk->user->username ?></a></span></li>
+                                    <li class="update">Address: <span><a href="#"><?php echo $model->produk->user->address ?></a></li>
+                                    <li class="release">Email: <span><?php echo $model->produk->user->email ?></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- <div class="details_section">
                             <div class="row">
                                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12 effect-slide-bottom in" data-effect="slide-bottom" style="transition: all 0.7s ease-in-out 0s;">
                                     <div class="custom-box">
@@ -122,7 +171,7 @@ $this->title = 'My Yii Application';
                                             <hr>
                                         </div>
                                         <div class="icn-main-container">
-                                            <span class="icn-container"><?php echo $model->dataR ?></span>
+                                            <span class="icn-container"></span>
                                         </div>
                                         <p>Tingkat Ketahanan</p>
                                         <ul class="pricing">
@@ -149,8 +198,7 @@ $this->title = 'My Yii Application';
                                         </div>
                                         <p>Tingkat Keamanan</p>
                                         <ul class="pricing">
-                                            <li><?php echo $model->produk->no_seri ?> (No Seri)</li>
-                                            <li><?php echo $model->produk->garansi ?> Garansi</li>
+
 
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
@@ -167,7 +215,7 @@ $this->title = 'My Yii Application';
                                         </div>
                                         <p>Tingkat Kondisi</p>
                                         <ul class="pricing">
-                                            <!--  -->
+
 
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
@@ -189,30 +237,14 @@ $this->title = 'My Yii Application';
                                         </ul>
                                         <a class="btn btn-primary" href="#">More Info</a>
                                     </div>
-                                    <!-- end custombox -->
+
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
         </div>
 
-    </div>
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="portfolio_details">
-            <div class="details_section">
-                <h3>About Toko</h3>
-                <p><?php echo $model->produk->user->tentang ?></p>
-                <hr>
-                <ul>
-                    <li class="version">Toko: <span><a href="#"><?php echo $model->produk->user->username ?></a></span></li>
-                    <li class="update">Address: <span><a href="#"><?php echo $model->produk->user->address ?></a></li>
-                    <li class="release">Email: <span><?php echo $model->produk->user->email ?></span></li>
-                </ul>
-            </div>
-            <!-- details section -->
-        </div>
-        <!-- theme details -->
     </div>
 </section>

@@ -5,6 +5,7 @@ namespace backend\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use common\models\LikeProduk;
+use Yii;
 
 /**
  * LikeProdukSearch represents the model behind the search form of `common\models\LikeProduk`.
@@ -40,7 +41,12 @@ class LikeProdukSearch extends LikeProduk
      */
     public function search($params)
     {
-        $query = LikeProduk::find();
+        if (\Yii::$app->user->can('SuperAdmin')) {
+            $query = LikeProduk::find();
+        } else if (\Yii::$app->user->can('Admin')) {
+            $query = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id]);
+        }
+        // $query = LikeProduk::find();
 
         // add conditions that should always apply here
 

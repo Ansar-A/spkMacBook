@@ -52,7 +52,7 @@ class ProdukSearch extends Produk
         // add conditions that should always apply here
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 5)
+            'pagination' => array('pageSize' => 4)
         ]);
 
         $this->load($params);

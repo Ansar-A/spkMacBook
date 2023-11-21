@@ -21,6 +21,118 @@ $totalLike = LikeProduk::find()->count();
 
 <head>
     <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;800&display=swap");
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body .container .card {
+            position: relative;
+            /* min-width: 320px; */
+            height: 200px;
+            box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.2),
+                inset -5px -5px 15px rgba(255, 255, 255, 0.1),
+                5px 5px 15px rgba(0, 0, 0, 0.3), -5px -5px 15px rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin-bottom: 10px;
+            transition: 0.5s;
+            width: 100%;
+        }
+
+        body .container .card:nth-child(1) .box .content a {
+            background: #2196f3;
+        }
+
+        body .container .card:nth-child(2) .box .content a {
+            background: #e91e63;
+        }
+
+        body .container .card:nth-child(3) .box .content a {
+            background: #23c186;
+        }
+
+        body .container .card .box {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: 20px;
+            bottom: 20px;
+            background: #515E92;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            transition: 0.5s;
+        }
+
+        body .container .card .box:hover {
+            transform: translateY(-50px);
+        }
+
+        body .container .card .box:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        body .container .card .box .content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        body .container .card .box .content h2 {
+            position: absolute;
+            top: -10px;
+            right: 30px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+        }
+
+        body .container .card .box .content h3 {
+            font-size: 1.8rem;
+            color: #fff;
+            z-index: 1;
+            transition: 0.5s;
+            margin-bottom: 15px;
+        }
+
+        body .container .card .box .content p {
+            font-size: 1rem;
+            font-weight: 300;
+            color: rgba(255, 255, 255, 0.9);
+            z-index: 1;
+            transition: 0.5s;
+        }
+
+        body .container .card .box .content a {
+            position: relative;
+            display: inline-block;
+            padding: 8px 20px;
+            background: black;
+            border-radius: 5px;
+            text-decoration: none;
+            color: white;
+            margin-top: 0px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: 0.5s;
+        }
+
+        body .container .card .box .content a:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+            background: #fff;
+            color: #000;
+        }
+
         .e-card {
             margin: 100px auto;
             background: transparent;
@@ -150,199 +262,223 @@ $totalLike = LikeProduk::find()->count();
                     </div>
                 </div>
             </div> -->
-            <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="like-produk-index">
-                            <!-- <div class="row">
+            <div class="col-sm-9">
+                <div class="like-produk-index">
+                    <!-- <div class="row">
                                 <div class="col-sm-12">
                                     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                                 </div>
                             </div> -->
-                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
-                                <?= GridView::widget([
-                                    'dataProvider' => $dataProvider,
-                                    'filterModel' => $searchModel,
-                                    'headerRowOptions' => ['class' => 'table m-0'],
-                                    'filterRowOptions' => ['class' => 'table m-0'],
-                                    //'bootstrap' => true,
-                                    'responsive' => true,
-                                    //'bordered' => false,
-                                    'striped' => false,
-                                    //'condensed' => false,
-                                    //'responsiveWrap' => false,
-                                    //'hover' => true,
-                                    //'containerOptions' => false,
-                                    //'perfectScrollbar' => false,
-                                    //'summary' => '',
-                                    //'showPageSummary' => true,
-                                    //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
-                                    //'summaryOptions' => ['class' => 'summary'],
+                    <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+                            'filterModel' => $searchModel,
+                            'headerRowOptions' => ['class' => 'table m-0'],
+                            'filterRowOptions' => ['class' => 'table m-0'],
+                            //'bootstrap' => true,
+                            'responsive' => true,
+                            //'bordered' => false,
+                            'striped' => false,
+                            //'condensed' => false,
+                            //'responsiveWrap' => false,
+                            //'hover' => true,
+                            //'containerOptions' => false,
+                            //'perfectScrollbar' => false,
+                            //'summary' => '',
+                            //'showPageSummary' => true,
+                            //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
+                            //'summaryOptions' => ['class' => 'summary'],
 
-                                    'resizableColumns' => true,
-                                    'persistResize' => true,
-                                    'floatHeader' => true,
-                                    //'showPageSummary' => true,
-                                    'columns' => [
-                                        [
-                                            'class' => '\kartik\grid\ActionColumn',
-                                            'template' => '{view}',
-                                            'header' => 'Action',
-                                            'buttons' => [
-                                                'class' => 'btn btn-primary dropdown-toggle',
-                                                'view' => function ($url, $model) {
-                                                    return Html::a('', ['view', 'id' => $model->id], [
-                                                        'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
-                                                    ]);
-                                                },
-                                                'update' => function ($url, $model) {
+                            'resizableColumns' => true,
+                            'persistResize' => true,
+                            'floatHeader' => true,
+                            //'showPageSummary' => true,
+                            'columns' => [
+                                [
+                                    'class' => '\kartik\grid\ActionColumn',
+                                    'template' => '{view}',
+                                    'header' => 'Action',
+                                    'buttons' => [
+                                        'class' => 'btn btn-primary dropdown-toggle',
+                                        'view' => function ($url, $model) {
+                                            return Html::a('', ['view', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
+                                            ]);
+                                        },
+                                        'update' => function ($url, $model) {
 
-                                                    return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
-                                                },
-                                                'delete' => function ($url, $model) {
+                                            return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
+                                        },
+                                        'delete' => function ($url, $model) {
 
-                                                    return Html::a('', ['delete', 'id' => $model->id], [
-                                                        'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
-                                                        'data' => [
-                                                            'confirm' => 'Yakin ingin menghapus item ini?',
-                                                            'method' => 'post',
-                                                        ],
-                                                    ]);
-                                                },
-                                            ],
-                                        ],
-                                        // 'id',
-                                        [
-                                            'attribute' => 'produk_id',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                            'value' => function ($model) {
-                                                return $model->kelayakan->kode_produk;
-                                            }
-                                        ],
-                                        [
-                                            'attribute' =>  'user_id',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                            'value' => function ($model) {
-                                                return $model->pengguna->username;
-                                            }
-                                        ],
-                                        [
-                                            'attribute' =>  'created_at',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                        ],
+                                            return Html::a('', ['delete', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-danger btn-sm glyphicon glyphicon-trash',
+                                                'data' => [
+                                                    'confirm' => 'Yakin ingin menghapus item ini?',
+                                                    'method' => 'post',
+                                                ],
+                                            ]);
+                                        },
                                     ],
-                                    'toolbar' => [
-                                        Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
-                                        // Html::a('<i class="md md-person-add"></i>', ['create'], [
-                                        //     'type' => 'button',
-                                        //     'class' => 'btn btn-success'
-                                        // ]),
-                                        // [
-                                        //     'content' =>
-                                        //     Html::button('<i class="md md-my-library-add"></i>', [
-                                        //         'type' => 'button',
-                                        //         'class' => 'btn btn-success'
-                                        //     ]) . ' ' .
-                                        //         Html::a('<i class="md md-redo"></i>', ['grid-demo'], [
-                                        //             'class' => 'btn btn-secondary btn-default',
-                                        //         ]),
-                                        // ],
-                                        '{export}',
-                                        '{toggleData}'
+                                ],
+                                // 'id',
+                                [
+                                    'attribute' => 'produk_id',
+                                    'header' => 'ID Produk',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->kelayakan->produk->id;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'produk_id',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->kelayakan->produk->nama_produk;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'user_id',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->pengguna->username;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'created_at',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                ],
+                            ],
+                            'toolbar' => [
+                                Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
+                                // Html::a('<i class="md md-person-add"></i>', ['create'], [
+                                //     'type' => 'button',
+                                //     'class' => 'btn btn-success'
+                                // ]),
+                                // [
+                                //     'content' =>
+                                //     Html::button('<i class="md md-my-library-add"></i>', [
+                                //         'type' => 'button',
+                                //         'class' => 'btn btn-success'
+                                //     ]) . ' ' .
+                                //         Html::a('<i class="md md-redo"></i>', ['grid-demo'], [
+                                //             'class' => 'btn btn-secondary btn-default',
+                                //         ]),
+                                // ],
+                                '{export}',
+                                '{toggleData}'
+                            ],
+                            'panel' => [
+                                'heading' => false,
+                                //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
+                                'type' => 'default',
+                                //'before' => Html::a('<i class="md-add-box"></i> Create Jenis SO', ['create'], ['class' => 'btn btn-success']),
+                                // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                // 'footer' => false
+                            ],
+                        ]); ?>
+                    <?php else : ?>
+                        <?= GridView::widget([
+                            'dataProvider' => $dataProvider,
+
+                            'headerRowOptions' => ['class' => 'table m-0'],
+                            'filterRowOptions' => ['class' => 'table m-0'],
+
+                            'responsive' => true,
+
+                            'striped' => false,
+
+                            'resizableColumns' => true,
+                            'persistResize' => true,
+                            'floatHeader' => true,
+
+                            'columns' => [
+                                [
+                                    'class' => '\kartik\grid\ActionColumn',
+                                    'template' => '{view}',
+                                    'header' => 'Action',
+                                    'buttons' => [
+                                        'class' => 'btn btn-primary dropdown-toggle',
+                                        'view' => function ($url, $model) {
+                                            return Html::a('', ['view', 'id' => $model->id], [
+                                                'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
+                                            ]);
+                                        },
+
                                     ],
-                                    'panel' => [
-                                        'heading' => false,
-                                        //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
-                                        'type' => 'default',
-                                        //'before' => Html::a('<i class="md-add-box"></i> Create Jenis SO', ['create'], ['class' => 'btn btn-success']),
-                                        // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
-                                        // 'footer' => false
-                                    ],
-                                ]); ?>
-                            <?php else : ?>
-                                <?= GridView::widget([
-                                    'dataProvider' => $dataProvider,
+                                ],
+                                // 'id',
+                                [
+                                    'attribute' => 'produk_id',
+                                    'header' => 'ID Produk',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->kelayakan->produk->id;
+                                    }
+                                ],
+                                [
+                                    'attribute' => 'produk_id',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->kelayakan->produk->nama_produk;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'user_id',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                    'value' => function ($model) {
+                                        return $model->pengguna->username;
+                                    }
+                                ],
+                                [
+                                    'attribute' =>  'created_at',
+                                    'headerOptions' => ['class' => 'text-center'],
+                                    'contentOptions' => ['style' => 'text-align:center'],
+                                ],
+                            ],
+                            'toolbar' => [
+                                Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
+                                '{export}',
+                                '{toggleData}'
+                            ],
+                            'panel' => [
+                                'heading' => false,
+                                'type' => 'default',
+                            ],
+                        ]); ?>
+                    <?php endif ?>
 
-                                    'headerRowOptions' => ['class' => 'table m-0'],
-                                    'filterRowOptions' => ['class' => 'table m-0'],
-
-                                    'responsive' => true,
-
-                                    'striped' => false,
-
-                                    'resizableColumns' => true,
-                                    'persistResize' => true,
-                                    'floatHeader' => true,
-
-                                    'columns' => [
-                                        [
-                                            'class' => '\kartik\grid\ActionColumn',
-                                            'template' => '{view}',
-                                            'header' => 'Action',
-                                            'buttons' => [
-                                                'class' => 'btn btn-primary dropdown-toggle',
-                                                'view' => function ($url, $model) {
-                                                    return Html::a('', ['view', 'id_nirkabel' => $model->id_nirkabel], [
-                                                        'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
-                                                    ]);
-                                                },
-
-                                            ],
-                                        ],
-                                        [
-                                            'attribute' => 'wifi',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                        ],
-                                        [
-                                            'attribute' => 'bluetooth',
-                                            'headerOptions' => ['class' => 'text-center'],
-                                            'contentOptions' => ['style' => 'text-align:center'],
-                                        ]
-                                    ],
-                                    'toolbar' => [
-                                        Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
-                                        '{export}',
-                                        '{toggleData}'
-                                    ],
-                                    'panel' => [
-                                        'heading' => false,
-                                        'type' => 'default',
-                                    ],
-                                ]); ?>
-                            <?php endif ?>
-
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="row">
+                    <div class="col-sm-12" style="padding-bottom: 10px;">
+                        <div class="card">
+                            <div class="box">
+                                <div class="content">
+                                    <h2><?php echo $totalLike ?></h2>
+                                    <h3>Like</h3>
+                                    <p>Jumlah total produk yang disukai pengguna</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <div class="e-card playing" style="margin-top: 0px;">
-                            <div class="image"></div>
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                            <div class="wave"></div>
-                            <div class="infotop">
-                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="icon">
-                                    <path fill="currentColor" d="M19.4133 4.89862L14.5863 2.17544C12.9911 1.27485 11.0089 1.27485 9.41368 2.17544L4.58674
-  4.89862C2.99153 5.7992 2 7.47596 2 9.2763V14.7235C2 16.5238 2.99153 18.2014 4.58674 19.1012L9.41368
-  21.8252C10.2079 22.2734 11.105 22.5 12.0046 22.5C12.6952 22.5 13.3874 22.3657 14.0349 22.0954C14.2204
-  22.018 14.4059 21.9273 14.5872 21.8252L19.4141 19.1012C19.9765 18.7831 20.4655 18.3728 20.8651
-  17.8825C21.597 16.9894 22 15.8671 22 14.7243V9.27713C22 7.47678 21.0085 5.7992 19.4133 4.89862ZM4.10784
-  14.7235V9.2763C4.10784 8.20928 4.6955 7.21559 5.64066 6.68166L10.4676 3.95848C10.9398 3.69152 11.4701
-  3.55804 11.9996 3.55804C12.5291 3.55804 13.0594 3.69152 13.5324 3.95848L18.3593 6.68166C19.3045 7.21476
-  19.8922 8.20928 19.8922 9.2763V9.75997C19.1426 9.60836 18.377 9.53091 17.6022 9.53091C14.7929 9.53091
-  12.1041 10.5501 10.0309 12.3999C8.36735 13.8847 7.21142 15.8012 6.68783 17.9081L5.63981 17.3165C4.69466
-  16.7834 4.10699 15.7897 4.10699 14.7235H4.10784ZM10.4676 20.0413L8.60933 18.9924C8.94996 17.0479 9.94402
-  15.2665 11.4515 13.921C13.1353 12.4181 15.3198 11.5908 17.6022 11.5908C18.3804 11.5908 19.1477 11.6864
-  19.8922 11.8742V14.7235C19.8922 15.2278 19.7589 15.7254 19.5119 16.1662C18.7615 15.3596 17.6806 14.8528
-   16.4783 14.8528C14.2136 14.8528 12.3781 16.6466 12.3781 18.8598C12.3781 19.3937 12.4861 19.9021 12.68
-   20.3676C11.9347 20.5316 11.1396 20.4203 10.4684 20.0413H10.4676Z"></path>
-                                </svg><br>
-                                <h1 style="color: #FFFFFF;"><?php echo $totalLike ?></h1>
-                                <br>
-                                <h5 style="color: #FFFFFF;">Like Produk</h5>
+                    <div class="col-sm-12">
+                        <div class="card">
+                            <div class="box">
+                                <div class="content">
+                                    <h2><?php echo $totalPengguna ?></h2>
+                                    <h3>Pengguna</h3>
+                                    <p>Jumlah total pengguna pada aplikasi</p>
+                                    <a style="height: 30px; padding-top:5px" href="<?= Url::to(['pengguna/index']) ?>">more</a>
+                                </div>
                             </div>
                         </div>
                     </div>
