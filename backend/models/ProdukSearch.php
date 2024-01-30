@@ -19,8 +19,9 @@ class ProdukSearch extends Produk
     public function rules()
     {
         return [
-            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi'], 'integer'],
-            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel', 'get_ukuranberat', 'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'nama_produk', 'tahun_rilis', 'photo', 'globalSearch', 'stok'], 'safe'],
+            [['id', 'id_servicer', 'id_jenis',  'id_so',   'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi'], 'integer'],
+            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'nama_produk',  'photo', 'globalSearch', 'no_seri', 'status_produk'], 'safe'],
+            [['tinggi', 'panjang', 'lebar', 'berat'], 'string'],
             [['harga'], 'number'],
         ];
     }
@@ -43,39 +44,47 @@ class ProdukSearch extends Produk
      */
     public function search($params)
     {
-        // menghubungkan produk dengan user yang login
-        if (\Yii::$app->user->can('SuperAdmin')) {
-            $query = Produk::find();
-        } else if (\Yii::$app->user->can('Admin')) {
+        if (\Yii::$app->user->can('Administrator')) {
+            $query = Produk::find()->joinWith('user');
+        } else if (\Yii::$app->user->can('Toko')) {
+            $query = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id]);
+        } else if (\Yii::$app->user->can('Personal')) {
             $query = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id]);
         }
-        // add conditions that should always apply here
+        $pageSize = 10;
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'pagination' => array('pageSize' => 4)
+            'pagination' => [
+                'pageSize' => $pageSize,
+            ],
         ]);
 
         $this->load($params);
 
         if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
             return $dataProvider;
         }
 
-        // $query
-        //     ->orFilterWhere(['like', 'id', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'nama_produk', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'id_jenis', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'harga', $this->globalSearch])
-        //     ->orFilterWhere(['like', 'tahun_rilis', $this->globalSearch]);
-        $query
-            ->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
-            ->andFilterWhere(['like', 'id_jenis', $this->id_jenis])
-            ->andFilterWhere(['like', 'harga', $this->harga])
-            ->andFilterWhere(['like', 'tahun_rilis', $this->tahun_rilis])
-            ->andFilterWhere(['like', 'id_servicer', $this->id_servicer]);
+        if (\Yii::$app->user->can('Administrator')) {
+            $query
+                ->orFilterWhere(['like', 'produk.id', $this->globalSearch])
+                ->orFilterWhere(['like', 'nama_produk', $this->globalSearch])
+                ->orFilterWhere(['=', 'user.username', $this->globalSearch])
+                ->orFilterWhere(['like', 'harga', $this->globalSearch])
+                ->orFilterWhere(['=', 'user.role', $this->globalSearch])
+                ->orFilterWhere(['like', 'status_produk', $this->globalSearch])
+                ->orFilterWhere(['like', 'tinggi', $this->globalSearch])
+                ->orFilterWhere(['like', 'lebar', $this->globalSearch])
+                ->orFilterWhere(['like', 'panjang', $this->globalSearch])
+                ->orFilterWhere(['like', 'berat', $this->globalSearch]);
+        } else {
+            $query
+                ->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
+                ->andFilterWhere(['like', 'harga', $this->harga])
+                ->andFilterWhere(['like', 'no_seri', $this->no_seri])
+                ->andFilterWhere(['tinggi' => $this->tinggi, 'panjang' => $this->panjang, 'lebar' => $this->lebar, 'berat' => $this->berat,])
+                ->andFilterWhere(['like', 'produk.status_produk', $this->status_produk]);
+        }
         return $dataProvider;
     }
 }

@@ -20,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="divider"></div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                 <div class="he-wrap tpl2">
-                    <img src="<?= Url::to('@web/max/img/office.png') ?>" alt="" class="img-responsive">
+                    <img src="<?= Url::to('@web/max/img/office.jpeg') ?>" alt="" class="img-responsive">
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

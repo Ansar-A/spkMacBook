@@ -43,10 +43,12 @@ use Yii;
 class SpkKelayakan extends \yii\db\ActiveRecord
 {
 
+    // public $status_produk;
     /**
      * {@inheritdoc}
      */
     // public $kode_produk;
+
     public static function tableName()
     {
         return 'spk_kelayakan';
@@ -59,14 +61,16 @@ class SpkKelayakan extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['dataR', 'Rsquare', 'dataF',  'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'required'],
+            [['dataR', 'Rsquare', 'dataF',  'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa', 'nilai'], 'required'],
             [['get_produk'], 'integer'],
-            [['dataR', 'Rsquare', 'dataF', 'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa',], 'number'],
-            // ['kode_produk', 'string'],
-            // [['kode_produk',], 'safe'],
+
+            [['nilai'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 20 * 1024, 'on' => 'update'],
+
+            [['dataR', 'Rsquare', 'dataF', 'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'number'],
             [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
         ];
     }
+
 
     /**
      * {@inheritdoc}
@@ -77,15 +81,14 @@ class SpkKelayakan extends \yii\db\ActiveRecord
             'id_kelayakan' => 'Id Kelayakan',
             'dataR' => 'R Square',
             'Rsquare' => 'Adjusted R Square',
-            'dataF' => 'F',
-            'T_ketahanan' => 'T Ketahanan',
-            'T_keamanan' => 'T Keamanan',
-            'T_kondisi' => 'T Kondisi',
-            'T_performa' => 'T Performa',
+            'dataF' => 'Uji F',
+            'T_ketahanan' => 'T RAM',
+            'T_keamanan' => 'T Storage',
+            'T_kondisi' => 'T Prosesor',
+            'T_performa' => 'T CycleCount',
             'get_produk' => 'Get Produk',
-            // 'kode_produk' => 'Kode Produk',
             'importFile' => 'Import File',
-
+            'nilai' => 'Nilai',
         ];
     }
     /**

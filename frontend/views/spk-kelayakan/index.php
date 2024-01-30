@@ -9,10 +9,21 @@ use yii\widgets\ListView;
 $this->title = 'Spk Kelayakans';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<html>
 
+<head>
+    <style>
+        .custom-pagination-container {
+            text-align: center;
+            /* Sesuaikan dengan jumlah padding yang diinginkan */
+        }
+    </style>
+</head>
+
+</html>
 <section class="post-wrapper-top">
     <div class="container">
-        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 pull-right" style="padding-top: 15px;">
             <?php echo $this->render('_search', ['model' => $searchModel]); ?>
         </div>
     </div>
@@ -22,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content pull-right col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="padding-top: 0px;">
             <div class="card-box">
                 <div class="general-title text-center">
-                    <h3>POPULAR ITEMS</h3>
+                    <!-- <h3>POPULAR ITEMS</h3> -->
                     <p>All item from SPK MacBook</p>
                     <hr>
                 </div>
@@ -35,6 +46,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'tag' => 'div',
                                 'class' => 'row',
                             ],
+                            'layout' => '{items}{pager}',
+                            'options' => ['class' => 'custom-pagination-container'],
                             'itemView' => '_list_item',
                             'itemOptions' => ['tag' => null],
                             'summary' => false,

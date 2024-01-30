@@ -16,11 +16,15 @@ class UserSearch extends User
      * {@inheritdoc}
      */
     public $globalSearch;
+
+
     public function rules()
     {
         return [
             [['id', 'username', 'status', 'created_at', 'updated_at', 'hp'], 'integer'],
             [['address', 'globalSearch', 'fb'], 'string'],
+            [['role'], 'safe']
+
         ];
     }
 
@@ -42,9 +46,11 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        if (\Yii::$app->user->can('SuperAdmin')) {
+        if (\Yii::$app->user->can('Administrator')) {
             $query = User::find();
-        } else if (\Yii::$app->user->can('Admin')) {
+        } else if (\Yii::$app->user->can('Toko')) {
+            $query = User::find()->where(['id' => Yii::$app->user->identity->id]);
+        } else if (\Yii::$app->user->can('Personal')) {
             $query = User::find()->where(['id' => Yii::$app->user->identity->id]);
         }
 
@@ -72,6 +78,8 @@ class UserSearch extends User
             'updated_at' => $this->updated_at,
             'hp' => $this->hp,
             'fb' => $this->fb,
+            'role' => $this->role,
+
         ]);
 
         $query->orFilterWhere(['like', 'username', $this->globalSearch])

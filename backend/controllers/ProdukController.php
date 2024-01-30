@@ -5,6 +5,7 @@ namespace backend\controllers;
 use backend\assets\SweetAlertAsset;
 use common\models\Produk;
 use backend\models\ProdukSearch;
+use mdm\admin\components\AccessControl;
 use Yii;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -50,20 +51,20 @@ class ProdukController extends Controller
             $searchModel = new ProdukSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
             // editable
-            // if (Yii::$app->request->post('hasEditable')) {
-            //     $id = Yii::$app->request->post('editableKey');
-            //     $jenis = Produk::findOne($id);
+            if (Yii::$app->request->post('hasEditable')) {
+                $id = Yii::$app->request->post('editableKey');
+                $jenis = Produk::findOne($id);
 
-            //     $out = Json::encode(['output' => '', 'message' => '']);
-            //     $post = [];
-            //     $posted = current($_POST['Produk']);
-            //     $post['Produk'] = $posted;
-            //     if ($jenis->load($post)) {
-            //         $jenis->save(true);
-            //     }
-            //     echo $out;
-            //     return;
-            // }
+                $out = Json::encode(['output' => '', 'message' => '']);
+                $post = [];
+                $posted = current($_POST['Produk']);
+                $post['Produk'] = $posted;
+                if ($jenis->load($post)) {
+                    $jenis->save(true);
+                }
+                echo $out;
+                return;
+            }
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -82,18 +83,18 @@ class ProdukController extends Controller
      */
     public function actionView($id)
     {
-        Alert::widget([
-            'options' => [
-                'title' => 'Konfirmasi',
-                'text' => 'Apakah Anda yakin ingin melanjutkan?',
-                'type' => Alert::TYPE_SUCCESS,
-                // 'showCancelButton' => true,
-                'confirmButtonText' => 'Ya',
-                // 'cancelButtonText' => 'Tidak',
-                'confirmButtonColor' => '#3085d6',
-                'cancelButtonColor' => '#d33',
-            ]
-        ]);
+        // Alert::widget([
+        //     'options' => [
+        //         'title' => 'Konfirmasi',
+        //         'text' => 'Apakah Anda yakin ingin melanjutkan?',
+        //         'type' => Alert::TYPE_SUCCESS,
+        //         // 'showCancelButton' => true,
+        //         'confirmButtonText' => 'Ya',
+        //         // 'cancelButtonText' => 'Tidak',
+        //         'confirmButtonColor' => '#3085d6',
+        //         'cancelButtonColor' => '#d33',
+        //     ]
+        // ]);
         return $this->render('view', [
 
             'model' => $this->findModel($id),
@@ -107,13 +108,12 @@ class ProdukController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new Produk();
         $model->id_servicer = Yii::$app->user->identity->id;
         $model->scenario = 'update';
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
+                // $model->tahun_rilis = \Yii::$app->formatter->asDate($model->tahun_rilis, 'yyyy-MM-dd');
                 $model->photo = UploadedFile::getInstance($model, 'photo');
                 if ($model->validate()) {
                     if (!is_null($model->photo)) {
@@ -122,22 +122,27 @@ class ProdukController extends Controller
                         $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
                         Image::thumbnail('@webroot/' . $filename, 800, 550)
                             ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
-
                         $model->photo = $newfilename;
                         // Yii::$app->getSession()->setFlash('success', '');
 
                     }
                     $model->save(false);
+                    $model->status_produk = 'Unprocessed';
                     return $this->redirect(['view', 'id' => $model->id]);
                 }
             }
         } else {
             $model->loadDefaultValues();
         }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if (\Yii::$app->user->can('Administrator')) {
+            return $this->renderAjax('create', [
+                'model' => $model,
+            ]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
     /**
      * Updates an existing Produk model.
@@ -148,7 +153,6 @@ class ProdukController extends Controller
      */
     public function actionUpdate($id)
     {
-
         $model = $this->findModel($id);
         $model->scenario = 'update';
         if ($this->request->isPost) {
@@ -162,9 +166,8 @@ class ProdukController extends Controller
                         $newfilename = 'photos/120x120/' . md5(microtime()) . '.' . $model->photo->extension;
                         Image::thumbnail('@webroot/' . $filename, 800, 550)
                             ->save(Yii::getAlias('@webroot/' . $newfilename), ['quality' => 100]);
-
                         $model->photo = $newfilename;
-                        // Yii::$app->getSession()->setFlash('success', '');
+                        Yii::$app->getSession()->setFlash('success', '');
                     }
                     $model->save(false);
                     return $this->redirect(['view', 'id' => $model->id]);
@@ -186,7 +189,6 @@ class ProdukController extends Controller
      */
     public function actionDelete($id)
     {
-
         $this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
@@ -205,5 +207,13 @@ class ProdukController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+    public function actionInfo()
+    {
+        return $this->render('info');
+    }
+    public function actionModal()
+    {
+        return $this->renderAjax('modal');
     }
 }

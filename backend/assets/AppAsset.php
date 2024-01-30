@@ -13,8 +13,8 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         "purple/assets/images/favicon_1.ico",
-        "purple/assets/plugins/morris/morris.css",
-        "purple/assets/css/bootstrap.min.css",
+        // "purple/assets/plugins/morris/morris.css",
+        // "purple/assets/css/bootstrap.min.css",
         "purple/assets/css/core.css",
         "purple/assets/css/components.css",
         "purple/assets/css/icons.css",
@@ -40,11 +40,10 @@ class AppAsset extends AssetBundle
         "purple/assets/plugins/peity/jquery.peity.min.js",
         "purple/assets/plugins/waypoints/lib/jquery.waypoints.js",
         "purple/assets/plugins/counterup/jquery.counterup.min.js",
-        "purple/assets/plugins/morris/morris.min.js",
+        // "purple/assets/plugins/morris/morris.min.js",
         "purple/assets/plugins/raphael/raphael-min.js",
         "purple/assets/plugins/jquery-knob/jquery.knob.js",
-        //
-        "purple/assets/pages/jquery.dashboard.js",
+        // "purple/assets/pages/jquery.dashboard.js",
         "purple/assets/js/jquery.core.js",
         "purple/assets/js/jquery.app.js",
         'js/yii-override.js'

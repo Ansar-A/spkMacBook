@@ -98,14 +98,49 @@ $this->params['breadcrumbs'][] = $this->title;
                                             // },
                                         ],
                                     ],
-                                    'item_name',
-                                    'user_id',
-                                    // [
-                                    //     'attribute' => 'user_id',
-                                    //     'value' => function ($model) {
-                                    //         return $model->itemName->name;
-                                    //     }
-                                    // ]
+                                    [
+                                        'attribute' => 'item_name',
+                                        'label' => 'Akses',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
+                                    ],
+
+                                    [
+                                        'attribute' => 'user_id',
+                                        'label' => 'Username',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'value' => function ($model) {
+                                            return $model->admin->username;
+                                        }
+                                    ],
+                                    [
+                                        'attribute' => 'user_id',
+                                        'label' => 'ID',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                    ],
+                                    [
+                                        'attribute' => 'user_id',
+                                        'label' => 'Status',
+                                        'format' => 'raw',
+                                        'label' => 'Status',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'filter'    => [10 => "Active", 9 => "Suspended"],
+                                        'value' => function ($data, $key, $index, $column) {
+                                            if ($data->admin->status == 10) {
+                                                return '<span class="label label-table label-success">Active</span>';
+                                            } else {
+                                                return '<span class="label label-table label-danger">Suspended</span>';
+                                            }
+                                        },
+                                    ],
+
                                     // 'created_at',
 
                                 ],

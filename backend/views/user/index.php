@@ -224,9 +224,10 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                 <div class="col-sm-9" style="padding-left: 20px;">
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                            <?php if (\Yii::$app->user->can('Administrator')) : ?>
                                 <div class="col-sm-2" style="padding-top: 4px; padding-left:0%">
-                                    <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?>
+                                    <!-- <?= Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-primary waves-effect waves-light']) ?> -->
+                                    <!-- <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?> -->
                                 </div>
                                 <?php echo $this->render('_search', ['model' => $searchModel]); ?>
                             <?php else : ?>
@@ -245,7 +246,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                         echo "<div id = 'modalContent'></div>";
                         Modal::end();
                         ?>
-                        <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <?php if (\Yii::$app->user->can('Administrator')) : ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'filterModel' => $searchModel,
@@ -307,16 +308,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     ],
 
                                     // ['class' => 'yii\grid\SerialColumn'],
-
-                                    [
-                                        'attribute' =>     'id',
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
-                                        'filterInputOptions' => [
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Search ID...',
-                                        ],
-                                    ],
                                     [
                                         'header' => '',
                                         //'contentOptions' => ['style' => 'max-width:20px;'],
@@ -352,8 +343,21 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                             }
                                         },
                                     ],
-
-
+                                    [
+                                        'attribute' =>      'role',
+                                        'label' => 'Akses',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                    ],
+                                    [
+                                        'attribute' =>     'id',
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search ID...',
+                                        ],
+                                    ],
                                     // [
                                     //     'attribute' =>   'id',
                                     //     'headerOptions' => ['class' => 'text-center'],
@@ -365,11 +369,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     //     'headerOptions' => ['class' => 'text-center'],
                                     //     'contentOptions' => ['style' => 'text-align:center'],
                                     // ],
-                                    [
-                                        'attribute' =>      'hp',
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
-                                    ],
                                     // 'id',
                                     //'auth_key',
                                     //'password_hash',
@@ -381,6 +380,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
 
                                 ],
                                 'toolbar' => [
+                                    Html::a('<i class="fas fa-redo"></i> go to Access', ['auth-assignment/index'], ['class' => 'btn btn-info']),
                                     Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
                                     // Html::a('<i class="md md-person-add"></i>', ['create'], [
                                     //     'type' => 'button',
@@ -404,7 +404,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     //'heading' => '<div class="portlet-heading portlet-default"><i class="md-folder-shared"></i></div>',
                                     'type' => 'default',
                                     //'before' => Html::a('<i class="md-add-box"></i> Create Admin', ['create'], ['class' => 'btn btn-success']),
-                                    // 'after' => Html::a('<i class="fas fa-redo"></i> Reset Grid', ['index'], ['class' => 'btn btn-info']),
+                                    // 'after' => Html::a('<i class="fas fa-redo"></i> go to Access', ['auth-assignment/index'], ['class' => 'btn btn-info']),
                                     // 'footer' => false
                                 ],
                             ]); ?>
@@ -483,8 +483,8 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
 
                                 ],
                                 'toolbar' => [
-                                    Html::a('<i class="fas fa-redo"></i> Refresh', ['index'], ['class' => 'btn btn-info']),
-                                    '{export}',
+                                    Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
+                                    // '{export}',
                                     // '{toggleData}'
                                 ],
                                 'panel' => [

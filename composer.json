@@ -44,7 +44,9 @@
         "kartik-v/yii2-money": "dev-master",
         "kartik-v/yii2-detail-view": "dev-master",
         "phpoffice/phpspreadsheet": "^1.29",
-        "kartik-v/yii2-builder": "dev-master"
+        "kartik-v/yii2-builder": "dev-master",
+        "2amigos/yii2-google-maps-library": "^1.1",
+        "kalyabin/yii2-select-google-map-location": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

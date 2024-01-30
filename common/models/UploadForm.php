@@ -22,7 +22,9 @@ class UploadForm extends Model
     {
         return [
             [
+                // [['get_produk'], 'integer'],
                 ['importFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'xlsx, xls',
+                // [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
             ],
             // [
             //     ['importFile'],  'required', 'on' => self::SCENARIO_IMPORT,

@@ -6,6 +6,7 @@ use backend\models\SignupForm;
 use backend\models\PasswordResetRequestForm;
 use backend\models\ResetPasswordForm;
 use backend\models\ResendVerificationEmailForm;
+use common\models\AuthAssignment;
 use common\models\JenisProduk;
 use common\models\LoginForm;
 use common\models\Pengguna;
@@ -124,14 +125,20 @@ class SiteController extends Controller
      *
      * @return string
      */
+
     public function actionIndex()
     {
         $DB = Yii::$app->db;
         $ts = $DB->createCommand("SELECT *, COUNT(id) AS total FROM produk GROUP BY id_jenis")->queryAll();
         $namaProduk = JenisProduk::find()->groupBy('jenis')->all();
+        Yii::$app->session->setFlash('Success', 'Selamat datang di Website Sistem Pendukung Keputusan Penentuan MacBook Bekas, mohon tunggu konfirmasi dari Admin agar anda dapat menggunakan Website ini.');
         return $this->render('index', compact('ts', 'namaProduk'));
     }
-
+    public function actionIndexAdmin()
+    {
+        $this->layout = 'main';
+        return $this->render('indexAdmin');
+    }
     /**
      * Login action.
      *
@@ -149,6 +156,14 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            // Role
+            // if ($model->roles === 'superadmin') {
+            //     return $this->render(['index']);
+            // } else if ($model->roles === 'admin') {
+            //     return $this->redirect(['site/indexAdmin']);
+            // } else if ($model->roles === 'personal') {
+            //     return $this->redirect(Yii::$app->user->can('Personal'));
+            // }
             $this->layout = 'mainwelcome';
             return $this->render('welcome');
         }
@@ -175,12 +190,11 @@ class SiteController extends Controller
                     $model->photo = $filename;
                 }
                 $model->signup();
-                return $this->goBack();
+                return $this->render('notifemail');
             }
         }
         return $this->render('signup', [
             'model' => $model,
-            //'authItems' => $authItems,
         ]);
     }
     /**

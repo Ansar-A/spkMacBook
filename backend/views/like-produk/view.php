@@ -34,15 +34,15 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="col-md-12">
                 <div class="card-box">
                     <div class="like-produk-view">
-                        <!-- <p>
-                            <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-                                'class' => 'btn btn-danger',
-                                'data' => [
-                                    'confirm' => 'Are you sure you want to delete this item?',
-                                    'method' => 'post',
-                                ],
-                            ]) ?>
-                        </p> -->
+                        <p>
+                            <!-- <?= Html::a('Delete', ['delete', 'id' => $model->id], [
+                                        'class' => 'btn btn-danger',
+                                        'data' => [
+                                            'confirm' => 'Are you sure you want to delete this item?',
+                                            'method' => 'post',
+                                        ],
+                                    ]) ?> -->
+                        </p>
 
                         <?= DetailView::widget([
                             'model' => $model,

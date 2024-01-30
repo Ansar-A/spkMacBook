@@ -1,6 +1,7 @@
 <?php
 
 use common\models\Produk;
+use GuzzleHttp\Handler\Proxy;
 use kartik\file\FileInput;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -17,7 +18,94 @@ use kartik\form\ActiveField;
 <div class="spk-kelayakan-form">
     <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-5">
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Nilai SPK</h3>
+                </div>
+                <div class="panel-body">
+                    <!-- <?= $form->field($model, 'nilai')->fileInput()->label('') ?> -->
+                    <?= $form->field($model, 'nilai')->widget(FileInput::className(), [
+                        'options' => ['accept' => 'Penilaian/*'],
+                        'pluginOptions' => [
+                            'initialPreview' => Url::to('@web/' . $model->nilai),
+                            'initialPreviewAsData' => true,
+                            'showUpload' => false,
+                            'browseLabel' => '',
+                            'removeLabel' => '',
+                            'mainClass' => 'input-group-lg',
+                            'fileimageuploaded' => true,
+                        ]
+                    ])->label('');
+                    ?>
+                </div>
+            </div>
+            <div class="panel panel-border panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Produk</h3>
+                </div>
+                <div class="panel-body">
+                    <?php
+                    if (\Yii::$app->user->can('Administrator')) {
+                        $list = Produk::find()
+                            ->leftJoin('user', 'produk.id_servicer = user.id')
+                            // ->andWhere(['user.role' => 'Personal'])
+                            ->andWhere(['produk.status_produk' => 'Unprocessed'])
+                            ->all();
+                        echo $form->field($model, 'get_produk')->dropDownList(
+                            ArrayHelper::map(
+                                $list,
+                                'id',
+                                function ($list) {
+                                    return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
+                                },
+                            ),
+                            ['prompt' => 'Select...']
+                        );
+                    } else {
+                        // $list = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->all();
+                        // echo $form->field($model, 'get_produk')->dropDownList(
+                        //     ArrayHelper::map(
+                        //         $list,
+                        //         'id', // Ini adalah kunci
+                        //         function ($list) {
+                        //             return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
+                        //         }
+                        //     ),
+                        //     ['prompt' => 'Pilih...']
+                        // );
+                        // Ambil daftar produk
+                        $list = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->all();
+
+                        // Ambil ID produk yang sudah dipilih (jika ada)
+                        $selectedProductId = $model->get_produk;
+
+                        // Buat daftar nilai untuk dropdown dengan memfilter nilai yang sudah dipilih
+                        $values = ArrayHelper::map(
+                            $list,
+                            'id',
+                            function ($list) {
+                                return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
+                            }
+                        );
+
+                        // Filter nilai yang sudah dipilih
+                        if ($selectedProductId !== null) {
+                            unset($values[$selectedProductId]);
+                        }
+
+                        // Tampilkan dropdown
+                        echo $form->field($model, 'get_produk')->dropDownList(
+                            $values,
+                            ['prompt' => 'Pilih...']
+                        );
+                    }
+
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-7">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
                     <div class="row">
@@ -134,35 +222,11 @@ use kartik\form\ActiveField;
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Produk</h3>
-                </div>
-                <div class="panel-body">
-                    <?php
-                    $list = Produk::find()->all();
-                    echo $form->field($model, 'get_produk')->dropDownList(
-                        ArrayHelper::map(
-                            $list,
-                            'id',
-                            function ($list) {
-                                return 'ID ' . $list->id . ' - ' . $list->nama_produk;
-                            },
-                        ),
-                        ['prompt' => 'Select...']
-                    );
-                    ?>
-                </div>
-            </div>
-            <div class="form-group">
-                <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success'], ['data-style' => 'zoom-in']) ?>
-                <a href="<?= Url::to(['spk-kelayakan/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
-            </div>
-        </div>
     </div>
-
-
+    <div class="form-group text-center">
+        <?= Html::submitButton('<i class="fa fa-save"></i> Save', ['class' => 'btn btn-success'], ['data-style' => 'zoom-in']) ?>
+        <a href="<?= Url::to(['spk-kelayakan/index']) ?>" type="button" class="btn btn-white waves-effect">Cancel</a>
+    </div>
     <?php ActiveForm::end(); ?>
 
 </div>

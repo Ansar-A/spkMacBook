@@ -56,16 +56,27 @@ return [
         ],
         'assetManager' => [
             'bundles' => [
+                // ...
                 'yii\web\JqueryAsset' => [
                     'sourcePath' => null,
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
                     'js' => [
                         'purple/assets/js/jquery.min.js',
-                    ]
+                        'purple/assets/plugins/morris/morris.min.js',
+                        'purple/assets/pages/jquery.dashboard_2.js',
+                    ],
+                ],
+                'yii\bootstrap\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'basePath' => '@webroot',
+                    'baseUrl' => '@web',
+                    'css' => [
+                        'purple/assets/css/bootstrap.min.css',
+                    ],
                 ],
                 'kartik\form\ActiveFormAsset' => [
-                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                    'bsDependencyEnabled' => false
                 ],
             ],
         ],

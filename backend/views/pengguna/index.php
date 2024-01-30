@@ -253,10 +253,10 @@ $totalPengguna = Pengguna::find()->count();
                                     //'updated_at',
                                     //'verification_token',
                                     //'jenis_kelamin',
-                                    [
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'attribute' => 'address',
-                                    ],
+                                    // [
+                                    //     'headerOptions' => ['class' => 'text-center'],
+                                    //     'attribute' => 'address',
+                                    // ],
 
                                 ],
                                 'toolbar' => [

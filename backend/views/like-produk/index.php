@@ -12,11 +12,12 @@ use kartik\grid\GridView;
 /** @var frontend\models\LikeProdukSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 $totalPengguna = Pengguna::find()->count();
-$totalLike = LikeProduk::find()->count();
+// $totalLike = LikeProduk::find()->count();
 $this->title = 'Like Produks';
 $this->params['breadcrumbs'][] = $this->title;
-$totalLike = LikeProduk::find()->count();
+
 ?>
+
 <html>
 
 <head>
@@ -244,31 +245,14 @@ $totalLike = LikeProduk::find()->count();
                     </li>
                 </ol>
             </div>
-            <!-- <div class="col-sm-12">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-8">
-                        <div class="widget-panel widget-style-2 bg-white">
-                            <i class="fa fa-heart text-pink"></i>
-                            <h2 class="m-0 text-dark counter font-600"><span data-plugin="counterup"><?php echo $totalLike ?></span></h2>
-                            <div class="text-muted m-t-5">Like</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-8">
-                        <div class="widget-panel widget-style-2 bg-white">
-                            <i class="md md-account-child text-custom"></i>
-                            <h2 class="m-0 text-dark counter font-600"><span data-plugin="counterup"><?php echo $totalPengguna ?></span></h2>
-                            <div class="text-muted m-t-5">Pengguna</div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-            <div class="col-sm-9">
+
+            <div class="col-sm-12">
                 <div class="like-produk-index">
-                    <!-- <div class="row">
-                                <div class="col-sm-12">
-                                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-                                </div>
-                            </div> -->
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                        </div>
+                    </div>
                     <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
                         <?= GridView::widget([
                             'dataProvider' => $dataProvider,
@@ -352,6 +336,7 @@ $totalLike = LikeProduk::find()->count();
                                     'headerOptions' => ['class' => 'text-center'],
                                     'contentOptions' => ['style' => 'text-align:center'],
                                 ],
+
                             ],
                             'toolbar' => [
                                 Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
@@ -457,33 +442,7 @@ $totalLike = LikeProduk::find()->count();
 
                 </div>
             </div>
-            <div class="col-sm-3">
-                <div class="row">
-                    <div class="col-sm-12" style="padding-bottom: 10px;">
-                        <div class="card">
-                            <div class="box">
-                                <div class="content">
-                                    <h2><?php echo $totalLike ?></h2>
-                                    <h3>Like</h3>
-                                    <p>Jumlah total produk yang disukai pengguna</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="card">
-                            <div class="box">
-                                <div class="content">
-                                    <h2><?php echo $totalPengguna ?></h2>
-                                    <h3>Pengguna</h3>
-                                    <p>Jumlah total pengguna pada aplikasi</p>
-                                    <a style="height: 30px; padding-top:5px" href="<?= Url::to(['pengguna/index']) ?>">more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

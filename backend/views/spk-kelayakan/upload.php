@@ -1,10 +1,13 @@
 <?php
 
+use common\models\Produk;
 use common\models\SpkKelayakan;
 use common\models\User;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
+use yii\helpers\ArrayHelper;
+
 ?>
 <html>
 
@@ -82,31 +85,56 @@ use kartik\file\FileInput;
                 </ol>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-8 card-box" style="height: 480px;">
+                <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
+                <?= $form->field($model, 'importFile')->widget(FileInput::className(), [
+                    // 'options' => ['accept' => 'photos/*'],
+                    'pluginOptions' => [
+                        'showRemove' => false,
+                        'showUpload' => false,
+                        'showCancel' => false,
+                        'browseLabel' => '',
+                        'removeLabel' => '',
+                        'mainClass' => 'input-group-lg',
+                        'fileimageuploaded' => true,
+                    ]
+                ])->label('');
+                ?>
 
-        <div class="card-box">
-            <div class="row">
-                <div class="col-sm-12">
-                    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]) ?>
-                    <?= $form->field($model, 'importFile')->widget(FileInput::className(), [
-                        // 'options' => ['accept' => 'photos/*'],
-                        'pluginOptions' => [
-                            'showRemove' => false,
-                            'showUpload' => false,
-                            'showCancel' => false,
-                            'browseLabel' => '',
-                            'removeLabel' => '',
-                            'mainClass' => 'input-group-lg',
-                            'fileimageuploaded' => true,
-                        ]
-                    ])->label('');
-                    ?>
-                    <!-- <?= $form->field($model, 'importFile')->fileInput() ?> -->
-                    <!-- <button type="button" class="btn btn-dropbox waves-effect waves-light">
-                <span class="btn-label"><i class="fa fa-dropbox"></i> </span>Submit
-            </button> -->
-                    <button class="btn btn-dropbox waves-effect waves-light"><span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i> </span>Submit</button>
+                <button class="btn btn-dropbox waves-effect waves-light"><span class="btn-label"><i class="glyphicon glyphicon-download-alt"></i> </span>Submit</button>
+                <?php ActiveForm::end() ?>
+            </div>
+            <div class="col-lg-4">
+                <div class="card-box m-b-0">
+                    <h4 class=" header-title m-t-0 m-b-20 text-dark">Info File</h4>
+                    <div class="p-20">
+                        <div class="nicescroll p-l-r-10" style="max-height: 535px; overflow: hidden; outline: none;" tabindex="5000">
+                            <div class="timeline-2">
+                                <div class="time-item">
+                                    <div class="item-info">
+                                        <div class="text-muted"><small>Extention File</small></div>
+                                        <p><strong><a class="text-info"><?= Yii::$app->user->identity->username ?></a></strong> Uploaded a file at <strong>"xlsx, xls"</strong></p>
+                                    </div>
+                                </div>
 
-                    <?php ActiveForm::end() ?>
+                                <div class="time-item">
+                                    <div class="item-info">
+                                        <div class="text-muted"><small>Info</small></div>
+                                        <p><em>"File yang di Upload merupakan hasil perhitungan dari pengolahan data menggunakan SPSS"</em></p>
+                                    </div>
+                                </div>
+
+                                <div class="time-item">
+                                    <div class="item-info">
+                                        <div class="text-muted"><small>Finished</small></div>
+                                        <p><a class="text-info"><em>"Metode Regresi Linear Berganda </a>merupakan metode yang digunakan untuk mengetahui tingkat kelayakan dari MacBook Bekas"</em></p>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

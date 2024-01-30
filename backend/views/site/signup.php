@@ -4,6 +4,8 @@
 /** @var yii\bootstrap5\ActiveForm $form */
 /** @var \common\models\LoginForm $model */
 
+use common\models\AuthAssignment;
+use common\models\AuthItem;
 use common\models\SosialMedia;
 use yii\helpers\Url;
 use kartik\form\ActiveForm;
@@ -143,7 +145,7 @@ $this->title = 'Signup';
                                     ])->passwordInput(['placeholder' => 'Enter password...']); ?>
 
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
-                                    <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About...']); ?>
+                                    <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About me...']); ?>
                                 </div>
                                 <div class="col-md-5">
                                     <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
@@ -153,8 +155,10 @@ $this->title = 'Signup';
                                         ],
                                     ]);
                                     ?>
-                                    <?= $form->field($model, 'hp')->textInput(['type' => 'number']);
-                                    ?>
+                                    <?= $form->field($model, 'hp')->textInput(['type' => 'number']); ?>
+                                    <?= $form->field($model, 'role')->dropDownList(['Toko' => 'Toko', 'Personal' => 'Personal', 'Administrator' => 'Administrator']); ?>
+
+
                                     <!-- <?= $form->field($model, 'fb')->textInput() ?> -->
                                 </div>
                             </div>
@@ -165,7 +169,6 @@ $this->title = 'Signup';
                                         <a class="text-dark"><?= Html::resetButton('', ['class' => 'fa fa-refresh m-r-5 btn btn-transparan']) ?></a>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="form-group m-t-20 m-b-0">
                                 <div class="col-sm-12 text-center">

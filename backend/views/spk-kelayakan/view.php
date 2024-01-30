@@ -93,6 +93,37 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'T_kondisi',
                                 'T_performa',
                                 'id_kelayakan',
+                                // [
+                                //     'attribute' => 'get_produk',
+                                //     'label' => 'Status SPK',
+                                //     'value' => function ($model) {
+                                //         return $model->produk->status_produk;
+                                //     }
+                                // ],
+                                [
+                                    'attribute' => 'get_produk',
+                                    'label' => 'Status SPK',
+                                    'value' => function ($model) {
+                                        // Periksa apakah objek produk valid sebelum mengakses propertinya
+                                        if ($model->produk !== null) {
+                                            return $model->produk->status_produk;
+                                        } else {
+                                            return 'Not Available';
+                                        }
+                                    }
+                                ],
+                                [
+                                    'label' => 'Nilai',
+                                    'format' => 'raw',
+                                    'value' => function ($model) {
+                                        $pdfUrl = Yii::getAlias('@web/' . $model->nilai);
+                                        return Html::a(
+                                            'Lihat PDF',
+                                            $pdfUrl,
+                                            ['target' => '_blank']
+                                        );
+                                    }
+                                ],
                             ],
                         ]) ?>
                     </div>

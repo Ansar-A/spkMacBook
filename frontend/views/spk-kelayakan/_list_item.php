@@ -11,16 +11,17 @@ use yii\helpers\Url;
                 <h3 class="a1" data-animate="fadeInDown">
                     <?php echo $model->produk->nama_produk ?>
                 </h3>
-                <a href="<?= Url::to(['detail-produk', 'id_kelayakan' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
                 <?php if (Yii::$app->user->isGuest) : ?>
-
+                    <a href="<?= Url::to(['site/login']) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
                 <?php elseif (LikeProduk::find()->where(['user_id' => Yii::$app->user->identity->id, 'produk_id' => $model->id_kelayakan])->exists()) : ?>
+                    <a href="<?= Url::to(['detail-produk', 'id_kelayakan' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
                     <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/unlike', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Unlike</a>
                 <?php else : ?>
-                    <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/like', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Like</a>
+                    <a href="<?= Url::to(['detail-produk', 'id_kelayakan' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
+                    <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/like', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn"><i class="fa fa-heart"></i></a>
                 <?php endif; ?>
-                <div class="text-white  a2" data-animate="fadeIn">
-                    <?php echo 'Rp ' . $model->produk->harga ?>
+                <div class="a2" data-animate="fadeIn">
+                    <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
                 </div>
             </div>
         </div>

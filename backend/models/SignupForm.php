@@ -20,6 +20,8 @@ class SignupForm extends Model
     public $tentang;
     public $get_sosial;
     public $fb;
+    public $role;
+    // public $get_auth;
     /**
      * {@inheritdoc}
      */
@@ -27,10 +29,11 @@ class SignupForm extends Model
     {
         return [
             ['username', 'trim'],
-            ['username', 'required'],
+            ['username',  'required'],
             ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
             [['username'], 'string', 'min' => 2, 'max' => 255],
-            [['fb'], 'string', 'min' => 2, 'max' => 255],
+            [['fb',], 'string', 'min' => 2, 'max' => 255],
+            [['role'], 'string'],
             ['email', 'trim'],
             ['email',  'required'],
             ['email', 'email'],
@@ -45,7 +48,15 @@ class SignupForm extends Model
             ['password', 'string', 'min' => Yii::$app->params['user.passwordMinLength']],
         ];
     }
+    // public function getRoleOptions()
+    // {
+    //     return [
+    //         'Admin' => 'Admin',
+    //         'Personal' => 'Personal',
+    //         'Super Admin' => 'Super Admin',
 
+    //     ];
+    // }
     /**
      * Signs user up.
      *
@@ -65,11 +76,11 @@ class SignupForm extends Model
         $user->hp = $this->hp;
         $user->tentang = $this->tentang;
         $user->fb = $this->fb;
-        // $user->get_sosial = $this->get_sosial;
+        $user->role = $this->role;
+        // $user->get_auth = $this->get_auth;
         $user->setPassword($this->password);
         $user->generateAuthKey();
         $user->generateEmailVerificationToken();
-
         return $user->save() && $this->sendEmail($user);
     }
 

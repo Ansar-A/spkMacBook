@@ -168,7 +168,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div> -->
                 <div class="col-sm-12">
                     <div class="card-box">
-                        <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <?php if (\Yii::$app->user->can('Administrator')) : ?>
                             <div class="panel-heading" style="padding-left: 0px;">
                                 <?= Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']) ?>
                                 <?= Html::a('', ['delete', 'id' => $model->id], [
@@ -199,7 +199,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                     'username',
                                     'address',
                                     'tentang',
-
                                     'hp',
                                     // 'auth_key',
                                     // 'password_hash',
@@ -217,6 +216,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     ],
                                     'fb',
                                     'ig',
+                                    'role'
                                     // 'created_at',
                                     // 'updated_at',
                                     // 'verification_token',

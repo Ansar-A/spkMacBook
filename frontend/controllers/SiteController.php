@@ -2,6 +2,8 @@
 
 namespace frontend\controllers;
 
+use backend\models\FrMacproSearch;
+use common\models\FrMacpro;
 use common\models\LikeProduk;
 use common\models\Produk;
 use common\models\SpkKelayakan;
@@ -30,33 +32,33 @@ class SiteController extends Controller
     /**
      * {@inheritdoc}
      */
-    // public function behaviors()
-    // {
-    //     return [
-    //         'access' => [
-    //             'class' => AccessControl::class,
-    //             'only' => [],
-    //             'rules' => [
-    //                 [
-    //                     'actions' => ['login', 'index', 'about'],
-    //                     'allow' => true,
-    //                     'roles' => ['?'],
-    //                 ],
-    //                 [
-    //                     'actions' => ['logout'],
-    //                     'allow' => true,
-    //                     'roles' => ['@'],
-    //                 ],
-    //             ],
-    //         ],
-    //         'verbs' => [
-    //             'class' => VerbFilter::class,
-    //             'actions' => [
-    //                 'logout' => ['post'],
-    //             ],
-    //         ],
-    //     ];
-    // }
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::class,
+                'only' => ['index'],
+                'rules' => [
+                    [
+                        'actions' => ['login', 'index', 'about'],
+                        'allow' => true,
+                        'roles' => ['?'],
+                    ],
+                    [
+                        'actions' => ['logout', 'index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::class,
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     /**
      * {@inheritdoc}
@@ -81,10 +83,10 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new SpkKelayakanSearch();
+        $searchModel = new FrMacproSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-        $query = SpkKelayakan::find();
+        $query = FrMacproSearch::find();
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
             'pagination' => ['pageSize' => 4],
@@ -115,7 +117,6 @@ class SiteController extends Controller
         }
 
         $model->password = '';
-
         return $this->render('login', [
             'model' => $model,
         ]);
@@ -283,5 +284,11 @@ class SiteController extends Controller
     public function actionBudgetset()
     {
         return $this->render('budgetset');
+    }
+
+    public function actionInfoProduk($id)
+    {
+        $model = FrMacpro::findOne($id);
+        return $this->render('produkinfo',  ['model' => $model]);
     }
 }

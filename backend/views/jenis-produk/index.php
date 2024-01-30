@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         Modal::end();
                         ?>
                         <p></p>
-                        <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                        <?php if (\Yii::$app->user->can('Administrator')) : ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
                                 'headerRowOptions' => ['class' => 'table m-0'],
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     //'id',
                                     [
                                         'class' => '\kartik\grid\ActionColumn',
-                                        'template' => '{view} ',
+                                        'template' => '{view} {update}',
                                         'header' => 'Action',
                                         'buttons' => [
                                             'class' => 'btn btn-primary dropdown-toggle',
@@ -103,10 +103,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                                     'class' => 'btn btn-icon waves-effect waves-light btn-info btn-sm glyphicon glyphicon-eye-open'
                                                 ]);
                                             },
-                                            // 'update' => function ($url, $model) {
+                                            'update' => function ($url, $model) {
 
-                                            //     return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
-                                            // },
+                                                return Html::a('', ['update', 'id' => $model->id], ['class' => 'btn btn-icon waves-effect waves-light btn-primary btn-sm glyphicon glyphicon-pencil']);
+                                            },
                                             'delete' => function ($url, $model) {
 
                                                 return Html::a('', ['delete', 'id' => $model->id], [

@@ -10,7 +10,12 @@ $verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'to
 <div class="verify-email">
     <p>Hello <?= Html::encode($user->username) ?>,</p>
 
-    <p>Ikuti tautan di bawah ini untuk mengatur ulang kata sandi Anda:</p>
-
-    <p><?= Html::a(Html::encode($verifyLink), $verifyLink) ?></p>
+    <p>Selamat datang di Website Sistem Pendukung Keputusan Penentuan MacBook Bekas, Silahkan klik tautan untuk login pada website.</p>
+    <p>
+        <a href="http://localhost/yii-spk/backend/web/site/login">click here to login</a>
+    </p>
+    <p>
+        Jika akun anda belum dapat melakukan akses login, tunggu konfirmasi dari pihak admin.
+    </p>
+    <!-- <p><?= Html::a(Html::encode($verifyLink), $verifyLink) ?></p> -->
 </div>

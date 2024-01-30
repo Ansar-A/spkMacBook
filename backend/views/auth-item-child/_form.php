@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
     <?php $form = ActiveForm::begin(); ?>
     <?php
     $list = AuthItemChild::find()->all();
+
     echo $form->field($model, 'parent')->dropDownList(
         ArrayHelper::map(
             $list,

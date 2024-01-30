@@ -50,13 +50,29 @@ return [
         'assetManager' => [
             'bundles' => [
                 'yii\web\JqueryAsset' => [
+                    'jsOptions' => ['position' => \yii\web\View::POS_HEAD],
                     'sourcePath' => null,
                     'basePath' => '@webroot',
                     'baseUrl' => '@web',
                     'js' => [
                         'max/lib/jquery/jquery.min.js',
+                        // '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
                     ]
                 ],
+                'view' => [
+                    'class' => 'yii\web\View',
+                    'as jwplayer' => [
+                        'class' => 'yz\icons\Jwplayer',
+                    ],
+                ],
+                // map
+                // 'dosamigos\google\maps\MapAsset' => [
+                //     'options' => [
+                //         'key' => 'AIzaSyCVCI3qVBztpD0tOf1RIKB-ZpUgMYte7oI',
+                //         'language' => 'id',
+                //         'version' => '3.1.18'
+                //     ]
+                // ]
             ],
         ],
 

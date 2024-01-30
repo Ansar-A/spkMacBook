@@ -10,18 +10,48 @@ use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
 $this->title = 'My Yii Application';
+$latitude = -5.210166;
+$longitude = 119.498257;
+
+$this->registerJsFile("https://maps.googleapis.com/maps/api/js?key=AIzaSyCVCI3qVBztpD0tOf1RIKB-ZpUgMYte7oI&callback=initMap", ['async' => true, 'defer' => true]);
+$this->registerJs("
+    function initMap() {
+        var mapOptions = {
+            center: {lat: $latitude, lng: $longitude},
+            zoom: 14
+        };
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+        var marker = new google.maps.Marker({
+            position: {lat: $latitude, lng: $longitude},
+            map: map,
+            title: 'Lokasi Anda'
+        });
+    }
+", \yii\web\View::POS_END);
 ?>
+<html>
+
+<!-- <head>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVCI3qVBztpD0tOf1RIKB-ZpUgMYte7oI&callback=initMap"></script>
+    <script>
+        function initMap() {
+            var map = new google.maps.Maps(document.getElementById("map"), {
+                center: new google.maps.LatLng(-5.135399, 119.423790),
+                zoom: 11,
+            });
+        }
+    </script>
+</head> -->
+
+</html>
+
 <section id="intro">
     <div class="container">
         <div class="ror">
             <div class="col-md-8 col-md-offset-2">
                 <h1>SPK MacBook Bekas</h1>
                 <p>"Membantu anda dalam menentukan MacBook yang memiliki kualitas terbaik berbadasarkan budget anda"</p>
-                <?php if (Yii::$app->user->isGuest) : ?>
-                    <p style="padding-top: 10px;"> <a class=" dmbutton large" href="<?= Url::to(['site/login']) ?>">FIND NOW</a></p>
-                <?php else : ?>
-                    <p style="padding-top: 10px;"> <a class=" dmbutton large" href="<?= Url::to(['spk-kelayakan/index']) ?>">FIND NOW</a></p>
-                <?php endif ?>
+                <p style="padding-top: 10px;"> <a class=" dmbutton large" href="<?= Url::to(['spk-kelayakan/index']) ?>">FIND NOW</a></p>
             </div>
         </div>
     </div>
@@ -81,157 +111,37 @@ $this->title = 'My Yii Application';
         </div>
     </div>
 </section>
+
 <section class="section1">
     <div class="container clearfix">
         <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
             <div class="divider"></div>
             <nav class="portfolio-filter clearfix">
-                <ul>
-                    <li><a href="#" class="dmbutton2" data-filter="*">Populer</a></li>
-                    <li><a href="#" class="dmbutton2" data-filter=".pro">MacBook Pro</a></li>
-                    <li><a href="#" class="dmbutton2" data-filter=".air">MacBook Air</a></li>
-                    <li><a href="#" class="dmbutton2" data-filter=".m">M Series</a></li>
-                </ul>
+                <a href="#" class="dmbutton2 active" style="background-color: grey; color:white;">Populer</a>
+                <a href="<?= Url::to(['spk-kelayakan/index']) ?>" class="dmbutton2">Find your Mac Now</a>
             </nav>
+
             <div class="portfolio-centered">
-                <div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 1518px;">
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 pro isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 0px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_01.jpg" alt="">
-                            <div class="he-view he-view-show">
-                                <div class="bg a0 fadeIn" data-animate="fadeIn">
-                                    <h3 class="big a1 fadeInDown" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="max/img/portfolio_01.jpg" class="dmbutton a2 bounceInLeft" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2 bounceInRight" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2 fadeIn" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-
-                    </div>
-                    <!-- end col-12 -->
-
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 m air isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(555px, 0px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_02.jpg" alt="">
-                            <div class="he-view">
-                                <div class="bg a0" data-animate="fadeIn">
-                                    <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="img/portfolio_02.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                    <!-- portfolio_category -->
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-
-                    </div>
-                    <!-- end col-12 -->
-
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 air isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 506px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_03.jpg" alt="">
-                            <div class="he-view">
-                                <div class="bg a0" data-animate="fadeIn">
-                                    <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="img/portfolio_03.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                    <!-- portfolio_category -->
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-
-                    </div>
-                    <!-- end col-12 -->
-
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 pro isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(555px, 506px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_04.jpg" alt="">
-                            <div class="he-view">
-                                <div class="bg a0" data-animate="fadeIn">
-                                    <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="img/portfolio_04.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                    <!-- portfolio_category -->
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-
-                    </div>
-                    <!-- end col-12 -->
-
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 m isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(0px, 1012px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_05.jpg" alt="">
-                            <div class="he-view">
-                                <div class="bg a0" data-animate="fadeIn">
-                                    <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="img/portfolio_05.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                    <!-- portfolio_category -->
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-
-                    </div>
-                    <!-- end col-12 -->
-
-                    <div class="portfolio-item col-lg-4 col-md-6 col-sm-6 col-xs-12 m isotope-item" style="position: absolute; left: 0px; top: 0px; transform: translate3d(555px, 1012px, 0px);">
-                        <div class="he-wrap tpl6 market-item">
-                            <img src="http://localhost/template/max/img/portfolio_06.jpg" alt="">
-                            <div class="he-view">
-                                <div class="bg a0" data-animate="fadeIn">
-                                    <h3 class="big a1" data-animate="fadeInDown">Project Name Here</h3>
-                                    <a data-rel="prettyPhoto" href="img/portfolio_06.jpg" class="dmbutton a2" data-animate="bounceInLeft"><i class="fa fa-search"></i></a>
-                                    <a href="#" class="dmbutton a2" data-animate="bounceInRight"><i class="fa fa-link"></i></a>
-                                    <div class="portfolio_category text-center a2" data-animate="fadeIn">
-                                        <a href="#">web design</a>
-                                    </div>
-                                    <!-- portfolio_category -->
-                                </div>
-                                <!-- he bg -->
-                            </div>
-                            <!-- he view -->
-                        </div>
-                        <!-- he wrap -->
-                    </div>
-                    <!-- end col-12 -->
-
+                <div class="recentitems portfolio isotope" style="position: relative; overflow: hidden; height: 808px;">
+                    <?=
+                    ListView::widget([
+                        'dataProvider' => $dataProvider,
+                        'options' => [
+                            'tag' => 'div',
+                            'class' => 'row',
+                        ],
+                        'layout' => '{items}',
+                        'itemView' => '_list_item',
+                        'itemOptions' => ['tag' => null],
+                        'summary' => false,
+                    ]);
+                    ?>
                 </div>
-                <!-- portfolio -->
             </div>
-            <!-- portfolio container -->
+
             <div class="divider"></div>
         </div>
-        <!-- end container -->
+
     </div>
 </section>
 <section class="section2">
@@ -240,7 +150,8 @@ $this->title = 'My Yii Application';
             <h2 class="big-title">WELCOME TO SPK <span>MACBOOK BEKAS</span></h2>
             <p class="small-title">"Simple, Inovatif and The Best Solution"</p>
             <a class="button large" href="<?= Url::to(['site/about']) ?>">ABOUT</a>
-            <a class=" dmbutton large" href="https://api.whatsapp.com/send?phone=6282347626103&text=Silahkan Kirim Pesan Anda" target="_blank">CONTACT US</a>
+            <a class=" dmbutton large" href="<?= Url::to(['site/contact']) ?>">CONTACT US</a>
         </div>
     </div>
 </section>
+<div id="map" style="height: 400px;"></div>

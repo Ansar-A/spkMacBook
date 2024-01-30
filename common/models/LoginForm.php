@@ -13,19 +13,25 @@ class LoginForm extends Model
     public $username;
     public $password;
     public $rememberMe = true;
-
     private $_user;
-
+    public $roles; // Property untuk dropdown list
 
     /**
      * {@inheritdoc}
      */
-    public $role;
+    public function __construct($config = [])
+    {
+        parent::__construct($config);
+        $this->roles = ['admin' => 'Admin', 'superadmin' => 'Super Admin', 'personal' => 'Personal']; // Contoh data dropdown
+    }
+
     public function rules()
     {
         return [
             // username and password are both required
-            [['username', 'password'], 'required'],
+            [['username', 'password', 'roles'], 'required'],
+
+
             // rememberMe must be a boolean value
             ['rememberMe', 'boolean'],
             // password is validated by validatePassword()

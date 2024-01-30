@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 Modal::end();
                                 ?>
                                 <p></p>
-                                <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                                <?php if (\Yii::$app->user->can('Administrator')) : ?>
                                     <?= GridView::widget([
                                         'dataProvider' => $dataProvider,
                                         //'filterModel' => $searchModel,
@@ -90,7 +90,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                             //'jenis',
                                             [
                                                 'class' => '\kartik\grid\ActionColumn',
-                                                'template' => '{view}',
+                                                'template' => '{view} {update}',
                                                 'header' => 'Action',
                                                 'buttons' => [
                                                     'class' => 'btn btn-primary dropdown-toggle',

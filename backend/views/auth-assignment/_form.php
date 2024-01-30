@@ -16,17 +16,22 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
     <?php
-    $list = AuthItem::find()->all();
+    // $list = AuthItem::find()->all();
+    $result = AuthItem::find()
+        ->select(['name', 'type'])
+        ->where(['type' => 1]) // Ganti 'tipe_column' dengan nama kolom yang berisi tipe
+        ->limit(3)
+        ->all();
     echo $form->field($model, 'item_name')->dropDownList(
         ArrayHelper::map(
-            $list,
+            $result,
             'name',
-            function ($list) {
-                return $list->name;
+            function ($result) {
+                return $result->name;
             },
         ),
         ['prompt' => 'Pilih...']
-    )
+    )->label('Akses')
     ?>
     <!-- <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?> -->
 
@@ -40,8 +45,8 @@ use yii\widgets\ActiveForm;
                 return $list->username;
             },
         ),
-        ['prompt' => 'User...']
-    ) ?>
+        ['prompt' => 'Pilih...']
+    )->label('User') ?>
 
     <!-- <?= $form->field($model, 'created_at')->textInput() ?> -->
 

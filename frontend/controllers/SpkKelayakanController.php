@@ -4,7 +4,6 @@ namespace frontend\controllers;
 
 use common\models\LikeProduk;
 use Yii;
-use common\models\Produk;
 use common\models\SpkKelayakan;
 use frontend\models\SpkKelayakanSearch;
 use yii\web\Controller;

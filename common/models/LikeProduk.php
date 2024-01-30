@@ -78,4 +78,8 @@ class LikeProduk extends \yii\db\ActiveRecord
     {
         $this->dropTable('like_produk');
     }
+    public function getFrMacpro()
+    {
+        return $this->hasMany(FrMacpro::class, ['get_like' => 'id']);
+    }
 }

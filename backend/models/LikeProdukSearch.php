@@ -41,9 +41,11 @@ class LikeProdukSearch extends LikeProduk
      */
     public function search($params)
     {
-        if (\Yii::$app->user->can('SuperAdmin')) {
+        if (\Yii::$app->user->can('Administrator')) {
             $query = LikeProduk::find();
-        } else if (\Yii::$app->user->can('Admin')) {
+        } else if (\Yii::$app->user->can('Toko')) {
+            $query = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id]);
+        } else if (\Yii::$app->user->can('Personal')) {
             $query = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id]);
         }
         // $query = LikeProduk::find();

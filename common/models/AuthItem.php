@@ -35,6 +35,7 @@ class AuthItem extends \yii\db\ActiveRecord
     /**
      * {@inheritdoc}
      */
+
     public function rules()
     {
         return [

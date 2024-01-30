@@ -5,15 +5,17 @@ namespace backend\controllers;
 use common\models\UploadForm;
 use common\models\SpkKelayakan;
 use backend\models\SpkKelayakanSearch;
+use common\models\Produk;
 use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Yii;
-
+use yii\helpers\Json;
 use yii\web\UploadedFile;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+use function PHPUnit\Framework\isNull;
 
 /**
  * SpkKelayakanController implements the CRUD actions for SpkKelayakan model.
@@ -49,6 +51,21 @@ class SpkKelayakanController extends Controller
         if (\Yii::$app->user->can('managePostSPK')) {
             $searchModel = new SpkKelayakanSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
+            if (Yii::$app->request->post('hasEditable')) {
+                $id = Yii::$app->request->post('editableKey');
+                $jenis = SpkKelayakan::findOne($id);
+
+                $out = Json::encode(['output' => '', 'message' => '']);
+                $post = [];
+                $posted = current($_POST['SpkKelayakan']);
+                $post['SpkKelayakan'] = $posted;
+                if ($jenis->load($post)) {
+                    $jenis->save(true);
+                }
+                echo $out;
+                return;
+            }
+
             return $this->render('index', [
                 'searchModel' => $searchModel,
                 'dataProvider' => $dataProvider,
@@ -80,10 +97,24 @@ class SpkKelayakanController extends Controller
     public function actionCreate()
     {
         $model = new SpkKelayakan();
+        $model->scenario = 'update';
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+            if ($model->load($this->request->post())) {
+                $model->nilai = UploadedFile::getInstance($model, 'nilai');
+
+                // Periksa jika file diunggah dan validasi sukses
+                if ($model->nilai !== null && $model->validate()) {
+                    $filename = 'Penilaian/' . md5(microtime()) . '.' . $model->nilai->extension;
+                    $model->nilai->saveAs($filename);
+                    $model->nilai = $filename;
+
+                    // Pesan flash sukses
+                    Yii::$app->getSession()->setFlash('success', 'File berhasil diunggah.');
+
+                    $model->save(false);
+                    return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+                }
             }
         } else {
             $model->loadDefaultValues();
@@ -104,11 +135,27 @@ class SpkKelayakanController extends Controller
     public function actionUpdate($id_kelayakan)
     {
         $model = $this->findModel($id_kelayakan);
-        if ($this->request->isPost && $model->load($this->request->post())) {
-            if ($model->save()) {
-                return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+        $model->scenario = 'update';
+
+        if ($this->request->isPost) {
+            if ($model->load($this->request->post())) {
+                $model->nilai = UploadedFile::getInstance($model, 'nilai');
+
+                // Periksa jika file diunggah dan validasi sukses
+                if ($model->nilai !== null && $model->validate()) {
+                    $filename = 'Penilaian/' . md5(microtime()) . '.' . $model->nilai->extension;
+                    $model->nilai->saveAs($filename);
+                    $model->nilai = $filename;
+
+                    // Pesan flash sukses
+                    Yii::$app->getSession()->setFlash('success', 'File berhasil diunggah.');
+
+                    $model->save(false);
+                    return $this->redirect(['view', 'id_kelayakan' => $model->id_kelayakan]);
+                }
             }
         }
+
         return $this->render('update', [
             'model' => $model,
         ]);
@@ -152,15 +199,12 @@ class SpkKelayakanController extends Controller
 
             if ($model->upload()) {
 
-                // $filename = 'berkas/' . md5(microtime()) . '.' . $model->importFile->extension;
-
                 $file = Yii::getAlias('@webroot/' . $model->filename);
                 $spreadsheet = IOFactory::load($file);
                 $worksheet = $spreadsheet->getActiveSheet();
                 $highestRow = $worksheet->getHighestRow();
-                // $highestColumn = $worksheet->getHighestColumn();
-                for ($row = 2; $row <= $highestRow; $row++) {
 
+                for ($row = 2; $row <= $highestRow; $row++) {
                     $cellValue = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
@@ -168,9 +212,7 @@ class SpkKelayakanController extends Controller
                     $cellValue = $worksheet->getCellByColumnAndRow(5, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(6, $row)->getValue();
                     $cellValue = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
-                    // var_dump($cellValue);
                     $model = new SpkKelayakan();
-
                     $model->dataR = $worksheet->getCellByColumnAndRow(1, $row)->getValue();
                     $model->Rsquare = $worksheet->getCellByColumnAndRow(2, $row)->getValue();
                     $model->dataF = $worksheet->getCellByColumnAndRow(3, $row)->getValue();
@@ -180,7 +222,8 @@ class SpkKelayakanController extends Controller
                     $model->T_performa = $worksheet->getCellByColumnAndRow(7, $row)->getValue();
                     $model->save();
                 }
-                // die;
+
+
                 Yii::$app->session->setFlash('success', 'Data berhasil diimpor');
                 return $this->redirect(['index']);
             }
@@ -190,8 +233,4 @@ class SpkKelayakanController extends Controller
 
         ]);
     }
-
-    // kode_otomatis
-
-
 }

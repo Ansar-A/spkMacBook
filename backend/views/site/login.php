@@ -6,11 +6,12 @@
 
 // use kartik\password\PasswordInput;
 
-
+use common\models\AuthAssignment;
 use yii\helpers\Url;
 use kartik\form\ActiveForm;
 use yii\helpers\Html;
 use kartik\checkbox\CheckboxX;
+use yii\helpers\ArrayHelper;
 
 $this->title = 'Login';
 ?>
@@ -86,14 +87,6 @@ $this->title = 'Login';
                 <?= Yii::$app->session->getFlash('error') ?>
             </div>
         <?php endif; ?>
-        <?php if (Yii::$app->session->hasFlash('success')) : ?>
-            <div class="alert alert-success alert-dismissable">
-                <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                <h4><i class="icon fa fa-check"></i>Success!</h4>
-                <?= Yii::$app->session->getFlash('success') ?>
-            </div>
-        <?php endif; ?>
-
         <div class="card-box">
             <div class="profile-widget text-center">
                 <div class="bg-custom bg-profile"></div>
@@ -105,14 +98,28 @@ $this->title = 'Login';
                     <div class="panel-body text-left">
                         <?php $form = ActiveForm::begin([
                             'id' => 'login-form',
-                        ]); ?>
-                        <?= $form->field($model, 'username', [
-                            'addon' => ['prepend' => ['content' => '<i class="fa fa-duotone fa-user fa-sm" style="color: #874bc3;"></i>']]
-                        ])->textInput(['autofocus' => true]); ?>
-                        <?= $form->field($model, 'password', [
-                            'addon' => ['prepend' => ['content' => '<i class="fa fa-sharp fa-regular fa-lock fa-lg" style="color: #874bc3;"></i>']]
-                        ])->passwordInput([]); ?>
+                            'fieldConfig' => [
+                                'showLabels' => false,
+                            ],
 
+                        ]); ?>
+                        <div class="form-group" style="padding-bottom: 8px;">
+                            <?= $form->field($model, 'username', [
+                                'addon' => [
+                                    'prepend' => ['content' => '<i class="fa fa-duotone fa-user fa-sm" style="color: #874bc3;"></i>']
+                                ],
+                                'inputOptions' => ['placeholder' => 'Username'],
+                            ])->textInput(['autofocus' => true]); ?>
+                        </div>
+
+                        <div class="form-group" style="padding-bottom: 2px;">
+                            <?= $form->field($model, 'password', [
+                                'addon' => ['prepend' => ['content' => '<i class="fa fa-sharp fa-regular fa-lock fa-lg" style="color: #874bc3;"></i>']],
+                                'inputOptions' => ['placeholder' => 'Password'],
+                            ])->passwordInput([]); ?>
+                        </div>
+
+                        <!-- <?= $form->field($model, 'roles')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?> -->
                         <div class="row">
                             <div class="col-md-6">
                                 <?= Html::checkbox('reveal-password', false, [

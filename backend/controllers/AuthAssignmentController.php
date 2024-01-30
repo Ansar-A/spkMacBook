@@ -77,7 +77,6 @@ class AuthAssignmentController extends Controller
      */
     public function actionCreate()
     {
-
         $model = new AuthAssignment();
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {

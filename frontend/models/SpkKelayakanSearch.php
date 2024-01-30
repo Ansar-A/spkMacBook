@@ -23,6 +23,7 @@ class SpkKelayakanSearch extends SpkKelayakan
         return [
             [['id_kelayakan', 'dataR', 'Rsquare', 'dataF', 'T_ketahanan',  'T_keamanan',  'T_kondisi',  'T_performa', 'get_produk', 'budgetMin', 'budgetMax'], 'integer'],
             [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
+            ['nilai', 'safe']
         ];
     }
 
@@ -44,12 +45,33 @@ class SpkKelayakanSearch extends SpkKelayakan
      */
     public function search($params)
     {
-        //$query = SpkKelayakan::find()->joinWith('produk')->select(" *, (T_ketahanan + T_keamanan + T_kondisi + T_performa) / 4 as akumulasi");
-        $query = SpkKelayakan::find()->joinWith('produk')->select(" *, Rsquare  as akumulasi");
+        // $query = SpkKelayakan::find()->joinWith('produk')->select(" *, Rsquare  as akumulasi");
+
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => $query,
+        //     'sort' => ['defaultOrder' => ['akumulasi' => SORT_DESC]]
+        // ]);
+
+        // $dataProvider->sort->attributes['akumulasi'] = [
+        //     'asc' => ['akumulasi' => SORT_ASC],
+        //     'desc' => ['akumulasi' => SORT_DESC],
+        // ];
+
+        // $dataProvider = new ActiveDataProvider([
+        //     'query' => $query,
+        //     'pagination' => ['pageSize' => 6]
+        // ]);
+        // test
+        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR");
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
-            'sort' => ['defaultOrder' => ['akumulasi' => SORT_DESC]]
+            'sort' => [
+                'defaultOrder' => [
+                    'akumulasi' => SORT_DESC,
+                    'akumulasiR' => SORT_DESC,
+                ],
+            ],
         ]);
 
         $dataProvider->sort->attributes['akumulasi'] = [
@@ -57,9 +79,12 @@ class SpkKelayakanSearch extends SpkKelayakan
             'desc' => ['akumulasi' => SORT_DESC],
         ];
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+        $dataProvider->sort->attributes['akumulasiR'] = [
+            'asc' => ['akumulasiR' => SORT_ASC],
+            'desc' => ['akumulasiR' => SORT_DESC],
+        ];
+        // test
+
         $this->load($params);
         if (!$this->validate()) {
             return $dataProvider;
