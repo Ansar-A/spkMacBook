@@ -153,7 +153,7 @@ $this->title = 'Signup';
                                     ]);
                                     ?>
                                     <?= $form->field($model, 'hp')->textInput(['type' => 'number']); ?>
-                                    <?= $form->field($model, 'role')->dropDownList(['Toko' => 'Toko', 'Personal' => 'Personal', 'Administrator' => 'Administrator']); ?>
+                                    <?= $form->field($model, 'role')->dropDownList(['Toko' => 'Toko', 'Personal' => 'Personal']); ?>
 
 
                                     <!-- <?= $form->field($model, 'fb')->textInput() ?> -->

@@ -29,21 +29,7 @@ $this->registerJs("
     }
 ", \yii\web\View::POS_END);
 ?>
-<html>
 
-<!-- <head>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCVCI3qVBztpD0tOf1RIKB-ZpUgMYte7oI&callback=initMap"></script>
-    <script>
-        function initMap() {
-            var map = new google.maps.Maps(document.getElementById("map"), {
-                center: new google.maps.LatLng(-5.135399, 119.423790),
-                zoom: 11,
-            });
-        }
-    </script>
-</head> -->
-
-</html>
 
 <section id="intro">
     <div class="container">
@@ -66,7 +52,7 @@ $this->registerJs("
                         <?php if (Yii::$app->user->isGuest) : ?>
                             <a href="<?= Url::to(['site/login']) ?>" class=""> <i class="active dm-icon fa fa-laptop fa-3x"></i> </a>
                         <?php else : ?>
-                            <a href="http://localhost/yii-spk/backend/web/site/login" class=""> <i class="active dm-icon fa fa-laptop fa-3x"></i> </a>
+                            <a href="https://spkmacbook.online/" class=""> <i class="active dm-icon fa fa-laptop fa-3x"></i> </a>
                         <?php endif ?>
                     </div>
                     <div class="servicetitle">

@@ -73,7 +73,7 @@ $this->title = 'Landing Page';
     <div class="card-box">
         <div class="profile-widget text-center">
             <div class="bg-custom bg-profile"></div>
-            <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail" alt="img">
+            <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
             <p></p>
             <p class="text-muted" style="padding-bottom: 30px; padding-top:20px;">
                 Welcome to SPK MacBook Bekas

@@ -7,6 +7,7 @@
 use kartik\password\PasswordInput;
 use yii\bootstrap\Html;
 use kartik\form\ActiveForm;
+use yii\helpers\Url;
 
 $this->title = 'Reset password';
 $this->params['breadcrumbs'][] = $this->title;
@@ -78,7 +79,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="card-box">
         <div class="profile-widget text-center">
             <div class="bg-custom bg-profile"></div>
-            <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail" alt="img">
+            <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
             <h4>SPK MacBook Bekas</h4>
             <p class="text-muted">Reset Password Form</p>
 
