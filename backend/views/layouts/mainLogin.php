@@ -28,6 +28,7 @@ LoginAsset::register($this);
     <?php $this->beginBody() ?>
     <main>
         <?= $content ?>
+        <!-- test -->
     </main>
     <script>
         var resizefunc = [];
