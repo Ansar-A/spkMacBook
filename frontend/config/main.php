@@ -20,11 +20,7 @@ return [
         ],
     ],
     'components' => [
-        'formatter' => [
-            'class' => 'yii\i18n\formatter',
-            'thousandSeparator' => ',',
-            'decimalSeparator' => '.',
-        ],
+
         'request' => [
             'csrfParam' => '_csrf-frontend',
         ],
