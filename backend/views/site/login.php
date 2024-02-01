@@ -90,7 +90,7 @@ $this->title = 'Login';
         <div class="card-box">
             <div class="profile-widget text-center">
                 <div class="bg-custom bg-profile"></div>
-                <img src="/yii-macbook/backend/web/purple/assets/images/users/mac.png" class="thumb-lg img-circle img-thumbnail" alt="img">
+                <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                 <h5>
                     <font>SPK MacBook Bekas</font>
                 </h5>

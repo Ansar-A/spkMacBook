@@ -350,7 +350,7 @@ use yii\helpers\Url;
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'get_builtinApps')->textarea()->label('Aksesoris...');
+                                    <?= $form->field($model, 'get_builtinApps')->textarea()->label('Dalam Kotak Pembelian...');
                                     ?>
                                 </div>
                             </div>
