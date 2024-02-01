@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </h2>
                 <p>Selamat datang di Sistem Pendukung Keputusan Penentuan MacBook Bekas, aplikasi yang dapat membantu anda dalam menentukan MacBook bekas terbaik.</p>
                 <p>Anda hanya perlu memasukkan budget yang anda miliki, aplikasi akan menampilkan MacBook bekas yang memiliki kualitas terbaik berdasarkan Performa, Keamanan, Ketahanan dan Kondisi komponen yang terbaik.</p>
-                <p class="withpadding">Belum punya Akun? <a href="/yii-spk/frontend/web/site/signup">Click Here</a> untuk registrasi sekarang.</p>
+                <p class="withpadding">Belum punya Akun? <a href="<?= Url::to(['site/signup']) ?>">Click Here</a> untuk registrasi sekarang.</p>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12" style="padding-top:85px">
                 <div class="wrapper-page">
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <?= $form->field($model, 'username')->textInput(['placeholder' => 'Username', 'autofocus' => true])->label('') ?>
                                     <?= $form->field($model, 'password')->passwordInput(['placeholder' => 'Password'])->label('') ?>
                                     <hr>
-                                    <!-- <?= $form->field($model, 'rememberMe')->checkbox(['template' => "<div class=\"col-lg-12\" style=\"padding-left: 0px\"> {input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>"])->label('Remember me') ?> -->
+                                    <?= $form->field($model, 'rememberMe')->checkbox(['template' => "<div class=\"col-lg-12\" style=\"padding-left: 0px\"> {input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>"])->label('Remember me') ?>
                                     <div class="form-group">
                                         <div class=" col-xs-5" style="padding-left:0%">
                                             <?= Html::submitButton('Sign in', ['class' => 'btn btn-primary btn-block  waves-effect waves-light', 'name' => 'login-button']) ?>

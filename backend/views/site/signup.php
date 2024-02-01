@@ -93,9 +93,6 @@ $this->title = 'Signup';
                             <div class="profile-widget text-center">
                                 <div class="bg-custom bg-profile"></div>
                                 <img src="<?= Url::to('@web/purple/assets/images/users/mac.png') ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                                <!-- <h4 style="padding-top: 20px;">
-                                    <font>SPK MacBook Bekas</font>
-                                </h4> -->
                                 <div class="form-group m-t-20 m-b-0">
                                     <div class="col-sm-12 text-center">
                                         <div class="col-lg-4">
