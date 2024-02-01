@@ -168,7 +168,7 @@ use yii\helpers\Url;
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'kapasitas_pengisian')->textInput(['type' => 'number', 'placeholder' => 'Kapasitas Pengisian Penuh...'])->label('') ?>
+                                    <?= $form->field($model, 'kapasitas_pengisian')->textInput(['placeholder' => 'Kapasitas Pengisian Penuh...'])->label('') ?>
                                 </div>
                             </div>
                         </div>

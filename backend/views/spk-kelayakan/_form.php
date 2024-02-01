@@ -24,7 +24,6 @@ use kartik\form\ActiveField;
                     <h3 class="panel-title">Nilai SPK</h3>
                 </div>
                 <div class="panel-body">
-                    <!-- <?= $form->field($model, 'nilai')->fileInput()->label('') ?> -->
                     <?= $form->field($model, 'nilai')->widget(FileInput::className(), [
                         'options' => ['accept' => 'Penilaian/*'],
                         'pluginOptions' => [
@@ -46,61 +45,20 @@ use kartik\form\ActiveField;
                 </div>
                 <div class="panel-body">
                     <?php
-                    if (\Yii::$app->user->can('Administrator')) {
-                        $list = Produk::find()
-                            ->leftJoin('user', 'produk.id_servicer = user.id')
-                            // ->andWhere(['user.role' => 'Personal'])
-                            ->andWhere(['produk.status_produk' => 'Unprocessed'])
-                            ->all();
-                        echo $form->field($model, 'get_produk')->dropDownList(
-                            ArrayHelper::map(
-                                $list,
-                                'id',
-                                function ($list) {
-                                    return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
-                                },
-                            ),
-                            ['prompt' => 'Select...']
-                        );
-                    } else {
-                        // $list = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->all();
-                        // echo $form->field($model, 'get_produk')->dropDownList(
-                        //     ArrayHelper::map(
-                        //         $list,
-                        //         'id', // Ini adalah kunci
-                        //         function ($list) {
-                        //             return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
-                        //         }
-                        //     ),
-                        //     ['prompt' => 'Pilih...']
-                        // );
-                        // Ambil daftar produk
-                        $list = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->all();
-
-                        // Ambil ID produk yang sudah dipilih (jika ada)
-                        $selectedProductId = $model->get_produk;
-
-                        // Buat daftar nilai untuk dropdown dengan memfilter nilai yang sudah dipilih
-                        $values = ArrayHelper::map(
+                    $list = Produk::find()
+                        ->leftJoin('user', 'produk.id_servicer = user.id')
+                        ->andWhere(['produk.status_produk' => 'Unprocessed'])
+                        ->all();
+                    echo $form->field($model, 'get_produk')->dropDownList(
+                        ArrayHelper::map(
                             $list,
                             'id',
                             function ($list) {
                                 return 'ID ' . $list->id . ' - ' . $list->nama_produk . ' - ' . $list->user->username;
-                            }
-                        );
-
-                        // Filter nilai yang sudah dipilih
-                        if ($selectedProductId !== null) {
-                            unset($values[$selectedProductId]);
-                        }
-
-                        // Tampilkan dropdown
-                        echo $form->field($model, 'get_produk')->dropDownList(
-                            $values,
-                            ['prompt' => 'Pilih...']
-                        );
-                    }
-
+                            },
+                        ),
+                        ['prompt' => 'Select...']
+                    );
                     ?>
                 </div>
             </div>

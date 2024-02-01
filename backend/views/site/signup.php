@@ -116,7 +116,7 @@ $this->title = 'Signup';
                         <div class="panel-body">
                             <div class="row">
                                 <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
-                                <div class="col-md-7">
+                                <div class="col-md-6">
                                     <?= $form->field($model, 'username', [
                                         'feedbackIcon' => [
                                             'prefix' => 'fa fa-user',
@@ -147,7 +147,7 @@ $this->title = 'Signup';
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
                                     <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About me...']); ?>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <?= $form->field($model, 'photo')->widget(FileInput::classname(), [
                                         'options' => ['accept' => 'photos/*'],
                                         'pluginOptions' => [

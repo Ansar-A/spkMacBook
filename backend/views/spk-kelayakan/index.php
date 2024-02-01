@@ -7,6 +7,7 @@ use yii\helpers\Url;
 use kartik\grid\GridView;
 use common\models\User;
 use kartik\editable\Editable;
+use kartik\grid\EditableColumn;
 use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
@@ -417,9 +418,6 @@ JS;
                                         ],
                                     ],
 
-
-
-
                                     // [
                                     //     'contentOptions' => ['style' => 'text-align:center'],
                                     //     'headerOptions' => ['class' => 'text-center'],
@@ -461,7 +459,7 @@ JS;
                                             );
                                         }
                                     ],
-
+                                    // ubah juga di Produk
                                     [
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
@@ -469,10 +467,10 @@ JS;
                                         'format' => 'raw',
                                         'label' => 'Status',
                                         'filter' => ['Finish' => "Finish", 'Unprocessed' => "Unprocessed"],
-                                        'value' => function ($data) {
-                                            if (isset($data->produk) && $data->produk !== 'Finish') {
+                                        'value' => function ($data, $key, $index, $column) {
+                                            if ($data->produk->status_produk == 'Finish') {
                                                 return '<span class="label label-table label-success">Finish</span>';
-                                            } else {
+                                            } elseif ($data->produk->status_produk == 'Unprocessed') {
                                                 return '<span class="label label-table label-danger">Unprocessed</span>';
                                             }
                                         },

@@ -152,6 +152,7 @@ AlertAsset::register($this);
                                             'berat',
                                             'panjang',
                                             'lebar',
+                                            'kapasitas_pengisian',
                                             'baterai',
                                             'ket',
                                             'status_produk'

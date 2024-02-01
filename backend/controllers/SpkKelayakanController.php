@@ -98,7 +98,6 @@ class SpkKelayakanController extends Controller
     {
         $model = new SpkKelayakan();
         $model->scenario = 'update';
-
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->nilai = UploadedFile::getInstance($model, 'nilai');

@@ -85,7 +85,9 @@ if (\Yii::$app->user->can('Administrator')) {
                                 <!-- <div class=" col-sm-6">
                                     <?= Html::button('<i class="md-add-box"></i> Add MacBook', ['value' => Url::to(['produk/create']), 'class' => 'btn btn-primary waves-effect waves-light', 'id' => 'modalButton']) ?>
                                 </div> -->
-                                <div class="col-sm-6"><?php echo $this->render('_search', ['model' => $searchModel]); ?></div>
+                                <div class="col-sm-6">
+                                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                                </div>
                                 <?php
                                 Modal::begin([
                                     'header' => false,
@@ -102,7 +104,7 @@ if (\Yii::$app->user->can('Administrator')) {
                         <?php if (\Yii::$app->user->can('Administrator')) : ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
-                                //'responsive' => true,
+                                // 'filterModel' => $searchModel,
                                 'headerRowOptions' => ['class' => 'table m-0'],
                                 'filterRowOptions' => ['class' => 'table m-0'],
                                 'striped' => false,

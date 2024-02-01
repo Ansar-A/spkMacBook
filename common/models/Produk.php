@@ -64,10 +64,9 @@ class Produk extends \yii\db\ActiveRecord
             [['nama_produk', 'id_servicer',  'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'photo', 'harga', 'baterai', 'kapasitas_pengisian', 'no_seri', 'garansi', 'get_informasi_ram', 'get_informasi_vga'], 'required'],
             [['ket'], 'in', 'range' => ['Normal', 'Replace']],
             [['status_produk'], 'in', 'range' => ['Finish', 'Unprocessed']],
-            [['id_servicer', 'id_jenis',  'id_so', 'get_warna'], 'integer'],
-            [['baterai',  'kapasitas_pengisian'], 'integer'],
+            [['id_servicer', 'id_jenis',  'id_so', 'get_warna', 'baterai'], 'integer'],
             [['id_jenis', 'photo', 'globalSearch', 'harga'], 'safe'],
-            [['nama_produk', 'ket', 'no_seri', 'garansi', 'get_informasi_ram', 'get_informasi_vga', 'id_penyimpanan', 'id_prosesor', 'id_layar', 'get_builtinApps', 'get_koneksiekspansi', 'get_kamera', 'get_audio', 'get_daya', 'get_nirkabel'], 'string', 'max' => 255],
+            [['nama_produk', 'ket', 'no_seri', 'garansi', 'get_informasi_ram', 'get_informasi_vga', 'id_penyimpanan', 'id_prosesor', 'id_layar', 'get_builtinApps', 'get_koneksiekspansi', 'get_kamera', 'get_audio', 'get_daya', 'get_nirkabel', 'kapasitas_pengisian'], 'string', 'max' => 255],
             [['photo'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg', 'on' => 'update'],
             [['id_jenis'], 'exist', 'skipOnError' => true, 'targetClass' => JenisProduk::class, 'targetAttribute' => ['id_jenis' => 'id']],
             [['id_so'], 'exist', 'skipOnError' => true, 'targetClass' => JenisSo::class, 'targetAttribute' => ['id_so' => 'id']],
@@ -105,7 +104,7 @@ class Produk extends \yii\db\ActiveRecord
             'harga' => 'Harga',
             'informasi_ram',
             // spk ketahanan
-            'baterai' => 'Baterai',
+            'baterai' => 'Cycle Count',
             'ket' => 'Keterangan',
             'kapasitas_pengisian' => 'Kapasitas Pengisian',
 

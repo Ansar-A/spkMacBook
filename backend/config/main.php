@@ -26,6 +26,7 @@ return [
         ],
         'request' => [
             'csrfParam' => '_csrf-backend',
+            'baseUrl' => '/administrator'
         ],
         'user' => [
             'identityClass' => 'common\models\User',
