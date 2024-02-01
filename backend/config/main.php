@@ -21,11 +21,7 @@ return [
     ],
     'components' => [
         //money
-        'formatter' => [
-            'class' => 'yii\i18n\formatter',
-            'thousandSeparator' => ',',
-            'decimalSeparator' => '.',
-        ],
+
         // rbac
         'authManager' => [
             'class' => 'yii\rbac\DbManager',
