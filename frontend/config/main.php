@@ -11,6 +11,14 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module',
+        ],
+        'gridviewKrajee' =>  [
+            'class' => '\kartik\grid\Module',
+        ],
+    ],
     'components' => [
         'formatter' => [
             'class' => 'yii\i18n\formatter',
