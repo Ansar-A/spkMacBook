@@ -122,7 +122,7 @@ $this->title = 'Signup';
                                             'error' => 'exclamation-triangle text-danger',
                                             'defaultOptions' => ['class' => 'text-custom']
                                         ]
-                                    ])->textInput(['placeholder' => 'Enter username...']); ?>
+                                    ])->textInput(['placeholder' => 'Input username...']); ?>
 
                                     <?= $form->field($model, 'email', [
                                         'feedbackIcon' => [
@@ -139,9 +139,9 @@ $this->title = 'Signup';
                                             'showMeter' => true,
                                             'toggleMask' => false
                                         ]
-                                    ])->passwordInput(['placeholder' => 'Enter password...']); ?>
+                                    ])->passwordInput(['placeholder' => 'Input password...']); ?>
 
-                                    <?= $form->field($model, 'address')->textarea(['placeholder' => 'Enter Address...']); ?>
+                                    <?= $form->field($model, 'address')->textarea(['placeholder' => 'Input Address...']); ?>
                                     <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About me...']); ?>
                                 </div>
                                 <div class="col-md-6">

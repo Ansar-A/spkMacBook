@@ -119,7 +119,6 @@ $this->title = 'Login';
                             ])->passwordInput([]); ?>
                         </div>
 
-                        <!-- <?= $form->field($model, 'roles')->dropDownList($model->roles, ['prompt' => 'Select Role']) ?> -->
                         <div class="row">
                             <div class="col-md-6">
                                 <?= Html::checkbox('reveal-password', false, [
