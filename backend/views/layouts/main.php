@@ -223,7 +223,7 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             <li class="has_sub">
                                 <a class="waves-effect"><i class="icon-people"></i> <span> Pengguna Website</span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['pengguna/index']) ?>">Data Pengguna</a></li>
+
                                     <li><a href="<?= Url::to(['like-produk/index']) ?>">Like Produk</a></li>
                                 </ul>
                             </li>

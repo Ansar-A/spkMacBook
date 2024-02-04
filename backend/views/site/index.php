@@ -539,11 +539,6 @@ foreach ($namaProduk as $namaP) {
                                     <div class="table-detail lable-detail">
                                         <span class="label label-info">Developher</span>
                                     </div>
-
-                                    <div class="table-detail table-actions-bar text-right">
-                                        <a href="#" class="table-action-btn"><i class="fa fa-info-circle"></i></a>
-                                        <a href="#" class="table-action-btn"><i class="fa fa-sliders"></i></a>
-                                    </div>
                                 </div>
                                 <hr>
                                 <h5 class="m-b-20"><b style="color: gray;">Terms and Conditions</b></h5>
