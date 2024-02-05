@@ -45,24 +45,7 @@ class SpkKelayakanSearch extends SpkKelayakan
      */
     public function search($params)
     {
-        // $query = SpkKelayakan::find()->joinWith('produk')->select(" *, Rsquare  as akumulasi");
-
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => $query,
-        //     'sort' => ['defaultOrder' => ['akumulasi' => SORT_DESC]]
-        // ]);
-
-        // $dataProvider->sort->attributes['akumulasi'] = [
-        //     'asc' => ['akumulasi' => SORT_ASC],
-        //     'desc' => ['akumulasi' => SORT_DESC],
-        // ];
-
-        // $dataProvider = new ActiveDataProvider([
-        //     'query' => $query,
-        //     'pagination' => ['pageSize' => 6]
-        // ]);
-        // test
-        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR, dataF as akumulasiF");
+        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR, dataF as akumulasiF, baterai as Baterai");
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -71,6 +54,7 @@ class SpkKelayakanSearch extends SpkKelayakan
                     'akumulasi' => SORT_DESC,
                     'akumulasiR' => SORT_DESC,
                     'akumulasiF' => SORT_ASC,
+                    'Baterai' => SORT_ASC,
                 ],
             ],
         ]);
@@ -89,7 +73,9 @@ class SpkKelayakanSearch extends SpkKelayakan
             'asc' => ['akumulasiF' => SORT_ASC],
         ];
 
-
+        $dataProvider->sort->attributes['akumulasiF'] = [
+            'asc' => ['Baterai' => SORT_ASC],
+        ];
         $this->load($params);
         if (!$this->validate()) {
             return $dataProvider;
