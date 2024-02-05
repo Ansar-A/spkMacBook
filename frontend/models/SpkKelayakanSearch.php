@@ -74,7 +74,7 @@ class SpkKelayakanSearch extends SpkKelayakan
             'asc' => ['akumulasiF' => SORT_ASC],
         ];
 
-        $dataProvider->sort->attributes['akumulasiF'] = [
+        $dataProvider->sort->attributes['baterai'] = [
             'asc' => ['baterai' => SORT_ASC],
         ];
         $this->load($params);
