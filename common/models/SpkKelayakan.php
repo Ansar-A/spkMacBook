@@ -66,7 +66,7 @@ class SpkKelayakan extends \yii\db\ActiveRecord
 
             [['nilai'], 'file', 'skipOnEmpty' => true, 'extensions' => 'pdf', 'maxSize' => 20 * 1024, 'on' => 'update'],
 
-            [['dataR', 'Rsquare', 'dataF', 'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'number'],
+            [['dataR', 'Rsquare', 'dataF', 'T_ketahanan', 'T_keamanan', 'T_kondisi', 'T_performa'], 'safe'],
             [['get_produk'], 'exist', 'skipOnError' => true, 'targetClass' => Produk::class, 'targetAttribute' => ['get_produk' => 'id']],
         ];
     }
