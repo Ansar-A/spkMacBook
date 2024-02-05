@@ -33,7 +33,7 @@ if (\Yii::$app->user->can('Administrator')) {
     $totalPengguna = Pengguna::find()->count();
 } else {
     $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
-    $totalPengguna = LikeProduk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
+    $totalPengguna = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id])->count();
 }
 ?>
 
