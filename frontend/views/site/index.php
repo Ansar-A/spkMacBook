@@ -98,7 +98,7 @@ $this->registerJs("
     </div>
 </section>
 
-<section class="section1">
+<!-- <section class="section1">
     <div class="container clearfix">
         <div class=" col-lg-12 col-md-12 col-sm-12 clearfix">
             <div class="divider"></div>
@@ -129,7 +129,7 @@ $this->registerJs("
         </div>
 
     </div>
-</section>
+</section> -->
 <section class="section2">
     <div class="container">
         <div class="message text-center">

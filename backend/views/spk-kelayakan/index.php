@@ -364,19 +364,19 @@ JS;
                                         //     return $model->produk->user->username;
                                         // }
                                     ],
-                                    // [
-                                    //     'attribute' =>  'get_produk',
-                                    //     'label'  => 'ID Mac',
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
-                                    //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'filterInputOptions' => [
-                                    //         'class'       => 'form-control',
-                                    //         'placeholder' => 'Search...',
-                                    //     ],
-                                    //     'value' => function ($model) {
-                                    //         return $model->produk->id;
-                                    //     }
-                                    // ],
+                                    [
+                                        'attribute' =>  'get_produk',
+                                        'label'  => 'ID Mac',
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
+                                        'value' => function ($model) {
+                                            return $model->produk->id;
+                                        }
+                                    ],
 
 
                                     [

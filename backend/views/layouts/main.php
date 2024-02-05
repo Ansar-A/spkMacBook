@@ -151,13 +151,13 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                                     <li><a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Item Child</a></li>
                                 </ul>
                             </li>
-                            <li class="text-muted menu-title">Frontend</li>
+                            <!-- <li class="text-muted menu-title">Frontend</li>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="ti-layers"></i><span> Custom Populer</span> <span style="color:#714ABA" class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['fr-macpro/index']) ?>">Populer Item</a></li>
                                 </ul>
-                            </li>
+                            </li> -->
                         <?php elseif (\Yii::$app->user->can('Toko')) : ?>
                             <li class="text-muted menu-title">MacBook</li>
                             <li class="has_sub">
