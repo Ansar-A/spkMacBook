@@ -162,17 +162,6 @@ if (\Yii::$app->user->can('Administrator')) {
                                         }
                                     ],
                                     [
-                                        'header' => 'Produk',
-                                        'label' => '',
-                                        'attribute' => 'nama_produk',
-                                        'filterInputOptions' => [
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Search name...',
-                                        ],
-                                        'contentOptions' => ['style' => 'text-align:center'],
-                                        'headerOptions' => ['class' => 'text-center']
-                                    ],
-                                    [
                                         'header' => 'Toko',
                                         'label' => '',
                                         'filterInputOptions' => [
@@ -186,7 +175,17 @@ if (\Yii::$app->user->can('Administrator')) {
                                             return $model->user->username;
                                         }
                                     ],
-
+                                    [
+                                        'header' => 'Produk',
+                                        'label' => '',
+                                        'attribute' => 'nama_produk',
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search name...',
+                                        ],
+                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'headerOptions' => ['class' => 'text-center']
+                                    ],
                                     [
                                         'class' => 'kartik\grid\EditableColumn',
                                         'headerOptions' => ['class' => 'text-center'],
