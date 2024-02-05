@@ -367,7 +367,7 @@ JS;
                                     [
                                         'attribute' =>  'get_produk',
                                         'label'  => 'ID Mac',
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'headerOptions' => ['class' => 'text-center'],
                                         'filterInputOptions' => [
                                             'class'       => 'form-control',
