@@ -24,7 +24,7 @@ $this->title = 'My Yii Application';
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="left-sidebar.html#popular" data-toggle="tab" aria-expanded="false">Detail Info Produk</a></li>
 
-                    <li class=""><a href="left-sidebar.html#kelayakan" data-toggle="tab" aria-expanded="true"> Perhitungan </a></li>
+                    <!-- <li class=""><a href="left-sidebar.html#kelayakan" data-toggle="tab" aria-expanded="true"> Perhitungan </a></li> -->
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="popular">
@@ -91,8 +91,8 @@ $this->title = 'My Yii Application';
                                                 <li class="designer">Builtin App : <span><?php echo $model->produk->get_builtinApps ?></span></li>
                                                 <li class="designer">Audio : <span><?php echo $model->produk->get_audio ?></span></li>
                                                 <li class="designer">Koneksi Ekspansi : <span><?php echo $model->produk->get_koneksiekspansi ?></span></li>
-                                                <li class="designer">Baterai : <span><?php echo $model->produk->baterai ?></span></li>
-                                                <li class="designer">Kapasitas Pengisian : <span><?php echo $model->produk->kapasitas_pengisian ?></span></li>
+                                                <li class="designer">Cycle Count : <span><?php echo $model->produk->baterai ?></span></li>
+                                                <li class="designer">Kapasitas Pengisian Penuh: <span><?php echo $model->produk->kapasitas_pengisian ?></span></li>
                                             </ul>
                                             <hr>
                                         </div>
