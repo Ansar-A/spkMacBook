@@ -77,12 +77,21 @@ if (\Yii::$app->user->can('Administrator')) {
                         <div class="text-muted m-t-5">Total Produk MacBook</div>
                     </div>
                 </div>
-                <div class="col-sm-6">
-                    <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
-                        <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalPengguna ?></b></h2>
-                        <div class="text-muted m-t-5">User Website</div>
+                <?php if (\Yii::$app->user->can('Administrator')) : ?>
+                    <div class="col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
+                            <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalPengguna ?></b></h2>
+                            <div class="text-muted m-t-5">User Website</div>
+                        </div>
                     </div>
-                </div>
+                <?php else : ?>
+                    <div class="col-sm-6">
+                        <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
+                            <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalPengguna ?></b></h2>
+                            <div class="text-muted m-t-5">Like Produk</div>
+                        </div>
+                    </div>
+                <?php endif ?>
                 <div class="col-sm-12">
                     <div class="produk-index">
                         <?php if (\Yii::$app->user->can('Administrator')) : ?>
