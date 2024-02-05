@@ -108,7 +108,7 @@ $this->title = 'My Yii Application';
 
                                         <div class="f-element">
                                             <div class="milestone-counter">
-                                                <span class="stat-count highlight"><?php echo $model->Rsquare ?></span>%
+                                                <span class="stat-count highlight"><?php echo $model->dataR ?></span>%
                                                 <div class="milestone-details">Tingkat Kelayakan</div>
                                             </div>
                                         </div>
