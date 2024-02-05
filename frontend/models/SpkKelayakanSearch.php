@@ -62,7 +62,7 @@ class SpkKelayakanSearch extends SpkKelayakan
         //     'pagination' => ['pageSize' => 6]
         // ]);
         // test
-        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR");
+        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR dataF as akumulasiF");
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -70,6 +70,7 @@ class SpkKelayakanSearch extends SpkKelayakan
                 'defaultOrder' => [
                     'akumulasi' => SORT_DESC,
                     'akumulasiR' => SORT_DESC,
+                    'akumulasiF' => SORT_ASC,
                 ],
             ],
         ]);
@@ -83,7 +84,11 @@ class SpkKelayakanSearch extends SpkKelayakan
             'asc' => ['akumulasiR' => SORT_ASC],
             'desc' => ['akumulasiR' => SORT_DESC],
         ];
-        // test
+
+        $dataProvider->sort->attributes['akumulasiF'] = [
+            'asc' => ['akumulasiF' => SORT_ASC],
+        ];
+
 
         $this->load($params);
         if (!$this->validate()) {
