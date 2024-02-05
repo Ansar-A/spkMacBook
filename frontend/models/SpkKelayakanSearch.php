@@ -62,7 +62,7 @@ class SpkKelayakanSearch extends SpkKelayakan
         //     'pagination' => ['pageSize' => 6]
         // ]);
         // test
-        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR dataF as akumulasiF");
+        $query = SpkKelayakan::find()->joinWith('produk')->select("*, Rsquare as akumulasi, dataR as akumulasiR, dataF as akumulasiF");
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
