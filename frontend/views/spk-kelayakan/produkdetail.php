@@ -15,10 +15,7 @@ $this->title = 'My Yii Application';
 
 <section class="section1">
     <div class="container clearfix">
-        <div class="general-title text-center">
-            <p>DETAIL PRODUK</p>
-            <hr>
-        </div>
+
         <div class="widget">
             <div class="tabbable">
                 <ul class="nav nav-tabs">

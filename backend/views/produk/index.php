@@ -1,6 +1,7 @@
 <?php
 
 use common\models\JenisProduk;
+use common\models\LikeProduk;
 use common\models\Pengguna;
 use common\models\Produk;
 use common\models\User;
@@ -24,11 +25,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $totalServicer = User::find()->count();
 $totalJenis = JenisProduk::find()->count();
-$totalPengguna = Pengguna::find()->count();
+
+
+
 if (\Yii::$app->user->can('Administrator')) {
     $totalProduk = Produk::find()->count();
+    $totalPengguna = Pengguna::find()->count();
 } else {
     $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
+    $totalPengguna = LikeProduk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
 }
 ?>
 
