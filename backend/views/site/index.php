@@ -732,12 +732,12 @@ foreach ($namaProduk as $namaP) {
 
                         <div class="col-sm-4">
                             <div class="card-box p-0">
-                                <div class="profile-widget text-center" style="height: 360px;">
+                                <div class="profile-widget text-center" style="height: 368px;">
                                     <div class="bg-custom bg-profile" style=" border-radius: 5px; border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;"></div>
                                     <img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                                     <h4><?php echo Yii::$app->user->identity->username ?></h4>
                                     <p class="text"> <?php echo Yii::$app->user->identity->tentang ?></p>
-                                    <p class="text-muted"><i class="fa fa-map-marker"></i> <?php echo Yii::$app->user->identity->address ?></p>
+                                    <p class="text-muted" style="padding-top:25px"><i class="fa fa-map-marker"></i> <?php echo Yii::$app->user->identity->address ?></p>
                                     <a href="<?php echo Yii::$app->user->identity->fb ?>" class="btn btn-sm btn-purple m-t-20">Facebook</a>
                                     <a href="<?php echo Yii::$app->user->identity->ig ?>" class="btn btn-sm btn-pink m-t-20">Instagram</a>
                                 </div>
