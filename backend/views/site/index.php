@@ -732,7 +732,7 @@ foreach ($namaProduk as $namaP) {
 
                         <div class="col-sm-4">
                             <div class="card-box p-0">
-                                <div class="profile-widget text-center" style="height: 338px;">
+                                <div class="profile-widget text-center" style="height: 360px;">
                                     <div class="bg-custom bg-profile" style=" border-radius: 5px; border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;"></div>
                                     <img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                                     <h4><?php echo Yii::$app->user->identity->username ?></h4>
