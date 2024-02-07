@@ -542,7 +542,7 @@ foreach ($namaProduk as $namaP) {
                                 </div>
                                 <hr>
                                 <h5 class="m-b-20"><b style="color: gray;">Terms and Conditions</b></h5>
-                                <div class="nicescroll p-l-r-10" style="max-height: 200px; overflow: hidden; outline: none;" tabindex="5000">
+                                <div class="nicescroll p-l-r-10" style="max-height: 300px; overflow: hidden; outline: none;" tabindex="5000">
                                     <div class="timeline-2">
                                         <div class="time-item">
                                             <div class="item-info">
@@ -593,8 +593,9 @@ foreach ($namaProduk as $namaP) {
                     </div>
                 </div>
                 <div class="col-sm-4">
-                    <div class="card" style="width: 100%; height: 446px; border-radius:5px;">
+                    <div class="card" style="width: 100%; height: 545px; border-radius:5px;">
                         <span class="card__hover">
+                            <h5 style="color: #FFFFFF;">Welcome to SPK MacBook Bekas</h5>
                             <h5 style="color: #FFFFFF;">About Me!</h5>
                         </span>
                         <figure class="card__figure" style="padding-top: 30px">
