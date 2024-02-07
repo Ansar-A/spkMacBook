@@ -598,7 +598,7 @@ foreach ($namaProduk as $namaP) {
                             <h5 style="color: #FFFFFF;">Welcome to SPK MacBook Bekas</h5>
                             <h5 style="color: #FFFFFF;">About Me!</h5>
                         </span>
-                        <figure class="card__figure" style="padding-top: 30px">
+                        <figure class="card__figure" style="padding-top: 100px">
                             <img src=" <?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
                         </figure>
                         <div class="card__info">
@@ -618,7 +618,7 @@ foreach ($namaProduk as $namaP) {
                                     </span>
                                 </p>
 
-                                <div class="card__links">
+                                <div class="card__links" style="padding-bottom: 30px;">
                                     <a href="https://www.facebook.com/?locale=id_ID" target="_blank">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: msFilter;">
                                             <path d="M13.397 20.997v-8.196h2.765l.411-3.209h-3.176V7.548c0-.926.258-1.56 1.587-1.56h1.684V3.127A22.336 22.336 0 0 0 14.201 3c-2.444 0-4.122 1.492-4.122 4.231v2.355H7.332v3.209h2.753v8.202h3.312z"></path>
