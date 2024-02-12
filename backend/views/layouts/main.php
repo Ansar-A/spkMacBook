@@ -145,10 +145,9 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="ti-key"></i><span> Akses Kontrol </span> <span style="color:#714ABA" class="menu-arrow"></span></a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['auth-item/index']) ?>">Auth Item</a></li>
+
                                     <li><a href="<?= Url::to(['auth-assignment/index']) ?>">Auth Assignment</a></li>
-                                    <!-- <li><a href="<?= Url::to(['auth-rule/index']) ?>">AuthRule</a></li> -->
-                                    <li><a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Item Child</a></li>
+
                                 </ul>
                             </li>
                             <!-- <li class="text-muted menu-title">Frontend</li>

@@ -289,7 +289,7 @@ JS;
                         <div class="row">
                             <div class="col-sm-4 pull-right">
                                 <?php if (\Yii::$app->user->can('Administrator')) : ?>
-                                    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                                    <!-- <?php echo $this->render('_search', ['model' => $searchModel]); ?> -->
                                 <?php else : ?>
                                 <?php endif ?>
                             </div>
@@ -303,7 +303,7 @@ JS;
                         <?php if (\Yii::$app->user->can('Administrator')) : ?>
                             <?= GridView::widget([
                                 'dataProvider' => $dataProvider,
-                                // 'filterModel' => $searchModel,
+                                'filterModel' => $searchModel,
                                 //'responsive' => true,
                                 'headerRowOptions' => ['class' => 'table m-0'],
                                 'filterRowOptions' => ['class' => 'table m-0'],
