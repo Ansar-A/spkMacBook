@@ -327,6 +327,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                             'placeholder' => 'Search by ID...',
                                         ],
                                     ],
+
                                     [
                                         'class' => 'kartik\grid\EditableColumn',
                                         'headerOptions' => ['class' => 'text-center'],
@@ -334,7 +335,16 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'attribute' => 'status',
                                         'format' => 'raw',
                                         'label' => 'Status',
+                                        'filterType' => GridView::FILTER_SELECT2,
                                         'filter'    => [10 => "Active", 9 => "Suspended"],
+                                        'editableOptions' => [
+                                            'inputType' => Editable::INPUT_DROPDOWN_LIST,
+                                            'data' => [10 => 'Active', 9 => 'Suspended'],
+                                            'displayValueConfig' => [
+                                                10 => 'Active',
+                                                9 => 'Suspended',
+                                            ],
+                                        ],
                                         'value' => function ($data, $key, $index, $column) {
                                             if ($data->status == 10) {
                                                 return '<span class="label label-table label-success">Active</span>';
@@ -496,7 +506,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                         <?php endif ?>
                     </div>
                 </div>
-
             </div>
 
         </div>
