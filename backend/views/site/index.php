@@ -734,67 +734,40 @@ foreach ($namaProduk as $namaP) {
 
                         <div class="col-sm-4">
                             <div class="card-box">
-                                <a href="<?= Url::to(['produk/index']) ?>" class="pull-right btn btn-default btn-sm waves-effect waves-light">View
-                                    All</a>
-                                <h4 class="text-dark header-title m-t-0">Data MacBook Terbaru</h4>
+                                <a href="<?= Url::to('produk/index') ?>" class="pull-right btn btn-default btn-sm waves-effect waves-light">View All</a>
+                                <p class="text-muted m-b-30 font-13">
+                                    Produk Terbaru
+                                </p>
+
                                 <div class="table-responsive">
-                                    <div class="card-box">
-                                        <a href="#" class="pull-right btn btn-default btn-sm waves-effect waves-light">View All</a>
-                                        <h4 class="text-dark header-title m-t-0">Recent Orders</h4>
-                                        <p class="text-muted m-b-30 font-13">
-                                            Your awesome text goes here.
-                                        </p>
-
-                                        <div class="table-responsive">
-                                            <table class="table table-actions-bar">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Product</th>
-                                                        <th>Toko</th>
-                                                        <th>Role</th>
-                                                        <th>Created</th>
-                                                        <th style="min-width: 80px;">Action</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    <?php
-                                                    // Query to get the 5 latest MacBook Pro products
-                                                    $products = Produk::find()
-                                                        ->where(['like', 'nama_produk', 'MacBook Pro'])
-                                                        ->orderBy(['created_at' => SORT_DESC])
-                                                        ->limit(5)
-                                                        ->all();
-
-                                                    // Iterate through the products and display each row
-                                                    foreach ($products as $product) :
-                                                    ?>
-                                                        <tr>
-                                                            <td><?= Html::encode($product->nama_produk) ?></td>
-                                                            <td><?= Html::encode($product->user->username) ?></td>
-                                                            <td><?= Html::encode($product->user->role) ?></td>
-                                                            <td><?= Yii::$app->formatter->asDate($product->created_at, 'long') ?></td>
-                                                            <td class="text-nowrap">
-                                                                <a href="<?= Url::to(['produk/index']) ?>" class="text-muted">
-                                                                    <!-- Download SVG icon from http://tabler-icons.io/i/message -->
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                                        <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
-                                                                        <line x1="8" y1="9" x2="16" y2="9"></line>
-                                                                        <line x1="8" y1="13" x2="14" y2="13"></line>
-                                                                    </svg>
-                                                                    new
-                                                                </a>
-                                                            </td>
-                                                        </tr>
-                                                    <?php endforeach; ?>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-
-
+                                    <table class="table table-actions-bar">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>Toko</th>
+                                                <th>Role</th>
+                                                <th>Created</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <?php
+                                            $products = Produk::find()
+                                                ->where(['like', 'nama_produk', 'MacBook Pro'])
+                                                ->orderBy(['created_at' => SORT_DESC])
+                                                ->limit(5)
+                                                ->all();
+                                            foreach ($products as $product) :
+                                            ?>
+                                                <tr>
+                                                    <td><?= Html::encode($product->nama_produk) ?></td>
+                                                    <td><?= Html::encode($product->user->username) ?></td>
+                                                    <td><?= Html::encode($product->user->role) ?></td>
+                                                    <td><?= Yii::$app->formatter->asDate($product->created_at, 'long') ?></td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        </tbody>
+                                    </table>
                                 </div>
-
                             </div>
                         </div>
 
