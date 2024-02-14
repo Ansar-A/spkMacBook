@@ -738,50 +738,60 @@ foreach ($namaProduk as $namaP) {
                                     All</a>
                                 <h4 class="text-dark header-title m-t-0">Data MacBook Terbaru</h4>
                                 <div class="table-responsive">
-                                    <tbody>
-                                        <?php
-                                        // Query untuk mendapatkan 7 data Permintaan terbaru
-                                        $permintaanData = Produk::find()->orderBy(['created_at' => SORT_DESC])->limit(7)->all();
+                                    <div class="card-box">
+                                        <a href="#" class="pull-right btn btn-default btn-sm waves-effect waves-light">View All</a>
+                                        <h4 class="text-dark header-title m-t-0">Recent Orders</h4>
+                                        <p class="text-muted m-b-30 font-13">
+                                            Your awesome text goes here.
+                                        </p>
 
-                                        // Iterasi untuk setiap data Permintaan
-                                        foreach ($permintaanData as $item) :
-                                            // Format tanggal sesuai kebutuhan (di sini hanya contoh)
-                                            $formattedDate = Yii::$app->formatter->asDate($item->created_at, 'long'); // Contoh format tanggal
+                                        <div class="table-responsive">
+                                            <table class="table table-actions-bar">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Product</th>
+                                                        <th>Toko</th>
+                                                        <th>Role</th>
+                                                        <th>Created</th>
+                                                        <th style="min-width: 80px;">Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    // Query to get the 5 latest MacBook Pro products
+                                                    $products = Produk::find()
+                                                        ->where(['like', 'nama_produk', 'MacBook Pro'])
+                                                        ->orderBy(['created_at' => SORT_DESC])
+                                                        ->limit(5)
+                                                        ->all();
 
-                                            // Output satu baris dalam tabel
-                                        ?>
-                                            <tr>
-                                                <td class="w-100">
-                                                    <a href="#" class="text-reset"><?= Html::encode($item->user->role) ?></a>
-                                                </td>
-                                                <td class="text-nowrap text-muted">
-                                                    <!-- Ikona tanggal -->
-                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                        <rect x="4" y="5" width="16" height="16" rx="2"></rect>
-                                                        <line x1="16" y1="3" x2="16" y2="7"></line>
-                                                        <line x1="8" y1="3" x2="8" y2="7"></line>
-                                                        <line x1="4" y1="11" x2="20" y2="11"></line>
-                                                        <line x1="11" y1="15" x2="12" y2="15"></line>
-                                                        <line x1="12" y1="15" x2="12" y2="18"></line>
-                                                    </svg>
-                                                    <?= $formattedDate ?>
-                                                </td>
-                                                <td class="text-nowrap">
-                                                    <a href="<?= Url::to(['produk/index']) ?>" class="text-muted">
-                                                        <!-- Download SVG icon from http://tabler-icons.io/i/message -->
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                                            <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
-                                                            <line x1="8" y1="9" x2="16" y2="9"></line>
-                                                            <line x1="8" y1="13" x2="14" y2="13"></line>
-                                                        </svg>
-                                                        new
-                                                    </a>
-                                                </td>
-                                            </tr>
-                                        <?php endforeach; ?>
-                                    </tbody>
+                                                    // Iterate through the products and display each row
+                                                    foreach ($products as $product) :
+                                                    ?>
+                                                        <tr>
+                                                            <td><?= Html::encode($product->nama_produk) ?></td>
+                                                            <td><?= Html::encode($product->user->username) ?></td>
+                                                            <td><?= Html::encode($product->user->role) ?></td>
+                                                            <td><?= Yii::$app->formatter->asDate($product->created_at, 'long') ?></td>
+                                                            <td class="text-nowrap">
+                                                                <a href="<?= Url::to(['produk/index']) ?>" class="text-muted">
+                                                                    <!-- Download SVG icon from http://tabler-icons.io/i/message -->
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                                        <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
+                                                                        <line x1="8" y1="9" x2="16" y2="9"></line>
+                                                                        <line x1="8" y1="13" x2="14" y2="13"></line>
+                                                                    </svg>
+                                                                    new
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+                                                    <?php endforeach; ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
 
                                 </div>
 
