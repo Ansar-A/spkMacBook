@@ -52,7 +52,6 @@ class SpkKelayakanSearch extends SpkKelayakan
         } else {
             $query = SpkKelayakan::find()
                 ->leftJoin('produk', 'spk_kelayakan.get_produk = produk.id');
-            // ->where(['id_servicer' => Yii::$app->user->identity->id]);
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -73,8 +72,7 @@ class SpkKelayakanSearch extends SpkKelayakan
             ->orFilterWhere(['like', 'Rsquare', $this->globalSearch])
             ->orFilterWhere(['like', 'dataF', $this->globalSearch])
             ->orFilterWhere(['=', 'produk.nama_produk', $this->globalSearch])
-            ->orFilterWhere(['=', 'produk.id', $this->globalSearch])
-            ->orFilterWhere(['=', 'user.role', $this->globalSearch]);
+            ->orFilterWhere(['=', 'produk.id', $this->globalSearch]);
 
         // $query->andFilterWhere([
         //     'id_kelayakan' => $this->id_kelayakan,
