@@ -689,7 +689,7 @@ foreach ($namaProduk as $namaP) {
                     <?php endif ?>
                     <!-- Digram -->
                     <?php if (Yii::$app->user->can('Administrator')) : ?>
-                        <div class="col-sm-8">
+                        <div class="col-sm-6">
                             <div class="card-box">
                                 <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
                                 <?php echo ChartJs::widget([
@@ -732,7 +732,7 @@ foreach ($namaProduk as $namaP) {
                             </div>
                         </div>
 
-                        <div class="col-sm-4">
+                        <div class="col-sm-6">
                             <div class="card-box">
                                 <a href="<?= Url::to('produk/index') ?>" class="pull-right btn btn-default btn-sm waves-effect waves-light">View All</a>
                                 <p class="text-muted m-b-30 font-13">
@@ -754,7 +754,7 @@ foreach ($namaProduk as $namaP) {
                                             $products = Produk::find()
                                                 ->where(['like', 'nama_produk', 'MacBook Pro'])
                                                 ->orderBy(['created_at' => SORT_DESC])
-                                                ->limit(5)
+                                                ->limit(4)
                                                 ->all();
                                             foreach ($products as $product) :
                                             ?>
