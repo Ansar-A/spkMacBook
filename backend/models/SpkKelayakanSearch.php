@@ -50,11 +50,9 @@ class SpkKelayakanSearch extends SpkKelayakan
                 ->leftJoin('produk', 'spk_kelayakan.get_produk = produk.id') // Join dengan tabel 'produk'
                 ->leftJoin('user', 'produk.id_servicer = user.id'); // Join dengan tabel 'user';
         } else {
-            // $query = SpkKelayakan::find()
-            //     ->leftJoin('produk', 'spk_kelayakan.get_produk = produk.id');
             $query = SpkKelayakan::find()
                 ->leftJoin('produk', 'spk_kelayakan.get_produk = produk.id')
-                ->leftJoin('user', 'produk.id = user.id');
+                ->leftJoin('user', 'produk.id_service = user.id');
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -75,7 +73,7 @@ class SpkKelayakanSearch extends SpkKelayakan
             ->orFilterWhere(['like', 'Rsquare', $this->globalSearch])
             ->orFilterWhere(['like', 'dataF', $this->globalSearch])
             ->orFilterWhere(['=', 'produk.nama_produk', $this->globalSearch])
-            ->orFilterWhere(['like', 'user.username', $this->globalSearch])
+            ->orFilterWhere(['like', 'produk.user.username', $this->globalSearch])
             ->orFilterWhere(['=', 'produk.id', $this->globalSearch]);
 
         // $query->andFilterWhere([
