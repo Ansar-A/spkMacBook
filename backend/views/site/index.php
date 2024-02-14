@@ -745,7 +745,6 @@ foreach ($namaProduk as $namaP) {
                                             <tr>
                                                 <th>Product</th>
                                                 <th>Toko</th>
-                                                <th>Role</th>
                                                 <th>Created</th>
                                             </tr>
                                         </thead>
@@ -761,7 +760,6 @@ foreach ($namaProduk as $namaP) {
                                                 <tr>
                                                     <td><?= Html::encode($product->nama_produk) ?></td>
                                                     <td><?= Html::encode($product->user->username) ?></td>
-                                                    <td><?= Html::encode($product->user->role) ?></td>
                                                     <td><?= Yii::$app->formatter->asDate($product->created_at, 'long') ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
