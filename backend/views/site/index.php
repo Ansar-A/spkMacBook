@@ -6,6 +6,7 @@ use common\models\Pengguna;
 use common\models\Produk;
 use common\models\User;
 use dosamigos\chartjs\ChartJs;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $this->title = 'My Yii Application';
@@ -732,16 +733,58 @@ foreach ($namaProduk as $namaP) {
                         </div>
 
                         <div class="col-sm-4">
-                            <div class="card-box p-0">
-                                <div class="profile-widget text-center" style="height: 368px;">
-                                    <div class="bg-custom bg-profile" style=" border-radius: 5px; border-bottom-right-radius: 0px;border-bottom-left-radius: 0px;"></div>
-                                    <img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" class="thumb-lg img-circle img-thumbnail" alt="img">
-                                    <h4><?php echo Yii::$app->user->identity->username ?></h4>
-                                    <p class="text"> <?php echo Yii::$app->user->identity->tentang ?></p>
-                                    <p class="text-muted" style="padding-top:25px"><i class="fa fa-map-marker"></i> <?php echo Yii::$app->user->identity->address ?></p>
-                                    <a href="<?php echo Yii::$app->user->identity->fb ?>" class="btn btn-sm btn-purple m-t-20">Facebook</a>
-                                    <a href="<?php echo Yii::$app->user->identity->ig ?>" class="btn btn-sm btn-pink m-t-20">Instagram</a>
+                            <div class="card-box">
+                                <a href="<?= Url::to(['produk/index']) ?>" class="pull-right btn btn-default btn-sm waves-effect waves-light">View
+                                    All</a>
+                                <h4 class="text-dark header-title m-t-0">Data MacBook Terbaru</h4>
+                                <div class="table-responsive">
+                                    <tbody>
+                                        <?php
+                                        // Query untuk mendapatkan 7 data Permintaan terbaru
+                                        $permintaanData = Produk::find()->orderBy(['created_at' => SORT_DESC])->limit(7)->all();
+
+                                        // Iterasi untuk setiap data Permintaan
+                                        foreach ($permintaanData as $item) :
+                                            // Format tanggal sesuai kebutuhan (di sini hanya contoh)
+                                            $formattedDate = Yii::$app->formatter->asDate($item->created_at, 'long'); // Contoh format tanggal
+
+                                            // Output satu baris dalam tabel
+                                        ?>
+                                            <tr>
+                                                <td class="w-100">
+                                                    <a href="#" class="text-reset"><?= Html::encode($item->user->role) ?></a>
+                                                </td>
+                                                <td class="text-nowrap text-muted">
+                                                    <!-- Ikona tanggal -->
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                        <rect x="4" y="5" width="16" height="16" rx="2"></rect>
+                                                        <line x1="16" y1="3" x2="16" y2="7"></line>
+                                                        <line x1="8" y1="3" x2="8" y2="7"></line>
+                                                        <line x1="4" y1="11" x2="20" y2="11"></line>
+                                                        <line x1="11" y1="15" x2="12" y2="15"></line>
+                                                        <line x1="12" y1="15" x2="12" y2="18"></line>
+                                                    </svg>
+                                                    <?= $formattedDate ?>
+                                                </td>
+                                                <td class="text-nowrap">
+                                                    <a href="<?= Url::to(['produk/index']) ?>" class="text-muted">
+                                                        <!-- Download SVG icon from http://tabler-icons.io/i/message -->
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                                            <path d="M4 21v-13a3 3 0 0 1 3 -3h10a3 3 0 0 1 3 3v6a3 3 0 0 1 -3 3h-9l-4 4"></path>
+                                                            <line x1="8" y1="9" x2="16" y2="9"></line>
+                                                            <line x1="8" y1="13" x2="14" y2="13"></line>
+                                                        </svg>
+                                                        new
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    </tbody>
+
                                 </div>
+
                             </div>
                         </div>
 
