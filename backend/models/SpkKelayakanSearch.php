@@ -68,27 +68,28 @@ class SpkKelayakanSearch extends SpkKelayakan
             // $query->where('0=1');
             return $dataProvider;
         }
-        $query
-            ->orFilterWhere(['like', 'id_kelayakan', $this->globalSearch])
-            ->orFilterWhere(['like', 'dataR', $this->globalSearch])
-            ->orFilterWhere(['like', 'Rsquare', $this->globalSearch])
-            ->orFilterWhere(['like', 'dataF', $this->globalSearch])
-            ->orFilterWhere(['=', 'produk.nama_produk', $this->globalSearch])
-            ->orFilterWhere(['=', 'produk.id', $this->globalSearch])
-            ->orFilterWhere(['=', 'user.role', $this->globalSearch]);
+        // $query
+        //     ->orFilterWhere(['like', 'id_kelayakan', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'dataR', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'Rsquare', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'dataF', $this->globalSearch])
+        //     ->orFilterWhere(['=', 'produk.nama_produk', $this->globalSearch])
+        //     ->orFilterWhere(['=', 'produk.id', $this->globalSearch])
+        //     ->orFilterWhere(['=', 'user.role', $this->globalSearch]);
 
-        // $query->andFilterWhere([
-        //     'id_kelayakan' => $this->id_kelayakan,
-        //     'dataR' => $this->dataR,
-        //     'Rsquare' => $this->Rsquare,
-        //     'dataF' => $this->dataF,
-        //     'T_ketahanan' => $this->T_ketahanan,
-        //     'T_keamanan' => $this->T_keamanan,
-        //     'T_kondisi' => $this->T_kondisi,
-        //     'T_performa' => $this->T_performa,
-        //     'nilai' => $this->nilai,
-        //     'produk.nama_produk' => $this->get_produk,
-        // ]);
+        $query->andFilterWhere([
+            'id_kelayakan' => $this->id_kelayakan,
+            'dataR' => $this->dataR,
+            'Rsquare' => $this->Rsquare,
+            'dataF' => $this->dataF,
+            'T_ketahanan' => $this->T_ketahanan,
+            'T_keamanan' => $this->T_keamanan,
+            'T_kondisi' => $this->T_kondisi,
+            'T_performa' => $this->T_performa,
+            'nilai' => $this->nilai,
+            'produk.nama_produk' => $this->get_produk,
+            'produk.id' => $this->get_produk,
+        ]);
 
         return $dataProvider;
     }
