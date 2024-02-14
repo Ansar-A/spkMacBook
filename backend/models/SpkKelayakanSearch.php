@@ -52,7 +52,7 @@ class SpkKelayakanSearch extends SpkKelayakan
         } else {
             $query = SpkKelayakan::find()
                 ->leftJoin('produk', 'spk_kelayakan.get_produk = produk.id')
-                ->leftJoin('user', 'produk.id_service = user.id');
+                ->leftJoin('user', 'produk.id_servicer = user.id');
         }
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
