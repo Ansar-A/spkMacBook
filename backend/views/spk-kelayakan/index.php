@@ -324,46 +324,7 @@ JS;
                                 //'summaryOptions' => ['class' => 'summary'],
                                 //'showPageSummary' => true,
                                 'columns' => [
-                                    //['class' => 'yii\grid\SerialColumn'],
-
-                                    // [
-                                    //     'attribute' =>  'id_kelayakan',
-                                    //     'label'  => 'ID',
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
-                                    //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'filterInputOptions' => [
-                                    //         'class'       => 'form-control',
-                                    //         'placeholder' => 'Search...',
-                                    //     ],
-                                    // ],
-                                    [
-                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'attribute' => 'get_produk',
-                                        'label' => 'Photo',
-                                        'format' => 'raw',
-                                        'value' => function ($model) {
-                                            $imagePath = '@web/' . $model->produk->photo;
-                                            $uniqueId = 'previewImage_' . $model->id_kelayakan; // Gunakan ID dinamis yang unik
-                                            return Html::img($imagePath, ['style' => 'max-width:100px; max-height:100px; border-radius: 5%;', 'class' => 'previewImage', 'data-id' => $uniqueId]);
-                                        }
-                                    ],
-
-
-                                    [
-                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        // 'attribute' => 'get_produk',
-                                        'attribute' => 'produk.user.username',
-                                        'label' => 'Toko',
-                                        'filterInputOptions' => [
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Search...',
-                                        ],
-                                        // 'value' => function ($model) {
-                                        //     return $model->produk->user->username;
-                                        // }
-                                    ],
+                                    ['class' => 'yii\grid\SerialColumn', 'header' => 'No'],
                                     [
                                         'attribute' =>  'get_produk',
                                         'label'  => 'ID Mac',
@@ -377,8 +338,28 @@ JS;
                                             return $model->produk->id;
                                         }
                                     ],
-
-
+                                    [
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'attribute' => 'produk.user.username',
+                                        'label' => 'Toko',
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
+                                    ],
+                                    [
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'attribute' => 'get_produk',
+                                        'label' => 'Photo',
+                                        'format' => 'raw',
+                                        'value' => function ($model) {
+                                            $imagePath = '@web/' . $model->produk->photo;
+                                            $uniqueId = 'previewImage_' . $model->id_kelayakan; // Gunakan ID dinamis yang unik
+                                            return Html::img($imagePath, ['style' => 'max-width:100px; max-height:100px; border-radius: 5%;', 'class' => 'previewImage', 'data-id' => $uniqueId]);
+                                        }
+                                    ],
                                     [
                                         'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'headerOptions' => ['class' => 'text-center'],
