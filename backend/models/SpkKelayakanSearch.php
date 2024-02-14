@@ -72,6 +72,7 @@ class SpkKelayakanSearch extends SpkKelayakan
             ->orFilterWhere(['like', 'Rsquare', $this->globalSearch])
             ->orFilterWhere(['like', 'dataF', $this->globalSearch])
             ->orFilterWhere(['=', 'produk.nama_produk', $this->globalSearch])
+            ->orFilterWhere(['=', 'produk.user.username', $this->globalSearch])
             ->orFilterWhere(['=', 'produk.id', $this->globalSearch]);
 
         // $query->andFilterWhere([
