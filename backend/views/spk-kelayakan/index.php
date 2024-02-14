@@ -493,7 +493,7 @@ JS;
                                 'toolbar' => [
                                     // Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-success']),
                                     Html::a('<i class="ion-load-a"></i>', ['index'], ['class' => 'btn btn-default']),
-                                    '{export}',
+                                    // '{export}',
                                     '{toggleData}',
                                     // Html::a('<i class="md md-person-add"></i>', ['create'], [
                                     //     'type' => 'button',
