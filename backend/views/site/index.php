@@ -689,7 +689,7 @@ foreach ($namaProduk as $namaP) {
                     <?php endif ?>
                     <!-- Digram -->
                     <?php if (Yii::$app->user->can('Administrator')) : ?>
-                        <div class="col-sm-6">
+                        <div class="col-sm-8">
                             <div class="card-box">
                                 <iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe><iframe class="chartjs-hidden-iframe" style="width: 100%; display: block; border: 0px; height: 0px; margin: 0px; position: absolute; inset: 0px;"></iframe>
                                 <?php echo ChartJs::widget([
@@ -732,7 +732,7 @@ foreach ($namaProduk as $namaP) {
                             </div>
                         </div>
 
-                        <div class="col-sm-6">
+                        <div class="col-sm-4">
                             <div class="card-box">
 
                                 <p class="text-muted m-b-30 font-13">
@@ -744,7 +744,7 @@ foreach ($namaProduk as $namaP) {
                                         <thead>
                                             <tr>
                                                 <th>Product</th>
-                                                <th>Toko</th>
+
                                                 <th>Created</th>
                                             </tr>
                                         </thead>
@@ -759,7 +759,7 @@ foreach ($namaProduk as $namaP) {
                                             ?>
                                                 <tr>
                                                     <td><?= Html::encode($product->nama_produk) ?></td>
-                                                    <td><?= Html::encode($product->user->username) ?></td>
+                                                    <!-- <td><?= Html::encode($product->user->username) ?></td> -->
                                                     <td><?= Yii::$app->formatter->asDate($product->created_at, 'long') ?></td>
                                                 </tr>
                                             <?php endforeach; ?>
