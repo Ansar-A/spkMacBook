@@ -734,7 +734,7 @@ foreach ($namaProduk as $namaP) {
 
                         <div class="col-sm-6">
                             <div class="card-box">
-                                <a href="<?= Url::to('produk/index') ?>" class="pull-right btn btn-default btn-sm waves-effect waves-light">View All</a>
+
                                 <p class="text-muted m-b-30 font-13">
                                     Produk Terbaru
                                 </p>
