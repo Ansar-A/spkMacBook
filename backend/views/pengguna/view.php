@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="card-box">
                     <div class="pengguna-view">
                         <p>
-                            <?php if (\Yii::$app->user->can('SuperAdmin')) : ?>
+                            <?php if (\Yii::$app->user->can('Administrator')) : ?>
                                 <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
                                 <?= Html::a('Delete', ['delete', 'id' => $model->id], [
                                     'class' => 'btn btn-danger',
