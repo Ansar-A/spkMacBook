@@ -147,6 +147,8 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                                 <ul class="list-unstyled">
 
                                     <li><a href="<?= Url::to(['auth-assignment/index']) ?>">Auth Assignment</a></li>
+                                    <li><a href="<?= Url::to(['auth-item/index']) ?>">Auth Item</a></li>
+                                    <li><a href="<?= Url::to(['auth-item-child/index']) ?>">Auth Child</a></li>
 
                                 </ul>
                             </li>
