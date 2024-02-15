@@ -252,22 +252,6 @@ JS;
 
     <div class="container">
         <div class="row">
-            <?php if (Yii::$app->session->hasFlash('success')) : ?>
-                <div class="alert alert-success alert-dismissable">
-                    <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                    <h4><i class="icon fa fa-check"></i>Success!</h4>
-                    <?= Yii::$app->session->getFlash('success') ?>
-                </div>
-            <?php endif; ?>
-            <div class="col-sm-12">
-                <?php if (Yii::$app->session->hasFlash('error')) : ?>
-                    <div class="alert alert-success alert-dismissable">
-                        <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
-                        <h4><i class="icon fa fa-check"></i>Access!</h4>
-                        <?= Yii::$app->session->getFlash('success') ?>
-                    </div>
-                <?php endif; ?>
-            </div>
             <div class="col-sm-12">
                 <ol class="breadcrumb">
                     <li>
