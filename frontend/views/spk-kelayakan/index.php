@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="content pull-right col-lg-12 col-md-12 col-sm-12 col-xs-12 clearfix" style="padding-top: 0px;">
             <div class="card-box">
                 <div class="general-title text-center">
-                    <!-- <h3>POPULAR ITEMS</h3> -->
                     <p>All item from SPK MacBook</p>
                     <hr>
                 </div>
@@ -46,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'tag' => 'div',
                                 'class' => 'row',
                             ],
-                            'layout' => '{items}{pager}',
+                            'layout' => '{items}{summary}{pager}',
                             'options' => ['class' => 'custom-pagination-container'],
                             'itemView' => '_list_item',
                             'itemOptions' => ['tag' => null],

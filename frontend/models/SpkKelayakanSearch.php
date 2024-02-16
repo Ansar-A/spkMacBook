@@ -50,6 +50,9 @@ class SpkKelayakanSearch extends SpkKelayakan
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => 9
+            ],
             'sort' => [
                 'defaultOrder' => [
                     'akumulasi' => SORT_DESC,
