@@ -80,7 +80,7 @@ class ProdukSearch extends Produk
         } else {
             $query
                 ->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
-                ->andFilterWhere(['=', 'harga', $this->harga])
+                ->andFilterWhere(['like', 'harga', $this->harga])
                 ->andFilterWhere(['like', 'so.jenis' => $this->id_so])
                 ->andFilterWhere(['like', 'produk.status_produk', $this->status_produk]);
         }
