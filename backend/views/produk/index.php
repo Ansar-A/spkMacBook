@@ -348,17 +348,26 @@ if (\Yii::$app->user->can('Administrator')) {
                                         ],
                                     ],
                                     [
-                                        'attribute' => 'id_so',
+                                        'attribute' => 'id_prosesor',
                                         'contentOptions' => ['style' => 'text-align:center'],
                                         'headerOptions' => ['class' => 'text-center'],
                                         'filterInputOptions' => [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Search...',
                                         ],
-                                        'value' => function ($model) {
-                                            return $model->so->jenis;
-                                        }
                                     ],
+                                    // [
+                                    //     'attribute' => 'id_so',
+                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //     'headerOptions' => ['class' => 'text-center'],
+                                    //     'filterInputOptions' => [
+                                    //         'class'       => 'form-control',
+                                    //         'placeholder' => 'Search...',
+                                    //     ],
+                                    //     'value' => function ($model) {
+                                    //         return $model->so->jenis;
+                                    //     }
+                                    // ],
                                     [
                                         'attribute' => 'harga',
                                         'contentOptions' => ['style' => 'text-align:center'],
@@ -367,7 +376,6 @@ if (\Yii::$app->user->can('Administrator')) {
                                             'class'       => 'form-control',
                                             'placeholder' => 'Search...',
                                         ],
-                                        // 'format' => ['decimal', 0],
                                         'value' => function ($model) {
                                             return number_format($model->harga, 0, ',', '.');
                                         },

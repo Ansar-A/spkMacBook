@@ -20,7 +20,7 @@ class ProdukSearch extends Produk
     {
         return [
             [['id', 'id_servicer', 'id_jenis',  'id_so',   'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi'], 'integer'],
-            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'nama_produk',  'photo', 'globalSearch', 'no_seri', 'status_produk'], 'safe'],
+            [['id', 'id_servicer', 'id_jenis', 'id_prosesor', 'id_so', 'id_layar', 'id_penyimpanan', 'get_warna', 'get_daya', 'get_nirkabel',  'get_kamera', 'get_builtinApps', 'get_audio', 'get_koneksiekspansi', 'nama_produk',  'photo', 'globalSearch', 'no_seri', 'status_produk', 'harga'], 'safe'],
             [['tinggi', 'panjang', 'lebar', 'berat'], 'string'],
             // [['harga'], 'number'],
         ];
@@ -81,7 +81,7 @@ class ProdukSearch extends Produk
             $query
                 ->andFilterWhere(['like', 'nama_produk', $this->nama_produk])
                 ->andFilterWhere(['=', 'harga', $this->harga])
-                ->andFilterWhere(['=', 'so.jenis', $this->jenis])
+                ->andFilterWhere(['like', 'id_prosesor', $this->id_prosesor])
                 ->andFilterWhere(['like', 'produk.status_produk', $this->status_produk]);
         }
         return $dataProvider;
