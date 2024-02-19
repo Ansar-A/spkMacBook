@@ -366,7 +366,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     //     },
                                     // ],
                                     [
-                                        'attribute' =>      'role',
+                                        'attribute' => 'role',
                                         'label' => 'Akses',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],

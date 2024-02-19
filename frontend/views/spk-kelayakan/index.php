@@ -1,5 +1,6 @@
 <?php
 
+use yii\widgets\LinkPager;
 use yii\widgets\ListView;
 
 /** @var yii\web\View $this */
@@ -52,6 +53,11 @@ $this->params['breadcrumbs'][] = $this->title;
                             'summary' => false,
                         ]);
                         ?>
+                    </div>
+                    <div class="custom-pagination-container">
+                        <?php echo LinkPager::widget([
+                            'pagination' => $dataProvider->getPagination(),
+                        ]); ?>
                     </div>
                 </div>
             </div>
