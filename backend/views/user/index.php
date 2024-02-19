@@ -326,7 +326,8 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'filter' => [9 => "Inaktif", 10 => "Aktif"],
                                         'editableOptions' => [
                                             'inputType' => Editable::INPUT_DROPDOWN_LIST,
-                                            'data' => ['Pilih...',  10 => "Aktif", 9 => "Tidak Aktif"],
+                                            'data' => [10 => "Aktif", 9 => "Tidak Aktif"],
+                                            'prompt' => 'Pilih...',
                                             'displayValueConfig' => [
                                                 10 => 'Aktif',
                                                 9 => 'Inaktif',
