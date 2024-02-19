@@ -35,14 +35,11 @@ use kartik\form\ActiveField;
                             'mainClass' => 'input-group-lg',
                             'fileimageuploaded' => true,
                         ]
-                    ])->label('');
+                    ])->label('File');
                     ?>
                 </div>
             </div>
             <div class="panel panel-border panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Produk</h3>
-                </div>
                 <div class="panel-body">
                     <?php
                     $list = Produk::find()
