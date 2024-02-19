@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             // 'options' => ['class' => 'custom-pagination-container'],
                             'itemView' => '_list_item',
                             'itemOptions' => ['tag' => null],
-                            'summary' => false,
+                            'summary' => true,
                         ]);
                         ?>
                     </div>
