@@ -72,109 +72,31 @@ use kartik\form\ActiveField;
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'dataR', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'placement' => 'right',
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Lorem ipsum, atau ringkasnya lipsum, adalah teks standar yang ditempatkan untuk mendemostrasikan elemen grafis atau presentasi visual seperti font, tipografi, dan tata letak.</div>'); ?>
-                            <!-- <?= $form->field($model, 'dataR')->textInput(['placeholder' => 'R Square Ketahanan'])->label('') ?> -->
+                            <?= $form->field($model, 'dataR')->textInput(['placeholder' => 'R Square'])->label('') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'Rsquare', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'Rsquare')->textInput(['placeholder' => 'Adjusted R Square'])->label('') ?> -->
+                            <?= $form->field($model, 'Rsquare')->textInput(['placeholder' => 'Adjusted R Square'])->label('') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'dataF', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'dataF')->textInput(['placeholder' => 'Uji F Ketahanan'])->label('') ?> -->
+                            <?= $form->field($model, 'dataF')->textInput(['placeholder' => 'Uji F'])->label('') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'T_ketahanan', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'T_ketahanan')->textInput(['placeholder' => 'Uji T Cycle Count'])->label('') ?> -->
+                            <?= $form->field($model, 'T_ketahanan')->textInput(['placeholder' => 'Uji T RAM'])->label('') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'T_keamanan', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'T_keamanan')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
+                            <?= $form->field($model, 'T_keamanan')->textInput(['placeholder' => 'Uji T Storage'])->label('') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'T_kondisi', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'T_kondisi')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
+                            <?= $form->field($model, 'T_performa')->textInput(['placeholder' => 'Uji T Cycle Count'])->label('') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?php echo $form->field($model, 'T_performa', [
-                                'hintType' => ActiveField::HINT_SPECIAL,
-                                'hintSettings' => [
-                                    'iconBesideInput' => true,
-                                    'onLabelClick' => false,
-                                    'onLabelHover' => false,
-                                    'onIconClick' => true,
-                                    'onIconHover' => true,
-                                    'title' => '<i class="fas fa-info-sign"></i> Note'
-                                ]
-                            ])->hint('<div style="width:200px">Enter <b>valid notes</b> to identify this record.</div>'); ?>
-                            <!-- <?= $form->field($model, 'T_performa')->textInput(['placeholder' => 'Uji T Kapasitas Pengisian'])->label('') ?> -->
+                            <?= $form->field($model, 'T_kondisi')->textInput(['placeholder' => 'Uji T Prosesor'])->label('') ?>
                         </div>
                     </div>
                 </div>
