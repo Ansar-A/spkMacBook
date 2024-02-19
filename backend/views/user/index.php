@@ -323,20 +323,20 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'format' => 'raw',
                                         'label' => 'Status',
                                         'filterType' => GridView::FILTER_SELECT2,
-                                        'filter' => ['not' => "Not Received", 'finish' => "Finish"],
+                                        'filter' => [9 => "Inaktif", 10 => "Aktif"],
                                         'editableOptions' => [
                                             'inputType' => Editable::INPUT_DROPDOWN_LIST,
-                                            'data' => ['Finish' => 'Finish', 'Unprocessed' => 'Unprocessed'],
+                                            'data' => [9 => "Inaktif", 10 => "Aktif"],
                                             'displayValueConfig' => [
-                                                'finish' => 'Finish',
-                                                'not' => 'Not Received',
+                                                10 => 'Aktif',
+                                                9 => 'Inaktif',
                                             ],
                                         ],
                                         'value' => function ($data, $key, $index, $column) {
-                                            if ($data->status == 'Finish') {
-                                                return '<span class="label label-table label-success">Finish</span>';
-                                            } elseif ($data->status == 'Unprocessed') {
-                                                return '<span class="label label-table label-danger">Unprocessed</span>';
+                                            if ($data->status == 'Aktif') {
+                                                return '<span class="label label-table label-success">Aktif</span>';
+                                            } elseif ($data->status == 'Inaktif') {
+                                                return '<span class="label label-table label-danger">Tidak Aktif</span>';
                                             }
                                         },
                                     ],
