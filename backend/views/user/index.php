@@ -257,18 +257,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                 'floatHeader' => true,
                                 'headerRowOptions' => ['class' => 'table m-0'],
                                 'filterRowOptions' => ['class' => 'table m-0'],
-                                //'bootstrap' => true,
-                                //'bordered' => false,
-                                //'condensed' => false,
-                                //'responsiveWrap' => false,
-                                //'hover' => true,
-                                //'containerOptions' => false,
-                                //'perfectScrollbar' => false,
-                                //'summary' => '',
-                                //'showPageSummary' => true,
-                                //'summary' => 'Showing <b>{begin}-{end}</b> of <b>{totalCount}</b> Pengguna',
-                                //'summaryOptions' => ['class' => 'summary'],
-                                //'showPageSummary' => true,
                                 'columns' => [
                                     [
                                         'class' => '\kartik\grid\ActionColumn',
@@ -327,7 +315,6 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                             'placeholder' => 'Search by ID...',
                                         ],
                                     ],
-
                                     [
                                         'class' => 'kartik\grid\EditableColumn',
                                         'headerOptions' => ['class' => 'text-center'],
@@ -336,23 +323,48 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'format' => 'raw',
                                         'label' => 'Status',
                                         'filterType' => GridView::FILTER_SELECT2,
-                                        'filter'    => [10 => "Active", 9 => "Suspended"],
+                                        'filter' => ['not' => "Not Received", 'finish' => "Finish"],
                                         'editableOptions' => [
                                             'inputType' => Editable::INPUT_DROPDOWN_LIST,
-                                            'data' => [10 => 'Active', 9 => 'Suspended'],
+                                            'data' => ['Finish' => 'Finish', 'Unprocessed' => 'Unprocessed'],
                                             'displayValueConfig' => [
-                                                10 => 'Active',
-                                                9 => 'Suspended',
+                                                'finish' => 'Finish',
+                                                'not' => 'Not Received',
                                             ],
                                         ],
                                         'value' => function ($data, $key, $index, $column) {
-                                            if ($data->status == 10) {
-                                                return '<span class="label label-table label-success">Active</span>';
-                                            } else {
-                                                return '<span class="label label-table label-danger">Suspended</span>';
+                                            if ($data->status == 'Finish') {
+                                                return '<span class="label label-table label-success">Finish</span>';
+                                            } elseif ($data->status == 'Unprocessed') {
+                                                return '<span class="label label-table label-danger">Unprocessed</span>';
                                             }
                                         },
                                     ],
+                                    // [
+                                    //     'class' => 'kartik\grid\EditableColumn',
+                                    //     'headerOptions' => ['class' => 'text-center'],
+                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //     'attribute' => 'status',
+                                    //     'format' => 'raw',
+                                    //     'label' => 'Status',
+                                    //     'filterType' => GridView::FILTER_SELECT2,
+                                    //     'filter'    => [10 => "Active", 9 => "Suspended"],
+                                    //     'editableOptions' => [
+                                    //         'inputType' => Editable::INPUT_DROPDOWN_LIST,
+                                    //         'data' => [10 => 'Active', 9 => 'Suspended'],
+                                    //         'displayValueConfig' => [
+                                    //             10 => 'Active',
+                                    //             9 => 'Suspended',
+                                    //         ],
+                                    //     ],
+                                    //     'value' => function ($data, $key, $index, $column) {
+                                    //         if ($data->status == 10) {
+                                    //             return '<span class="label label-table label-success">Active</span>';
+                                    //         } else {
+                                    //             return '<span class="label label-table label-danger">Suspended</span>';
+                                    //         }
+                                    //     },
+                                    // ],
                                     [
                                         'attribute' =>      'role',
                                         'label' => 'Akses',
