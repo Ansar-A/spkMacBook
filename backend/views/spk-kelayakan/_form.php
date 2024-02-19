@@ -21,7 +21,7 @@ use kartik\form\ActiveField;
         <div class="col-sm-5">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Nilai SPK</h3>
+                    <h3 class="panel-title">Upload File</h3>
                 </div>
                 <div class="panel-body">
                     <?= $form->field($model, 'nilai')->widget(FileInput::className(), [
@@ -58,7 +58,7 @@ use kartik\form\ActiveField;
                             },
                         ),
                         ['prompt' => 'Select...']
-                    );
+                    )->label('Produk');
                     ?>
                 </div>
             </div>
@@ -66,37 +66,36 @@ use kartik\form\ActiveField;
         <div class="col-sm-7">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
-                    <div class="row">
-                    </div>
+                    <h3 class="panel-title">Nilai SPK</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'dataR')->textInput(['placeholder' => 'R Square'])->label('') ?>
+                            <?= $form->field($model, 'dataR')->textInput(['placeholder' => ''])->label('R Square') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'Rsquare')->textInput(['placeholder' => 'Adjusted R Square'])->label('') ?>
+                            <?= $form->field($model, 'Rsquare')->textInput(['placeholder' => ''])->label('Adjusted R Square') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'dataF')->textInput(['placeholder' => 'Uji F'])->label('') ?>
+                            <?= $form->field($model, 'dataF')->textInput(['placeholder' => ''])->label('Uji F') ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'T_ketahanan')->textInput(['placeholder' => 'Uji T RAM'])->label('') ?>
+                            <?= $form->field($model, 'T_ketahanan')->textInput(['placeholder' => ''])->label('Uji T RAM') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'T_keamanan')->textInput(['placeholder' => 'Uji T Storage'])->label('') ?>
+                            <?= $form->field($model, 'T_keamanan')->textInput(['placeholder' => ''])->label('Uji T Storage') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'T_performa')->textInput(['placeholder' => 'Uji T Cycle Count'])->label('') ?>
+                            <?= $form->field($model, 'T_performa')->textInput(['placeholder' => ''])->label('Uji T Cycle Count') ?>
                         </div>
                         <div class="col-sm-12">
-                            <?= $form->field($model, 'T_kondisi')->textInput(['placeholder' => 'Uji T Prosesor'])->label('') ?>
+                            <?= $form->field($model, 'T_kondisi')->textInput(['placeholder' => ''])->label('Uji T Prosesor') ?>
                         </div>
                     </div>
                 </div>
