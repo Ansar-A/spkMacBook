@@ -25,11 +25,29 @@ use yii\helpers\Url;
                     <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
                 </div>
                 <div class="rating text-center a2" data-animate="fadeIn">
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
-                    <i class="fa fa-star"></i>
+                    <?php
+                    $starsCount = 0;
+
+                    if ($dataR > 80) {
+                        $starsCount = 5;
+                    } elseif ($dataR > 75) {
+                        $starsCount = 4;
+                    } elseif ($dataR > 70) {
+                        $starsCount = 3;
+                    } elseif ($dataR > 65) {
+                        $starsCount = 2;
+                    } elseif ($dataR > 60) {
+                        $starsCount = 1;
+                    }
+
+                    for ($i = 0; $i < 5; $i++) {
+                        if ($i < $starsCount) {
+                            echo '<i class="fa fa-star"></i>';
+                        } else {
+                            echo '<i class="fa fa-star-o"></i>';
+                        }
+                    }
+                    ?>
                 </div>
             </div>
         </div>
