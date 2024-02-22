@@ -21,9 +21,7 @@ use yii\helpers\Url;
                     <a href="<?= Url::to(['detail-produk', 'id_kelayakan' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn">Details</a>
                     <a href="<?= Yii::$app->urlManager->createUrl(['like-produk/like', 'produk_id' => $model->id_kelayakan]) ?>" class="dmbutton a2" data-animate="fadeIn"><i class="fa fa-heart"></i></a>
                 <?php endif; ?>
-                <div class="a2" data-animate="fadeIn">
-                    <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
-                </div>
+
                 <div class="rating text-center a2" data-animate="fadeIn">
                     <?php
                     $starsCount = 0;
@@ -48,6 +46,9 @@ use yii\helpers\Url;
                         }
                     }
                     ?>
+                </div>
+                <div class="a2" data-animate="fadeIn">
+                    <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
                 </div>
             </div>
         </div>
