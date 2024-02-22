@@ -309,7 +309,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     [
                                         'attribute' =>    'username',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'filterInputOptions' => [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Search by ID...',
@@ -318,7 +318,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     [
                                         'class' => 'kartik\grid\EditableColumn',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'attribute' => 'status',
                                         'format' => 'raw',
                                         'label' => 'Status',
@@ -343,7 +343,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     // [
                                     //     'class' => 'kartik\grid\EditableColumn',
                                     //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //    'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     //     'attribute' => 'status',
                                     //     'format' => 'raw',
                                     //     'label' => 'Status',
@@ -369,12 +369,12 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'attribute' => 'role',
                                         'label' => 'Akses',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     ],
                                     [
                                         'attribute' =>     'id',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'filterInputOptions' => [
                                             'class'       => 'form-control',
                                             'placeholder' => 'Search ID...',
@@ -383,13 +383,13 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     // [
                                     //     'attribute' =>   'id',
                                     //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //    'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     // ],
 
                                     // [
                                     //     'attribute' =>     'address',
                                     //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //    'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     // ],
                                     // 'id',
                                     //'auth_key',
@@ -469,7 +469,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     ],
                                     [
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'attribute' => 'status',
                                         'format' => 'raw',
                                         'filter'    => [10 => "Active", 9 => "Suspended"],
@@ -484,23 +484,23 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     // [
                                     //     'attribute' => 'id',
                                     //     'headerOptions' => ['class' => 'text-center'],
-                                    //     'contentOptions' => ['style' => 'text-align:center'],
+                                    //    'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     // ],
                                     // 'id',
                                     [
                                         'attribute' =>    'username',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     ],
                                     [
                                         'attribute' =>     'address',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     ],
                                     [
                                         'attribute' =>      'hp',
                                         'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center'],
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                     ],
 
                                 ],
