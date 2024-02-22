@@ -28,15 +28,15 @@ use yii\helpers\Url;
                     <?php
                     $starsCount = 0;
 
-                    if ($dataR > 80) {
+                    if ($model->$dataR > 80) {
                         $starsCount = 5;
-                    } elseif ($dataR > 75) {
+                    } elseif ($model->$dataR > 75) {
                         $starsCount = 4;
-                    } elseif ($dataR > 70) {
+                    } elseif ($model->$dataR > 70) {
                         $starsCount = 3;
-                    } elseif ($dataR > 65) {
+                    } elseif ($model->$dataR > 65) {
                         $starsCount = 2;
-                    } elseif ($dataR > 60) {
+                    } elseif ($model->$dataR > 60) {
                         $starsCount = 1;
                     }
 
