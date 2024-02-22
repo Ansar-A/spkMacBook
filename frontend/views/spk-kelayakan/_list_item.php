@@ -2,12 +2,7 @@
 
 use common\models\LikeProduk;
 use yii\helpers\Url;
-// Initialize or increment the counter
-// if (!isset($counter)) {
-//     $counter = 0;
-// } else {
-//     $counter++;
-// }
+
 ?>
 <div class="portfolio-item col-lg-4 col-sm-2 mockups">
     <div class="he-wrap tpl6 market-item">
@@ -28,6 +23,13 @@ use yii\helpers\Url;
                 <?php endif; ?>
                 <div class="a2" data-animate="fadeIn">
                     <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
+                </div>
+                <div class="rating text-center a2" data-animate="fadeIn">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
                 </div>
             </div>
         </div>
