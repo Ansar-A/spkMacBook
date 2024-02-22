@@ -229,7 +229,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                     <!-- <?= Html::a('<i class="md-add-box"></i> Add Data', ['create'], ['class' => 'btn btn-primary waves-effect waves-light']) ?> -->
                                     <!-- <?= Html::button('<i class="md-add-box"></i> Add Admin', ['value' => Url::to(['user/create']), 'class' => 'btn btn-success', 'id' => 'modalButton']) ?> -->
                                 </div>
-                                <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+                                <!-- <?php echo $this->render('_search', ['model' => $searchModel]); ?> -->
                             <?php else : ?>
                             <?php endif ?>
 
@@ -370,6 +370,10 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'label' => 'Akses',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search Akses...',
+                                        ],
                                     ],
                                     [
                                         'attribute' =>     'id',

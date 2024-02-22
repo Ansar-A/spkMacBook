@@ -76,21 +76,19 @@ class UserSearch extends User
             'address' => $this->address,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'hp' => $this->hp,
-            'fb' => $this->fb,
             'role' => $this->role,
 
         ]);
 
-        $query->orFilterWhere(['like', 'username', $this->globalSearch])
-            ->orFilterWhere(['like', 'auth_key', $this->globalSearch])
-            ->orFilterWhere(['like', 'password_hash', $this->globalSearch])
-            ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
-            ->orFilterWhere(['like', 'email', $this->globalSearch])
-            ->orFilterWhere(['like', 'address', $this->globalSearch])
-            ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
-            ->orFilterWhere(['like', 'fb', $this->globalSearch])
-            ->orFilterWhere(['like', 'hp', $this->globalSearch]);
+        // $query->orFilterWhere(['like', 'username', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'auth_key', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'password_hash', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'password_reset_token', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'email', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'address', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'verification_token', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'fb', $this->globalSearch])
+        //     ->orFilterWhere(['like', 'hp', $this->globalSearch]);
         return $dataProvider;
     }
 }
