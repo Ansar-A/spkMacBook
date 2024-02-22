@@ -47,7 +47,6 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'row',
                             ],
                             'layout' => '{items}',
-                            // 'options' => ['class' => 'custom-pagination-container'],
                             'itemView' => '_list_item',
                             'itemOptions' => ['tag' => null],
                             'summary' => true,
