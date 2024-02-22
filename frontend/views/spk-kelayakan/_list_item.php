@@ -11,7 +11,6 @@ if (!isset($counter)) {
 ?>
 <div class="portfolio-item col-lg-4 col-sm-2 mockups">
     <div class="he-wrap tpl6 market-item">
-        <span class="badge badge-secondary badge-top-right"><?php echo $counter; ?></span>
         <img class="img-rounded" alt="" src="<?= Url::to('@web/' . $model->produk->photo) ?>" style="display: block; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease; max-width: 100%; height: auto; ">
         <div class="he-view">
             <div class="bg a0" data-animate="fadeIn">
@@ -29,6 +28,9 @@ if (!isset($counter)) {
                 <?php endif; ?>
                 <div class="a2" data-animate="fadeIn">
                     <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
+                </div>
+                <div class="a1" data-animate="fadeIn">
+                    <p style="color: white;"><?php echo $counter; ?></p>
                 </div>
             </div>
         </div>
