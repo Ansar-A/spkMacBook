@@ -11,7 +11,8 @@ if (!isset($counter)) {
 ?>
 <div class="portfolio-item col-lg-4 col-sm-2 mockups">
     <div class="he-wrap tpl6 market-item">
-        <img class="lazyOwl" alt="" src="<?= Url::to('@web/' . $model->produk->photo) ?>" style="display: block; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease; max-width: 100%; height: auto; border-radius: 10px;">
+        <span class="badge badge-secondary badge-top-right"><?php echo $counter; ?></span>
+        <img class="img-rounded" alt="" src="<?= Url::to('@web/' . $model->produk->photo) ?>" style="display: block; opacity: 1; transition-property: all; transition-duration: 0s; transition-timing-function: ease; max-width: 100%; height: auto; ">
         <div class="he-view">
             <div class="bg a0" data-animate="fadeIn">
                 <h3 class="a1" data-animate="fadeInDown">
@@ -31,9 +32,6 @@ if (!isset($counter)) {
                 </div>
             </div>
         </div>
-        <!-- Display the item number -->
-        <div class="a2" data-animate="fadeIn">
-            <p style="color:blanchedalmond;"><?php echo 'Item ' . $counter; ?></p>
-        </div>
+
     </div>
 </div>
