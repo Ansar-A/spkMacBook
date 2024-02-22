@@ -31,9 +31,6 @@ use yii\helpers\Url;
                 </div>
             </div>
         </div>
-        <!-- Display the item number -->
-        <!-- <div class="a2" data-animate="fadeIn">
-            <p style="color:blanchedalmond;"><?php echo 'Item ' . $counter; ?></p>
-        </div> -->
+
     </div>
 </div>
