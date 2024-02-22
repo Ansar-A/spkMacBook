@@ -37,7 +37,6 @@ use yii\helpers\Url;
                     } elseif ($dataR < 49) {
                         $starsCount = 1;
                     }
-
                     for ($i = 0; $i < 5; $i++) {
                         if ($i < $starsCount) {
                             echo '<i class="fa fa-star"></i>';
