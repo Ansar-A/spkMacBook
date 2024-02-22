@@ -29,11 +29,11 @@ if (!isset($counter)) {
                 <div class="a2" data-animate="fadeIn">
                     <p style="color: white;"><?php echo 'Rp ' . number_format($model->produk->harga, 0, ',', '.') ?></p>
                 </div>
-                <div class="a1" data-animate="fadeIn">
-                    <p style="color: white;"><?php echo $counter; ?></p>
-                </div>
             </div>
         </div>
-
+        <!-- Display the item number -->
+        <div class="a2" data-animate="fadeIn">
+            <p style="color:blanchedalmond;"><?php echo 'Item ' . $counter; ?></p>
+        </div>
     </div>
 </div>
