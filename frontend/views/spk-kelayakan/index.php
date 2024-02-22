@@ -38,31 +38,27 @@ $this->params['breadcrumbs'][] = $this->title;
                     <hr>
                 </div>
                 <div class="portfolio-centered">
-                    <?php if (empty($model)) : ?>
-                        <div class="empty">Data Tidak Ditemukan</div>
-                    <?php else : ?>
-                        <div class="recentitems portfolio">
-                            <?=
-                            ListView::widget([
-                                'dataProvider' => $dataProvider,
-                                'options' => [
-                                    'tag' => 'div',
-                                    'class' => 'row',
-                                ],
-                                'layout' => '{items}',
-                                'itemView' => '_list_item',
-                                'itemOptions' => ['tag' => null],
-                                'summary' => true,
-                            ]);
-                            ?>
-                        </div>
-                        <div class="custom-pagination-container">
-                            <?php echo LinkPager::widget([
-                                'pagination' => $dataProvider->getPagination(),
-                            ]); ?>
-                        </div>
-                    <?php endif ?>
-
+                    <!--  -->
+                    <div class="recentitems portfolio">
+                        <?=
+                        ListView::widget([
+                            'dataProvider' => $dataProvider,
+                            'options' => [
+                                'tag' => 'div',
+                                'class' => 'row',
+                            ],
+                            'layout' => '{items}',
+                            'itemView' => '_list_item',
+                            'itemOptions' => ['tag' => null],
+                            'summary' => true,
+                        ]);
+                        ?>
+                    </div>
+                    <div class="custom-pagination-container">
+                        <?php echo LinkPager::widget([
+                            'pagination' => $dataProvider->getPagination(),
+                        ]); ?>
+                    </div>
                 </div>
             </div>
         </div>
