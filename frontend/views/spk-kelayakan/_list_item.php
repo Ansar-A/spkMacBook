@@ -33,7 +33,7 @@ if (!isset($counter)) {
         </div>
         <!-- Display the item number -->
         <div class="a2" data-animate="fadeIn">
-            <p style="color: white;"><?php echo 'Item ' . $counter; ?></p>
+            <p style="color:blanchedalmond;"><?php echo 'Item ' . $counter; ?></p>
         </div>
     </div>
 </div>
