@@ -339,16 +339,7 @@ JS;
                                             return Html::img($imagePath, ['style' => 'max-width:100px; max-height:100px; border-radius: 5%;', 'class' => 'previewImage', 'data-id' => $uniqueId]);
                                         }
                                     ],
-                                    [
-                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'attribute' => 'produk.user.username',
-                                        'label' => 'Toko',
-                                        'filterInputOptions' => [
-                                            'class'       => 'form-control',
-                                            'placeholder' => 'Search...',
-                                        ],
-                                    ],
+
                                     [
                                         'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'headerOptions' => ['class' => 'text-center'],
@@ -364,7 +355,16 @@ JS;
                                         // },
 
                                     ],
-
+                                    [
+                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
+                                        'headerOptions' => ['class' => 'text-center'],
+                                        'attribute' => 'produk.user.username',
+                                        'label' => 'Toko',
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
+                                    ],
                                     // [
                                     //     'contentOptions' => ['style' => 'text-align:center'],
                                     //     'headerOptions' => ['class' => 'text-center'],
