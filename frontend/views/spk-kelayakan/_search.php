@@ -46,8 +46,7 @@ use yii\helpers\Url;
 
         <div class="form-group" style="padding-top: 25px;">
             <?= Html::submitButton('<i class="fa fa-search"></i>', ['class' => 'btn btn-primary']) ?>
-            <!-- <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?> -->
-            <a class="button" href="<?= Url::to('spk-kelayakan/index') ?>">Refresh</a>
+            <?= Html::resetButton('Reset', ['class' => 'btn btn-outline-secondary']) ?>
         </div>
     </div>
     <?php ActiveForm::end(); ?>
