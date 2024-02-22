@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'pagination' => $dataProvider->getPagination(),
                             ]); ?>
                         </div>
-                    <?php endif; ?>
+                    <?php endif ?>
 
                 </div>
             </div>
