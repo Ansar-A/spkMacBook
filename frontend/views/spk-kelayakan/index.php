@@ -47,7 +47,10 @@ $this->params['breadcrumbs'][] = $this->title;
                                 'class' => 'row',
                             ],
                             'layout' => '{items}',
-                            'itemView' => '_list_item',
+                            // 'itemView' => '_list_item',
+                            'itemView' => function ($model, $key, $index, $widget) {
+                                return $this->render('_list_item', ['model' => $model, 'counter' => $index + 1]);
+                            },
                             'itemOptions' => ['tag' => null],
                             'summary' => true,
                         ]);

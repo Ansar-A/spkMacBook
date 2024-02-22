@@ -15,7 +15,7 @@ use kartik\money\MaskMoney;
     ]); ?>
     <div class="input-container">
         <div class="col-sm-4">
-            <!-- <?= $form->field($model, 'budgetMin')->textInput(['placeholder' => 'Budget Min', 'type' => 'number'])->label('') ?> -->
+
             <?php echo $form->field($model, 'budgetMin')->widget(MaskMoney::class, [
                 'pluginOptions' => [
                     'prefix' => 'Rp. ', // Simbol mata uang
@@ -29,7 +29,7 @@ use kartik\money\MaskMoney;
             ])->label('Budget Min'); ?>
         </div>
         <div class="col-sm-4">
-            <!-- <?= $form->field($model, 'budgetMax')->textInput(['placeholder' => 'Budget Max', 'type' => 'number'])->label('') ?> -->
+
             <?php echo $form->field($model, 'budgetMax')->widget(MaskMoney::class, [
                 'pluginOptions' => [
                     'prefix' => 'Rp. ', // Simbol mata uang
