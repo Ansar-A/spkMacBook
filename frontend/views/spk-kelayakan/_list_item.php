@@ -3,11 +3,11 @@
 use common\models\LikeProduk;
 use yii\helpers\Url;
 // Initialize or increment the counter
-if (!isset($counter)) {
-    $counter = 1;
-} else {
-    $counter++;
-}
+// if (!isset($counter)) {
+//     $counter = 0;
+// } else {
+//     $counter++;
+// }
 ?>
 <div class="portfolio-item col-lg-4 col-sm-2 mockups">
     <div class="he-wrap tpl6 market-item">
@@ -32,8 +32,8 @@ if (!isset($counter)) {
             </div>
         </div>
         <!-- Display the item number -->
-        <div class="a2" data-animate="fadeIn">
+        <!-- <div class="a2" data-animate="fadeIn">
             <p style="color:blanchedalmond;"><?php echo 'Item ' . $counter; ?></p>
-        </div>
+        </div> -->
     </div>
 </div>
