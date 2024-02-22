@@ -27,16 +27,16 @@ use yii\helpers\Url;
                 <div class="rating text-center a2" data-animate="fadeIn">
                     <?php
                     $starsCount = 0;
-
-                    if ($model->$dataR > 80) {
+                    $dataR = $model->dataR;
+                    if ($dataR > 80) {
                         $starsCount = 5;
-                    } elseif ($model->$dataR > 75) {
+                    } elseif ($dataR > 75) {
                         $starsCount = 4;
-                    } elseif ($model->$dataR > 70) {
+                    } elseif ($dataR > 70) {
                         $starsCount = 3;
-                    } elseif ($model->$dataR > 65) {
+                    } elseif ($dataR > 65) {
                         $starsCount = 2;
-                    } elseif ($model->$dataR > 60) {
+                    } elseif ($dataR > 60) {
                         $starsCount = 1;
                     }
 
