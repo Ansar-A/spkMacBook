@@ -212,7 +212,7 @@ class SiteController extends Controller
     {
         $this->layout = 'mainFirs';
         Yii::$app->user->logout();
-        return $this->render('login');
+        return $this->render('firs');
     }
 
     public function actionWelcome()
