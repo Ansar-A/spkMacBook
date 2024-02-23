@@ -37,7 +37,7 @@ use yii\widgets\ActiveForm;
 
     <?php
     // $list = User::find()->all();
-    $list = User::find()->where(['status' => 10]);
+    $list = User::find()->where(['status' => 10])->all();
     echo $form->field($model, 'user_id')->dropDownList(
         ArrayHelper::map(
             $list,
