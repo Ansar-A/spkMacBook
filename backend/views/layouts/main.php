@@ -60,10 +60,10 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             </button>
                             <span class="clearfix"></span>
                         </div>
-                        <form role="search" class="navbar-left app-search pull-left hidden-xs">
+                        <!-- <form role="search" class="navbar-left app-search pull-left hidden-xs">
                             <input style="width: 300px;" type="text" placeholder="Search..." class="form-control">
                             <a href=""><i class="fa fa-search"></i></a>
-                        </form>
+                        </form> -->
                         <ul class="nav navbar-nav navbar-right pull-right">
                             <li class="hidden-xs">
                                 <a href="<?= Url::to(['user/index']) ?>" class="right-bar-toggle waves-effect waves-light"><i class="fa fa-dot-circle-o"></i> <?php echo Yii::$app->user->identity->username ?> [ <?php echo Yii::$app->user->identity->role ?> ]</a>
@@ -81,7 +81,7 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                                 <a href="" class="dropdown-toggle profile waves-effect waves-light" data-toggle="dropdown" aria-expanded="false"><img src="<?php echo Url::to('@web/' . Yii::$app->user->identity->photo) ?>" alt="user-img" class="img-circle"> </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="<?= Url::to(['user/index']) ?>"><i class="ti-user m-r-10 text-custom"></i> Profile</a></li>
-                                    <li><a href="javascript:void(0)"><i class="ti-settings m-r-10 text-custom"></i> Settings</a></li>
+                                    <!-- <li><a href="javascript:void(0)"><i class="ti-settings m-r-10 text-custom"></i> Settings</a></li> -->
                                     <li><a href="<?= Url::to(['site/firs']) ?>"><i class="ti-lock m-r-10 text-custom"></i> Lock screen</a></li>
                                     <li class="divider"></li>
                                     <li><a href="<?= Url::to(['site/logout']) ?>" data-method="POST"><i class="ti-power-off m-r-10 text-danger"></i> Logout</a></li>
