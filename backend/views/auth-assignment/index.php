@@ -116,13 +116,21 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'contentOptions' => ['style' => 'text-align:center'],
                                         'value' => function ($model) {
                                             return $model->admin->username;
-                                        }
+                                        },
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
                                     ],
                                     [
                                         'attribute' => 'user_id',
                                         'label' => 'ID',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],
+                                        'filterInputOptions' => [
+                                            'class'       => 'form-control',
+                                            'placeholder' => 'Search...',
+                                        ],
                                     ],
                                     [
                                         'attribute' => 'user_id',
@@ -131,7 +139,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'label' => 'Status',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],
-                                        'filter'    => [10 => "Active", 9 => "Suspended"],
+                                        'filter'    => ['' => 'Pilih...', 10 => "Active", 9 => "Suspended"],
                                         'value' => function ($data, $key, $index, $column) {
                                             if ($data->admin->status == 10) {
                                                 return '<span class="label label-table label-success">Active</span>';
