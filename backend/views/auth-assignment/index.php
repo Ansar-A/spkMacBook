@@ -139,12 +139,12 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'label' => 'Status',
                                         'headerOptions' => ['class' => 'text-center'],
                                         'contentOptions' => ['style' => 'text-align:center'],
-                                        'filter'    => ['' => 'Pilih...', 10 => "Active", 9 => "Suspended"],
+                                        'filter'    => ['' => 'Pilih...', 10 => "Suspended", 9 => "Active"],
                                         'value' => function ($data, $key, $index, $column) {
                                             if ($data->admin->status == 10) {
-                                                return '<span class="label label-table label-success">Active</span>';
+                                                return '<span class="label label-table label-success">Suspended</span>';
                                             } else {
-                                                return '<span class="label label-table label-danger">Suspended</span>';
+                                                return '<span class="label label-table label-danger">Active</span>';
                                             }
                                         },
                                     ],
