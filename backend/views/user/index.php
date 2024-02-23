@@ -326,10 +326,10 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         // 'filter' => ['' => 'Pilih...', 9 => "Inaktif", 10 => "Aktif"],
                                         'editableOptions' => [
                                             'inputType' => Editable::INPUT_DROPDOWN_LIST,
-                                            'data' => array_merge(['' => 'Pilih...'], [10 => "Aktif", 9 => "Tidak Aktif"]),
+                                            'data' => array_merge(['' => 'Pilih...'], [10 => "Tidak Aktif", 9 => "Aktif"]),
                                             'displayValueConfig' => [
-                                                10 => 'Aktif',
-                                                9 => 'Tidak Aktif',
+                                                10 => 'Tidak Aktif',
+                                                9 => 'Aktif',
                                             ],
                                         ],
                                         // 'value' => function ($data, $key, $index, $column) {
