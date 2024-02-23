@@ -178,5 +178,5 @@ $this->title = 'Firs';
     </div>
 </a>
 <div class="menu">
-    <a class="menu__link" href="<?= Url::to('site/login') ?>" data-hover="Slice">go to LOGIN</a>
+    <a class="menu__link" href="#slice" data-hover="Slice">go to LOGIN</a>
 </div>
