@@ -126,9 +126,9 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             </li>
                             <li class="text-muted menu-title">User</li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="ti-user"></i> <span> User </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['user/index']) ?>">Data Admin</a></li>
+                                    <li><a href="<?= Url::to(['user/index']) ?>">Data User</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
@@ -185,9 +185,9 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             </li> -->
                             <li class="text-muted menu-title">User</li>
                             <li class="has_sub">
-                                <a class="waves-effect"><i class="ti-user"></i> <span> Admin </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
+                                <a class="waves-effect"><i class="ti-user"></i> <span> User </span> <span style="color:#714ABA" class="menu-arrow"></span> </a>
                                 <ul class="list-unstyled">
-                                    <li><a href="<?= Url::to(['user/index']) ?>">Data Admin</a></li>
+                                    <li><a href="<?= Url::to(['user/index']) ?>">Data User</a></li>
                                 </ul>
                             </li>
                             <li class="has_sub">
