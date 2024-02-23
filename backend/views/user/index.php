@@ -332,13 +332,13 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                                 9 => 'Tidak Aktif',
                                             ],
                                         ],
-                                        'value' => function ($data, $key, $index, $column) {
-                                            if ($data->status == 10) {
-                                                return '<span class="label label-table label-success">Aktif</span>';
-                                            } elseif ($data->status == 9) {
-                                                return '<span class="label label-table label-danger">Tidak Aktif</span>';
-                                            }
-                                        },
+                                        // 'value' => function ($data, $key, $index, $column) {
+                                        //     if ($data->status == 10) {
+                                        //         return '<span class="label label-table label-success">Aktif</span>';
+                                        //     } elseif ($data->status == 9) {
+                                        //         return '<span class="label label-table label-danger">Tidak Aktif</span>';
+                                        //     }
+                                        // },
                                     ],
                                     // [
                                     //     'class' => 'kartik\grid\EditableColumn',
