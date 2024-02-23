@@ -139,7 +139,7 @@ $this->title = 'Signup';
                                             'showMeter' => true,
                                             'toggleMask' => false
                                         ]
-                                    ])->passwordInput(['placeholder' => 'Input password...']); ?>
+                                    ])->passwordInput(['placeholder' => 'min 8 characters...']); ?>
 
                                     <?= $form->field($model, 'address')->textarea(['placeholder' => 'Input Address...']); ?>
                                     <?= $form->field($model, 'tentang')->textarea(['placeholder' => 'About me...']); ?>
