@@ -142,9 +142,9 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'filter'    => ['' => 'Pilih...', 10 => "Suspended", 9 => "Active"],
                                         'value' => function ($data, $key, $index, $column) {
                                             if ($data->admin->status == 10) {
-                                                return '<span class="label label-table label-success">Suspended</span>';
+                                                return '<span class="label label-table label-danger">Suspended</span>';
                                             } else {
-                                                return '<span class="label label-table label-danger">Active</span>';
+                                                return '<span class="label label-table label-success">Active</span>';
                                             }
                                         },
                                     ],

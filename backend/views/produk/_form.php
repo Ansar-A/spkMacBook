@@ -310,7 +310,7 @@ use yii\helpers\Url;
                         <div class="col-xs-12">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <?= $form->field($model, 'get_daya')->textarea()->label('Daya...');
+                                    <?= $form->field($model, 'get_daya')->textarea()->label('Info Baterai & Daya...');
                                     ?>
                                 </div>
                             </div>

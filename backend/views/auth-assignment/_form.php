@@ -36,7 +36,8 @@ use yii\widgets\ActiveForm;
     <!-- <?= $form->field($model, 'item_name')->textInput(['maxlength' => true]) ?> -->
 
     <?php
-    $list = User::find()->all();
+    // $list = User::find()->all();
+    $list = User::find()->where(['status' => 10]);
     echo $form->field($model, 'user_id')->dropDownList(
         ArrayHelper::map(
             $list,
