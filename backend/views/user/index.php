@@ -315,31 +315,7 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                             'placeholder' => 'Search by ID...',
                                         ],
                                     ],
-                                    [
-                                        'class' => 'kartik\grid\EditableColumn',
-                                        'headerOptions' => ['class' => 'text-center'],
-                                        'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
-                                        'attribute' => 'status',
-                                        'format' => 'raw',
-                                        'label' => 'Status',
-                                        'filterType' => GridView::FILTER_SELECT2,
-                                        // 'filter' => ['' => 'Pilih...', 9 => "Inaktif", 10 => "Aktif"],
-                                        'editableOptions' => [
-                                            'inputType' => Editable::INPUT_DROPDOWN_LIST,
-                                            'data' => array_merge(['' => 'Pilih...'], [10 => "Tidak Aktif", 9 => "Aktif"]),
-                                            'displayValueConfig' => [
-                                                10 => 'Tidak Aktif',
-                                                9 => 'Aktif',
-                                            ],
-                                        ],
-                                        // 'value' => function ($data, $key, $index, $column) {
-                                        //     if ($data->status == 10) {
-                                        //         return '<span class="label label-table label-success">Aktif</span>';
-                                        //     } elseif ($data->status == 9) {
-                                        //         return '<span class="label label-table label-danger">Tidak Aktif</span>';
-                                        //     }
-                                        // },
-                                    ],
+
                                     // [
                                     //     'class' => 'kartik\grid\EditableColumn',
                                     //     'headerOptions' => ['class' => 'text-center'],
