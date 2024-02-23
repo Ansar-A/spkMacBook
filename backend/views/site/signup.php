@@ -152,7 +152,7 @@ $this->title = 'Signup';
                                         ],
                                     ]);
                                     ?>
-                                    <?= $form->field($model, 'hp')->textInput(['type' => 'number']); ?>
+                                    <?= $form->field($model, 'hp')->textInput(['placeholder' => 'hp...', 'type' => 'number']); ?>
                                     <?= $form->field($model, 'role')->dropDownList(['' => 'Pilih...', 'Toko' => 'Toko', 'Personal' => 'Personal']); ?>
 
 
