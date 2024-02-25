@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $totalServicer = User::find()->count();
 $totalJenis = JenisProduk::find()->count();
-$totalun = Produk::find()->where('status_produk' == 'Unprocessed')->count();
+$totalun = Produk::find()->where(['status_produk' => 'Unprocessed'])->count();
 
 
 if (\Yii::$app->user->can('Administrator')) {
@@ -96,7 +96,7 @@ if (\Yii::$app->user->can('Administrator')) {
                 <div class="col-sm-4">
                     <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
                         <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalun ?></b></h2>
-                        <div class="text-muted m-t-5">Unproses</div>
+                        <div class="text-muted m-t-5">Unprocessed</div>
                     </div>
                 </div>
                 <div class="col-sm-12">
