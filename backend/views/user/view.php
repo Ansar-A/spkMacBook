@@ -207,7 +207,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     [
                                         'attribute' => 'status',
                                         'value' => function ($data) {
-                                            if ($data->status == 10) {
+                                            if ($data->status == 9) {
                                                 return 'Active';
                                             } else {
                                                 return 'Suspended';
@@ -226,7 +226,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
