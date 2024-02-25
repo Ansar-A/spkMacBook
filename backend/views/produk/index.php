@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $totalServicer = User::find()->count();
 $totalJenis = JenisProduk::find()->count();
-
+$totalun = Produk::find()->where('status_produk' == 'Unprocessed')->count();
 
 
 if (\Yii::$app->user->can('Administrator')) {
@@ -35,6 +35,7 @@ if (\Yii::$app->user->can('Administrator')) {
     $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
     $totalPengguna = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id])->count();
 }
+
 ?>
 
 
@@ -71,27 +72,33 @@ if (\Yii::$app->user->can('Administrator')) {
                 </ol>
             </div>
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                     <div class="widget-panel widget-style-2 bg-white"><i class="md md-assessment text-info"></i>
                         <h2 class="m-0 text-dark counter font-800"><b><?php echo $totalProduk ?></b></h2>
                         <div class="text-muted m-t-5">Total Produk MacBook</div>
                     </div>
                 </div>
                 <?php if (\Yii::$app->user->can('Administrator')) : ?>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
                             <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalPengguna ?></b></h2>
                             <div class="text-muted m-t-5">User Website</div>
                         </div>
                     </div>
                 <?php else : ?>
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
                             <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalPengguna ?></b></h2>
                             <div class="text-muted m-t-5">Like Produk</div>
                         </div>
                     </div>
                 <?php endif ?>
+                <div class="col-sm-4">
+                    <div class="widget-panel widget-style-2 bg-white"><i class="md md-person text-success"></i>
+                        <h2 class=" m-0 text-dark counter font-800"><b><?php echo $totalun ?></b></h2>
+                        <div class="text-muted m-t-5">Unproses</div>
+                    </div>
+                </div>
                 <div class="col-sm-12">
                     <div class="produk-index">
                         <?php if (\Yii::$app->user->can('Administrator')) : ?>
