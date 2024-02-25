@@ -452,9 +452,9 @@ $active = User::find()->where(['status' => Yii::$app->user->identity->id])->coun
                                         'contentOptions' => ['style' => 'text-align:center; vertical-align: middle;'],
                                         'attribute' => 'status',
                                         'format' => 'raw',
-                                        'filter'    => [10 => "Active", 9 => "Suspended"],
+                                        'filter'    => [9 => "Active", 10 => "Suspended"],
                                         'value' => function ($data, $key, $index, $column) {
-                                            if ($data->status == 10) {
+                                            if ($data->status == 9) {
                                                 return '<span class="label label-table label-success">Active</span>';
                                             } else {
                                                 return '<span class="label label-table label-danger">Suspended</span>';
