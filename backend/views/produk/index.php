@@ -25,15 +25,19 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $totalServicer = User::find()->count();
 $totalJenis = JenisProduk::find()->count();
-$totalun = Produk::find()->where(['status_produk' => 'Unprocessed'])->count();
+
 
 
 if (\Yii::$app->user->can('Administrator')) {
     $totalProduk = Produk::find()->count();
     $totalPengguna = Pengguna::find()->count();
+    $totalun = Produk::find()->where(['status_produk' => 'Unprocessed'])->count();
 } else {
     $totalProduk = Produk::find()->where(['id_servicer' => Yii::$app->user->identity->id])->count();
     $totalPengguna = LikeProduk::find()->joinWith('kelayakan.produk.user')->where(['id_servicer' => Yii::$app->user->identity->id])->count();
+
+    $id = Yii::$app->user->identity->id;
+    $totalun = Produk::find()->where(['status_produk' => 'Unprocessed', 'id_servicer' => $id])->count();
 }
 
 ?>
