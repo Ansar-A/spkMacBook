@@ -10,7 +10,7 @@ $verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'to
 <div class="verify-email">
     <p>Hello <?= Html::encode($user->username) ?>,</p>
 
-    <p>Selamat datang di Website Sistem Pendukung Keputusan Penentuan MacBook Bekas, Silahkan klik tautan untuk login pada website.</p>
+    <p>Selamat datang di Website Sistem Pendukung Keputusan Penentuan MacBook Bekas, Silahkan klik tautan untuk login pada website</p>
     <p>
         <a href="https://spkmacbook.online/administrator/site/login">click here to login</a>
     </p>
