@@ -12,7 +12,7 @@ $verifyLink = Yii::$app->urlManager->createAbsoluteUrl(['site/verify-email', 'to
 
     <p>Selamat datang di Website Sistem Pendukung Keputusan Penentuan MacBook Bekas, Silahkan klik tautan untuk login pada website.</p>
     <p>
-        <a href="http://localhost/yii-spk/backend/web/site/login">click here to login</a>
+        <a href="https://spkmacbook.online/administrator/site/login">click here to login</a>
     </p>
     <p>
         Jika akun anda belum dapat melakukan akses login, tunggu konfirmasi dari pihak admin.
