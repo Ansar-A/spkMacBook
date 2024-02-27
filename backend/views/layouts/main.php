@@ -96,7 +96,7 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
             <div class="sidebar-inner slimscrollleft">
                 <div id="sidebar-menu">
                     <ul>
-                        <li class="text-muted menu-title">Dashboard</li>
+                        <li class="text-muted menu-title">Dashboards</li>
                         <li class="has_sub active">
                             <a href="<?= Url::to(['site/index']) ?>" class="waves-effect"><i class="fa fa-desktop"></i> <span> Dashboard </span></a>
                         </li>
