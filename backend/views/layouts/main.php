@@ -117,7 +117,7 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                                     <li><a href="<?= Url::to(['warna/index']) ?>">Warna</a></li>
                                 </ul>
                             </li>
-                            <li class="text-muted menu-title">SPK</li>
+                            <li class="text-muted menu-title">SPK Kelayakan</li>
                             <li class="has_sub">
                                 <a href="javascript:void(0);" class="waves-effect"><i class="ti-stats-up"></i><span style="color:#714ABA" class="menu-arrow"></span><span> SPK </span></a>
                                 <ul class="list-unstyled">
