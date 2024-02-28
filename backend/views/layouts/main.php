@@ -119,7 +119,7 @@ if (\Yii::$app->user->can('Yii::@app->user->identity->get_auth')) {
                             </li>
                             <li class="text-muted menu-title">SPK Kelayakan</li>
                             <li class="has_sub">
-                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-stats-up"></i><span style="color:#714ABA" class="menu-arrow"></span><span> SPK Kelayakan</span></a>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-stats-up"></i><span style="color:#714ABA" class="menu-arrow"></span><span> SPK</span></a>
                                 <ul class="list-unstyled">
                                     <li><a href="<?= Url::to(['spk-kelayakan/index']) ?>">Kelayakan MacBook</a></li>
                                 </ul>
